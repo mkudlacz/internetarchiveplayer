@@ -247,6 +247,14 @@ function appendConcertRows(listEl, docs, onTap) {
 // ── Search ─────────────────────────────────────────────────────────
 let searchTimer = null;
 
+const SEARCH_PLACEHOLDERS = {
+  library:   'Artists, titles, dates…',
+  artists:   'Filter artists…',
+  discover:  'Search all shows…',
+  playlists: 'Search playlists…',
+  favorites: 'Search favorites…',
+};
+
 function openSearch() {
   state.searching = true;
   state.searchQuery = '';
@@ -255,9 +263,43 @@ function openSearch() {
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
   el.backBtn.classList.remove('visible');
-  showView('library');
-  renderLibrary();
+  el.searchInput.placeholder = SEARCH_PLACEHOLDERS[state.mode] || 'Search…';
+  renderForSearch();
   requestAnimationFrame(() => el.searchInput.focus());
+}
+
+function renderForSearch() {
+  const mode = state.mode;
+  const q    = state.searchQuery;
+  if (mode === 'library') {
+    showView('library');
+    renderLibrary();
+  } else if (mode === 'artists') {
+    showView('artists');
+    renderArtistView();
+  } else if (mode === 'favorites') {
+    showView('favorites');
+    renderFavorites();
+  } else if (mode === 'playlists') {
+    showView('playlists');
+    renderPlaylists();
+  } else if (mode === 'discover') {
+    showView('discover');
+    if (q) {
+      const results = sortDocs(filterIndex(q));
+      el.viewDiscover.innerHTML = '';
+      if (!results.length) {
+        el.viewDiscover.innerHTML = '<div class="empty-msg">No shows found.</div>';
+      } else {
+        const ul = document.createElement('ul');
+        ul.className = 'concert-list';
+        el.viewDiscover.appendChild(ul);
+        appendConcertRows(ul, results, doc => openConcert(doc));
+      }
+    } else {
+      renderDiscover();
+    }
+  }
 }
 
 function closeSearch() {
@@ -274,29 +316,44 @@ function onSearchInput() {
   searchTimer = setTimeout(() => {
     state.searchQuery = el.searchInput.value.trim();
     state.displayPage = 1;
-    renderLibrary();
+    renderForSearch();
   }, 250);
 }
 
-function filterIndex(query) {
+function filterDocs(docs, query) {
   const q = query.toLowerCase();
-  return state.index.filter(doc =>
+  return docs.filter(doc =>
     (doc.creator || '').toLowerCase().includes(q) ||
     (doc.title   || '').toLowerCase().includes(q) ||
     (doc.date    || '').includes(q)
   );
 }
 
+function filterIndex(query) {
+  return filterDocs(state.index, query);
+}
+
 // ── Artist column view ─────────────────────────────────────────────
 function renderArtistView() {
-  const groups = groupByArtist(state.index);
+  let groups = groupByArtist(state.index);
+
+  if (state.searching && state.searchQuery) {
+    const q = state.searchQuery.toLowerCase();
+    groups = groups.filter(([name]) => name.toLowerCase().includes(q));
+    // Clear selected artist if it was filtered away
+    if (state.selectedArtist && !groups.find(([name]) => name === state.selectedArtist.name)) {
+      state.selectedArtist = null;
+    }
+  }
+
+  const totalVisible = groups.reduce((sum, [, docs]) => sum + docs.length, 0);
 
   // Left column: artist list
   el.artistList.innerHTML = '';
   const frag = document.createDocumentFragment();
 
   // "All" entry at top
-  const allItem = makeArtistItem('All Artists', state.index.length, !state.selectedArtist);
+  const allItem = makeArtistItem('All Artists', totalVisible, !state.selectedArtist);
   allItem.addEventListener('click', () => selectArtist(null));
   frag.appendChild(allItem);
 
@@ -307,8 +364,8 @@ function renderArtistView() {
   });
   el.artistList.appendChild(frag);
 
-  // Right column
-  renderArtistConcerts();
+  // Right column (pass filtered docs as fallback for "All Artists")
+  renderArtistConcerts(groups.flatMap(([, docs]) => docs));
 }
 
 function makeArtistItem(name, count, selected) {
@@ -331,10 +388,10 @@ function selectArtist(artistObj) {
   renderArtistConcerts();
 }
 
-function renderArtistConcerts() {
+function renderArtistConcerts(fallbackDocs) {
   const docs = state.selectedArtist
     ? sortDocs(state.selectedArtist.docs)
-    : sortDocs(state.index);
+    : sortDocs(fallbackDocs || state.index);
 
   el.artistConcerts.innerHTML = '';
   if (!docs.length) {
@@ -379,11 +436,14 @@ function groupByArtist(docs) {
 // ── Favorites view ─────────────────────────────────────────────────
 function renderFavorites() {
   const ids = new Set(getFavIds());
-  const favDocs = sortDocs(state.index.filter(d => ids.has(d.identifier)));
+  let favDocs = sortDocs(state.index.filter(d => ids.has(d.identifier)));
+  if (state.searching && state.searchQuery) favDocs = filterDocs(favDocs, state.searchQuery);
 
   el.favoritesList.innerHTML = '';
   if (!favDocs.length) {
-    el.favoritesList.innerHTML = '<li class="empty-msg">No favorites yet. Tap ♥ on any concert.</li>';
+    el.favoritesList.innerHTML = `<li class="empty-msg">${
+      state.searching && state.searchQuery ? 'No matches.' : 'No favorites yet. Tap ♥ on any concert.'
+    }</li>`;
     return;
   }
   appendConcertRows(el.favoritesList, favDocs, doc => openConcert(doc));
@@ -646,10 +706,16 @@ function extractVenues(index) {
 
 // ── Playlists ──────────────────────────────────────────────────────
 function renderPlaylists() {
-  const lists = getAllPlaylists();
+  let lists = getAllPlaylists();
+  if (state.searching && state.searchQuery) {
+    const q = state.searchQuery.toLowerCase();
+    lists = lists.filter(pl => pl.name.toLowerCase().includes(q));
+  }
   el.playlistsList.innerHTML = '';
   if (!lists.length) {
-    el.playlistsList.innerHTML = '<li class="empty-msg">No playlists yet.<br>Open a concert and tap "Add to Playlist."</li>';
+    el.playlistsList.innerHTML = `<li class="empty-msg">${
+      state.searching && state.searchQuery ? 'No playlists match.' : 'No playlists yet.<br>Open a concert and tap "Add to Playlist."'
+    }</li>`;
     return;
   }
   lists.forEach(pl => {
