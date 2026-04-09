@@ -617,17 +617,19 @@ button {
 
 /* ── Track action sheet ───────────────────────────────────────────── */
 #track-action-sheet {
-  position: fixed; inset: 0; z-index: 150;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 150;
   display: none;
-  align-items: flex-end;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.55);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
-#track-action-sheet.visible { display: flex; }
+#track-action-sheet.visible { display: block; }
 
 .action-sheet-inner {
-  width: 100%;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
   background: var(--bg2);
   border-radius: 16px 16px 0 0;
   padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));

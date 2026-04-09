@@ -27,8 +27,6 @@ const PAGE_SIZE = 50;
 const $ = id => document.getElementById(id);
 
 const el = {
-  headerTitle:    $('header-title'),
-  headerSubtitle: $('header-subtitle'),
   backBtn:        $('back-btn'),
   searchToggle:   $('search-toggle'),
   settingsBtn:    $('settings-btn'),
@@ -136,9 +134,6 @@ function setMode(mode) {
 
   // Header
   el.backBtn.classList.remove('visible');
-  el.headerTitle.textContent = collectionName();
-  el.headerSubtitle.textContent = `Internet Archive · ${state.collectionId}`;
-  el.headerSubtitle.style.display = '';
 
   // Mode bar tabs
   el.modeBar.classList.remove('hidden');
@@ -399,7 +394,6 @@ async function openConcert(doc) {
   state.inFiltered = false;
 
   el.backBtn.classList.add('visible');
-  el.headerTitle.textContent = '';
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
   el.searchBar.classList.remove('visible');
@@ -610,8 +604,6 @@ function openFilteredList(label, docs) {
   state.prevMode  = state.mode;
   state.inFiltered = true;
   el.backBtn.classList.add('visible');
-  el.headerTitle.textContent = label;
-  el.headerSubtitle.style.display = 'none';
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
   showView('filtered');
@@ -689,7 +681,6 @@ function openPlaylistDetail(pl) {
   state.currentPlaylist = pl;
   state.inConcert = true;
   el.backBtn.classList.add('visible');
-  el.headerTitle.textContent = '';
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
   showView('playlist-detail');
@@ -918,7 +909,6 @@ function init() {
       state.prevMode = state.mode;
       state.inConcert = true;
       el.backBtn.classList.add('visible');
-      el.headerTitle.textContent = '';
       el.modeBar.classList.add('hidden');
       el.sortBar.classList.add('hidden');
       showView('concert');
