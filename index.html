@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AJC Archive">
+  <meta name="theme-color" content="#0e0e0e">
+  <title>AJC Archive</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Header ── -->
+  <header id="header">
+    <button class="back-btn" id="back-btn" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15,18 9,12 15,6"/>
+      </svg>
+      Back
+    </button>
+    <h1 id="header-title">AJC Archive</h1>
+    <div class="header-actions">
+      <button id="search-toggle" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <button id="settings-btn" aria-label="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Search bar (shown when searching) ── -->
+  <div id="search-bar">
+    <input id="search-input" type="search" placeholder="Artists, titles, dates…"
+           autocapitalize="none" autocorrect="off" spellcheck="false">
+    <button id="search-cancel">Cancel</button>
+  </div>
+
+  <!-- ── Mode tabs ── -->
+  <nav id="mode-bar">
+    <button class="mode-btn active" data-mode="library">All</button>
+    <button class="mode-btn" data-mode="artists">Artists</button>
+    <button class="mode-btn" data-mode="playlists">Playlists</button>
+    <button class="mode-btn" data-mode="favorites">Favs</button>
+  </nav>
+
+  <!-- ── Sort bar (library mode only) ── -->
+  <div id="sort-bar" role="toolbar" aria-label="Sort"></div>
+
+  <!-- ── Main ── -->
+  <main id="main">
+
+    <!-- Library / search results -->
+    <div id="view-library">
+      <ul id="concert-list" aria-label="Concerts"></ul>
+      <button id="load-more" style="display:none">Load more</button>
+    </div>
+
+    <!-- Artist column browser -->
+    <div id="view-artists" style="display:none">
+      <div class="artist-col">
+        <ul id="artist-list"></ul>
+      </div>
+      <div class="concerts-col">
+        <ul id="artist-concerts"></ul>
+      </div>
+    </div>
+
+    <!-- Playlists list -->
+    <div id="view-playlists" style="display:none">
+      <ul id="playlists-list"></ul>
+    </div>
+
+    <!-- Playlist detail -->
+    <div id="view-playlist-detail" style="display:none"></div>
+
+    <!-- Favorites -->
+    <div id="view-favorites" style="display:none">
+      <ul id="favorites-list"></ul>
+    </div>
+
+    <!-- Concert detail -->
+    <div id="view-concert" style="display:none"></div>
+
+  </main>
+
+  <!-- ── Now Playing Bar ── -->
+  <div id="now-playing-bar" role="region" aria-label="Now playing">
+    <div class="bar-progress" id="bar-progress">
+      <div class="bar-progress-fill" id="bar-progress-fill"></div>
+    </div>
+    <div class="bar-body">
+      <div class="bar-info" id="bar-info">
+        <div class="bar-title" id="bar-title">–</div>
+        <div class="bar-artist" id="bar-artist"></div>
+      </div>
+      <div class="bar-controls">
+        <button class="bar-btn small" id="bar-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="19,20 9,12 19,4"/>
+            <rect x="5" y="4" width="2" height="16"/>
+          </svg>
+        </button>
+        <button class="bar-btn primary" id="bar-play" aria-label="Play/Pause">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <button class="bar-btn small" id="bar-next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5,4 15,12 5,20"/>
+            <rect x="17" y="4" width="2" height="16"/>
+          </svg>
+        </button>
+        <button class="bar-btn small" id="bar-queue" aria-label="Queue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- ── Add-to-Playlist Sheet ── -->
+<div id="addpl-sheet" role="dialog" aria-label="Add to playlist" aria-modal="true">
+  <div class="sheet-header">
+    <h2>Add to Playlist</h2>
+    <button class="sheet-close" id="addpl-close">Cancel</button>
+  </div>
+  <div class="addpl-body">
+    <button id="addpl-new">+ New Playlist…</button>
+    <ul id="addpl-list"></ul>
+  </div>
+</div>
+
+<!-- ── Queue Sheet ── -->
+<div id="queue-sheet" role="dialog" aria-label="Queue" aria-modal="true">
+  <div class="sheet-header">
+    <h2>Queue</h2>
+    <button class="sheet-close" id="queue-close">Done</button>
+  </div>
+  <ul class="queue-list" id="queue-list"></ul>
+</div>
+
+<!-- ── Settings Sheet ── -->
+<div id="settings-sheet" role="dialog" aria-label="Settings" aria-modal="true">
+  <div class="sheet-header">
+    <h2>Settings</h2>
+    <button class="sheet-close" id="settings-close">Done</button>
+  </div>
+  <div class="settings-body">
+    <div>
+      <div class="settings-label">Collection ID</div>
+      <input id="collection-input" class="settings-input" type="text"
+             placeholder="e.g. aadamjacobs"
+             autocapitalize="none" autocorrect="off" spellcheck="false">
+      <p class="settings-hint">
+        The identifier from archive.org/details/<strong>identifier</strong>
+      </p>
+    </div>
+    <button class="settings-save" id="settings-save">Save &amp; Reload</button>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
