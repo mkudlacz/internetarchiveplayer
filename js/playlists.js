@@ -41,6 +41,15 @@ export function remove(id) {
   save(load().filter(p => p.id !== id));
 }
 
+// Overwrite a playlist's tracks entirely (used to sync queue → playlist)
+export function syncTracks(id, tracks) {
+  const lists = load();
+  const pl = lists.find(p => p.id === id);
+  if (!pl) return;
+  pl.tracks = (tracks || []).filter(t => t && t.url);
+  save(lists);
+}
+
 // ── Share URL ──────────────────────────────────────────────────────
 // Format: #pl=Name~identifier:filename~identifier:filename~...
 // Compact enough for clipboard, decodable by the app.

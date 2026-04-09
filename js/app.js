@@ -1,7 +1,7 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds } from './favorites.js';
-import { getAll as getAllPlaylists, getById, create as createPlaylist, addTracks, removeTrack as removePlTrack, remove as removePlaylist, encodeShareUrl, decodeShareHash, shareText } from './playlists.js';
+import { getAll as getAllPlaylists, getById, create as createPlaylist, addTracks, removeTrack as removePlTrack, remove as removePlaylist, encodeShareUrl, decodeShareHash, shareText, syncTracks } from './playlists.js';
 
 // ── State ──────────────────────────────────────────────────────────
 const state = {
@@ -18,6 +18,7 @@ const state = {
   selectedArtist:   null,   // { name, docs[] } or null = all
   currentConcert:   null,
   currentPlaylist:  null,   // playlist object being viewed
+  activePlaylistId: null,   // playlist whose tracks mirror the queue
   pendingTracks:    null,   // tracks waiting to be added to a playlist
 };
 
@@ -436,7 +437,10 @@ function renderConcert(meta) {
     e.currentTarget.classList.toggle('active', active);
   });
 
-  $('play-all').addEventListener('click', () => player.replaceQueue(tracks, 0));
+  $('play-all').addEventListener('click', () => {
+    state.activePlaylistId = null;
+    player.replaceQueue(tracks, 0);
+  });
   $('queue-all').addEventListener('click', () => tracks.forEach(t => player.addToEnd(t)));
   $('add-to-pl').addEventListener('click', () => openAddToPlaylist(tracks));
 
@@ -704,7 +708,10 @@ function renderPlaylistDetail(pl) {
     <ul class="track-list" id="pl-track-list"></ul>
   `;
 
-  $('pl-play-all').addEventListener('click', () => player.replaceQueue(fresh.tracks, 0));
+  $('pl-play-all').addEventListener('click', () => {
+    state.activePlaylistId = fresh.id;
+    player.replaceQueue(fresh.tracks, 0);
+  });
   $('pl-queue-all').addEventListener('click', () => fresh.tracks.forEach(t => player.addToEnd(t)));
   $('pl-share').addEventListener('click', () => sharePlaylist(fresh));
 
@@ -976,6 +983,7 @@ function init() {
   player.on('timeupdate',  updateProgress);
   player.on('queuechange', () => {
     if (el.queueSheet.classList.contains('visible')) renderQueue();
+    if (state.activePlaylistId) syncTracks(state.activePlaylistId, player.queue);
   });
 
   // Check for shared playlist in URL hash
