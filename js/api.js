@@ -10,7 +10,7 @@ export async function loadFullIndex(collectionId) {
     q:      `collection:${collectionId}`,
     output: 'json',
     rows:   9999,
-    fl:     'identifier,title,creator,date,year',
+    fl:     'identifier,title,creator,date,year,coverage',
     sort:   'date desc',
   });
   const res = await fetch(`${IA_SEARCH}?${params}`);

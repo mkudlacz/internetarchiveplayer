@@ -53,14 +53,26 @@ button {
   flex-shrink: 0;
 }
 
-#header h1 {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
+#header-title-block {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  text-align: center;
   pointer-events: none;
+}
+
+#header-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+
+#header-subtitle {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1px;
+  margin-top: 1px;
 }
 
 .back-btn {
@@ -137,8 +149,8 @@ button {
 
 .mode-btn {
   flex: 1;
-  padding: 10px 0;
-  font-size: 13px;
+  padding: 9px 0;
+  font-size: 11px;
   font-weight: 500;
   color: var(--text2);
   border-bottom: 2px solid transparent;
@@ -602,6 +614,228 @@ button {
   padding: 13px; border-radius: 10px; width: 100%;
 }
 .settings-hint { font-size: 13px; color: var(--text2); margin-top: -12px; }
+
+/* ── Track action sheet ───────────────────────────────────────────── */
+#track-action-sheet {
+  position: fixed; inset: 0; z-index: 150;
+  display: none;
+  align-items: flex-end;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+#track-action-sheet.visible { display: flex; }
+
+.action-sheet-inner {
+  width: 100%;
+  background: var(--bg2);
+  border-radius: 16px 16px 0 0;
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+.action-sheet-title {
+  font-size: 13px;
+  color: var(--text2);
+  text-align: center;
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-sheet-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 16px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+.action-sheet-btn:last-child { border-bottom: none; }
+.action-sheet-btn:active { background: var(--bg3); }
+.action-sheet-btn.cancel { color: var(--text2); margin-top: 4px; border-top: 1px solid var(--border); }
+
+/* ── Discover view ────────────────────────────────────────────────── */
+#view-discover,
+#view-filtered {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.discover-section {
+  padding: 16px 0 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.discover-section:last-child { border-bottom: none; }
+
+.discover-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 16px 10px;
+}
+
+.discover-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text2);
+}
+
+.discover-section-count {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+/* Horizontal scroll strip */
+.discover-h-scroll {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.discover-h-scroll::-webkit-scrollbar { display: none; }
+
+/* Today's show cards */
+.today-card {
+  flex-shrink: 0;
+  width: 140px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.today-card:active { background: var(--bg3); }
+
+.today-card-year {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.today-card-title {
+  font-size: 12px;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+}
+
+.today-card-artist {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Year pills */
+.year-pill {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.1s;
+  min-width: 56px;
+}
+.year-pill:active { background: var(--bg3); }
+
+.year-pill-year {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.year-pill-count {
+  font-size: 11px;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+/* Venue list */
+.venue-item {
+  display: flex;
+  align-items: center;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  gap: 10px;
+  transition: background 0.1s;
+}
+.venue-item:active { background: var(--bg2); }
+
+.venue-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.venue-count {
+  font-size: 12px;
+  color: var(--text3);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Filtered list view header */
+.filtered-list-label {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
 
 /* ── Playlists view ───────────────────────────────────────────────── */
 #view-playlists,

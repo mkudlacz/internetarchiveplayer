@@ -7,9 +7,10 @@ import { getAll as getAllPlaylists, getById, create as createPlaylist, addTracks
 const state = {
   collectionId: localStorage.getItem('collectionId') || DEFAULT_COLLECTION,
   index:        null,   // full item array loaded once
-  mode:         'library',   // 'library' | 'artists' | 'playlists' | 'favorites'
-  prevMode:     'library',   // where to go back from concert/playlist-detail view
+  mode:         'library',   // 'library'|'artists'|'discover'|'playlists'|'favorites'
+  prevMode:     'library',
   inConcert:    false,
+  inFiltered:   false,   // drilling into a filtered list from Discover
   sort:         'date desc',
   displayPage:  1,
   searching:    false,
@@ -27,6 +28,7 @@ const $ = id => document.getElementById(id);
 
 const el = {
   headerTitle:    $('header-title'),
+  headerSubtitle: $('header-subtitle'),
   backBtn:        $('back-btn'),
   searchToggle:   $('search-toggle'),
   settingsBtn:    $('settings-btn'),
@@ -44,6 +46,15 @@ const el = {
   loadMore:       $('load-more'),
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
+  viewDiscover:       $('view-discover'),
+  viewFiltered:       $('view-filtered'),
+  filteredList:       $('filtered-list'),
+  trackActionSheet:   $('track-action-sheet'),
+  trackActionTitle:   $('track-action-title'),
+  trackActionPlay:    $('track-action-play'),
+  trackActionQueue:   $('track-action-queue'),
+  trackActionPlaylist:$('track-action-playlist'),
+  trackActionCancel:  $('track-action-cancel'),
   viewPlaylists:      $('view-playlists'),
   viewPlaylistDetail: $('view-playlist-detail'),
   playlistsList:      $('playlists-list'),
@@ -111,6 +122,8 @@ function buildSortBar() {
 function showView(name) {
   el.viewLibrary.style.display        = name === 'library'         ? 'block' : 'none';
   el.viewArtists.style.display        = name === 'artists'         ? 'flex'  : 'none';
+  el.viewDiscover.style.display       = name === 'discover'        ? 'block' : 'none';
+  el.viewFiltered.style.display       = name === 'filtered'        ? 'block' : 'none';
   el.viewPlaylists.style.display      = name === 'playlists'       ? 'block' : 'none';
   el.viewPlaylistDetail.style.display = name === 'playlist-detail' ? 'block' : 'none';
   el.viewFavorites.style.display      = name === 'favorites'       ? 'block' : 'none';
@@ -124,6 +137,8 @@ function setMode(mode) {
   // Header
   el.backBtn.classList.remove('visible');
   el.headerTitle.textContent = collectionName();
+  el.headerSubtitle.textContent = `Internet Archive · ${state.collectionId}`;
+  el.headerSubtitle.style.display = '';
 
   // Mode bar tabs
   el.modeBar.classList.remove('hidden');
@@ -146,6 +161,9 @@ function setMode(mode) {
   } else if (mode === 'artists') {
     showView('artists');
     if (state.index) renderArtistView();
+  } else if (mode === 'discover') {
+    showView('discover');
+    if (state.index) renderDiscover();
   } else if (mode === 'playlists') {
     showView('playlists');
     renderPlaylists();
@@ -376,8 +394,9 @@ function renderFavorites() {
 
 // ── Concert detail view ────────────────────────────────────────────
 async function openConcert(doc) {
-  state.prevMode = state.mode;
+  if (!state.inFiltered) state.prevMode = state.mode;
   state.inConcert = true;
+  state.inFiltered = false;
 
   el.backBtn.classList.add('visible');
   el.headerTitle.textContent = '';
@@ -437,12 +456,11 @@ function renderConcert(meta) {
         <div class="track-title">${esc(track.title)}</div>
         ${track.duration ? `<div class="track-duration">${track.duration}</div>` : ''}
       </div>
-      <button class="track-add" title="Add to queue">+</button>
+      <button class="track-add" title="More options">…</button>
     `;
     li.querySelector('.track-add').addEventListener('click', e => {
       e.stopPropagation();
-      player.addToEnd(track);
-      flashBtn(e.currentTarget);
+      openTrackAction(track);
     });
     li.addEventListener('click', () => player.playNow(track));
     trackList.appendChild(li);
@@ -456,10 +474,177 @@ function buildTracks(meta) {
     title:      f.title || stripExt(f.name),
     artist:     m.creator || '',
     album:      m.title || m.identifier,
+    date:       (m.date || '').slice(0, 10),
     duration:   formatDuration(f.length),
-    identifier: m.identifier,   // needed for playlist share URLs
+    identifier: m.identifier,
     filename:   f.name,
   }));
+}
+
+// ── Track action sheet ─────────────────────────────────────────────
+let _actionTrack = null;
+
+function openTrackAction(track) {
+  _actionTrack = track;
+  el.trackActionTitle.textContent = track.title;
+  el.trackActionSheet.classList.add('visible');
+}
+
+function closeTrackAction() {
+  el.trackActionSheet.classList.remove('visible');
+  _actionTrack = null;
+}
+
+// ── Discover ───────────────────────────────────────────────────────
+function renderDiscover() {
+  const index = state.index;
+  const today = new Date();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const todaySlice = `${mm}-${dd}`;
+  const todayShows = index.filter(d => (d.date || '').slice(5, 10) === todaySlice)
+                          .sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+
+  const byYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
+    .filter(([y]) => y && y.length === 4)
+    .sort((a, b) => a[0] - b[0]);
+
+  const venues = extractVenues(index);
+  const byVenue = groupBy(index, d => extractVenueName(d) || '__none__')
+    .filter(([v]) => v !== '__none__')
+    .sort((a, b) => b[1].length - a[1].length)
+    .slice(0, 30);
+
+  const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
+  const years = index.map(d => +(d.date || '').slice(0, 4)).filter(Boolean);
+  const minYear = Math.min(...years), maxYear = Math.max(...years);
+  const topYear = byYear.sort((a, b) => b[1].length - a[1].length)[0];
+  byYear.sort((a, b) => a[0] - b[0]); // restore sort
+
+  el.viewDiscover.innerHTML = '';
+
+  // ── Today in Archive ──
+  const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+  if (todayShows.length) {
+    const sec = discoverSection(`Today in the Archive — ${todayLabel}`, `${todayShows.length} show${todayShows.length !== 1 ? 's' : ''}`);
+    const strip = document.createElement('div');
+    strip.className = 'discover-h-scroll';
+    todayShows.forEach(doc => {
+      const card = document.createElement('div');
+      card.className = 'today-card';
+      card.innerHTML = `
+        <div class="today-card-year">${(doc.date || '').slice(0, 4)}</div>
+        <div class="today-card-title">${esc(doc.title || doc.identifier)}</div>
+        <div class="today-card-artist">${esc(doc.creator || '')}</div>
+      `;
+      card.addEventListener('click', () => openConcert(doc));
+      strip.appendChild(card);
+    });
+    sec.appendChild(strip);
+    el.viewDiscover.appendChild(sec);
+  }
+
+  // ── Browse by Year ──
+  {
+    const sec = discoverSection('Browse by Year', `${byYear.length} years`);
+    const strip = document.createElement('div');
+    strip.className = 'discover-h-scroll';
+    byYear.forEach(([year, docs]) => {
+      const pill = document.createElement('div');
+      pill.className = 'year-pill';
+      pill.innerHTML = `<div class="year-pill-year">${year}</div><div class="year-pill-count">${docs.length}</div>`;
+      pill.addEventListener('click', () => openFilteredList(`${year}`, docs.sort((a,b) => (a.date||'').localeCompare(b.date||''))));
+      strip.appendChild(pill);
+    });
+    sec.appendChild(strip);
+    el.viewDiscover.appendChild(sec);
+  }
+
+  // ── Browse by Venue ──
+  if (byVenue.length) {
+    const sec = discoverSection('Browse by Venue', `${byVenue.length} venues`);
+    byVenue.forEach(([venue, docs]) => {
+      const item = document.createElement('div');
+      item.className = 'venue-item';
+      item.innerHTML = `<div class="venue-name">${esc(venue)}</div><div class="venue-count">${docs.length}</div>`;
+      item.addEventListener('click', () => openFilteredList(venue, docs));
+      sec.appendChild(item);
+    });
+    el.viewDiscover.appendChild(sec);
+  }
+
+  // ── By the Numbers ──
+  {
+    const sec = discoverSection('By the Numbers', '');
+    const grid = document.createElement('div');
+    grid.className = 'stats-grid';
+    [
+      [index.length.toLocaleString(), 'Total Shows'],
+      [uniqueArtists.toLocaleString(), 'Artists'],
+      [`${minYear}–${maxYear}`, 'Year Range'],
+      [topYear ? `${topYear[0]} (${topYear[1].length})` : '–', 'Most Active Year'],
+    ].forEach(([val, label]) => {
+      const card = document.createElement('div');
+      card.className = 'stat-card';
+      card.innerHTML = `<div class="stat-value">${val}</div><div class="stat-label">${label}</div>`;
+      grid.appendChild(card);
+    });
+    sec.appendChild(grid);
+    el.viewDiscover.appendChild(sec);
+  }
+}
+
+function discoverSection(title, count) {
+  const sec = document.createElement('div');
+  sec.className = 'discover-section';
+  sec.innerHTML = `
+    <div class="discover-section-header">
+      <div class="discover-section-title">${esc(title)}</div>
+      ${count ? `<div class="discover-section-count">${esc(count)}</div>` : ''}
+    </div>
+  `;
+  return sec;
+}
+
+function openFilteredList(label, docs) {
+  state.prevMode  = state.mode;
+  state.inFiltered = true;
+  el.backBtn.classList.add('visible');
+  el.headerTitle.textContent = label;
+  el.headerSubtitle.style.display = 'none';
+  el.modeBar.classList.add('hidden');
+  el.sortBar.classList.add('hidden');
+  showView('filtered');
+  el.viewFiltered.scrollTop = 0;
+
+  el.filteredList.innerHTML = '';
+  const labelEl = document.createElement('div');
+  labelEl.className = 'filtered-list-label';
+  labelEl.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''}`;
+  el.filteredList.appendChild(labelEl);
+  appendConcertRows(el.filteredList, docs, doc => openConcert(doc));
+}
+
+function groupBy(arr, keyFn) {
+  const map = new Map();
+  arr.forEach(item => {
+    const k = keyFn(item);
+    if (!map.has(k)) map.set(k, []);
+    map.get(k).push(item);
+  });
+  return [...map.entries()];
+}
+
+function extractVenueName(doc) {
+  // Try coverage field first, then parse from title
+  if (doc.coverage && doc.coverage.trim()) return doc.coverage.trim();
+  const title = doc.title || '';
+  const m = title.match(/(?:live\s+)?at\s+([^,\d\(\[]+?)(?:\s+\d{4}|\s*[,\(\[\-]|$)/i);
+  return m ? m[1].trim() : null;
+}
+
+function extractVenues(index) {
+  return [...new Set(index.map(d => extractVenueName(d)).filter(Boolean))];
 }
 
 // ── Playlists ──────────────────────────────────────────────────────
@@ -618,13 +803,20 @@ function flashConfirm(msg) {
 
 // ── Back navigation ────────────────────────────────────────────────
 function goBack() {
-  state.inConcert = false;
-  if (state.searching) {
-    openSearch();
+  if (state.searching && state.inConcert) {
+    // came from search → concert, go back to search results
+    state.inConcert = false;
     el.backBtn.classList.remove('visible');
+    openSearch();
     return;
   }
-  // If returning to playlists and we were in playlist detail, re-render the list
+  if (state.inFiltered) {
+    state.inFiltered = false;
+    state.inConcert = false;
+    setMode(state.prevMode);
+    return;
+  }
+  state.inConcert = false;
   setMode(state.prevMode);
 }
 
@@ -634,7 +826,9 @@ function updateBar() {
   if (!t) { el.nowBar.classList.remove('visible'); return; }
   el.nowBar.classList.add('visible');
   el.barTitle.textContent  = t.title;
-  el.barArtist.textContent = t.artist || t.album || '';
+  const datePart = t.date ? formatDate(t.date) : '';
+  const artistPart = t.artist || '';
+  el.barArtist.textContent = [artistPart, datePart].filter(Boolean).join(' · ');
   el.barPlay.innerHTML     = player.paused ? svgPlay() : svgPause();
 }
 
@@ -736,6 +930,13 @@ function init() {
     const r = el.barProgress.getBoundingClientRect();
     player.seek((e.clientX - r.left) / r.width);
   });
+
+  // Track action sheet
+  el.trackActionPlay.addEventListener('click', () => { if (_actionTrack) player.playNow(_actionTrack); closeTrackAction(); });
+  el.trackActionQueue.addEventListener('click', () => { if (_actionTrack) { player.addToEnd(_actionTrack); flashConfirm('Added to queue'); } closeTrackAction(); });
+  el.trackActionPlaylist.addEventListener('click', () => { if (_actionTrack) { closeTrackAction(); openAddToPlaylist([_actionTrack]); } });
+  el.trackActionCancel.addEventListener('click', closeTrackAction);
+  el.trackActionSheet.addEventListener('click', e => { if (e.target === el.trackActionSheet) closeTrackAction(); });
 
   // Add-to-playlist sheet
   el.addplClose.addEventListener('click', closeAddToPlaylist);
