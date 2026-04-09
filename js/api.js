@@ -42,8 +42,8 @@ export function getAudioFiles(files) {
 }
 
 export function formatDuration(seconds) {
-  if (!seconds) return '';
   const s = Math.round(Number(seconds));
+  if (!isFinite(s) || s <= 0) return '';
   const h = Math.floor(s / 3600);
   const m = Math.floor((s % 3600) / 60);
   const sec = s % 60;

@@ -58,7 +58,8 @@ const el = {
   playlistsList:      $('playlists-list'),
   addplSheet:         $('addpl-sheet'),
   addplClose:         $('addpl-close'),
-  addplNew:           $('addpl-new'),
+  addplNameInput:     $('addpl-name-input'),
+  addplNameSave:      $('addpl-name-save'),
   addplList:          $('addpl-list'),
   favoritesList:  $('favorites-list'),
   nowBar:         $('now-playing-bar'),
@@ -755,6 +756,7 @@ function copyToClipboard(text) {
 // ── Add-to-playlist sheet ──────────────────────────────────────────
 function openAddToPlaylist(tracks) {
   state.pendingTracks = tracks;
+  el.addplNameInput.value = '';
   const lists = getAllPlaylists();
   el.addplList.innerHTML = '';
   lists.forEach(pl => {
@@ -924,20 +926,30 @@ function init() {
   // Track action sheet
   el.trackActionPlay.addEventListener('click', () => { if (_actionTrack) player.playNow(_actionTrack); closeTrackAction(); });
   el.trackActionQueue.addEventListener('click', () => { if (_actionTrack) { player.addToEnd(_actionTrack); flashConfirm('Added to queue'); } closeTrackAction(); });
-  el.trackActionPlaylist.addEventListener('click', () => { if (_actionTrack) { closeTrackAction(); openAddToPlaylist([_actionTrack]); } });
+  el.trackActionPlaylist.addEventListener('click', () => {
+    if (_actionTrack) {
+      const track = _actionTrack; // capture before closeTrackAction nulls it
+      closeTrackAction();
+      openAddToPlaylist([track]);
+    }
+  });
   el.trackActionCancel.addEventListener('click', closeTrackAction);
   el.trackActionSheet.addEventListener('click', e => { if (e.target === el.trackActionSheet) closeTrackAction(); });
 
   // Add-to-playlist sheet
   el.addplClose.addEventListener('click', closeAddToPlaylist);
-  el.addplNew.addEventListener('click', () => {
-    const name = prompt('Playlist name:');
-    if (!name?.trim()) return;
-    const pl = createPlaylist(name.trim());
-    if (state.pendingTracks) addTracks(pl.id, state.pendingTracks);
+
+  function saveNewPlaylist() {
+    const name = el.addplNameInput.value.trim();
+    if (!name) { el.addplNameInput.focus(); return; }
+    const pl = createPlaylist(name);
+    if (state.pendingTracks?.length) addTracks(pl.id, state.pendingTracks);
+    el.addplNameInput.value = '';
     closeAddToPlaylist();
-    flashConfirm(`Added to "${pl.name}"`);
-  });
+    flashConfirm(`Created "${pl.name}"`);
+  }
+  el.addplNameSave.addEventListener('click', saveNewPlaylist);
+  el.addplNameInput.addEventListener('keydown', e => { if (e.key === 'Enter') saveNewPlaylist(); });
 
   // Queue
   el.queueClose.addEventListener('click', () => el.queueSheet.classList.remove('visible'));

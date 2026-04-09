@@ -18,8 +18,10 @@ export function addTracks(id, tracks) {
   const lists = load();
   const pl = lists.find(p => p.id === id);
   if (!pl) return;
+  const valid = (tracks || []).filter(t => t && t.url);
+  if (!valid.length) return;
   const seen = new Set(pl.tracks.map(t => t.url));
-  tracks.forEach(t => { if (!seen.has(t.url)) pl.tracks.push(t); });
+  valid.forEach(t => { if (!seen.has(t.url)) pl.tracks.push(t); });
   save(lists);
 }
 

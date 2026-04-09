@@ -46,8 +46,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--header-h);
-  padding: 0 12px 0 16px;
+  height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 12px 0 16px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
@@ -931,12 +931,36 @@ button {
   flex: 1;
 }
 
-#addpl-new {
-  padding: 16px;
-  text-align: left;
-  font-size: 16px;
-  color: var(--accent);
+#addpl-new-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
   border-bottom: 1px solid var(--border);
+}
+
+#addpl-name-input {
+  flex: 1;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: var(--font);
+  outline: none;
+  min-width: 0;
+}
+#addpl-name-input:focus { border-color: var(--accent); }
+
+#addpl-name-save {
+  background: var(--accent);
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .addpl-option {

@@ -161,7 +161,11 @@
     <button class="sheet-close" id="addpl-close">Cancel</button>
   </div>
   <div class="addpl-body">
-    <button id="addpl-new">+ New Playlist…</button>
+    <div id="addpl-new-form">
+      <input id="addpl-name-input" type="text" placeholder="New playlist name…"
+             autocapitalize="words" autocorrect="off" spellcheck="false">
+      <button id="addpl-name-save">Create</button>
+    </div>
     <ul id="addpl-list"></ul>
   </div>
 </div>
