@@ -6,8 +6,8 @@ import { isFav, toggleFav, getFavIds } from './favorites.js';
 const state = {
   collectionId: localStorage.getItem('collectionId') || DEFAULT_COLLECTION,
   index:        null,   // full item array loaded once
-  mode:         'library',   // 'library'|'artists'|'discover'|'favorites'
-  prevMode:     'library',
+  mode:         'discover',  // 'discover'|'artists'|'favorites'
+  prevMode:     'discover',
   inConcert:    false,
   inFiltered:   false,   // drilling into a filtered list from Discover
   sort:         'date desc',
@@ -15,6 +15,8 @@ const state = {
   searching:    false,
   searchQuery:  '',
   selectedArtist:   null,   // { name, docs[] } or null = all
+  selectedYear:     null,   // year string e.g. "1995"
+  selectedVenue:    null,   // venue string
   currentConcert:   null,
 };
 
@@ -42,6 +44,12 @@ const el = {
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
   viewDiscover:       $('view-discover'),
+  viewYear:           $('view-year'),
+  yearList:           $('year-list'),
+  yearConcerts:       $('year-concerts'),
+  viewVenue:          $('view-venue'),
+  venueList:          $('venue-list'),
+  venueConcerts:      $('venue-concerts'),
   viewFiltered:       $('view-filtered'),
   filteredList:       $('filtered-list'),
   trackActionSheet:   $('track-action-sheet'),
@@ -107,12 +115,14 @@ function buildSortBar() {
 
 // ── View management ────────────────────────────────────────────────
 function showView(name) {
-  el.viewLibrary.style.display  = name === 'library'   ? 'block' : 'none';
-  el.viewArtists.style.display  = name === 'artists'   ? 'flex'  : 'none';
-  el.viewDiscover.style.display = name === 'discover'  ? 'block' : 'none';
-  el.viewFiltered.style.display = name === 'filtered'  ? 'block' : 'none';
+  el.viewLibrary.style.display   = name === 'library'   ? 'block' : 'none';
+  el.viewArtists.style.display   = name === 'artists'   ? 'flex'  : 'none';
+  el.viewDiscover.style.display  = name === 'discover'  ? 'block' : 'none';
+  el.viewYear.style.display      = name === 'year'      ? 'flex'  : 'none';
+  el.viewVenue.style.display     = name === 'venue'     ? 'flex'  : 'none';
+  el.viewFiltered.style.display  = name === 'filtered'  ? 'block' : 'none';
   el.viewFavorites.style.display = name === 'favorites' ? 'block' : 'none';
-  el.viewConcert.style.display  = name === 'concert'   ? 'block' : 'none';
+  el.viewConcert.style.display   = name === 'concert'   ? 'block' : 'none';
 }
 
 function setMode(mode) {
@@ -146,6 +156,12 @@ function setMode(mode) {
   } else if (mode === 'discover') {
     showView('discover');
     if (state.index) renderDiscover();
+  } else if (mode === 'year') {
+    showView('year');
+    if (state.index) renderYear();
+  } else if (mode === 'venue') {
+    showView('venue');
+    if (state.index) renderVenue();
   } else if (mode === 'favorites') {
     showView('favorites');
     if (state.index) renderFavorites();
@@ -158,14 +174,17 @@ function collectionName() {
 
 // ── Index loading ──────────────────────────────────────────────────
 async function loadIndex() {
-  el.concertList.innerHTML = '<div class="spinner"></div>';
-  el.loadMore.style.display = 'none';
+  el.viewDiscover.innerHTML = '<div class="spinner"></div>';
   try {
     state.index = await loadFullIndex(state.collectionId);
     state.displayPage = 1;
-    if (state.mode === 'library') renderLibrary();
+    if (state.mode === 'discover') renderDiscover();
+    else if (state.mode === 'artists') renderArtistView();
+    else if (state.mode === 'year') renderYear();
+    else if (state.mode === 'venue') renderVenue();
+    else if (state.mode === 'favorites') renderFavorites();
   } catch (err) {
-    el.concertList.innerHTML = `<li class="error-msg">Failed to load: ${err.message}</li>`;
+    el.viewDiscover.innerHTML = `<p class="error-msg">Failed to load: ${err.message}</p>`;
   }
 }
 
@@ -330,11 +349,6 @@ function renderArtistView() {
   el.artistList.innerHTML = '';
   const frag = document.createDocumentFragment();
 
-  // "All" entry at top
-  const allItem = makeArtistItem('All Artists', totalVisible, !state.selectedArtist);
-  allItem.addEventListener('click', () => selectArtist(null));
-  frag.appendChild(allItem);
-
   groups.forEach(([name, docs]) => {
     const item = makeArtistItem(name, docs.length, state.selectedArtist?.name === name);
     item.addEventListener('click', () => selectArtist({ name, docs }));
@@ -342,7 +356,7 @@ function renderArtistView() {
   });
   el.artistList.appendChild(frag);
 
-  // Right column (pass filtered docs as fallback for "All Artists")
+  // Right column
   renderArtistConcerts(groups.flatMap(([, docs]) => docs));
 }
 
@@ -541,17 +555,10 @@ function renderDiscover() {
     .filter(([y]) => y && y.length === 4)
     .sort((a, b) => a[0] - b[0]);
 
-  const venues = extractVenues(index);
-  const byVenue = groupBy(index, d => extractVenueName(d) || '__none__')
-    .filter(([v]) => v !== '__none__')
-    .sort((a, b) => b[1].length - a[1].length)
-    .slice(0, 30);
-
   const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
   const years = index.map(d => +(d.date || '').slice(0, 4)).filter(Boolean);
   const minYear = Math.min(...years), maxYear = Math.max(...years);
-  const topYear = byYear.sort((a, b) => b[1].length - a[1].length)[0];
-  byYear.sort((a, b) => a[0] - b[0]); // restore sort
+  const topYear = [...byYear].sort((a, b) => b[1].length - a[1].length)[0];
 
   el.viewDiscover.innerHTML = '';
 
@@ -576,35 +583,6 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
-  // ── Browse by Year ──
-  {
-    const sec = discoverSection('Browse by Year', `${byYear.length} years`);
-    const strip = document.createElement('div');
-    strip.className = 'discover-h-scroll';
-    byYear.forEach(([year, docs]) => {
-      const pill = document.createElement('div');
-      pill.className = 'year-pill';
-      pill.innerHTML = `<div class="year-pill-year">${year}</div><div class="year-pill-count">${docs.length}</div>`;
-      pill.addEventListener('click', () => openFilteredList(`${year}`, docs.sort((a,b) => (a.date||'').localeCompare(b.date||''))));
-      strip.appendChild(pill);
-    });
-    sec.appendChild(strip);
-    el.viewDiscover.appendChild(sec);
-  }
-
-  // ── Browse by Venue ──
-  if (byVenue.length) {
-    const sec = discoverSection('Browse by Venue', `${byVenue.length} venues`);
-    byVenue.forEach(([venue, docs]) => {
-      const item = document.createElement('div');
-      item.className = 'venue-item';
-      item.innerHTML = `<div class="venue-name">${esc(venue)}</div><div class="venue-count">${docs.length}</div>`;
-      item.addEventListener('click', () => openFilteredList(venue, docs));
-      sec.appendChild(item);
-    });
-    el.viewDiscover.appendChild(sec);
-  }
-
   // ── By the Numbers ──
   {
     const sec = discoverSection('By the Numbers', '');
@@ -624,6 +602,140 @@ function renderDiscover() {
     sec.appendChild(grid);
     el.viewDiscover.appendChild(sec);
   }
+}
+
+function buildUploadChart(index) {
+  const counts = new Map();
+  index.forEach(doc => {
+    const d = doc.addeddate;
+    if (!d) return;
+    const month = d.slice(0, 7); // "2024-12"
+    counts.set(month, (counts.get(month) || 0) + 1);
+  });
+  const months = [...counts.keys()].sort().filter(m => m >= '2024-01');
+  if (months.length < 2) return null;
+
+  const values = months.map(m => counts.get(m));
+  const max = Math.max(...values);
+  const W = 320, H = 90;
+  const pad = { top: 8, right: 4, bottom: 22, left: 4 };
+  const cW = W - pad.left - pad.right;
+  const cH = H - pad.top - pad.bottom;
+  const barW = Math.max(2, (cW / months.length) * 0.7);
+  const gap   = cW / months.length;
+  const xS = i => pad.left + i * gap + gap / 2;
+  const yS = v => pad.top + cH - (v / max) * cH;
+
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const labelEvery = Math.ceil(months.length / 5);
+
+  const bars = months.map((m, i) => {
+    const bh = (values[i] / max) * cH;
+    return `<rect x="${(xS(i) - barW / 2).toFixed(1)}" y="${yS(values[i]).toFixed(1)}" width="${barW.toFixed(1)}" height="${bh.toFixed(1)}" class="chart-bar"/>`;
+  }).join('');
+
+  const labels = months.map((m, i) => {
+    if (i % labelEvery !== 0 && i !== months.length - 1) return '';
+    const [y, mo] = m.split('-');
+    return `<text x="${xS(i).toFixed(1)}" y="${H - 4}" text-anchor="middle" class="chart-label">${monthNames[+mo - 1]} '${y.slice(2)}</text>`;
+  }).join('');
+
+  return `<svg viewBox="0 0 ${W} ${H}" class="upload-chart" preserveAspectRatio="none">
+    ${bars}
+    ${labels}
+  </svg>`;
+}
+
+// ── Year tab ───────────────────────────────────────────────────────
+function renderYear() {
+  const index = state.index;
+  const byYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
+    .filter(([y]) => y && y.length === 4)
+    .sort((a, b) => a[0] - b[0]); // ascending
+
+  el.yearList.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  byYear.forEach(([year, docs]) => {
+    const item = makeArtistItem(year, docs.length, state.selectedYear === year);
+    item.addEventListener('click', () => selectYear(year, docs));
+    frag.appendChild(item);
+  });
+  el.yearList.appendChild(frag);
+
+  if (!state.selectedYear && byYear.length) {
+    const [year, docs] = byYear[0];
+    state.selectedYear = year;
+    el.yearList.querySelector('.artist-item')?.classList.add('selected');
+    renderYearConcerts(sortDocs(docs));
+  } else if (state.selectedYear) {
+    const entry = byYear.find(([y]) => y === state.selectedYear);
+    renderYearConcerts(sortDocs(entry?.[1] || []));
+  }
+}
+
+function selectYear(year, docs) {
+  state.selectedYear = year;
+  el.yearList.querySelectorAll('.artist-item').forEach(item => {
+    item.classList.toggle('selected', item.querySelector('.artist-name').textContent === year);
+  });
+  renderYearConcerts(sortDocs(docs));
+}
+
+function renderYearConcerts(docs) {
+  el.yearConcerts.innerHTML = '';
+  if (!docs.length) {
+    el.yearConcerts.innerHTML = '<li class="empty-msg">No concerts.</li>';
+    return;
+  }
+  appendConcertRows(el.yearConcerts, docs, doc => openConcert(doc));
+}
+
+// ── Venue tab ──────────────────────────────────────────────────────
+function renderVenue() {
+  const index = state.index;
+  const byVenue = groupBy(index, d => extractVenueName(d) || '__none__')
+    .filter(([v]) => v !== '__none__')
+    .sort((a, b) => a[0].localeCompare(b[0]));
+
+  el.venueList.innerHTML = '';
+  if (!byVenue.length) {
+    el.venueList.innerHTML = '<li class="empty-msg">No venues found.</li>';
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  byVenue.forEach(([venue, docs]) => {
+    const item = makeArtistItem(venue, docs.length, state.selectedVenue === venue);
+    item.addEventListener('click', () => selectVenue(venue, docs));
+    frag.appendChild(item);
+  });
+  el.venueList.appendChild(frag);
+
+  if (!state.selectedVenue && byVenue.length) {
+    const [venue, docs] = byVenue[0];
+    state.selectedVenue = venue;
+    el.venueList.querySelector('.artist-item')?.classList.add('selected');
+    renderVenueConcerts(sortDocs(docs));
+  } else if (state.selectedVenue) {
+    const entry = byVenue.find(([v]) => v === state.selectedVenue);
+    renderVenueConcerts(sortDocs(entry?.[1] || []));
+  }
+}
+
+function selectVenue(venue, docs) {
+  state.selectedVenue = venue;
+  el.venueList.querySelectorAll('.artist-item').forEach(item => {
+    item.classList.toggle('selected', item.querySelector('.artist-name').textContent === venue);
+  });
+  renderVenueConcerts(sortDocs(docs));
+}
+
+function renderVenueConcerts(docs) {
+  el.venueConcerts.innerHTML = '';
+  if (!docs.length) {
+    el.venueConcerts.innerHTML = '<li class="empty-msg">No concerts.</li>';
+    return;
+  }
+  appendConcertRows(el.venueConcerts, docs, doc => openConcert(doc));
 }
 
 function discoverSection(title, count) {
@@ -840,7 +952,7 @@ function init() {
     state.index = null;
     state.selectedArtist = null;
     state.displayPage = 1;
-    setMode('library');
+    setMode('discover');
     loadIndex();
   });
 
@@ -853,7 +965,7 @@ function init() {
   });
 
   // Boot
-  setMode('library');
+  setMode('discover');
   loadIndex();
 }
 

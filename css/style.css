@@ -274,7 +274,7 @@ button {
 #load-more:disabled { color: var(--text3); }
 
 /* ── Artist Column View ───────────────────────────────────────────── */
-#view-artists {
+#view-artists, #view-year, #view-venue {
   display: flex;
   height: 100%;
 }
@@ -828,6 +828,30 @@ button {
   color: var(--text2);
   text-transform: uppercase;
   letter-spacing: 0.4px;
+}
+
+/* ── Upload activity chart ────────────────────────────────────────── */
+.upload-chart-wrap {
+  padding: 0 16px 16px;
+}
+
+.upload-chart {
+  display: block;
+  width: 100%;
+  height: 90px;
+  overflow: visible;
+}
+
+.chart-bar {
+  fill: var(--accent);
+  opacity: 0.85;
+  rx: 2;
+}
+
+.chart-label {
+  font-size: 9px;
+  fill: var(--text2);
+  font-family: var(--font);
 }
 
 /* Filtered list view header */

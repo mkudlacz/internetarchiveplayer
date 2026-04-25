@@ -46,9 +46,10 @@
 
   <!-- ── Mode tabs ── -->
   <nav id="mode-bar">
-    <button class="mode-btn active" data-mode="library">All</button>
+    <button class="mode-btn active" data-mode="discover">Discover</button>
     <button class="mode-btn" data-mode="artists">Artists</button>
-    <button class="mode-btn" data-mode="discover">Discover</button>
+    <button class="mode-btn" data-mode="venue">Venue</button>
+    <button class="mode-btn" data-mode="year">Year</button>
     <button class="mode-btn" data-mode="favorites">Favs</button>
   </nav>
 
@@ -76,6 +77,26 @@
 
     <!-- Discover -->
     <div id="view-discover" style="display:none"></div>
+
+    <!-- Venue browser -->
+    <div id="view-venue" style="display:none">
+      <div class="artist-col">
+        <ul id="venue-list"></ul>
+      </div>
+      <div class="concerts-col">
+        <ul id="venue-concerts"></ul>
+      </div>
+    </div>
+
+    <!-- Year browser -->
+    <div id="view-year" style="display:none">
+      <div class="artist-col">
+        <ul id="year-list"></ul>
+      </div>
+      <div class="concerts-col">
+        <ul id="year-concerts"></ul>
+      </div>
+    </div>
 
     <!-- Filtered list (drilldown from Discover) -->
     <div id="view-filtered" style="display:none">
