@@ -49,7 +49,6 @@
     <button class="mode-btn active" data-mode="library">All</button>
     <button class="mode-btn" data-mode="artists">Artists</button>
     <button class="mode-btn" data-mode="discover">Discover</button>
-    <button class="mode-btn" data-mode="playlists">Lists</button>
     <button class="mode-btn" data-mode="favorites">Favs</button>
   </nav>
 
@@ -82,14 +81,6 @@
     <div id="view-filtered" style="display:none">
       <ul id="filtered-list"></ul>
     </div>
-
-    <!-- Playlists list -->
-    <div id="view-playlists" style="display:none">
-      <ul id="playlists-list"></ul>
-    </div>
-
-    <!-- Playlist detail -->
-    <div id="view-playlist-detail" style="display:none"></div>
 
     <!-- Favorites -->
     <div id="view-favorites" style="display:none">
@@ -149,24 +140,7 @@
     <div class="action-sheet-title" id="track-action-title"></div>
     <button class="action-sheet-btn" id="track-action-play">Play Now</button>
     <button class="action-sheet-btn" id="track-action-queue">Add to Queue</button>
-    <button class="action-sheet-btn" id="track-action-playlist">Add to Playlist…</button>
     <button class="action-sheet-btn cancel" id="track-action-cancel">Cancel</button>
-  </div>
-</div>
-
-<!-- ── Add-to-Playlist Sheet ── -->
-<div id="addpl-sheet" role="dialog" aria-label="Add to playlist" aria-modal="true">
-  <div class="sheet-header">
-    <h2>Add to Playlist</h2>
-    <button class="sheet-close" id="addpl-close">Cancel</button>
-  </div>
-  <div class="addpl-body">
-    <div id="addpl-new-form">
-      <input id="addpl-name-input" type="text" placeholder="New playlist name…"
-             autocapitalize="words" autocorrect="off" spellcheck="false">
-      <button id="addpl-name-save">Create</button>
-    </div>
-    <ul id="addpl-list"></ul>
   </div>
 </div>
 

@@ -1,13 +1,12 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds } from './favorites.js';
-import { getAll as getAllPlaylists, getById, create as createPlaylist, addTracks, removeTrack as removePlTrack, remove as removePlaylist, encodeShareUrl, decodeShareHash, shareText, syncTracks } from './playlists.js';
 
 // ── State ──────────────────────────────────────────────────────────
 const state = {
   collectionId: localStorage.getItem('collectionId') || DEFAULT_COLLECTION,
   index:        null,   // full item array loaded once
-  mode:         'library',   // 'library'|'artists'|'discover'|'playlists'|'favorites'
+  mode:         'library',   // 'library'|'artists'|'discover'|'favorites'
   prevMode:     'library',
   inConcert:    false,
   inFiltered:   false,   // drilling into a filtered list from Discover
@@ -17,9 +16,6 @@ const state = {
   searchQuery:  '',
   selectedArtist:   null,   // { name, docs[] } or null = all
   currentConcert:   null,
-  currentPlaylist:  null,   // playlist object being viewed
-  activePlaylistId: null,   // playlist whose tracks mirror the queue
-  pendingTracks:    null,   // tracks waiting to be added to a playlist
 };
 
 const PAGE_SIZE = 50;
@@ -52,16 +48,7 @@ const el = {
   trackActionTitle:   $('track-action-title'),
   trackActionPlay:    $('track-action-play'),
   trackActionQueue:   $('track-action-queue'),
-  trackActionPlaylist:$('track-action-playlist'),
   trackActionCancel:  $('track-action-cancel'),
-  viewPlaylists:      $('view-playlists'),
-  viewPlaylistDetail: $('view-playlist-detail'),
-  playlistsList:      $('playlists-list'),
-  addplSheet:         $('addpl-sheet'),
-  addplClose:         $('addpl-close'),
-  addplNameInput:     $('addpl-name-input'),
-  addplNameSave:      $('addpl-name-save'),
-  addplList:          $('addpl-list'),
   favoritesList:  $('favorites-list'),
   nowBar:         $('now-playing-bar'),
   barTitle:       $('bar-title'),
@@ -120,14 +107,12 @@ function buildSortBar() {
 
 // ── View management ────────────────────────────────────────────────
 function showView(name) {
-  el.viewLibrary.style.display        = name === 'library'         ? 'block' : 'none';
-  el.viewArtists.style.display        = name === 'artists'         ? 'flex'  : 'none';
-  el.viewDiscover.style.display       = name === 'discover'        ? 'block' : 'none';
-  el.viewFiltered.style.display       = name === 'filtered'        ? 'block' : 'none';
-  el.viewPlaylists.style.display      = name === 'playlists'       ? 'block' : 'none';
-  el.viewPlaylistDetail.style.display = name === 'playlist-detail' ? 'block' : 'none';
-  el.viewFavorites.style.display      = name === 'favorites'       ? 'block' : 'none';
-  el.viewConcert.style.display        = name === 'concert'         ? 'block' : 'none';
+  el.viewLibrary.style.display  = name === 'library'   ? 'block' : 'none';
+  el.viewArtists.style.display  = name === 'artists'   ? 'flex'  : 'none';
+  el.viewDiscover.style.display = name === 'discover'  ? 'block' : 'none';
+  el.viewFiltered.style.display = name === 'filtered'  ? 'block' : 'none';
+  el.viewFavorites.style.display = name === 'favorites' ? 'block' : 'none';
+  el.viewConcert.style.display  = name === 'concert'   ? 'block' : 'none';
 }
 
 function setMode(mode) {
@@ -161,9 +146,6 @@ function setMode(mode) {
   } else if (mode === 'discover') {
     showView('discover');
     if (state.index) renderDiscover();
-  } else if (mode === 'playlists') {
-    showView('playlists');
-    renderPlaylists();
   } else if (mode === 'favorites') {
     showView('favorites');
     if (state.index) renderFavorites();
@@ -251,7 +233,6 @@ const SEARCH_PLACEHOLDERS = {
   library:   'Artists, titles, dates…',
   artists:   'Filter artists…',
   discover:  'Search all shows…',
-  playlists: 'Search playlists…',
   favorites: 'Search favorites…',
 };
 
@@ -280,9 +261,6 @@ function renderForSearch() {
   } else if (mode === 'favorites') {
     showView('favorites');
     renderFavorites();
-  } else if (mode === 'playlists') {
-    showView('playlists');
-    renderPlaylists();
   } else if (mode === 'discover') {
     showView('discover');
     if (q) {
@@ -485,7 +463,6 @@ function renderConcert(meta) {
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>
-        <button class="btn-addpl" id="add-to-pl">+ Playlist</button>
         <button class="btn-fav${faved ? ' active' : ''}" id="concert-fav" title="Favorite">♥</button>
       </div>
     </div>
@@ -497,12 +474,8 @@ function renderConcert(meta) {
     e.currentTarget.classList.toggle('active', active);
   });
 
-  $('play-all').addEventListener('click', () => {
-    state.activePlaylistId = null;
-    player.replaceQueue(tracks, 0);
-  });
+  $('play-all').addEventListener('click', () => player.replaceQueue(tracks, 0));
   $('queue-all').addEventListener('click', () => tracks.forEach(t => player.addToEnd(t)));
-  $('add-to-pl').addEventListener('click', () => openAddToPlaylist(tracks));
 
   const trackList = $('track-list');
   tracks.forEach((track, i) => {
@@ -521,7 +494,7 @@ function renderConcert(meta) {
       e.stopPropagation();
       openTrackAction(track);
     });
-    li.addEventListener('click', () => player.playNow(track));
+    li.addEventListener('click', () => player.replaceQueue(tracks, i));
     trackList.appendChild(li);
   });
 }
@@ -704,156 +677,6 @@ function extractVenues(index) {
   return [...new Set(index.map(d => extractVenueName(d)).filter(Boolean))];
 }
 
-// ── Playlists ──────────────────────────────────────────────────────
-function renderPlaylists() {
-  let lists = getAllPlaylists();
-  if (state.searching && state.searchQuery) {
-    const q = state.searchQuery.toLowerCase();
-    lists = lists.filter(pl => pl.name.toLowerCase().includes(q));
-  }
-  el.playlistsList.innerHTML = '';
-  if (!lists.length) {
-    el.playlistsList.innerHTML = `<li class="empty-msg">${
-      state.searching && state.searchQuery ? 'No playlists match.' : 'No playlists yet.<br>Open a concert and tap "Add to Playlist."'
-    }</li>`;
-    return;
-  }
-  lists.forEach(pl => {
-    const li = document.createElement('li');
-    li.className = 'playlist-item';
-    li.innerHTML = `
-      <div class="playlist-info">
-        <div class="playlist-name">${esc(pl.name)}</div>
-        <div class="playlist-meta">${pl.tracks.length} track${pl.tracks.length !== 1 ? 's' : ''}</div>
-      </div>
-      <div class="playlist-actions">
-        <button class="pl-action-btn" data-action="share" title="Share">⬆</button>
-        <button class="pl-action-btn danger" data-action="delete" title="Delete">×</button>
-      </div>
-    `;
-    li.querySelector('[data-action="share"]').addEventListener('click', e => {
-      e.stopPropagation();
-      sharePlaylist(pl);
-    });
-    li.querySelector('[data-action="delete"]').addEventListener('click', e => {
-      e.stopPropagation();
-      if (confirm(`Delete "${pl.name}"?`)) {
-        removePlaylist(pl.id);
-        renderPlaylists();
-      }
-    });
-    li.addEventListener('click', () => openPlaylistDetail(pl));
-    el.playlistsList.appendChild(li);
-  });
-}
-
-function openPlaylistDetail(pl) {
-  state.prevMode = state.mode;
-  state.currentPlaylist = pl;
-  state.inConcert = true;
-  el.backBtn.classList.add('visible');
-  el.modeBar.classList.add('hidden');
-  el.sortBar.classList.add('hidden');
-  showView('playlist-detail');
-  renderPlaylistDetail(pl);
-}
-
-function renderPlaylistDetail(pl) {
-  const fresh = getById(pl.id) || pl; // re-read from storage
-  state.currentPlaylist = fresh;
-  el.viewPlaylistDetail.innerHTML = `
-    <div class="pl-detail-header">
-      <div class="pl-detail-name">${esc(fresh.name)}</div>
-      <div class="pl-detail-meta">${fresh.tracks.length} track${fresh.tracks.length !== 1 ? 's' : ''}</div>
-      <div class="pl-detail-actions">
-        <button class="btn-primary" id="pl-play-all">Play All</button>
-        <button class="btn-secondary" id="pl-queue-all">Add to Queue</button>
-        <button class="pl-action-btn" id="pl-share" title="Share">⬆ Share</button>
-      </div>
-    </div>
-    <ul class="track-list" id="pl-track-list"></ul>
-  `;
-
-  $('pl-play-all').addEventListener('click', () => {
-    state.activePlaylistId = fresh.id;
-    player.replaceQueue(fresh.tracks, 0);
-  });
-  $('pl-queue-all').addEventListener('click', () => fresh.tracks.forEach(t => player.addToEnd(t)));
-  $('pl-share').addEventListener('click', () => sharePlaylist(fresh));
-
-  const list = $('pl-track-list');
-  fresh.tracks.forEach((track, i) => {
-    const li = document.createElement('li');
-    li.className = 'track-item' + (player.currentTrack?.url === track.url ? ' playing' : '');
-    li.dataset.url = track.url;
-    li.innerHTML = `
-      <span class="track-num">${i + 1}</span>
-      <div class="track-info">
-        <div class="track-title">${esc(track.title)}</div>
-        <div class="track-duration">${esc(track.artist || track.album || '')}</div>
-      </div>
-      <button class="track-add" data-i="${i}" title="Remove">×</button>
-    `;
-    li.querySelector('.track-add').addEventListener('click', e => {
-      e.stopPropagation();
-      removePlTrack(fresh.id, i);
-      renderPlaylistDetail(fresh); // re-render
-    });
-    li.addEventListener('click', () => player.playNow(track));
-    list.appendChild(li);
-  });
-}
-
-function sharePlaylist(pl) {
-  const url = encodeShareUrl(pl);
-  const text = shareText(pl);
-  if (navigator.share) {
-    navigator.share({ title: pl.name, text, url }).catch(() => copyToClipboard(url));
-  } else {
-    copyToClipboard(url);
-    alert(`Share link copied!\n\n${url}\n\n---\n${text}`);
-  }
-}
-
-function copyToClipboard(text) {
-  navigator.clipboard?.writeText(text).catch(() => {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    ta.remove();
-  });
-}
-
-// ── Add-to-playlist sheet ──────────────────────────────────────────
-function openAddToPlaylist(tracks) {
-  state.pendingTracks = tracks;
-  el.addplNameInput.value = '';
-  const lists = getAllPlaylists();
-  el.addplList.innerHTML = '';
-  lists.forEach(pl => {
-    const li = document.createElement('li');
-    li.className = 'addpl-option';
-    li.innerHTML = `
-      <div>${esc(pl.name)}</div>
-      <div class="addpl-option-meta">${pl.tracks.length} track${pl.tracks.length !== 1 ? 's' : ''}</div>
-    `;
-    li.addEventListener('click', () => {
-      addTracks(pl.id, tracks);
-      closeAddToPlaylist();
-      flashConfirm(`Added to "${pl.name}"`);
-    });
-    el.addplList.appendChild(li);
-  });
-  el.addplSheet.classList.add('visible');
-}
-
-function closeAddToPlaylist() {
-  el.addplSheet.classList.remove('visible');
-  state.pendingTracks = null;
-}
-
 function flashConfirm(msg) {
   const toast = document.createElement('div');
   toast.textContent = msg;
@@ -999,30 +822,8 @@ function init() {
   // Track action sheet
   el.trackActionPlay.addEventListener('click', () => { if (_actionTrack) player.playNow(_actionTrack); closeTrackAction(); });
   el.trackActionQueue.addEventListener('click', () => { if (_actionTrack) { player.addToEnd(_actionTrack); flashConfirm('Added to queue'); } closeTrackAction(); });
-  el.trackActionPlaylist.addEventListener('click', () => {
-    if (_actionTrack) {
-      const track = _actionTrack; // capture before closeTrackAction nulls it
-      closeTrackAction();
-      openAddToPlaylist([track]);
-    }
-  });
   el.trackActionCancel.addEventListener('click', closeTrackAction);
   el.trackActionSheet.addEventListener('click', e => { if (e.target === el.trackActionSheet) closeTrackAction(); });
-
-  // Add-to-playlist sheet
-  el.addplClose.addEventListener('click', closeAddToPlaylist);
-
-  function saveNewPlaylist() {
-    const name = el.addplNameInput.value.trim();
-    if (!name) { el.addplNameInput.focus(); return; }
-    const pl = createPlaylist(name);
-    if (state.pendingTracks?.length) addTracks(pl.id, state.pendingTracks);
-    el.addplNameInput.value = '';
-    closeAddToPlaylist();
-    flashConfirm(`Created "${pl.name}"`);
-  }
-  el.addplNameSave.addEventListener('click', saveNewPlaylist);
-  el.addplNameInput.addEventListener('keydown', e => { if (e.key === 'Enter') saveNewPlaylist(); });
 
   // Queue
   el.queueClose.addEventListener('click', () => el.queueSheet.classList.remove('visible'));
@@ -1049,21 +850,7 @@ function init() {
   player.on('timeupdate',  updateProgress);
   player.on('queuechange', () => {
     if (el.queueSheet.classList.contains('visible')) renderQueue();
-    if (state.activePlaylistId) syncTracks(state.activePlaylistId, player.queue);
   });
-
-  // Check for shared playlist in URL hash
-  const sharedPl = decodeShareHash();
-  if (sharedPl) {
-    history.replaceState(null, '', location.pathname); // clean the URL
-    if (confirm(`Load shared playlist "${sharedPl.name}" (${sharedPl.tracks.length} tracks)?`)) {
-      const pl = createPlaylist(sharedPl.name);
-      addTracks(pl.id, sharedPl.tracks);
-      setMode('playlists');
-      loadIndex().then(() => openPlaylistDetail(pl));
-      return;
-    }
-  }
 
   // Boot
   setMode('library');

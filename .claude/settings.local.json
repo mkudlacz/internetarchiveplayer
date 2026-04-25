@@ -15,7 +15,8 @@
       "Bash(python3 -c \"import cairosvg; print\\('cairosvg ok'\\)\")",
       "Bash(python3 -c \"from PIL import Image; print\\('pillow ok'\\)\")",
       "Bash(sed -i '' '/el\\\\.headerTitle/d' /Users/mkudlacz/Projects/Internetarchiveplayer/js/app.js)",
-      "Bash(sed -i '' '/el\\\\.headerSubtitle/d' /Users/mkudlacz/Projects/Internetarchiveplayer/js/app.js)"
+      "Bash(sed -i '' '/el\\\\.headerSubtitle/d' /Users/mkudlacz/Projects/Internetarchiveplayer/js/app.js)",
+      "Bash(grep -E \"\\\\.\\(js|html|json\\)$\")"
     ]
   }
 }
