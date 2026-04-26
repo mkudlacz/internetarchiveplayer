@@ -198,13 +198,17 @@ button {
 }
 
 #view-library,
-#view-favorites,
 #view-concert {
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
+}
+
+#view-favorites {
+  display: flex;
+  height: 100%;
 }
 
 /* ── Concert List (shared by library, favorites, search) ──────────── */

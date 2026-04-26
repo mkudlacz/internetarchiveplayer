@@ -15,6 +15,7 @@ const state = {
   searching:    false,
   searchQuery:  '',
   selectedArtist:   null,   // { name, docs[] } or null = all
+  selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
   selectedVenue:    null,   // venue string
   currentConcert:   null,
@@ -38,6 +39,8 @@ const el = {
   viewLibrary:    $('view-library'),
   viewArtists:    $('view-artists'),
   viewFavorites:  $('view-favorites'),
+  favArtistList:  $('fav-artist-list'),
+  favConcerts:    $('fav-concerts'),
   viewConcert:    $('view-concert'),
   concertList:    $('concert-list'),
   loadMore:       $('load-more'),
@@ -57,7 +60,6 @@ const el = {
   trackActionPlay:    $('track-action-play'),
   trackActionQueue:   $('track-action-queue'),
   trackActionCancel:  $('track-action-cancel'),
-  favoritesList:  $('favorites-list'),
   nowBar:         $('now-playing-bar'),
   barTitle:       $('bar-title'),
   barArtist:      $('bar-artist'),
@@ -125,7 +127,7 @@ function showView(name) {
   el.viewYear.style.display      = name === 'year'      ? 'flex'  : 'none';
   el.viewVenue.style.display     = name === 'venue'     ? 'flex'  : 'none';
   el.viewFiltered.style.display  = name === 'filtered'  ? 'block' : 'none';
-  el.viewFavorites.style.display = name === 'favorites' ? 'block' : 'none';
+  el.viewFavorites.style.display = name === 'favorites' ? 'flex'  : 'none';
   el.viewConcert.style.display   = name === 'concert'   ? 'block' : 'none';
 }
 
@@ -258,7 +260,7 @@ const SEARCH_PLACEHOLDERS = {
   discover:  'Search all shows…',
   venue:     'Filter venues…',
   year:      'Filter years…',
-  favorites: 'Search favorites…',
+  favorites: 'Filter artists…',
 };
 
 function openSearch() {
@@ -440,17 +442,61 @@ function groupByArtist(docs) {
 // ── Favorites view ─────────────────────────────────────────────────
 function renderFavorites() {
   const ids = new Set(getFavIds());
-  let favDocs = sortDocs(state.index.filter(d => ids.has(d.identifier)));
-  if (state.searching && state.searchQuery) favDocs = filterDocs(favDocs, state.searchQuery);
+  const favDocs = state.index.filter(d => ids.has(d.identifier));
 
-  el.favoritesList.innerHTML = '';
-  if (!favDocs.length) {
-    el.favoritesList.innerHTML = `<li class="empty-msg">${
-      state.searching && state.searchQuery ? 'No matches.' : 'No favorites yet. Tap ♥ on any concert.'
+  let groups = groupByArtist(favDocs).sort((a, b) => a[0].localeCompare(b[0]));
+
+  if (state.searching && state.searchQuery) {
+    const q = state.searchQuery.toLowerCase();
+    groups = groups.filter(([name]) => name.toLowerCase().includes(q));
+    if (state.selectedFavArtist && !groups.find(([name]) => name === state.selectedFavArtist)) {
+      state.selectedFavArtist = null;
+    }
+  }
+
+  el.favArtistList.innerHTML = '';
+  if (!groups.length) {
+    el.favArtistList.innerHTML = `<li class="empty-msg">${
+      state.searching && state.searchQuery ? 'No matches.' : 'No favorites yet.<br>Tap ♥ on any concert.'
     }</li>`;
+    el.favConcerts.innerHTML = '';
     return;
   }
-  appendConcertRows(el.favoritesList, favDocs, doc => openConcert(doc));
+
+  const frag = document.createDocumentFragment();
+  groups.forEach(([name, docs]) => {
+    const item = makeArtistItem(name, docs.length, state.selectedFavArtist === name);
+    item.addEventListener('click', () => selectFavArtist(name, docs));
+    frag.appendChild(item);
+  });
+  el.favArtistList.appendChild(frag);
+
+  if (!state.selectedFavArtist && groups.length) {
+    const [name, docs] = groups[0];
+    state.selectedFavArtist = name;
+    el.favArtistList.querySelector('.artist-item')?.classList.add('selected');
+    renderFavConcerts(sortDocs(docs));
+  } else if (state.selectedFavArtist) {
+    const entry = groups.find(([n]) => n === state.selectedFavArtist);
+    renderFavConcerts(sortDocs(entry?.[1] || []));
+  }
+}
+
+function selectFavArtist(name, docs) {
+  state.selectedFavArtist = name;
+  el.favArtistList.querySelectorAll('.artist-item').forEach(item => {
+    item.classList.toggle('selected', item.querySelector('.artist-name').textContent === name);
+  });
+  renderFavConcerts(sortDocs(docs));
+}
+
+function renderFavConcerts(docs) {
+  el.favConcerts.innerHTML = '';
+  if (!docs.length) {
+    el.favConcerts.innerHTML = '<li class="empty-msg">No concerts.</li>';
+    return;
+  }
+  appendConcertRows(el.favConcerts, docs, doc => openConcert(doc));
 }
 
 // ── Concert detail view ────────────────────────────────────────────
