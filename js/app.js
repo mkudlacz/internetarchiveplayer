@@ -628,6 +628,20 @@ function renderDiscover() {
 
   el.viewDiscover.innerHTML = '';
 
+  // ── Surprises from the Archive ──
+  {
+    const sec = discoverSection('Surprises from the Archive', '');
+    const btn = document.createElement('button');
+    btn.className = 'surprise-btn';
+    btn.textContent = '▶ Play a Random Show';
+    btn.addEventListener('click', () => {
+      const doc = index[Math.floor(Math.random() * index.length)];
+      openConcert(doc);
+    });
+    sec.appendChild(btn);
+    el.viewDiscover.appendChild(sec);
+  }
+
   // ── Today in Archive ──
   const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
   if (todayShows.length) {
@@ -646,40 +660,6 @@ function renderDiscover() {
       strip.appendChild(card);
     });
     sec.appendChild(strip);
-    el.viewDiscover.appendChild(sec);
-  }
-
-  // ── By the Numbers ──
-  {
-    const sec = discoverSection('By the Numbers', '');
-    const grid = document.createElement('div');
-    grid.className = 'stats-grid';
-    [
-      [index.length.toLocaleString(), 'Total Shows'],
-      [uniqueArtists.toLocaleString(), 'Artists'],
-      [`${minYear}–${maxYear}`, 'Year Range'],
-      [topYear ? `${topYear[0]} (${topYear[1].length})` : '–', 'Most Active Year'],
-    ].forEach(([val, label]) => {
-      const card = document.createElement('div');
-      card.className = 'stat-card';
-      card.innerHTML = `<div class="stat-value">${val}</div><div class="stat-label">${label}</div>`;
-      grid.appendChild(card);
-    });
-    sec.appendChild(grid);
-    el.viewDiscover.appendChild(sec);
-  }
-
-  // ── Surprise Me ──
-  {
-    const sec = discoverSection('Surprise Me', '');
-    const btn = document.createElement('button');
-    btn.className = 'surprise-btn';
-    btn.textContent = '▶ Play a Random Show';
-    btn.addEventListener('click', () => {
-      const doc = index[Math.floor(Math.random() * index.length)];
-      openConcert(doc);
-    });
-    sec.appendChild(btn);
     el.viewDiscover.appendChild(sec);
   }
 

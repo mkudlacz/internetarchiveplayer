@@ -755,7 +755,7 @@ button {
 }
 
 /* Recently Added list */
-.recent-list { list-style: none; }
+.recent-list { list-style: none; padding: 0 16px; }
 .recent-item {
   display: flex;
   align-items: center;
