@@ -1,27 +1,1853 @@
 {
-  "1986-01-26": "1986 · Bears defeat New England Patriots 46–10 in Super Bowl XX",
-  "1929-02-14": "1929 · St. Valentine's Day Massacre: seven gangsters killed in a Lincoln Park garage",
-  "1992-04-13": "1992 · Great Chicago Flood: freight tunnel breach fills the Loop with river water",
-  "1914-04-23": "1914 · Wrigley Field (then Weeghman Park) opens on the North Side",
-  "1983-04-29": "1983 · Harold Washington inaugurated as Chicago's first Black mayor",
-  "1893-05-01": "1893 · World's Columbian Exposition opens in Jackson Park, drawing 27 million visitors",
-  "1973-05-03": "1973 · Sears Tower (now Willis Tower) topped out, becoming the world's tallest building",
-  "2010-06-09": "2010 · Blackhawks win first Stanley Cup in 49 years, defeating Philadelphia Flyers",
-  "1991-06-12": "1991 · Bulls win first NBA Championship, defeating the LA Lakers in five games",
-  "1997-06-13": "1997 · Bulls win fifth NBA Championship, defeating Utah Jazz in six games",
-  "1992-06-14": "1992 · Bulls win second NBA Championship, defeating Portland Trail Blazers",
-  "1998-06-14": "1998 · Bulls complete the second three-peat, defeating Utah Jazz — Jordan's last title",
-  "2015-06-15": "2015 · Blackhawks win third Stanley Cup in six seasons, defeating Tampa Bay Lightning",
-  "1996-06-16": "1996 · Bulls cap their 72-win season with a championship over Seattle SuperSonics",
-  "1993-06-20": "1993 · Bulls complete first three-peat, defeating Phoenix Suns in six games",
-  "2013-06-24": "2013 · Blackhawks rally to win Stanley Cup over Boston Bruins",
-  "1979-06-25": "1979 · American Airlines Flight 191 crashes at O'Hare, killing all 273 aboard",
-  "1915-07-24": "1915 · SS Eastland capsizes in the Chicago River, killing 844 passengers",
-  "1994-08-18": "1994 · United Center opens as new home of the Bulls and Blackhawks",
-  "1968-08-28": "1968 · Police clash with anti-war protesters at the Democratic National Convention",
-  "2003-09-29": "2003 · Rebuilt Soldier Field reopens after $660 million renovation",
-  "1871-10-08": "1871 · Great Chicago Fire begins, burning 17,000 structures over two days",
-  "2005-10-26": "2005 · White Sox sweep Houston Astros to win first World Series title since 1917",
-  "1993-10-31": "1993 · CTA Orange Line opens, connecting the Loop to Midway Airport",
-  "2016-11-02": "2016 · Cubs defeat Cleveland Indians in Game 7, ending a 108-year World Series drought"
+  "1871-10-08": [
+    "1871 · Great Chicago Fire begins, burning 17,000 structures over two days"
+  ],
+  "1893-05-01": [
+    "1893 · World's Columbian Exposition opens in Jackson Park, drawing 27 million visitors"
+  ],
+  "1914-04-23": [
+    "1914 · Wrigley Field (then Weeghman Park) opens on the North Side"
+  ],
+  "1915-07-24": [
+    "1915 · SS Eastland capsizes in the Chicago River, killing 844 passengers"
+  ],
+  "1929-02-14": [
+    "1929 · St. Valentine's Day Massacre: seven gangsters killed in a Lincoln Park garage"
+  ],
+  "1968-08-28": [
+    "1968 · Police clash with anti-war protesters at the Democratic National Convention"
+  ],
+  "1973-05-03": [
+    "1973 · Sears Tower (now Willis Tower) topped out, becoming the world's tallest building"
+  ],
+  "1979-06-25": [
+    "1979 · American Airlines Flight 191 crashes at O'Hare, killing all 273 aboard"
+  ],
+  "1983-04-29": [
+    "1983 · Harold Washington inaugurated as Chicago's first Black mayor"
+  ],
+  "1984-04-05": [
+    "1984 · Cubs defeat San Francisco Giants 11–7"
+  ],
+  "1984-08-18": [
+    "1984 · White Sox defeat Toronto Blue Jays 7–6"
+  ],
+  "1985-04-14": [
+    "1985 · White Sox defeat Boston Red Sox 11–6"
+  ],
+  "1985-05-03": [
+    "1985 · White Sox defeat Detroit Tigers 7–1"
+  ],
+  "1985-08-11": [
+    "1985 · White Sox defeat Milwaukee Brewers 4–1"
+  ],
+  "1985-08-13": [
+    "1985 · White Sox defeat New York Yankees 4–3"
+  ],
+  "1985-08-31": [
+    "1985 · Cubs defeat Atlanta Braves 5–4"
+  ],
+  "1985-09-17": [
+    "1985 · White Sox defeat California Angels 5–2"
+  ],
+  "1985-09-22": [
+    "1985 · White Sox defeat Oakland Athletics 7–5"
+  ],
+  "1986-01-26": [
+    "1986 · Bears defeat New England Patriots 46–10 in Super Bowl XX"
+  ],
+  "1986-04-11": [
+    "1986 · Cubs defeat Pittsburgh Pirates 5–4"
+  ],
+  "1986-05-08": [
+    "1986 · Cubs defeat Los Angeles Dodgers 6–5"
+  ],
+  "1986-05-09": [
+    "1986 · White Sox defeat Cleveland Indians 4–3"
+  ],
+  "1986-06-16": [
+    "1986 · Cubs defeat Philadelphia Phillies 7–5"
+  ],
+  "1986-06-29": [
+    "1986 · White Sox defeat Oakland Athletics 6–5"
+  ],
+  "1986-09-26": [
+    "1986 · Cubs defeat St. Louis Cardinals 4–1"
+  ],
+  "1986-09-27": [
+    "1986 · White Sox defeat Minnesota Twins 5–2"
+  ],
+  "1987-04-22": [
+    "1987 · Cubs defeat St. Louis Cardinals 5–4"
+  ],
+  "1987-05-01": [
+    "1987 · White Sox defeat Baltimore Orioles 5–1"
+  ],
+  "1987-05-03": [
+    "1987 · White Sox defeat Baltimore Orioles 4–3"
+  ],
+  "1987-06-06": [
+    "1987 · Cubs defeat St. Louis Cardinals 6–5"
+  ],
+  "1987-07-22": [
+    "1987 · Cubs defeat San Diego Padres 6–3"
+  ],
+  "1987-08-13": [
+    "1987 · White Sox defeat Toronto Blue Jays 10–3"
+  ],
+  "1987-08-23": [
+    "1987 · White Sox defeat Texas Rangers 8–1"
+  ],
+  "1987-09-16": [
+    "1987 · White Sox defeat Minnesota Twins 13–10"
+  ],
+  "1987-09-18": [
+    "1987 · Cubs defeat St. Louis Cardinals 8–1"
+  ],
+  "1987-09-30": [
+    "1987 · White Sox defeat California Angels 5–2"
+  ],
+  "1988-04-15": [
+    "1988 · White Sox defeat Oakland Athletics 11–3"
+  ],
+  "1988-04-30": [
+    "1988 · White Sox defeat Baltimore Orioles 4–1"
+  ],
+  "1988-05-06": [
+    "1988 · Cubs defeat San Francisco Giants 3–2"
+  ],
+  "1988-05-07": [
+    "1988 · White Sox defeat Baltimore Orioles 11–7"
+  ],
+  "1988-05-28": [
+    "1988 · White Sox defeat Toronto Blue Jays 3–2"
+  ],
+  "1988-06-10": [
+    "1988 · White Sox defeat Milwaukee Brewers 1–0"
+  ],
+  "1988-06-22": [
+    "1988 · White Sox defeat Kansas City Royals 5–4"
+  ],
+  "1988-07-01": [
+    "1988 · White Sox defeat New York Yankees 2–1"
+  ],
+  "1988-07-03": [
+    "1988 · White Sox defeat New York Yankees 4–3"
+  ],
+  "1988-08-11": [
+    "1988 · White Sox defeat Seattle Mariners 4–3"
+  ],
+  "1988-08-31": [
+    "1988 · Cubs defeat Houston Astros 3–1"
+  ],
+  "1988-09-23": [
+    "1988 · White Sox defeat Kansas City Royals 2–0"
+  ],
+  "1989-05-05": [
+    "1989 · Cubs defeat Los Angeles Dodgers 4–2"
+  ],
+  "1989-06-07": [
+    "1989 · White Sox defeat Texas Rangers 6–4"
+  ],
+  "1989-06-21": [
+    "1989 · White Sox defeat New York Yankees 7–3"
+  ],
+  "1989-06-30": [
+    "1989 · Cubs defeat San Francisco Giants 6–4"
+  ],
+  "1989-07-06": [
+    "1989 · Cubs defeat San Diego Padres 7–3"
+  ],
+  "1989-07-16": [
+    "1989 · White Sox defeat Milwaukee Brewers 2–0"
+  ],
+  "1989-07-19": [
+    "1989 · White Sox defeat New York Yankees 11–5"
+  ],
+  "1989-08-04": [
+    "1989 · White Sox defeat Detroit Tigers 5–4"
+  ],
+  "1989-09-13": [
+    "1989 · White Sox defeat Baltimore Orioles 3–0"
+  ],
+  "1989-09-30": [
+    "1989 · White Sox defeat Cleveland Indians 8–2"
+  ],
+  "1989-10-05": [
+    "1989 · Cubs defeat San Francisco Giants 9–5, NLCS Game 2 (series tied 1–1)"
+  ],
+  "1989-10-07": [
+    "1989 · San Francisco Giants defeat Cubs 4–3, NLCS Game 3 at Wrigley (Giants lead 2–1)"
+  ],
+  "1990-05-04": [
+    "1990 · White Sox defeat Kansas City Royals 5–4"
+  ],
+  "1990-06-14": [
+    "1990 · White Sox defeat Oakland Athletics 3–2"
+  ],
+  "1990-07-14": [
+    "1990 · White Sox defeat New York Yankees 8–7"
+  ],
+  "1990-07-27": [
+    "1990 · White Sox defeat Milwaukee Brewers 7–4"
+  ],
+  "1990-07-28": [
+    "1990 · White Sox defeat Milwaukee Brewers 5–4"
+  ],
+  "1990-08-02": [
+    "1990 · White Sox defeat Milwaukee Brewers 4–3"
+  ],
+  "1990-09-08": [
+    "1990 · Cubs defeat St. Louis Cardinals 5–4"
+  ],
+  "1990-09-21": [
+    "1990 · White Sox defeat Seattle Mariners 5–4"
+  ],
+  "1991-05-04": [
+    "1991 · Bulls defeat Philadelphia 76ers 105–92, Eastern Semifinals Game 1"
+  ],
+  "1991-06-12": [
+    "1991 · Bulls win first NBA Championship, defeating the LA Lakers in five games"
+  ],
+  "1991-06-30": [
+    "1991 · Cubs defeat St. Louis Cardinals 7–4"
+  ],
+  "1991-07-06": [
+    "1991 · Cubs defeat St. Louis Cardinals 12–2"
+  ],
+  "1991-07-27": [
+    "1991 · White Sox defeat Boston Red Sox 10–8"
+  ],
+  "1991-07-28": [
+    "1991 · White Sox defeat Boston Red Sox 5–2"
+  ],
+  "1991-08-01": [
+    "1991 · White Sox defeat Texas Rangers 13–2"
+  ],
+  "1991-08-03": [
+    "1991 · Cubs defeat New York Mets 9–2"
+  ],
+  "1991-08-06": [
+    "1991 · White Sox defeat New York Yankees 14–5"
+  ],
+  "1991-08-08": [
+    "1991 · White Sox defeat New York Yankees 4–1"
+  ],
+  "1991-08-28": [
+    "1991 · Cubs defeat San Francisco Giants 8–6"
+  ],
+  "1991-10-03": [
+    "1991 · White Sox defeat Minnesota Twins 3–2"
+  ],
+  "1992-04-11": [
+    "1992 · Cubs defeat St. Louis Cardinals 5–1"
+  ],
+  "1992-04-13": [
+    "1992 · Great Chicago Flood: freight tunnel breach fills the Loop with river water"
+  ],
+  "1992-05-08": [
+    "1992 · White Sox defeat Baltimore Orioles 4–3"
+  ],
+  "1992-05-13": [
+    "1992 · White Sox defeat Milwaukee Brewers 1–0"
+  ],
+  "1992-05-15": [
+    "1992 · Cubs defeat San Francisco Giants 5–3"
+  ],
+  "1992-05-27": [
+    "1992 · Bulls defeat Cleveland Cavaliers 94–88, Eastern Conference Finals Game 5 (Bulls lead 3–2)"
+  ],
+  "1992-05-28": [
+    "1992 · Cubs defeat San Francisco Giants 5–0"
+  ],
+  "1992-06-07": [
+    "1992 · Portland Trail Blazers defeat Bulls 94–84, NBA Finals Game 3 (Portland pulls within 2–1)"
+  ],
+  "1992-06-10": [
+    "1992 · Portland Trail Blazers defeat Bulls 93–88, NBA Finals Game 4 (series tied 2–2)"
+  ],
+  "1992-06-12": [
+    "1992 · Bulls defeat Portland Trail Blazers 119–106, NBA Finals Game 5 (Bulls lead 3–2)"
+  ],
+  "1992-06-13": [
+    "1992 · White Sox defeat Minnesota Twins 4–2"
+  ],
+  "1992-06-14": [
+    "1992 · Bulls win NBA Championship, defeating Portland Trail Blazers 97–93 (Finals Game 6) — Jordan's 2nd title"
+  ],
+  "1992-07-23": [
+    "1992 · White Sox defeat Milwaukee Brewers 6–2"
+  ],
+  "1992-08-05": [
+    "1992 · White Sox defeat Minnesota Twins 9–5"
+  ],
+  "1992-09-23": [
+    "1992 · White Sox defeat Oakland Athletics 17–6"
+  ],
+  "1992-09-28": [
+    "1992 · White Sox defeat Minnesota Twins 9–4"
+  ],
+  "1993-04-29": [
+    "1993 · White Sox defeat Milwaukee Brewers 7–4"
+  ],
+  "1993-05-15": [
+    "1993 · Bulls defeat Cleveland Cavaliers in Eastern Conference Semifinals (series clincher)"
+  ],
+  "1993-05-22": [
+    "1993 · Cubs defeat Florida Marlins 2–1"
+  ],
+  "1993-05-27": [
+    "1993 · Cubs defeat San Francisco Giants 5–4"
+  ],
+  "1993-05-29": [
+    "1993 · Bulls defeat New York Knicks, Eastern Conference Finals Game 6 (Bulls advance to Finals)"
+  ],
+  "1993-06-11": [
+    "1993 · Phoenix Suns defeat Bulls 103–108, NBA Finals Game 2 (Suns tie series 1–1)"
+  ],
+  "1993-06-16": [
+    "1993 · Bulls defeat Phoenix Suns 111–105, NBA Finals Game 4 (Bulls lead 3–1)"
+  ],
+  "1993-06-18": [
+    "1993 · Phoenix Suns defeat Bulls 108–98, NBA Finals Game 5 (Bulls lead series 3–2)"
+  ],
+  "1993-06-20": [
+    "1993 · Bulls complete first three-peat, defeating Phoenix Suns in six games"
+  ],
+  "1993-07-02": [
+    "1993 · White Sox defeat Baltimore Orioles 12–1"
+  ],
+  "1993-07-09": [
+    "1993 · Cubs defeat Houston Astros 5–2"
+  ],
+  "1993-07-17": [
+    "1993 · White Sox defeat Milwaukee Brewers 9–4"
+  ],
+  "1993-08-06": [
+    "1993 · Cubs defeat St. Louis Cardinals 6–4"
+  ],
+  "1993-08-12": [
+    "1993 · Cubs defeat Florida Marlins 5–1"
+  ],
+  "1993-08-13": [
+    "1993 · White Sox defeat Kansas City Royals 5–4"
+  ],
+  "1993-08-14": [
+    "1993 · White Sox defeat Kansas City Royals 4–1"
+  ],
+  "1993-08-27": [
+    "1993 · White Sox defeat Minnesota Twins 7–3"
+  ],
+  "1993-09-03": [
+    "1993 · White Sox defeat Detroit Tigers 8–6"
+  ],
+  "1993-10-01": [
+    "1993 · White Sox defeat Cleveland Indians 4–2"
+  ],
+  "1993-10-02": [
+    "1993 · White Sox defeat Cleveland Indians 4–2"
+  ],
+  "1993-10-31": [
+    "1993 · CTA Orange Line opens, connecting the Loop to Midway Airport"
+  ],
+  "1994-04-06": [
+    "1994 · White Sox defeat Toronto Blue Jays 9–2"
+  ],
+  "1994-04-22": [
+    "1994 · White Sox defeat Detroit Tigers 7–2"
+  ],
+  "1994-04-23": [
+    "1994 · White Sox defeat Detroit Tigers 9–3"
+  ],
+  "1994-04-28": [
+    "1994 · White Sox defeat Cleveland Indians 5–3"
+  ],
+  "1994-05-06": [
+    "1994 · Cubs defeat Pittsburgh Pirates 10–1"
+  ],
+  "1994-05-20": [
+    "1994 · White Sox defeat Oakland Athletics 13–6"
+  ],
+  "1994-05-21": [
+    "1994 · White Sox defeat Oakland Athletics 6–5"
+  ],
+  "1994-05-27": [
+    "1994 · White Sox defeat Baltimore Orioles 3–0"
+  ],
+  "1994-06-08": [
+    "1994 · White Sox defeat Toronto Blue Jays 3–2"
+  ],
+  "1994-06-11": [
+    "1994 · Cubs defeat Los Angeles Dodgers 7–4"
+  ],
+  "1994-06-25": [
+    "1994 · White Sox defeat Seattle Mariners 2–1"
+  ],
+  "1994-07-02": [
+    "1994 · White Sox defeat Milwaukee Brewers 5–0"
+  ],
+  "1994-07-04": [
+    "1994 · White Sox defeat Milwaukee Brewers 3–2"
+  ],
+  "1994-07-07": [
+    "1994 · White Sox defeat Detroit Tigers 9–5"
+  ],
+  "1994-07-14": [
+    "1994 · White Sox defeat Cleveland Indians 6–3"
+  ],
+  "1994-07-16": [
+    "1994 · Cubs defeat Cincinnati Reds 7–2"
+  ],
+  "1994-07-22": [
+    "1994 · Cubs defeat Cincinnati Reds 7–6"
+  ],
+  "1994-07-28": [
+    "1994 · Cubs defeat Pittsburgh Pirates 10–3"
+  ],
+  "1994-08-07": [
+    "1994 · White Sox defeat California Angels 10–5"
+  ],
+  "1994-08-08": [
+    "1994 · White Sox defeat Oakland Athletics 2–1"
+  ],
+  "1994-08-18": [
+    "1994 · United Center opens as new home of the Bulls and Blackhawks"
+  ],
+  "1995-05-20": [
+    "1995 · Cubs defeat Los Angeles Dodgers 7–1"
+  ],
+  "1995-05-21": [
+    "1995 · Cubs defeat Los Angeles Dodgers 2–1"
+  ],
+  "1995-06-10": [
+    "1995 · Cubs defeat Colorado Rockies 3–0"
+  ],
+  "1995-06-21": [
+    "1995 · White Sox defeat Seattle Mariners 5–4"
+  ],
+  "1995-06-22": [
+    "1995 · Cubs defeat Houston Astros 13–2"
+  ],
+  "1995-06-23": [
+    "1995 · White Sox defeat Cleveland Indians 12–5"
+  ],
+  "1995-06-24": [
+    "1995 · White Sox defeat Cleveland Indians 8–3"
+  ],
+  "1995-06-25": [
+    "1995 · White Sox defeat Cleveland Indians 3–2"
+  ],
+  "1995-07-01": [
+    "1995 · White Sox defeat Kansas City Royals 11–5"
+  ],
+  "1995-07-09": [
+    "1995 · Cubs defeat Philadelphia Phillies 7–6"
+  ],
+  "1995-07-27": [
+    "1995 · White Sox defeat Boston Red Sox 5–4"
+  ],
+  "1995-08-03": [
+    "1995 · Cubs defeat Pittsburgh Pirates 7–2"
+  ],
+  "1995-08-18": [
+    "1995 · White Sox defeat Texas Rangers 3–1"
+  ],
+  "1995-08-28": [
+    "1995 · White Sox defeat Milwaukee Brewers 6–5"
+  ],
+  "1995-09-02": [
+    "1995 · White Sox defeat Toronto Blue Jays 10–4"
+  ],
+  "1995-09-08": [
+    "1995 · White Sox defeat Oakland Athletics 7–3"
+  ],
+  "1995-09-11": [
+    "1995 · Cubs defeat Los Angeles Dodgers 12–1"
+  ],
+  "1995-09-13": [
+    "1995 · White Sox defeat California Angels 6–1"
+  ],
+  "1996-04-04": [
+    "1996 · Cubs defeat Los Angeles Dodgers 9–4"
+  ],
+  "1996-04-08": [
+    "1996 · Cubs defeat Colorado Rockies 9–6"
+  ],
+  "1996-04-20": [
+    "1996 · White Sox defeat Oakland Athletics 8–3"
+  ],
+  "1996-05-01": [
+    "1996 · Cubs defeat St. Louis Cardinals 9–3"
+  ],
+  "1996-05-05": [
+    "1996 · Cubs defeat New York Mets 5–4"
+  ],
+  "1996-05-10": [
+    "1996 · White Sox defeat New York Yankees 5–2"
+  ],
+  "1996-05-11": [
+    "1996 · White Sox defeat New York Yankees 7–5"
+  ],
+  "1996-05-12": [
+    "1996 · Cubs defeat New York Mets 3–0"
+  ],
+  "1996-05-18": [
+    "1996 · White Sox defeat Detroit Tigers 16–4"
+  ],
+  "1996-05-25": [
+    "1996 · White Sox defeat Milwaukee Brewers 9–7"
+  ],
+  "1996-06-05": [
+    "1996 · Bulls defeat Seattle SuperSonics 107–90, NBA Finals Game 1"
+  ],
+  "1996-06-07": [
+    "1996 · Bulls defeat Seattle SuperSonics 92–88, NBA Finals Game 2 (Bulls lead 2–0)"
+  ],
+  "1996-06-11": [
+    "1996 · Cubs defeat Philadelphia Phillies 9–2"
+  ],
+  "1996-06-14": [
+    "1996 · Seattle SuperSonics defeat Bulls 89–78, NBA Finals Game 5 (Bulls lead series 3–2)"
+  ],
+  "1996-06-16": [
+    "1996 · Bulls win NBA Championship, defeating Seattle SuperSonics 87–75 (Finals Game 6) — Jordan's 4th title, 72-win season"
+  ],
+  "1996-06-20": [
+    "1996 · Cubs defeat San Diego Padres 3–2"
+  ],
+  "1996-06-23": [
+    "1996 · White Sox defeat Seattle Mariners 7–6"
+  ],
+  "1996-06-26": [
+    "1996 · Cubs defeat Los Angeles Dodgers 6–4"
+  ],
+  "1996-07-20": [
+    "1996 · Cubs defeat St. Louis Cardinals 3–0"
+  ],
+  "1996-07-26": [
+    "1996 · White Sox defeat Texas Rangers 6–2"
+  ],
+  "1996-08-02": [
+    "1996 · White Sox defeat Texas Rangers 9–0"
+  ],
+  "1996-08-10": [
+    "1996 · Cubs defeat Montreal Expos 3–2"
+  ],
+  "1996-08-28": [
+    "1996 · White Sox defeat Milwaukee Brewers 2–0"
+  ],
+  "1996-08-29": [
+    "1996 · Cubs defeat Houston Astros 4–3"
+  ],
+  "1996-08-30": [
+    "1996 · White Sox defeat Toronto Blue Jays 11–2"
+  ],
+  "1996-09-03": [
+    "1996 · White Sox defeat Detroit Tigers 6–4"
+  ],
+  "1996-09-07": [
+    "1996 · White Sox defeat Boston Red Sox 4–3"
+  ],
+  "1996-09-13": [
+    "1996 · Cubs defeat Philadelphia Phillies 4–2"
+  ],
+  "1996-09-14": [
+    "1996 · White Sox defeat Boston Red Sox 13–5"
+  ],
+  "1997-04-25": [
+    "1997 · Cubs defeat Pittsburgh Pirates 11–1"
+  ],
+  "1997-05-06": [
+    "1997 · Cubs defeat San Diego Padres 2–1"
+  ],
+  "1997-05-15": [
+    "1997 · Cubs defeat San Diego Padres 8–2"
+  ],
+  "1997-05-21": [
+    "1997 · Cubs defeat Philadelphia Phillies 7–0"
+  ],
+  "1997-05-31": [
+    "1997 · Cubs defeat Cincinnati Reds 7–4"
+  ],
+  "1997-06-03": [
+    "1997 · White Sox defeat Cleveland Indians 9–5"
+  ],
+  "1997-06-13": [
+    "1997 · Bulls win fifth NBA Championship, defeating Utah Jazz in six games"
+  ],
+  "1997-06-16": [
+    "1997 · Cubs defeat White Sox 8–3"
+  ],
+  "1997-06-21": [
+    "1997 · White Sox defeat Minnesota Twins 5–3"
+  ],
+  "1997-07-11": [
+    "1997 · Cubs defeat St. Louis Cardinals 7–1"
+  ],
+  "1997-07-12": [
+    "1997 · White Sox defeat Kansas City Royals 11–7"
+  ],
+  "1997-07-20": [
+    "1997 · White Sox defeat Baltimore Orioles 10–2"
+  ],
+  "1997-07-23": [
+    "1997 · Cubs defeat Atlanta Braves 3–1"
+  ],
+  "1997-07-24": [
+    "1997 · White Sox defeat Texas Rangers 2–1"
+  ],
+  "1997-08-02": [
+    "1997 · Cubs defeat Los Angeles Dodgers 5–1"
+  ],
+  "1997-08-07": [
+    "1997 · Cubs defeat San Francisco Giants 6–3"
+  ],
+  "1997-08-21": [
+    "1997 · White Sox defeat Toronto Blue Jays 6–3"
+  ],
+  "1997-08-30": [
+    "1997 · White Sox defeat Houston Astros 9–2"
+  ],
+  "1997-09-02": [
+    "1997 · Cubs defeat Minnesota Twins 9–3"
+  ],
+  "1997-09-06": [
+    "1997 · Cubs defeat New York Mets 7–5"
+  ],
+  "1997-09-11": [
+    "1997 · White Sox defeat Cleveland Indians 7–5"
+  ],
+  "1997-09-13": [
+    "1997 · Cubs defeat Pittsburgh Pirates 4–1"
+  ],
+  "1997-09-18": [
+    "1997 · Cubs defeat St. Louis Cardinals 4–3"
+  ],
+  "1997-09-20": [
+    "1997 · White Sox defeat Boston Red Sox 6–4"
+  ],
+  "1998-04-03": [
+    "1998 · White Sox defeat Tampa Bay Rays 10–4"
+  ],
+  "1998-04-04": [
+    "1998 · Cubs defeat Montreal Expos 3–1"
+  ],
+  "1998-04-05": [
+    "1998 · Cubs defeat Montreal Expos 7–2"
+  ],
+  "1998-04-10": [
+    "1998 · White Sox defeat Tampa Bay Rays 3–0"
+  ],
+  "1998-04-25": [
+    "1998 · White Sox defeat Toronto Blue Jays 8–1"
+  ],
+  "1998-05-01": [
+    "1998 · Cubs defeat St. Louis Cardinals 6–5"
+  ],
+  "1998-05-15": [
+    "1998 · White Sox defeat Seattle Mariners 6–3"
+  ],
+  "1998-05-23": [
+    "1998 · White Sox defeat Detroit Tigers 7–1"
+  ],
+  "1998-05-28": [
+    "1998 · White Sox defeat Detroit Tigers 11–7"
+  ],
+  "1998-05-29": [
+    "1998 · Cubs defeat Atlanta Braves 5–3"
+  ],
+  "1998-05-31": [
+    "1998 · White Sox defeat Detroit Tigers 8–2"
+  ],
+  "1998-06-13": [
+    "1998 · White Sox defeat Minnesota Twins 3–2"
+  ],
+  "1998-06-14": [
+    "1998 · Bulls complete the second three-peat, defeating Utah Jazz — Jordan's last title"
+  ],
+  "1998-06-24": [
+    "1998 · White Sox defeat Cincinnati Reds 4–2"
+  ],
+  "1998-07-02": [
+    "1998 · Cubs defeat Arizona Diamondbacks 3–2"
+  ],
+  "1998-07-25": [
+    "1998 · White Sox defeat New York Yankees 6–2"
+  ],
+  "1998-09-19": [
+    "1998 · White Sox defeat Boston Red Sox 5–2"
+  ],
+  "1998-09-25": [
+    "1998 · White Sox defeat Kansas City Royals 3–0"
+  ],
+  "1999-04-30": [
+    "1999 · Cubs defeat San Diego Padres 6–5"
+  ],
+  "1999-05-03": [
+    "1999 · White Sox defeat Anaheim Angels 8–1"
+  ],
+  "1999-05-22": [
+    "1999 · White Sox defeat New York Yankees 2–1"
+  ],
+  "1999-05-29": [
+    "1999 · White Sox defeat Detroit Tigers 7–1"
+  ],
+  "1999-06-14": [
+    "1999 · White Sox defeat Tampa Bay Rays 9–7"
+  ],
+  "1999-07-20": [
+    "1999 · Cubs defeat Kansas City Royals 8–7"
+  ],
+  "1999-09-16": [
+    "1999 · Cubs defeat Cincinnati Reds 7–6"
+  ],
+  "1999-09-28": [
+    "1999 · Cubs defeat Philadelphia Phillies 8–2"
+  ],
+  "1999-10-01": [
+    "1999 · White Sox defeat Minnesota Twins 9–8"
+  ],
+  "1999-10-10": [
+    "1999 · Bears defeat Minnesota Vikings 24–22"
+  ],
+  "1999-11-21": [
+    "1999 · Bears defeat San Diego Chargers 23–20"
+  ],
+  "2000-05-20": [
+    "2000 · White Sox defeat Toronto Blue Jays 6–2"
+  ],
+  "2000-05-21": [
+    "2000 · Cubs defeat Cincinnati Reds 4–2"
+  ],
+  "2000-05-23": [
+    "2000 · White Sox defeat New York Yankees 8–2"
+  ],
+  "2000-06-23": [
+    "2000 · White Sox defeat New York Yankees 4–3"
+  ],
+  "2000-07-14": [
+    "2000 · Cubs defeat Minnesota Twins 6–2"
+  ],
+  "2000-07-24": [
+    "2000 · White Sox defeat Kansas City Royals 7–6"
+  ],
+  "2000-07-29": [
+    "2000 · Cubs defeat San Francisco Giants 8–1"
+  ],
+  "2000-09-29": [
+    "2000 · White Sox defeat Kansas City Royals 6–4"
+  ],
+  "2001-04-07": [
+    "2001 · Cubs defeat Philadelphia Phillies 8–4"
+  ],
+  "2001-04-21": [
+    "2001 · Cubs defeat Pittsburgh Pirates 4–3"
+  ],
+  "2001-04-25": [
+    "2001 · White Sox defeat Oakland Athletics 2–1"
+  ],
+  "2001-05-02": [
+    "2001 · Cubs defeat San Diego Padres 8–3"
+  ],
+  "2001-06-09": [
+    "2001 · Cubs defeat White Sox 4–3"
+  ],
+  "2001-06-15": [
+    "2001 · Cubs defeat Minnesota Twins 5–3"
+  ],
+  "2001-06-24": [
+    "2001 · White Sox defeat Baltimore Orioles 8–2"
+  ],
+  "2001-07-07": [
+    "2001 · White Sox defeat Pittsburgh Pirates 4–1"
+  ],
+  "2001-08-01": [
+    "2001 · White Sox defeat Kansas City Royals 7–6"
+  ],
+  "2001-08-03": [
+    "2001 · White Sox defeat Tampa Bay Rays 4–0"
+  ],
+  "2001-08-04": [
+    "2001 · White Sox defeat Tampa Bay Rays 8–6"
+  ],
+  "2001-08-24": [
+    "2001 · White Sox defeat Tampa Bay Rays 5–4"
+  ],
+  "2001-08-31": [
+    "2001 · White Sox defeat Cleveland Indians 11–8"
+  ],
+  "2001-09-01": [
+    "2001 · Cubs defeat Atlanta Braves 5–3"
+  ],
+  "2001-09-22": [
+    "2001 · White Sox defeat Kansas City Royals 5–4"
+  ],
+  "2001-10-14": [
+    "2001 · Bears defeat Arizona Cardinals 20–13"
+  ],
+  "2002-04-16": [
+    "2002 · White Sox defeat Cleveland Indians 10–5"
+  ],
+  "2002-04-19": [
+    "2002 · Cubs defeat Cincinnati Reds 5–2"
+  ],
+  "2002-04-20": [
+    "2002 · White Sox defeat Detroit Tigers 12–5"
+  ],
+  "2002-04-21": [
+    "2002 · White Sox defeat Detroit Tigers 11–8"
+  ],
+  "2002-05-16": [
+    "2002 · White Sox defeat Texas Rangers 4–0"
+  ],
+  "2002-05-18": [
+    "2002 · White Sox defeat Anaheim Angels 10–4"
+  ],
+  "2002-05-24": [
+    "2002 · White Sox defeat Detroit Tigers 12–1"
+  ],
+  "2002-06-12": [
+    "2002 · White Sox defeat New York Mets 2–1"
+  ],
+  "2002-06-15": [
+    "2002 · Cubs defeat White Sox 7–3"
+  ],
+  "2002-06-20": [
+    "2002 · White Sox defeat Philadelphia Phillies 6–1"
+  ],
+  "2002-06-23": [
+    "2002 · Cubs defeat St. Louis Cardinals 8–3"
+  ],
+  "2002-06-27": [
+    "2002 · White Sox defeat Minnesota Twins 7–4"
+  ],
+  "2002-07-02": [
+    "2002 · White Sox defeat Detroit Tigers 17–9"
+  ],
+  "2002-07-03": [
+    "2002 · Cubs defeat Florida Marlins 6–2"
+  ],
+  "2002-07-11": [
+    "2002 · White Sox defeat Detroit Tigers 9–2"
+  ],
+  "2002-07-13": [
+    "2002 · Cubs defeat Florida Marlins 9–2"
+  ],
+  "2002-07-19": [
+    "2002 · Cubs defeat Houston Astros 5–0"
+  ],
+  "2002-07-23": [
+    "2002 · White Sox defeat Minnesota Twins 8–7"
+  ],
+  "2002-08-01": [
+    "2002 · Cubs defeat San Diego Padres 8–7"
+  ],
+  "2002-08-02": [
+    "2002 · White Sox defeat Tampa Bay Rays 8–5"
+  ],
+  "2002-08-04": [
+    "2002 · Cubs defeat Colorado Rockies 4–1"
+  ],
+  "2002-08-07": [
+    "2002 · White Sox defeat Anaheim Angels 7–6"
+  ],
+  "2002-08-18": [
+    "2002 · Cubs defeat Arizona Diamondbacks 3–2"
+  ],
+  "2002-08-25": [
+    "2002 · White Sox defeat Tampa Bay Rays 8–3"
+  ],
+  "2002-09-10": [
+    "2002 · White Sox defeat Kansas City Royals 12–4"
+  ],
+  "2002-09-12": [
+    "2002 · White Sox defeat Kansas City Royals 5–1"
+  ],
+  "2002-09-13": [
+    "2002 · White Sox defeat New York Yankees 13–2"
+  ],
+  "2002-09-14": [
+    "2002 · White Sox defeat New York Yankees 8–1"
+  ],
+  "2002-09-18": [
+    "2002 · White Sox defeat Kansas City Royals 3–1"
+  ],
+  "2002-09-21": [
+    "2002 · White Sox defeat Minnesota Twins 14–4"
+  ],
+  "2002-09-26": [
+    "2002 · White Sox defeat Boston Red Sox 3–2"
+  ],
+  "2002-09-28": [
+    "2002 · Cubs defeat Pittsburgh Pirates 5–4"
+  ],
+  "2002-09-29": [
+    "2002 · Cubs defeat Pittsburgh Pirates 7–3"
+  ],
+  "2003-04-04": [
+    "2003 · White Sox defeat Detroit Tigers 5–2"
+  ],
+  "2003-04-05": [
+    "2003 · White Sox defeat Detroit Tigers 7–0"
+  ],
+  "2003-04-06": [
+    "2003 · White Sox defeat Detroit Tigers 10–2"
+  ],
+  "2003-04-08": [
+    "2003 · White Sox defeat Cleveland Indians 5–3"
+  ],
+  "2003-04-09": [
+    "2003 · Cubs defeat Montreal Expos 3–0"
+  ],
+  "2003-04-10": [
+    "2003 · White Sox defeat Cleveland Indians 7–2"
+  ],
+  "2003-04-11": [
+    "2003 · White Sox defeat Detroit Tigers 5–0"
+  ],
+  "2003-04-16": [
+    "2003 · White Sox defeat Kansas City Royals 4–3"
+  ],
+  "2003-04-17": [
+    "2003 · White Sox defeat Kansas City Royals 8–2"
+  ],
+  "2003-04-18": [
+    "2003 · White Sox defeat Cleveland Indians 5–3"
+  ],
+  "2003-04-25": [
+    "2003 · Cubs defeat Colorado Rockies 11–7"
+  ],
+  "2003-04-26": [
+    "2003 · White Sox defeat Minnesota Twins 7–4"
+  ],
+  "2003-04-27": [
+    "2003 · White Sox defeat Minnesota Twins 3–1"
+  ],
+  "2003-05-14": [
+    "2003 · White Sox defeat Baltimore Orioles 5–1"
+  ],
+  "2003-05-24": [
+    "2003 · Cubs defeat Houston Astros 3–2"
+  ],
+  "2003-05-25": [
+    "2003 · White Sox defeat Detroit Tigers 8–5"
+  ],
+  "2003-05-29": [
+    "2003 · White Sox defeat Toronto Blue Jays 3–2"
+  ],
+  "2003-05-31": [
+    "2003 · Cubs defeat Houston Astros 1–0"
+  ],
+  "2003-06-07": [
+    "2003 · Cubs defeat New York Yankees 5–2"
+  ],
+  "2003-06-08": [
+    "2003 · Cubs defeat New York Yankees 8–7"
+  ],
+  "2003-06-10": [
+    "2003 · Cubs defeat Baltimore Orioles 4–0"
+  ],
+  "2003-06-13": [
+    "2003 · White Sox defeat San Diego Padres 5–3"
+  ],
+  "2003-06-14": [
+    "2003 · White Sox defeat San Diego Padres 6–5"
+  ],
+  "2003-07-18": [
+    "2003 · White Sox defeat Detroit Tigers 7–5"
+  ],
+  "2003-07-21": [
+    "2003 · White Sox defeat Cleveland Indians 4–3"
+  ],
+  "2003-07-29": [
+    "2003 · White Sox defeat Kansas City Royals 9–6"
+  ],
+  "2003-07-30": [
+    "2003 · White Sox defeat Kansas City Royals 15–4"
+  ],
+  "2003-08-03": [
+    "2003 · Cubs defeat Arizona Diamondbacks 2–1"
+  ],
+  "2003-08-30": [
+    "2003 · White Sox defeat Detroit Tigers 5–2"
+  ],
+  "2003-09-05": [
+    "2003 · White Sox defeat Cleveland Indians 5–3"
+  ],
+  "2003-09-06": [
+    "2003 · White Sox defeat Cleveland Indians 8–5"
+  ],
+  "2003-09-14": [
+    "2003 · White Sox defeat Boston Red Sox 7–2"
+  ],
+  "2003-09-22": [
+    "2003 · White Sox defeat New York Yankees 6–3"
+  ],
+  "2003-09-23": [
+    "2003 · Cubs defeat Cincinnati Reds 6–0"
+  ],
+  "2003-09-28": [
+    "2003 · White Sox defeat Kansas City Royals 5–1"
+  ],
+  "2003-09-29": [
+    "2003 · Rebuilt Soldier Field reopens after $660 million renovation"
+  ],
+  "2003-10-05": [
+    "2003 · Bears defeat Oakland Raiders 24–21"
+  ],
+  "2003-10-07": [
+    "2003 · Cubs defeat Florida Marlins 9–8, NLCS Game 1 (Cubs lead 1–0)"
+  ],
+  "2003-10-09": [
+    "2003 · Cubs defeat Florida Marlins 12–3, NLCS Game 2 (Cubs lead 2–0)"
+  ],
+  "2003-10-11": [
+    "2003 · Florida Marlins defeat Cubs 9–11, NLCS Game 3 at Wrigley (Cubs lead 2–1)"
+  ],
+  "2003-10-13": [
+    "2003 · Cubs defeat Florida Marlins 8–3, NLCS Game 4 (Cubs lead 3–1)"
+  ],
+  "2003-10-15": [
+    "2003 · Cubs defeat Florida Marlins 4–0, NLCS Game 5 (Cubs lead 3–2, one win from World Series)"
+  ],
+  "2003-11-23": [
+    "2003 · Bears defeat Denver Broncos 19–10"
+  ],
+  "2004-04-07": [
+    "2004 · White Sox defeat Kansas City Royals 4–3"
+  ],
+  "2004-04-09": [
+    "2004 · Cubs defeat Atlanta Braves 2–1"
+  ],
+  "2004-04-10": [
+    "2004 · White Sox defeat New York Yankees 7–3"
+  ],
+  "2004-04-17": [
+    "2004 · White Sox defeat Tampa Bay Rays 4–1"
+  ],
+  "2004-04-18": [
+    "2004 · White Sox defeat Tampa Bay Rays 5–0"
+  ],
+  "2004-04-19": [
+    "2004 · Cubs defeat Cincinnati Reds 8–1"
+  ],
+  "2004-04-20": [
+    "2004 · Cubs defeat Pittsburgh Pirates 9–1"
+  ],
+  "2004-04-21": [
+    "2004 · Cubs defeat Pittsburgh Pirates 12–1"
+  ],
+  "2004-04-22": [
+    "2004 · White Sox defeat New York Yankees 4–3"
+  ],
+  "2004-05-05": [
+    "2004 · White Sox defeat Baltimore Orioles 6–5"
+  ],
+  "2004-05-14": [
+    "2004 · Cubs defeat San Diego Padres 6–1"
+  ],
+  "2004-05-16": [
+    "2004 · Cubs defeat San Diego Padres 4–2"
+  ],
+  "2004-05-21": [
+    "2004 · White Sox defeat Minnesota Twins 8–2"
+  ],
+  "2004-05-22": [
+    "2004 · Cubs defeat St. Louis Cardinals 7–1"
+  ],
+  "2004-05-27": [
+    "2004 · White Sox defeat Texas Rangers 9–0"
+  ],
+  "2004-05-30": [
+    "2004 · Cubs defeat Pittsburgh Pirates 12–1"
+  ],
+  "2004-05-31": [
+    "2004 · Cubs defeat Houston Astros 3–1"
+  ],
+  "2004-06-10": [
+    "2004 · Cubs defeat St. Louis Cardinals 12–3"
+  ],
+  "2004-06-12": [
+    "2004 · Cubs defeat Anaheim Angels 10–5"
+  ],
+  "2004-06-19": [
+    "2004 · Cubs defeat Oakland Athletics 4–3"
+  ],
+  "2004-06-25": [
+    "2004 · Cubs defeat White Sox 7–4"
+  ],
+  "2004-07-01": [
+    "2004 · Cubs defeat Houston Astros 5–4"
+  ],
+  "2004-07-02": [
+    "2004 · Cubs defeat White Sox 6–2"
+  ],
+  "2004-07-09": [
+    "2004 · White Sox defeat Seattle Mariners 6–2"
+  ],
+  "2004-07-10": [
+    "2004 · White Sox defeat Seattle Mariners 3–2"
+  ],
+  "2004-07-11": [
+    "2004 · Cubs defeat St. Louis Cardinals 8–4"
+  ],
+  "2004-07-21": [
+    "2004 · Cubs defeat Cincinnati Reds 5–4"
+  ],
+  "2004-07-30": [
+    "2004 · Cubs defeat Philadelphia Phillies 10–7"
+  ],
+  "2004-08-14": [
+    "2004 · Cubs defeat Los Angeles Dodgers 2–0"
+  ],
+  "2004-08-19": [
+    "2004 · Cubs defeat Milwaukee Brewers 9–6"
+  ],
+  "2004-08-28": [
+    "2004 · White Sox defeat Cleveland Indians 5–3"
+  ],
+  "2004-09-03": [
+    "2004 · White Sox defeat Seattle Mariners 7–5"
+  ],
+  "2004-09-04": [
+    "2004 · White Sox defeat Seattle Mariners 8–7"
+  ],
+  "2004-09-05": [
+    "2004 · White Sox defeat Seattle Mariners 6–2"
+  ],
+  "2004-09-18": [
+    "2004 · White Sox defeat Detroit Tigers 9–8"
+  ],
+  "2004-09-21": [
+    "2004 · Cubs defeat Pittsburgh Pirates 5–4"
+  ],
+  "2004-09-22": [
+    "2004 · Cubs defeat Pittsburgh Pirates 1–0"
+  ],
+  "2004-09-23": [
+    "2004 · Cubs defeat Pittsburgh Pirates 6–3"
+  ],
+  "2004-09-24": [
+    "2004 · Cubs defeat New York Mets 2–1"
+  ],
+  "2004-09-26": [
+    "2004 · White Sox defeat Kansas City Royals 5–1"
+  ],
+  "2004-09-27": [
+    "2004 · Cubs defeat Cincinnati Reds 12–5"
+  ],
+  "2004-09-30": [
+    "2004 · White Sox defeat Kansas City Royals 9–2"
+  ],
+  "2004-10-31": [
+    "2004 · Bears defeat San Francisco 49ers 23–13"
+  ],
+  "2004-11-14": [
+    "2004 · Bears defeat Tennessee Titans 19–17"
+  ],
+  "2005-04-08": [
+    "2005 · White Sox defeat Minnesota Twins 5–1"
+  ],
+  "2005-04-09": [
+    "2005 · White Sox defeat Minnesota Twins 8–5"
+  ],
+  "2005-04-10": [
+    "2005 · Cubs defeat Milwaukee Brewers 6–5"
+  ],
+  "2005-04-23": [
+    "2005 · White Sox defeat Kansas City Royals 3–2"
+  ],
+  "2005-04-24": [
+    "2005 · White Sox defeat Kansas City Royals 4–3"
+  ],
+  "2005-04-27": [
+    "2005 · Cubs defeat Cincinnati Reds 8–7"
+  ],
+  "2005-04-30": [
+    "2005 · White Sox defeat Detroit Tigers 4–3"
+  ],
+  "2005-05-12": [
+    "2005 · White Sox defeat Baltimore Orioles 3–2"
+  ],
+  "2005-05-22": [
+    "2005 · Cubs defeat White Sox 4–3"
+  ],
+  "2005-05-28": [
+    "2005 · Cubs defeat Colorado Rockies 5–1"
+  ],
+  "2005-05-31": [
+    "2005 · White Sox defeat Anaheim Angels 5–4"
+  ],
+  "2005-06-02": [
+    "2005 · Cubs defeat San Diego Padres 5–0"
+  ],
+  "2005-06-03": [
+    "2005 · White Sox defeat Cleveland Indians 6–4"
+  ],
+  "2005-06-04": [
+    "2005 · White Sox defeat Cleveland Indians 6–5"
+  ],
+  "2005-06-08": [
+    "2005 · Cubs defeat Toronto Blue Jays 2–0"
+  ],
+  "2005-06-15": [
+    "2005 · White Sox defeat Arizona Diamondbacks 12–6"
+  ],
+  "2005-06-17": [
+    "2005 · White Sox defeat Los Angeles Dodgers 6–0"
+  ],
+  "2005-06-25": [
+    "2005 · Cubs defeat White Sox 6–2"
+  ],
+  "2005-07-08": [
+    "2005 · Cubs defeat Florida Marlins 9–6"
+  ],
+  "2005-07-15": [
+    "2005 · White Sox defeat Cleveland Indians 7–1"
+  ],
+  "2005-07-16": [
+    "2005 · White Sox defeat Cleveland Indians 7–5"
+  ],
+  "2005-07-17": [
+    "2005 · White Sox defeat Cleveland Indians 4–0"
+  ],
+  "2005-07-29": [
+    "2005 · White Sox defeat Baltimore Orioles 7–2"
+  ],
+  "2005-07-30": [
+    "2005 · White Sox defeat Baltimore Orioles 9–6"
+  ],
+  "2005-08-06": [
+    "2005 · White Sox defeat Seattle Mariners 4–2"
+  ],
+  "2005-08-19": [
+    "2005 · Cubs defeat Colorado Rockies 5–3"
+  ],
+  "2005-08-21": [
+    "2005 · White Sox defeat New York Yankees 6–2"
+  ],
+  "2005-08-27": [
+    "2005 · White Sox defeat Seattle Mariners 4–3"
+  ],
+  "2005-09-06": [
+    "2005 · White Sox defeat Kansas City Royals 6–5"
+  ],
+  "2005-09-13": [
+    "2005 · White Sox defeat Kansas City Royals 6–4"
+  ],
+  "2005-09-16": [
+    "2005 · White Sox defeat Minnesota Twins 2–1"
+  ],
+  "2005-09-29": [
+    "2005 · White Sox defeat Detroit Tigers 4–2"
+  ],
+  "2005-10-26": [
+    "2005 · White Sox sweep Houston Astros to win first World Series title since 1917"
+  ],
+  "2005-12-18": [
+    "2005 · Bears defeat Atlanta Falcons 16–3"
+  ],
+  "2006-04-21": [
+    "2006 · White Sox defeat Minnesota Twins 7–1"
+  ],
+  "2006-04-22": [
+    "2006 · White Sox defeat Minnesota Twins 9–2"
+  ],
+  "2006-04-28": [
+    "2006 · White Sox defeat Anaheim Angels 8–5"
+  ],
+  "2006-04-29": [
+    "2006 · White Sox defeat Anaheim Angels 2–1"
+  ],
+  "2006-04-30": [
+    "2006 · White Sox defeat Anaheim Angels 6–5"
+  ],
+  "2006-06-05": [
+    "2006 · Cubs defeat Houston Astros 8–0"
+  ],
+  "2006-06-07": [
+    "2006 · White Sox defeat Detroit Tigers 4–3"
+  ],
+  "2006-06-23": [
+    "2006 · White Sox defeat Houston Astros 7–4"
+  ],
+  "2006-06-24": [
+    "2006 · White Sox defeat Houston Astros 6–5"
+  ],
+  "2006-07-07": [
+    "2006 · Cubs defeat Milwaukee Brewers 7–2"
+  ],
+  "2006-07-28": [
+    "2006 · White Sox defeat Baltimore Orioles 6–4"
+  ],
+  "2006-07-30": [
+    "2006 · Cubs defeat St. Louis Cardinals 6–3"
+  ],
+  "2006-08-05": [
+    "2006 · White Sox defeat Toronto Blue Jays 7–1"
+  ],
+  "2006-08-30": [
+    "2006 · White Sox defeat Tampa Bay Rays 5–4"
+  ],
+  "2006-09-02": [
+    "2006 · White Sox defeat Kansas City Royals 5–3"
+  ],
+  "2006-09-23": [
+    "2006 · White Sox defeat Seattle Mariners 11–7"
+  ],
+  "2007-01-14": [
+    "2007 · Bears defeat Seattle Seahawks 27–24 (NFC Divisional playoff)"
+  ],
+  "2007-04-19": [
+    "2007 · Cubs defeat Atlanta Braves 3–0"
+  ],
+  "2007-05-25": [
+    "2007 · White Sox defeat Tampa Bay Rays 5–4"
+  ],
+  "2007-06-30": [
+    "2007 · White Sox defeat Kansas City Royals 3–1"
+  ],
+  "2007-07-13": [
+    "2007 · Cubs defeat Houston Astros 6–0"
+  ],
+  "2007-07-20": [
+    "2007 · Cubs defeat Arizona Diamondbacks 6–2"
+  ],
+  "2007-07-27": [
+    "2007 · White Sox defeat Toronto Blue Jays 4–3"
+  ],
+  "2007-07-29": [
+    "2007 · Cubs defeat Cincinnati Reds 6–0"
+  ],
+  "2007-08-18": [
+    "2007 · Cubs defeat St. Louis Cardinals 5–3"
+  ],
+  "2007-09-28": [
+    "2007 · Cubs defeat Cincinnati Reds 6–0"
+  ],
+  "2007-10-03": [
+    "2007 · Arizona Diamondbacks defeat Cubs 3–1, NLDS Game 1"
+  ],
+  "2008-05-25": [
+    "2008 · White Sox defeat Anaheim Angels 3–2"
+  ],
+  "2008-05-26": [
+    "2008 · Cubs defeat Los Angeles Dodgers 3–1"
+  ],
+  "2008-05-31": [
+    "2008 · Cubs defeat Colorado Rockies 5–4"
+  ],
+  "2008-06-21": [
+    "2008 · Cubs defeat White Sox 11–7"
+  ],
+  "2008-07-26": [
+    "2008 · White Sox defeat Detroit Tigers 7–6"
+  ],
+  "2008-09-27": [
+    "2008 · Cubs defeat Milwaukee Brewers 7–3"
+  ],
+  "2008-11-23": [
+    "2008 · Bears defeat St. Louis Rams 27–3"
+  ],
+  "2008-12-07": [
+    "2008 · Bears defeat Jacksonville Jaguars 23–10"
+  ],
+  "2009-04-18": [
+    "2009 · Cubs defeat St. Louis Cardinals 7–5"
+  ],
+  "2009-04-19": [
+    "2009 · White Sox defeat Tampa Bay Rays 12–2"
+  ],
+  "2009-06-19": [
+    "2009 · Cubs defeat Cleveland Indians 8–7"
+  ],
+  "2009-06-21": [
+    "2009 · Cubs defeat Cleveland Indians 6–2"
+  ],
+  "2009-07-12": [
+    "2009 · Cubs defeat St. Louis Cardinals 7–3"
+  ],
+  "2009-07-24": [
+    "2009 · Cubs defeat Cincinnati Reds 8–5"
+  ],
+  "2009-07-25": [
+    "2009 · Cubs defeat Cincinnati Reds 5–3"
+  ],
+  "2009-08-15": [
+    "2009 · Cubs defeat Pittsburgh Pirates 3–1"
+  ],
+  "2009-09-12": [
+    "2009 · White Sox defeat Anaheim Angels 4–3"
+  ],
+  "2009-09-24": [
+    "2009 · Cubs defeat San Francisco Giants 3–2"
+  ],
+  "2009-09-26": [
+    "2009 · Cubs defeat San Francisco Giants 6–2"
+  ],
+  "2010-04-10": [
+    "2010 · Cubs defeat Cincinnati Reds 4–3"
+  ],
+  "2010-04-16": [
+    "2010 · Cubs defeat Houston Astros 7–2"
+  ],
+  "2010-04-30": [
+    "2010 · Cubs defeat Arizona Diamondbacks 11–5"
+  ],
+  "2010-05-02": [
+    "2010 · Cubs defeat Arizona Diamondbacks 10–5"
+  ],
+  "2010-05-08": [
+    "2010 · White Sox defeat Toronto Blue Jays 7–3"
+  ],
+  "2010-05-16": [
+    "2010 · Cubs defeat Pittsburgh Pirates 4–3"
+  ],
+  "2010-05-23": [
+    "2010 · Cubs defeat Texas Rangers 5–4"
+  ],
+  "2010-05-30": [
+    "2010 · White Sox defeat Tampa Bay Rays 8–5"
+  ],
+  "2010-06-05": [
+    "2010 · Cubs defeat Houston Astros 8–5"
+  ],
+  "2010-06-09": [
+    "2010 · Blackhawks win first Stanley Cup in 49 years, defeating Philadelphia Flyers"
+  ],
+  "2010-07-18": [
+    "2010 · Cubs defeat Philadelphia Phillies 11–6"
+  ],
+  "2010-07-30": [
+    "2010 · White Sox defeat Oakland Athletics 6–1"
+  ],
+  "2010-08-24": [
+    "2010 · White Sox defeat Baltimore Orioles 7–5"
+  ],
+  "2010-08-28": [
+    "2010 · Cubs defeat Cincinnati Reds 3–2"
+  ],
+  "2010-09-14": [
+    "2010 · Cubs defeat St. Louis Cardinals 7–2"
+  ],
+  "2010-09-22": [
+    "2010 · White Sox defeat Oakland Athletics 4–3"
+  ],
+  "2010-09-30": [
+    "2010 · White Sox defeat Boston Red Sox 8–2"
+  ],
+  "2010-11-18": [
+    "2010 · Bears defeat Miami Dolphins 16–0"
+  ],
+  "2011-01-16": [
+    "2011 · Bears defeat Seattle Seahawks 35–24 (NFC Divisional playoff)"
+  ],
+  "2011-04-29": [
+    "2011 · Cubs defeat Arizona Diamondbacks 4–2"
+  ],
+  "2011-05-21": [
+    "2011 · Cubs defeat Boston Red Sox 9–3"
+  ],
+  "2011-06-14": [
+    "2011 · Cubs defeat Milwaukee Brewers 5–4"
+  ],
+  "2011-06-25": [
+    "2011 · White Sox defeat Washington Nationals 3–0"
+  ],
+  "2011-07-15": [
+    "2011 · Cubs defeat Florida Marlins 2–1"
+  ],
+  "2011-08-27": [
+    "2011 · White Sox defeat Seattle Mariners 3–0"
+  ],
+  "2011-09-17": [
+    "2011 · Cubs defeat Houston Astros 2–1"
+  ],
+  "2011-09-20": [
+    "2011 · White Sox defeat Cleveland Indians 5–4"
+  ],
+  "2011-10-16": [
+    "2011 · Bears defeat Minnesota Vikings 39–10"
+  ],
+  "2012-04-21": [
+    "2012 · White Sox defeat Seattle Mariners 4–0"
+  ],
+  "2012-04-27": [
+    "2012 · Cubs defeat Philadelphia Phillies 5–1"
+  ],
+  "2012-05-06": [
+    "2012 · Cubs defeat Los Angeles Dodgers 4–3"
+  ],
+  "2012-05-24": [
+    "2012 · White Sox defeat Minnesota Twins 11–8"
+  ],
+  "2012-05-25": [
+    "2012 · White Sox defeat Cleveland Indians 9–3"
+  ],
+  "2012-06-09": [
+    "2012 · White Sox defeat Houston Astros 10–1"
+  ],
+  "2012-06-12": [
+    "2012 · Cubs defeat Detroit Tigers 4–3"
+  ],
+  "2012-06-23": [
+    "2012 · White Sox defeat Milwaukee Brewers 8–6"
+  ],
+  "2012-06-30": [
+    "2012 · Cubs defeat Houston Astros 3–2"
+  ],
+  "2012-07-01": [
+    "2012 · Cubs defeat Houston Astros 3–0"
+  ],
+  "2012-07-27": [
+    "2012 · White Sox defeat Texas Rangers 9–5"
+  ],
+  "2012-08-13": [
+    "2012 · Cubs defeat Houston Astros 7–1"
+  ],
+  "2012-08-16": [
+    "2012 · White Sox defeat Toronto Blue Jays 7–2"
+  ],
+  "2012-09-09": [
+    "2012 · Bears defeat Indianapolis Colts 41–21"
+  ],
+  "2012-09-14": [
+    "2012 · White Sox defeat Minnesota Twins 6–0"
+  ],
+  "2012-09-15": [
+    "2012 · White Sox defeat Minnesota Twins 5–3"
+  ],
+  "2012-09-18": [
+    "2012 · White Sox defeat Kansas City Royals 3–2"
+  ],
+  "2013-05-14": [
+    "2013 · White Sox defeat Minnesota Twins 4–2"
+  ],
+  "2013-05-21": [
+    "2013 · White Sox defeat Boston Red Sox 3–1"
+  ],
+  "2013-05-26": [
+    "2013 · White Sox defeat Miami Marlins 5–3"
+  ],
+  "2013-05-27": [
+    "2013 · Cubs defeat White Sox 7–0"
+  ],
+  "2013-06-09": [
+    "2013 · White Sox defeat Oakland Athletics 4–2"
+  ],
+  "2013-06-22": [
+    "2013 · Blackhawks defeat Boston Bruins 3–1, Stanley Cup Finals Game 5 (Hawks lead series 3–2)"
+  ],
+  "2013-06-24": [
+    "2013 · Blackhawks rally to win Stanley Cup over Boston Bruins"
+  ],
+  "2013-06-29": [
+    "2013 · Cubs defeat Seattle Mariners 5–3"
+  ],
+  "2013-07-06": [
+    "2013 · Cubs defeat Pittsburgh Pirates 4–1"
+  ],
+  "2013-07-11": [
+    "2013 · White Sox defeat Detroit Tigers 6–3"
+  ],
+  "2013-07-13": [
+    "2013 · Cubs defeat St. Louis Cardinals 6–4"
+  ],
+  "2013-07-19": [
+    "2013 · Cubs defeat Colorado Rockies 3–1"
+  ],
+  "2013-07-20": [
+    "2013 · White Sox defeat Atlanta Braves 10–6"
+  ],
+  "2013-08-09": [
+    "2013 · Cubs defeat St. Louis Cardinals 3–0"
+  ],
+  "2013-08-12": [
+    "2013 · White Sox defeat Detroit Tigers 6–2"
+  ],
+  "2013-09-10": [
+    "2013 · Cubs defeat Cincinnati Reds 9–1"
+  ],
+  "2013-09-16": [
+    "2013 · White Sox defeat Minnesota Twins 12–1"
+  ],
+  "2013-09-17": [
+    "2013 · White Sox defeat Minnesota Twins 4–3"
+  ],
+  "2013-09-21": [
+    "2013 · Cubs defeat Atlanta Braves 3–1"
+  ],
+  "2013-09-22": [
+    "2013 · Bears defeat Pittsburgh Steelers 40–23"
+  ],
+  "2013-09-23": [
+    "2013 · White Sox defeat Toronto Blue Jays 3–2"
+  ],
+  "2013-09-28": [
+    "2013 · White Sox defeat Kansas City Royals 6–5"
+  ],
+  "2013-12-15": [
+    "2013 · Bears defeat Cleveland Browns 38–31"
+  ],
+  "2014-04-06": [
+    "2014 · White Sox defeat Kansas City Royals 5–1"
+  ],
+  "2014-04-13": [
+    "2014 · White Sox defeat Cleveland Indians 4–3"
+  ],
+  "2014-04-20": [
+    "2014 · White Sox defeat Texas Rangers 16–2"
+  ],
+  "2014-04-21": [
+    "2014 · White Sox defeat Detroit Tigers 3–1"
+  ],
+  "2014-04-27": [
+    "2014 · White Sox defeat Tampa Bay Rays 9–2"
+  ],
+  "2014-05-03": [
+    "2014 · Cubs defeat St. Louis Cardinals 3–0"
+  ],
+  "2014-05-16": [
+    "2014 · White Sox defeat Houston Astros 7–2"
+  ],
+  "2014-05-22": [
+    "2014 · White Sox defeat New York Yankees 3–2"
+  ],
+  "2014-06-07": [
+    "2014 · Cubs defeat Miami Marlins 5–2"
+  ],
+  "2014-06-15": [
+    "2014 · Cubs defeat Philadelphia Phillies 3–0"
+  ],
+  "2014-08-18": [
+    "2014 · Cubs defeat New York Mets 4–1"
+  ],
+  "2014-09-08": [
+    "2014 · White Sox defeat Oakland Athletics 5–4"
+  ],
+  "2014-09-11": [
+    "2014 · White Sox defeat Oakland Athletics 1–0"
+  ],
+  "2014-09-19": [
+    "2014 · White Sox defeat Tampa Bay Rays 4–3"
+  ],
+  "2014-09-23": [
+    "2014 · Cubs defeat St. Louis Cardinals 4–3"
+  ],
+  "2014-10-12": [
+    "2014 · Bears defeat Atlanta Falcons 27–13"
+  ],
+  "2015-04-11": [
+    "2015 · White Sox defeat Minnesota Twins 5–4"
+  ],
+  "2015-04-13": [
+    "2015 · Cubs defeat Cincinnati Reds 7–6"
+  ],
+  "2015-04-26": [
+    "2015 · White Sox defeat Kansas City Royals 5–3"
+  ],
+  "2015-05-01": [
+    "2015 · Cubs defeat Milwaukee Brewers 1–0"
+  ],
+  "2015-05-11": [
+    "2015 · Cubs defeat New York Mets 4–3"
+  ],
+  "2015-05-15": [
+    "2015 · White Sox defeat Oakland Athletics 7–6"
+  ],
+  "2015-05-29": [
+    "2015 · White Sox defeat Houston Astros 6–3"
+  ],
+  "2015-06-04": [
+    "2015 · Cubs defeat Washington Nationals 2–1"
+  ],
+  "2015-06-06": [
+    "2015 · Blackhawks defeat Tampa Bay Lightning 3–2, Stanley Cup Finals Game 2 (series tied 1–1)"
+  ],
+  "2015-06-11": [
+    "2015 · Cubs defeat Cincinnati Reds 6–3"
+  ],
+  "2015-06-12": [
+    "2015 · Blackhawks defeat Tampa Bay Lightning 2–1, Stanley Cup Finals Game 5 (Hawks lead 3–2)"
+  ],
+  "2015-06-13": [
+    "2015 · Cubs defeat Cincinnati Reds 4–3"
+  ],
+  "2015-06-15": [
+    "2015 · Blackhawks win third Stanley Cup in six seasons, defeating Tampa Bay Lightning"
+  ],
+  "2015-06-25": [
+    "2015 · White Sox defeat Detroit Tigers 8–7"
+  ],
+  "2015-07-09": [
+    "2015 · White Sox defeat Toronto Blue Jays 2–0"
+  ],
+  "2015-07-12": [
+    "2015 · Cubs defeat White Sox 3–1"
+  ],
+  "2015-07-19": [
+    "2015 · Cubs defeat Atlanta Braves 4–1"
+  ],
+  "2015-07-23": [
+    "2015 · White Sox defeat Cleveland Indians 8–1"
+  ],
+  "2015-07-24": [
+    "2015 · White Sox defeat Cleveland Indians 6–0"
+  ],
+  "2015-08-09": [
+    "2015 · Cubs defeat San Francisco Giants 2–0"
+  ],
+  "2015-09-04": [
+    "2015 · White Sox defeat Kansas City Royals 12–1"
+  ],
+  "2015-09-05": [
+    "2015 · White Sox defeat Kansas City Royals 6–1"
+  ],
+  "2015-09-12": [
+    "2015 · White Sox defeat Minnesota Twins 8–2"
+  ],
+  "2015-10-04": [
+    "2015 · Cubs defeat St. Louis Cardinals 4–0, NLDS Game 1 (Arrieta complete-game shutout)"
+  ],
+  "2015-10-12": [
+    "2015 · Cubs defeat St. Louis Cardinals 8–6, NLDS Game 3 at Wrigley (Cubs lead 2–1)"
+  ],
+  "2016-04-23": [
+    "2016 · White Sox defeat Texas Rangers 4–3"
+  ],
+  "2016-04-30": [
+    "2016 · White Sox defeat Baltimore Orioles 8–7"
+  ],
+  "2016-05-14": [
+    "2016 · Cubs defeat Pittsburgh Pirates 8–2"
+  ],
+  "2016-05-20": [
+    "2016 · Cubs defeat San Francisco Giants 8–1"
+  ],
+  "2016-05-23": [
+    "2016 · White Sox defeat Cleveland Indians 7–6"
+  ],
+  "2016-05-24": [
+    "2016 · Cubs defeat St. Louis Cardinals 12–3"
+  ],
+  "2016-05-28": [
+    "2016 · Cubs defeat Philadelphia Phillies 4–1"
+  ],
+  "2016-06-19": [
+    "2016 · Cubs defeat Pittsburgh Pirates 10–5"
+  ],
+  "2016-07-09": [
+    "2016 · White Sox defeat Atlanta Braves 5–4"
+  ],
+  "2016-07-10": [
+    "2016 · Cubs defeat Pittsburgh Pirates 6–5"
+  ],
+  "2016-07-16": [
+    "2016 · Cubs defeat Texas Rangers 3–1"
+  ],
+  "2016-07-23": [
+    "2016 · White Sox defeat Detroit Tigers 4–3"
+  ],
+  "2016-08-06": [
+    "2016 · White Sox defeat Baltimore Orioles 4–2"
+  ],
+  "2016-09-16": [
+    "2016 · White Sox defeat Kansas City Royals 7–4"
+  ],
+  "2016-09-23": [
+    "2016 · Cubs defeat St. Louis Cardinals 5–0"
+  ],
+  "2016-10-15": [
+    "2016 · Cubs defeat Los Angeles Dodgers 8–4, NLCS Game 1 (Cubs en route to first World Series title since 1908)"
+  ],
+  "2016-10-16": [
+    "2016 · Los Angeles Dodgers defeat Cubs 1–0, NLCS Game 2 (series tied 1–1)"
+  ],
+  "2016-10-20": [
+    "2016 · Cubs defeat Los Angeles Dodgers 8–4, NLCS Game 5 (Cubs lead 3–2)"
+  ],
+  "2016-11-02": [
+    "2016 · Cubs defeat Cleveland Indians in Game 7, ending a 108-year World Series drought"
+  ],
+  "2017-04-18": [
+    "2017 · Cubs defeat Milwaukee Brewers 9–7"
+  ],
+  "2017-04-21": [
+    "2017 · Cubs defeat Cincinnati Reds 6–5"
+  ],
+  "2017-04-25": [
+    "2017 · Cubs defeat Pittsburgh Pirates 1–0"
+  ],
+  "2017-05-09": [
+    "2017 · Cubs defeat Colorado Rockies 8–1"
+  ],
+  "2017-05-13": [
+    "2017 · White Sox defeat San Diego Padres 5–4"
+  ],
+  "2017-05-16": [
+    "2017 · Cubs defeat Cincinnati Reds 9–5"
+  ],
+  "2017-05-23": [
+    "2017 · Cubs defeat San Francisco Giants 4–1"
+  ],
+  "2017-05-26": [
+    "2017 · White Sox defeat Detroit Tigers 8–2"
+  ],
+  "2017-06-02": [
+    "2017 · Cubs defeat St. Louis Cardinals 3–2"
+  ],
+  "2017-06-24": [
+    "2017 · Cubs defeat Miami Marlins 5–3"
+  ],
+  "2017-08-25": [
+    "2017 · White Sox defeat Detroit Tigers 3–2"
+  ],
+  "2017-08-26": [
+    "2017 · Cubs defeat Philadelphia Phillies 17–2"
+  ],
+  "2017-08-29": [
+    "2017 · Cubs defeat Pittsburgh Pirates 4–1"
+  ],
+  "2017-09-16": [
+    "2017 · Cubs defeat St. Louis Cardinals 4–1"
+  ],
+  "2017-09-25": [
+    "2017 · Cubs defeat St. Louis Cardinals 10–2"
+  ],
+  "2018-03-31": [
+    "2018 · Cubs defeat Miami Marlins 10–6"
+  ],
+  "2018-04-28": [
+    "2018 · Cubs defeat Milwaukee Brewers 3–0"
+  ],
+  "2018-05-11": [
+    "2018 · Cubs defeat White Sox 11–2"
+  ],
+  "2018-07-13": [
+    "2018 · Cubs defeat San Diego Padres 5–4"
+  ],
+  "2018-07-15": [
+    "2018 · Cubs defeat San Diego Padres 7–4"
+  ],
+  "2018-08-12": [
+    "2018 · Cubs defeat Washington Nationals 4–3"
+  ],
+  "2018-09-14": [
+    "2018 · Cubs defeat Cincinnati Reds 3–2"
+  ],
+  "2018-09-15": [
+    "2018 · Cubs defeat Cincinnati Reds 1–0"
+  ],
+  "2019-05-11": [
+    "2019 · Cubs defeat Milwaukee Brewers 2–1"
+  ],
+  "2019-08-06": [
+    "2019 · White Sox defeat Detroit Tigers 5–3"
+  ],
+  "2019-08-13": [
+    "2019 · White Sox defeat Houston Astros 4–1"
+  ],
+  "2019-08-29": [
+    "2019 · Cubs defeat New York Mets 4–1"
+  ]
 }

@@ -554,10 +554,14 @@ function renderConcert(meta) {
   if (m.date) {
     fetchDayContext(m.date.slice(0, 10)).then(text => {
       const ctx = $('concert-context');
-      if (ctx) ctx.textContent = text;
+      if (ctx) ctx.innerHTML = text;
     });
+    const histEntry = HISTORY[m.date.slice(0, 10)];
     const histEl = $('concert-history');
-    if (histEl && HISTORY[m.date.slice(0, 10)]) histEl.textContent = HISTORY[m.date.slice(0, 10)];
+    if (histEl && histEntry) {
+      const entries = Array.isArray(histEntry) ? histEntry : [histEntry];
+      histEl.innerHTML = `<strong>Events on this date:</strong> ${entries.join('; ')}`;
+    }
   }
 
   const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
@@ -985,9 +989,9 @@ async function fetchDayContext(dateStr) {
       const sunsetRaw = d.daily.sunset?.[0];
       if (sunsetRaw) {
         const [h, m] = sunsetRaw.split('T')[1].split(':').map(Number);
-        sunsetPart = ` · Sunset ${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+        sunsetPart = ` • <strong>Sunset on this date:</strong> ${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
       }
-      text = `Chicago weather: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F${sunsetPart}`;
+      text = `<strong>Weather on this date:</strong> ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F${sunsetPart}`;
     }
   } catch {}
   _contextCache.set(dateStr, text);
