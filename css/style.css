@@ -303,42 +303,24 @@ button {
   padding-right: env(safe-area-inset-right, 0px);
 }
 
-/* Venue column: photo pinned above scrollable list */
-.venue-concerts-col {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding-right: 0;
-}
-.venue-concerts-col ul {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: env(safe-area-inset-right, 0px);
-}
-.venue-photo-wrap {
-  flex-shrink: 0;
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
-  background: var(--bg2);
-  position: relative;
+/* Concert detail photo carousel */
+.concert-photos {
   display: none;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 16px 14px;
+  scrollbar-width: none;
 }
-.venue-photo-wrap.has-photo { display: block; }
-.venue-photo-wrap img {
-  width: 100%;
-  height: 100%;
+.concert-photos::-webkit-scrollbar { display: none; }
+.concert-photos.has-photos { display: flex; }
+.concert-photo-item {
+  flex-shrink: 0;
+  height: 130px;
+  width: auto;
+  border-radius: 8px;
   object-fit: cover;
-  object-position: center;
-}
-.venue-photo-credit {
-  position: absolute;
-  bottom: 4px;
-  right: 6px;
-  font-size: 9px;
-  color: rgba(255,255,255,0.45);
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .artist-item {

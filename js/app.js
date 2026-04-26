@@ -1,7 +1,7 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
-import { fetchVenuePhoto, getFlickrKey, setFlickrKey } from './flickr.js';
+import { fetchVenuePhotos, getFlickrKey, setFlickrKey } from './flickr.js';
 
 // ── State ──────────────────────────────────────────────────────────
 const state = {
@@ -54,8 +54,6 @@ const el = {
   viewVenue:          $('view-venue'),
   venueList:          $('venue-list'),
   venueConcerts:      $('venue-concerts'),
-  venuePhotoWrap:     $('venue-photo-wrap'),
-  venuePhotoImg:      $('venue-photo-img'),
   viewFiltered:       $('view-filtered'),
   filteredList:       $('filtered-list'),
   trackActionSheet:   $('track-action-sheet'),
@@ -538,6 +536,7 @@ function renderConcert(meta) {
       <div class="concert-header-title">${esc(m.title || m.identifier)}</div>
       <div class="concert-header-creator">${esc(m.creator || '')}</div>
       <div class="concert-context" id="concert-context"></div>
+      <div class="concert-photos" id="concert-photos"></div>
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>
@@ -551,6 +550,23 @@ function renderConcert(meta) {
     fetchDayContext(m.date.slice(0, 10)).then(text => {
       const ctx = $('concert-context');
       if (ctx) ctx.textContent = text;
+    });
+  }
+
+  const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
+  if (venueName) {
+    fetchVenuePhotos(venueName).then(urls => {
+      const strip = $('concert-photos');
+      if (!strip || !urls.length) return;
+      urls.forEach(url => {
+        const img = document.createElement('img');
+        img.className = 'concert-photo-item';
+        img.alt = venueName;
+        img.src = url;
+        img.onerror = () => img.remove();
+        strip.appendChild(img);
+      });
+      strip.classList.add('has-photos');
     });
   }
 
@@ -839,16 +855,6 @@ function selectVenue(venue, docs) {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === venue);
   });
   renderVenueConcerts(sortDocs(docs));
-
-  el.venuePhotoWrap.classList.remove('has-photo');
-  el.venuePhotoImg.src = '';
-  fetchVenuePhoto(venue).then(url => {
-    if (url && state.selectedVenue === venue) {
-      el.venuePhotoImg.src = url;
-      el.venuePhotoImg.onload  = () => el.venuePhotoWrap.classList.add('has-photo');
-      el.venuePhotoImg.onerror = () => el.venuePhotoWrap.classList.remove('has-photo');
-    }
-  });
 }
 
 function renderVenueConcerts(docs) {
