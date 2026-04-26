@@ -18,7 +18,9 @@
       "Bash(sed -i '' '/el\\\\.headerSubtitle/d' /Users/mkudlacz/Projects/Internetarchiveplayer/js/app.js)",
       "Bash(grep -E \"\\\\.\\(js|html|json\\)$\")",
       "WebFetch(domain:nypost.com)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(cp /Users/mkudlacz/Downloads/cover.jpg /Users/mkudlacz/Projects/Internetarchiveplayer/icon.jpg)",
+      "Bash(cp /Users/mkudlacz/Downloads/favicon.jpg /Users/mkudlacz/Projects/Internetarchiveplayer/favicon.jpg)"
     ]
   }
 }

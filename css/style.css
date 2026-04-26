@@ -553,6 +553,7 @@ button {
 }
 .sheet-header h2 { font-size: 17px; font-weight: 600; }
 .sheet-close { color: var(--accent); font-size: 15px; padding: 8px 0; }
+.sheet-clear { color: var(--text2); font-size: 15px; padding: 8px 0; }
 
 .queue-list { list-style: none; overflow-y: auto; flex: 1; }
 

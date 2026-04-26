@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="AJC Archive">
+  <meta name="apple-mobile-web-app-title" content="No Tape Left">
   <meta name="theme-color" content="#0e0e0e">
-  <title>AJC Archive</title>
+  <title>No Tape Left Behind Collection</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="icon.jpg">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -159,7 +161,7 @@
 <div id="track-action-sheet" role="dialog" aria-modal="true">
   <div class="action-sheet-inner">
     <div class="action-sheet-title" id="track-action-title"></div>
-    <button class="action-sheet-btn" id="track-action-play">Play Now</button>
+    <button class="action-sheet-btn" id="track-action-play">Play Next</button>
     <button class="action-sheet-btn" id="track-action-queue">Add to Queue</button>
     <button class="action-sheet-btn cancel" id="track-action-cancel">Cancel</button>
   </div>
@@ -168,6 +170,7 @@
 <!-- ── Queue Sheet ── -->
 <div id="queue-sheet" role="dialog" aria-label="Queue" aria-modal="true">
   <div class="sheet-header">
+    <button class="sheet-clear" id="queue-clear">Clear</button>
     <h2>Queue</h2>
     <button class="sheet-close" id="queue-close">Done</button>
   </div>

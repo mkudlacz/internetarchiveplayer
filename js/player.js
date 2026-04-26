@@ -73,6 +73,16 @@ class Player {
     }
   }
 
+  clearQueue() {
+    this.audio.pause();
+    this.audio.src = '';
+    this.queue = [];
+    this.currentIndex = -1;
+    this._emit('trackchange', null);
+    this._emit('queuechange');
+    this._emit('statechange');
+  }
+
   removeFromQueue(index) {
     if (index === this.currentIndex) return; // don't remove currently playing
     this.queue.splice(index, 1);

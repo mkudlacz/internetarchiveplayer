@@ -70,6 +70,7 @@ const el = {
   barQueue:       $('bar-queue'),
   queueSheet:     $('queue-sheet'),
   queueList:      $('queue-list'),
+  queueClear:     $('queue-clear'),
   queueClose:     $('queue-close'),
   settingsSheet:  $('settings-sheet'),
   settingsClose:  $('settings-close'),
@@ -169,7 +170,7 @@ function setMode(mode) {
 }
 
 function collectionName() {
-  return state.collectionId === DEFAULT_COLLECTION ? 'AJC Archive' : state.collectionId;
+  return state.collectionId === DEFAULT_COLLECTION ? 'No Tape Left Behind Collection' : state.collectionId;
 }
 
 // ── Index loading ──────────────────────────────────────────────────
@@ -252,6 +253,8 @@ const SEARCH_PLACEHOLDERS = {
   library:   'Artists, titles, dates…',
   artists:   'Filter artists…',
   discover:  'Search all shows…',
+  venue:     'Filter venues…',
+  year:      'Filter years…',
   favorites: 'Search favorites…',
 };
 
@@ -277,6 +280,12 @@ function renderForSearch() {
   } else if (mode === 'artists') {
     showView('artists');
     renderArtistView();
+  } else if (mode === 'venue') {
+    showView('venue');
+    renderVenue();
+  } else if (mode === 'year') {
+    showView('year');
+    renderYear();
   } else if (mode === 'favorites') {
     showView('favorites');
     renderFavorites();
@@ -649,9 +658,17 @@ function buildUploadChart(index) {
 // ── Year tab ───────────────────────────────────────────────────────
 function renderYear() {
   const index = state.index;
-  const byYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
+  let byYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
     .filter(([y]) => y && y.length === 4)
     .sort((a, b) => a[0] - b[0]); // ascending
+
+  if (state.searching && state.searchQuery) {
+    const q = state.searchQuery.toLowerCase();
+    byYear = byYear.filter(([y]) => y.includes(q));
+    if (state.selectedYear && !byYear.find(([y]) => y === state.selectedYear)) {
+      state.selectedYear = null;
+    }
+  }
 
   el.yearList.innerHTML = '';
   const frag = document.createDocumentFragment();
@@ -693,9 +710,17 @@ function renderYearConcerts(docs) {
 // ── Venue tab ──────────────────────────────────────────────────────
 function renderVenue() {
   const index = state.index;
-  const byVenue = groupBy(index, d => extractVenueName(d) || '__none__')
+  let byVenue = groupBy(index, d => extractVenueName(d) || '__none__')
     .filter(([v]) => v !== '__none__')
     .sort((a, b) => a[0].localeCompare(b[0]));
+
+  if (state.searching && state.searchQuery) {
+    const q = state.searchQuery.toLowerCase();
+    byVenue = byVenue.filter(([v]) => v.toLowerCase().includes(q));
+    if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
+      state.selectedVenue = null;
+    }
+  }
 
   el.venueList.innerHTML = '';
   if (!byVenue.length) {
@@ -867,10 +892,19 @@ function renderQueue() {
       </div>
       ${i !== currentIndex ? `<button class="queue-remove" data-i="${i}">×</button>` : ''}
     `;
+    if (i !== currentIndex) {
+      li.style.cursor = 'pointer';
+      li.addEventListener('click', e => {
+        if (e.target.classList.contains('queue-remove')) return;
+        player.replaceQueue(player.queue, i);
+        renderQueue();
+      });
+    }
     el.queueList.appendChild(li);
   });
   el.queueList.querySelectorAll('.queue-remove').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
       player.removeFromQueue(Number(btn.dataset.i));
       renderQueue();
     });
@@ -932,12 +966,13 @@ function init() {
   });
 
   // Track action sheet
-  el.trackActionPlay.addEventListener('click', () => { if (_actionTrack) player.playNow(_actionTrack); closeTrackAction(); });
+  el.trackActionPlay.addEventListener('click', () => { if (_actionTrack) { player.addNext(_actionTrack); flashConfirm('Playing next'); } closeTrackAction(); });
   el.trackActionQueue.addEventListener('click', () => { if (_actionTrack) { player.addToEnd(_actionTrack); flashConfirm('Added to queue'); } closeTrackAction(); });
   el.trackActionCancel.addEventListener('click', closeTrackAction);
   el.trackActionSheet.addEventListener('click', e => { if (e.target === el.trackActionSheet) closeTrackAction(); });
 
   // Queue
+  el.queueClear.addEventListener('click', () => { player.clearQueue(); el.queueSheet.classList.remove('visible'); });
   el.queueClose.addEventListener('click', () => el.queueSheet.classList.remove('visible'));
 
   // Settings
