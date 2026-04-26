@@ -63,6 +63,7 @@ const el = {
   nowBar:         $('now-playing-bar'),
   barTitle:       $('bar-title'),
   barArtist:      $('bar-artist'),
+  barContext:     $('bar-context'),
   barPlay:        $('bar-play'),
   barPrev:        $('bar-prev'),
   barNext:        $('bar-next'),
@@ -921,6 +922,63 @@ function goBack() {
 }
 
 // ── Now Playing Bar ────────────────────────────────────────────────
+// ── Day context (weather + Wikipedia) ─────────────────────────────
+
+const _contextCache = new Map();
+let _contextDate = '';
+
+const WMO = {
+  0:'clear', 1:'mostly clear', 2:'partly cloudy', 3:'overcast',
+  45:'foggy', 48:'icy fog',
+  51:'light drizzle', 53:'drizzle', 55:'heavy drizzle',
+  61:'light rain', 63:'rain', 65:'heavy rain',
+  71:'light snow', 73:'snow', 75:'heavy snow',
+  80:'showers', 81:'showers', 82:'heavy showers',
+  95:'thunderstorms',
+};
+function wmoDesc(c) { return WMO[c] || WMO[Math.floor(c/10)*10] || 'variable'; }
+
+async function fetchDayContext(dateStr) {
+  if (_contextCache.has(dateStr)) return _contextCache.get(dateStr);
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const parts = [];
+
+  await Promise.allSettled([
+    fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=41.8781&longitude=-87.6298&start_date=${dateStr}&end_date=${dateStr}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=America%2FChicago&temperature_unit=fahrenheit`)
+      .then(r => r.json())
+      .then(d => {
+        if (d.daily?.temperature_2m_max?.[0] != null) {
+          const hi = Math.round(d.daily.temperature_2m_max[0]);
+          const lo = Math.round(d.daily.temperature_2m_min[0]);
+          parts.push(`Chicago that day: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F`);
+        }
+      }),
+    fetch(`https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/${month}/${day}`)
+      .then(r => r.json())
+      .then(d => {
+        const events = d.events || [];
+        const sameYear = events.filter(e => e.year == year);
+        const picks = sameYear.length
+          ? sameYear.slice(0, 2)
+          : events.sort((a, b) => Math.abs(a.year - year) - Math.abs(b.year - year)).slice(0, 2);
+        picks.forEach(e => parts.push(`${e.year}: ${e.text}`));
+      }),
+  ]);
+
+  const text = parts.join('   ·   ');
+  _contextCache.set(dateStr, text);
+  return text;
+}
+
+function setBarContext(text) {
+  const span = el.barContext.querySelector('span');
+  el.barContext.style.display = text ? '' : 'none';
+  span.textContent = text;
+  span.style.animation = 'none';
+  span.offsetHeight; // force reflow to restart animation
+  span.style.animation = '';
+}
+
 function updateBar() {
   const t = player.currentTrack;
   if (!t) { el.nowBar.classList.remove('visible'); return; }
@@ -930,6 +988,14 @@ function updateBar() {
   const artistPart = t.artist || '';
   el.barArtist.textContent = [artistPart, datePart].filter(Boolean).join(' · ');
   el.barPlay.innerHTML     = player.paused ? svgPlay() : svgPause();
+
+  if (t.date && t.date !== _contextDate) {
+    _contextDate = t.date;
+    setBarContext('');
+    fetchDayContext(t.date).then(text => {
+      if (t.date === _contextDate) setBarContext(text);
+    });
+  }
 }
 
 function updateProgress() {

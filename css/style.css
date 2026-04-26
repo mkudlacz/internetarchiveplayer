@@ -13,7 +13,7 @@
   --accent2:     #a07020;
   --accent-dim:  rgba(200,144,42,0.12);
   --danger:      #c0392b;
-  --bar-h:       72px;
+  --bar-h:       86px;
   --header-h:    52px;
   --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
@@ -527,6 +527,24 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.bar-context {
+  overflow: hidden;
+  white-space: nowrap;
+  height: 13px;
+  margin-top: 2px;
+  display: none;
+}
+.bar-context span {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--text2);
+  opacity: 0.7;
+  animation: bar-scroll 50s linear infinite;
+}
+@keyframes bar-scroll {
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
 }
 
 .bar-controls { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
