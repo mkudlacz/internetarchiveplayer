@@ -18,3 +18,20 @@ export function toggleFav(id) {
   save(s);
   return s.has(id); // returns new state
 }
+
+export function importFavIds(ids) {
+  const s = load();
+  ids.forEach(id => { if (id) s.add(id); });
+  save(s);
+}
+
+export function encodeFavsHash() {
+  const ids = getFavIds();
+  if (!ids.length) return '';
+  return location.href.split('#')[0] + '#favs=' + ids.map(encodeURIComponent).join(',');
+}
+
+export function decodeFavsHash() {
+  if (!location.hash.startsWith('#favs=')) return null;
+  return location.hash.slice(6).split(',').map(decodeURIComponent).filter(Boolean);
+}

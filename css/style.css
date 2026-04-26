@@ -615,6 +615,7 @@ button {
   padding: 13px; border-radius: 10px; width: 100%;
 }
 .settings-hint { font-size: 13px; color: var(--text2); margin-top: -12px; }
+.settings-divider { border-top: 1px solid var(--border); margin: 8px 0; }
 
 /* ── Track action sheet ───────────────────────────────────────────── */
 #track-action-sheet {

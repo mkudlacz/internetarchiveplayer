@@ -20,7 +20,10 @@
       "WebFetch(domain:nypost.com)",
       "Bash(python3 *)",
       "Bash(cp /Users/mkudlacz/Downloads/cover.jpg /Users/mkudlacz/Projects/Internetarchiveplayer/icon.jpg)",
-      "Bash(cp /Users/mkudlacz/Downloads/favicon.jpg /Users/mkudlacz/Projects/Internetarchiveplayer/favicon.jpg)"
+      "Bash(cp /Users/mkudlacz/Downloads/favicon.jpg /Users/mkudlacz/Projects/Internetarchiveplayer/favicon.jpg)",
+      "Bash(sips -z 180 180 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/apple-touch-icon.png)",
+      "Bash(sips -z 192 192 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-192.png)",
+      "Bash(sips -z 512 512 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-512.png)"
     ]
   }
 }

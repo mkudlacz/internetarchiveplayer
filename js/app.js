@@ -1,6 +1,6 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
-import { isFav, toggleFav, getFavIds } from './favorites.js';
+import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
 
 // ── State ──────────────────────────────────────────────────────────
 const state = {
@@ -76,6 +76,7 @@ const el = {
   settingsClose:  $('settings-close'),
   collectionInput: $('collection-input'),
   settingsSave:   $('settings-save'),
+  favsExport:     $('favs-export'),
 };
 
 // ── Sorting ────────────────────────────────────────────────────────
@@ -978,6 +979,15 @@ function init() {
   // Settings
   el.settingsBtn.addEventListener('click', openSettings);
   el.settingsClose.addEventListener('click', () => el.settingsSheet.classList.remove('visible'));
+  el.favsExport.addEventListener('click', () => {
+    const ids = getFavIds();
+    if (!ids.length) { flashConfirm('No favorites yet.'); return; }
+    const url = encodeFavsHash();
+    navigator.clipboard?.writeText(url).then(() => {
+      flashConfirm(`Copied! (${ids.length} favorites)`);
+    }).catch(() => flashConfirm('Could not copy — try again'));
+  });
+
   el.settingsSave.addEventListener('click', () => {
     const val = el.collectionInput.value.trim();
     if (!val) return;
@@ -998,6 +1008,14 @@ function init() {
   player.on('queuechange', () => {
     if (el.queueSheet.classList.contains('visible')) renderQueue();
   });
+
+  // Restore favorites from share link
+  const favsToImport = decodeFavsHash();
+  if (favsToImport?.length) {
+    importFavIds(favsToImport);
+    history.replaceState(null, '', location.pathname);
+    flashConfirm(`Restored ${favsToImport.length} favorite${favsToImport.length !== 1 ? 's' : ''}`);
+  }
 
   // Boot
   setMode('discover');
