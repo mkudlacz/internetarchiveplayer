@@ -956,12 +956,10 @@ async function fetchDayContext(dateStr) {
     fetch(`https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/${month}/${day}`)
       .then(r => r.json())
       .then(d => {
-        const events = d.events || [];
-        const sameYear = events.filter(e => e.year == year);
-        const picks = sameYear.length
-          ? sameYear.slice(0, 2)
-          : events.sort((a, b) => Math.abs(a.year - year) - Math.abs(b.year - year)).slice(0, 2);
-        picks.forEach(e => parts.push(`${e.year}: ${e.text}`));
+        (d.events || [])
+          .filter(e => e.year == year)
+          .slice(0, 2)
+          .forEach(e => parts.push(`${e.year}: ${e.text}`));
       }),
   ]);
 
@@ -972,7 +970,7 @@ async function fetchDayContext(dateStr) {
 
 function setBarContext(text) {
   const span = el.barContext.querySelector('span');
-  el.barContext.style.display = text ? '' : 'none';
+  el.barContext.style.display = text ? 'block' : 'none';
   span.textContent = text;
   span.style.animation = 'none';
   span.offsetHeight; // force reflow to restart animation
