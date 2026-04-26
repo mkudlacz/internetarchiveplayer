@@ -203,6 +203,8 @@ button {
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 /* ── Concert List (shared by library, favorites, search) ──────────── */
@@ -286,6 +288,7 @@ button {
   -webkit-overflow-scrolling: touch;
   border-right: 1px solid var(--border);
   flex-shrink: 0;
+  padding-left: env(safe-area-inset-left, 0px);
 }
 
 .concerts-col {
@@ -293,10 +296,11 @@ button {
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 .artist-item {
-  padding: 11px 10px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   transition: background 0.1s;
@@ -305,7 +309,7 @@ button {
 .artist-item.selected {
   background: var(--accent-dim);
   border-left: 2px solid var(--accent);
-  padding-left: 8px;
+  padding-left: 12px;
 }
 
 .artist-name {
@@ -327,7 +331,7 @@ button {
 .artist-concert-item {
   display: flex;
   align-items: center;
-  padding: 10px 12px 10px 14px;
+  padding: 10px 16px 10px 14px;
   border-bottom: 1px solid var(--border);
   gap: 8px;
   cursor: pointer;
