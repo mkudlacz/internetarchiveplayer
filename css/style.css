@@ -519,11 +519,20 @@ button {
   min-height: 0;
 }
 
-.bar-info { flex: 1; min-width: 0; cursor: pointer; }
+.bar-info {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .bar-title {
   font-size: 14px;
   font-weight: 500;
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -531,6 +540,7 @@ button {
 .bar-artist {
   font-size: 12px;
   color: var(--text2);
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -538,14 +548,15 @@ button {
 .bar-context {
   overflow: hidden;
   white-space: nowrap;
-  height: 16px;
-  line-height: 16px;
-  margin-top: 2px;
+  height: 15px;
+  line-height: 15px;
+  margin-top: 1px;
   display: none;
 }
 .bar-context span {
   display: inline-block;
   font-size: 10px;
+  font-style: italic;
   color: var(--text2);
   opacity: 0.7;
   animation: bar-scroll 50s linear infinite;

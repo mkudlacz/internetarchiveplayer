@@ -950,12 +950,18 @@ async function fetchDayContext(dateStr) {
   if (_contextCache.has(dateStr)) return _contextCache.get(dateStr);
   let text = '';
   try {
-    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=41.8781&longitude=-87.6298&start_date=${dateStr}&end_date=${dateStr}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=America%2FChicago&temperature_unit=fahrenheit`;
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=41.8781&longitude=-87.6298&start_date=${dateStr}&end_date=${dateStr}&daily=temperature_2m_max,temperature_2m_min,weathercode,sunset&timezone=America%2FChicago&temperature_unit=fahrenheit`;
     const d = await fetch(url).then(r => r.json());
     if (d.daily?.temperature_2m_max?.[0] != null) {
       const hi = Math.round(d.daily.temperature_2m_max[0]);
       const lo = Math.round(d.daily.temperature_2m_min[0]);
-      text = `Chicago that day: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F`;
+      let sunsetPart = '';
+      const sunsetRaw = d.daily.sunset?.[0];
+      if (sunsetRaw) {
+        const [h, m] = sunsetRaw.split('T')[1].split(':').map(Number);
+        sunsetPart = ` · sunset ${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+      }
+      text = `Chicago that day: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F${sunsetPart}`;
     }
   } catch {}
   _contextCache.set(dateStr, text);
