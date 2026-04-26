@@ -665,7 +665,7 @@ function renderDiscover() {
 
   // ── Recently Uploaded ──
   if (recentShows.length) {
-    const sec = discoverSection('Recently Added to Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 30 days`);
+    const sec = discoverSection('Recently Added to the Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 30 days`);
     const list = document.createElement('ul');
     list.className = 'recent-list';
     recentShows.forEach(doc => {
