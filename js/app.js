@@ -3,6 +3,10 @@ import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
 import { fetchVenuePhotos, getFlickrKey, setFlickrKey } from './flickr.js';
 
+// ── Chicago history ────────────────────────────────────────────────
+let HISTORY = {};
+fetch('./js/chicago-history.json').then(r => r.json()).then(d => { HISTORY = d; }).catch(() => {});
+
 // ── State ──────────────────────────────────────────────────────────
 const state = {
   collectionId: localStorage.getItem('collectionId') || DEFAULT_COLLECTION,
@@ -536,6 +540,7 @@ function renderConcert(meta) {
       <div class="concert-header-title">${esc(m.title || m.identifier)}</div>
       <div class="concert-header-creator">${esc(m.creator || '')}</div>
       <div class="concert-context" id="concert-context"></div>
+      <div class="concert-history" id="concert-history"></div>
       <div class="concert-photos" id="concert-photos"></div>
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
@@ -551,6 +556,9 @@ function renderConcert(meta) {
       const ctx = $('concert-context');
       if (ctx) ctx.textContent = text;
     });
+    const mmdd = m.date.slice(5, 10);
+    const histEl = $('concert-history');
+    if (histEl && HISTORY[mmdd]) histEl.textContent = HISTORY[mmdd];
   }
 
   const venueName = extractVenueName({ title: m.title, coverage: m.coverage });

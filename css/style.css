@@ -411,6 +411,14 @@ button {
   color: var(--text2);
   opacity: 0.75;
   line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.concert-history {
+  font-size: 12px;
+  color: var(--text2);
+  opacity: 0.75;
+  line-height: 1.5;
   margin-bottom: 14px;
 }
 
@@ -950,158 +958,6 @@ button {
   color: var(--text2);
   border-bottom: 1px solid var(--border);
   background: var(--bg2);
-}
-
-/* ── Playlists view ───────────────────────────────────────────────── */
-#view-playlists,
-#view-playlist-detail {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.playlist-item {
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  gap: 12px;
-  cursor: pointer;
-  transition: background 0.1s;
-}
-.playlist-item:active { background: var(--bg2); }
-
-.playlist-info { flex: 1; min-width: 0; }
-
-.playlist-name {
-  font-size: 16px;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.playlist-meta {
-  font-size: 13px;
-  color: var(--text2);
-  margin-top: 2px;
-}
-
-.playlist-actions {
-  display: flex;
-  gap: 4px;
-  flex-shrink: 0;
-}
-
-.pl-action-btn {
-  width: 34px; height: 34px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 8px;
-  color: var(--text2);
-  border: 1px solid var(--border);
-  background: var(--bg3);
-  font-size: 15px;
-  flex-shrink: 0;
-}
-.pl-action-btn:active { background: var(--bg2); }
-.pl-action-btn.danger { color: var(--danger); border-color: transparent; background: none; }
-
-/* ── Playlist detail header ───────────────────────────────────────── */
-.pl-detail-header {
-  padding: 16px 16px 14px;
-  border-bottom: 1px solid var(--border);
-}
-
-.pl-detail-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.pl-detail-meta {
-  font-size: 14px;
-  color: var(--text2);
-  margin-bottom: 14px;
-}
-
-.pl-detail-actions {
-  display: flex;
-  gap: 10px;
-}
-
-/* ── Add to Playlist sheet ────────────────────────────────────────── */
-#addpl-sheet {
-  position: fixed; inset: 0; z-index: 100;
-  display: none; flex-direction: column;
-  background: var(--bg);
-}
-#addpl-sheet.visible { display: flex; }
-
-.addpl-body {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  flex: 1;
-}
-
-#addpl-new-form {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-#addpl-name-input {
-  flex: 1;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px 12px;
-  color: var(--text);
-  font-size: 15px;
-  font-family: var(--font);
-  outline: none;
-  min-width: 0;
-}
-#addpl-name-input:focus { border-color: var(--accent); }
-
-#addpl-name-save {
-  background: var(--accent);
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 9px 14px;
-  border-radius: 8px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.addpl-option {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  font-size: 15px;
-  transition: background 0.1s;
-}
-.addpl-option:active { background: var(--bg2); }
-
-.addpl-option-meta {
-  font-size: 13px;
-  color: var(--text2);
-  margin-top: 2px;
-}
-
-/* In concert view, the "add to playlist" button */
-.btn-addpl {
-  flex-shrink: 0;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 9px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg3);
-  color: var(--text2);
-  white-space: nowrap;
 }
 
 /* ── Utility ──────────────────────────────────────────────────────── */
