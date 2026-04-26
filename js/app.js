@@ -545,8 +545,8 @@ function renderConcert(meta) {
 
   if (m.date) {
     fetchDayContext(m.date.slice(0, 10)).then(text => {
-      const el = $('concert-context');
-      if (el && text) el.textContent = text;
+      const ctx = $('concert-context');
+      if (ctx) ctx.textContent = text;
     });
   }
 
@@ -948,30 +948,16 @@ function wmoDesc(c) { return WMO[c] || WMO[Math.floor(c/10)*10] || 'variable'; }
 
 async function fetchDayContext(dateStr) {
   if (_contextCache.has(dateStr)) return _contextCache.get(dateStr);
-  const [year, month, day] = dateStr.split('-').map(Number);
-  const parts = [];
-
-  await Promise.allSettled([
-    fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=41.8781&longitude=-87.6298&start_date=${dateStr}&end_date=${dateStr}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=America%2FChicago&temperature_unit=fahrenheit`)
-      .then(r => r.json())
-      .then(d => {
-        if (d.daily?.temperature_2m_max?.[0] != null) {
-          const hi = Math.round(d.daily.temperature_2m_max[0]);
-          const lo = Math.round(d.daily.temperature_2m_min[0]);
-          parts.push(`Chicago that day: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F`);
-        }
-      }),
-    fetch(`https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/${month}/${day}`)
-      .then(r => r.json())
-      .then(d => {
-        (d.events || [])
-          .filter(e => e.year == year)
-          .slice(0, 2)
-          .forEach(e => parts.push(`${e.year}: ${e.text}`));
-      }),
-  ]);
-
-  const text = parts.join('   ·   ');
+  let text = '';
+  try {
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=41.8781&longitude=-87.6298&start_date=${dateStr}&end_date=${dateStr}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=America%2FChicago&temperature_unit=fahrenheit`;
+    const d = await fetch(url).then(r => r.json());
+    if (d.daily?.temperature_2m_max?.[0] != null) {
+      const hi = Math.round(d.daily.temperature_2m_max[0]);
+      const lo = Math.round(d.daily.temperature_2m_min[0]);
+      text = `Chicago that day: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F`;
+    }
+  } catch {}
   _contextCache.set(dateStr, text);
   return text;
 }

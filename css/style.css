@@ -391,9 +391,7 @@ button {
   opacity: 0.75;
   line-height: 1.5;
   margin-bottom: 14px;
-  display: none;
 }
-.concert-context:not(:empty) { display: block; }
 
 .concert-actions {
   display: flex;
@@ -540,7 +538,8 @@ button {
 .bar-context {
   overflow: hidden;
   white-space: nowrap;
-  height: 13px;
+  height: 16px;
+  line-height: 16px;
   margin-top: 2px;
   display: none;
 }
