@@ -23,7 +23,12 @@
       "Bash(cp /Users/mkudlacz/Downloads/favicon.jpg /Users/mkudlacz/Projects/Internetarchiveplayer/favicon.jpg)",
       "Bash(sips -z 180 180 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/apple-touch-icon.png)",
       "Bash(sips -z 192 192 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-192.png)",
-      "Bash(sips -z 512 512 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-512.png)"
+      "Bash(sips -z 512 512 /Users/mkudlacz/Downloads/cover.jpg --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-512.png)",
+      "Bash(sips -s format png -z 180 180 \"/Users/mkudlacz/Documents/Graduwit/Onboarding/Portal Training/cover_2.png\" --out /Users/mkudlacz/Projects/Internetarchiveplayer/apple-touch-icon.png)",
+      "Bash(sips -s format png -z 192 192 \"/Users/mkudlacz/Documents/Graduwit/Onboarding/Portal Training/cover_2.png\" --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-192.png)",
+      "Bash(sips -s format png -z 512 512 \"/Users/mkudlacz/Documents/Graduwit/Onboarding/Portal Training/cover_2.png\" --out /Users/mkudlacz/Projects/Internetarchiveplayer/icon-512.png)",
+      "Bash(cp \"/Users/mkudlacz/Downloads/favicon_2.jpg\" /Users/mkudlacz/Projects/Internetarchiveplayer/favicon.jpg)",
+      "Bash(cp \"/Users/mkudlacz/Documents/Graduwit/Onboarding/Portal Training/cover_2.png\" /Users/mkudlacz/Projects/Internetarchiveplayer/icon.jpg)"
     ]
   }
 }
