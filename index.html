@@ -85,7 +85,11 @@
       <div class="artist-col">
         <ul id="venue-list"></ul>
       </div>
-      <div class="concerts-col">
+      <div class="concerts-col venue-concerts-col">
+        <div id="venue-photo-wrap" class="venue-photo-wrap">
+          <img id="venue-photo-img" alt="">
+          <span class="venue-photo-credit">via Flickr</span>
+        </div>
         <ul id="venue-concerts"></ul>
       </div>
     </div>
@@ -211,6 +215,13 @@
              autocapitalize="none" autocorrect="off" spellcheck="false">
       <button class="settings-save" id="favs-import">Restore</button>
       <p class="settings-hint">Paste your exported link above and tap Restore.</p>
+      <div class="settings-divider"></div>
+      <div class="settings-label">Flickr API Key</div>
+      <input id="flickr-key-input" class="settings-input" type="text"
+             placeholder="Paste your Flickr API key…"
+             autocapitalize="none" autocorrect="off" spellcheck="false">
+      <button class="settings-save" id="flickr-key-save">Save Key</button>
+      <p class="settings-hint">Get a free key at flickr.com/services/apps/create — enables venue photos in the Venue tab.</p>
     </div>
   </div>
 </div>

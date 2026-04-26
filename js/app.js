@@ -1,6 +1,7 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
+import { fetchVenuePhoto, getFlickrKey, setFlickrKey } from './flickr.js';
 
 // ── State ──────────────────────────────────────────────────────────
 const state = {
@@ -53,6 +54,8 @@ const el = {
   viewVenue:          $('view-venue'),
   venueList:          $('venue-list'),
   venueConcerts:      $('venue-concerts'),
+  venuePhotoWrap:     $('venue-photo-wrap'),
+  venuePhotoImg:      $('venue-photo-img'),
   viewFiltered:       $('view-filtered'),
   filteredList:       $('filtered-list'),
   trackActionSheet:   $('track-action-sheet'),
@@ -81,6 +84,8 @@ const el = {
   favsExport:     $('favs-export'),
   favsImportInput: $('favs-import-input'),
   favsImport:     $('favs-import'),
+  flickrKeyInput: $('flickr-key-input'),
+  flickrKeySave:  $('flickr-key-save'),
 };
 
 // ── Sorting ────────────────────────────────────────────────────────
@@ -834,6 +839,16 @@ function selectVenue(venue, docs) {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === venue);
   });
   renderVenueConcerts(sortDocs(docs));
+
+  el.venuePhotoWrap.classList.remove('has-photo');
+  el.venuePhotoImg.src = '';
+  fetchVenuePhoto(venue).then(url => {
+    if (url && state.selectedVenue === venue) {
+      el.venuePhotoImg.src = url;
+      el.venuePhotoImg.onload  = () => el.venuePhotoWrap.classList.add('has-photo');
+      el.venuePhotoImg.onerror = () => el.venuePhotoWrap.classList.remove('has-photo');
+    }
+  });
 }
 
 function renderVenueConcerts(docs) {
@@ -1104,6 +1119,12 @@ function init() {
     navigator.clipboard?.writeText(url).then(() => {
       flashConfirm(`Copied! (${ids.length} favorites)`);
     }).catch(() => flashConfirm('Could not copy — try again'));
+  });
+
+  el.flickrKeyInput.value = getFlickrKey();
+  el.flickrKeySave.addEventListener('click', () => {
+    setFlickrKey(el.flickrKeyInput.value);
+    flashConfirm('Flickr API key saved.');
   });
 
   el.favsImport.addEventListener('click', () => {
