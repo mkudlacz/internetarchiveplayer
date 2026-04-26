@@ -510,7 +510,7 @@ button {
   flex-shrink: 0;
   background: var(--bg2);
   border-top: 1px solid var(--border);
-  height: var(--bar-h);
+  height: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
   display: none;
   flex-direction: column;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -572,7 +572,7 @@ button {
 
 /* ── Queue Sheet ──────────────────────────────────────────────────── */
 #queue-sheet {
-  position: fixed; top: 0; left: 0; right: 0; bottom: var(--bar-h); z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 100;
   display: none; flex-direction: column;
   background: var(--bg);
 }
