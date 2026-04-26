@@ -556,9 +556,8 @@ function renderConcert(meta) {
       const ctx = $('concert-context');
       if (ctx) ctx.textContent = text;
     });
-    const mmdd = m.date.slice(5, 10);
     const histEl = $('concert-history');
-    if (histEl && HISTORY[mmdd]) histEl.textContent = HISTORY[mmdd];
+    if (histEl && HISTORY[m.date.slice(0, 10)]) histEl.textContent = HISTORY[m.date.slice(0, 10)];
   }
 
   const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
