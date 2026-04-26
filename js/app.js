@@ -63,7 +63,6 @@ const el = {
   nowBar:         $('now-playing-bar'),
   barTitle:       $('bar-title'),
   barArtist:      $('bar-artist'),
-  barContext:     $('bar-context'),
   barPlay:        $('bar-play'),
   barPrev:        $('bar-prev'),
   barNext:        $('bar-next'),
@@ -933,7 +932,6 @@ function goBack() {
 // ── Day context (weather + Wikipedia) ─────────────────────────────
 
 const _contextCache = new Map();
-let _contextDate = '';
 
 const WMO = {
   0:'clear', 1:'mostly clear', 2:'partly cloudy', 3:'overcast',
@@ -959,22 +957,13 @@ async function fetchDayContext(dateStr) {
       const sunsetRaw = d.daily.sunset?.[0];
       if (sunsetRaw) {
         const [h, m] = sunsetRaw.split('T')[1].split(':').map(Number);
-        sunsetPart = ` · sunset ${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+        sunsetPart = ` · Sunset ${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
       }
-      text = `Chicago that day: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F${sunsetPart}`;
+      text = `Chicago weather: ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F${sunsetPart}`;
     }
   } catch {}
   _contextCache.set(dateStr, text);
   return text;
-}
-
-function setBarContext(text) {
-  const span = el.barContext.querySelector('span');
-  el.barContext.style.display = text ? 'block' : 'none';
-  span.textContent = text;
-  span.style.animation = 'none';
-  span.offsetHeight; // force reflow to restart animation
-  span.style.animation = '';
 }
 
 function updateBar() {
@@ -986,14 +975,6 @@ function updateBar() {
   const artistPart = t.artist || '';
   el.barArtist.textContent = [artistPart, datePart].filter(Boolean).join(' · ');
   el.barPlay.innerHTML     = player.paused ? svgPlay() : svgPause();
-
-  if (t.date && t.date !== _contextDate) {
-    _contextDate = t.date;
-    setBarContext('');
-    fetchDayContext(t.date).then(text => {
-      if (t.date === _contextDate) setBarContext(text);
-    });
-  }
 }
 
 function updateProgress() {

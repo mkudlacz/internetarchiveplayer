@@ -13,7 +13,7 @@
   --accent2:     #a07020;
   --accent-dim:  rgba(200,144,42,0.12);
   --danger:      #c0392b;
-  --bar-h:       86px;
+  --bar-h:       72px;
   --header-h:    52px;
   --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
@@ -387,6 +387,7 @@ button {
 }
 .concert-context {
   font-size: 12px;
+  font-style: italic;
   color: var(--text2);
   opacity: 0.75;
   line-height: 1.5;
@@ -489,7 +490,7 @@ button {
   flex-shrink: 0;
   background: var(--bg2);
   border-top: 1px solid var(--border);
-  height: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
+  height: var(--bar-h);
   display: none;
   flex-direction: column;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -519,20 +520,11 @@ button {
   min-height: 0;
 }
 
-.bar-info {
-  flex: 1;
-  min-width: 0;
-  cursor: pointer;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+.bar-info { flex: 1; min-width: 0; cursor: pointer; }
 
 .bar-title {
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -540,30 +532,9 @@ button {
 .bar-artist {
   font-size: 12px;
   color: var(--text2);
-  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.bar-context {
-  overflow: hidden;
-  white-space: nowrap;
-  height: 15px;
-  line-height: 15px;
-  margin-top: 1px;
-  display: none;
-}
-.bar-context span {
-  display: inline-block;
-  font-size: 10px;
-  font-style: italic;
-  color: var(--text2);
-  opacity: 0.7;
-  animation: bar-scroll 50s linear infinite;
-}
-@keyframes bar-scroll {
-  0%   { transform: translateX(100vw); }
-  100% { transform: translateX(-100%); }
 }
 
 .bar-controls { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
@@ -581,7 +552,7 @@ button {
 
 /* ── Queue Sheet ──────────────────────────────────────────────────── */
 #queue-sheet {
-  position: fixed; top: 0; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; bottom: var(--bar-h); z-index: 100;
   display: none; flex-direction: column;
   background: var(--bg);
 }
