@@ -618,7 +618,51 @@ function renderDiscover() {
   const minYear = Math.min(...years), maxYear = Math.max(...years);
   const topYear = [...byYear].sort((a, b) => b[1].length - a[1].length)[0];
 
+  // ── Recently Uploaded ──
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 60);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+  const recentShows = index
+    .filter(d => d.addeddate && d.addeddate.slice(0, 10) >= cutoffStr)
+    .sort((a, b) => b.addeddate.localeCompare(a.addeddate))
+    .slice(0, 10);
+
   el.viewDiscover.innerHTML = '';
+
+  // ── Surprise Me ──
+  {
+    const sec = discoverSection('Surprise Me', '');
+    const btn = document.createElement('button');
+    btn.className = 'surprise-btn';
+    btn.textContent = '▶ Play a Random Show';
+    btn.addEventListener('click', () => {
+      const doc = index[Math.floor(Math.random() * index.length)];
+      openConcert(doc);
+    });
+    sec.appendChild(btn);
+    el.viewDiscover.appendChild(sec);
+  }
+
+  // ── Recently Uploaded ──
+  if (recentShows.length) {
+    const sec = discoverSection('Recently Added to Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 60 days`);
+    const strip = document.createElement('div');
+    strip.className = 'discover-h-scroll';
+    recentShows.forEach(doc => {
+      const card = document.createElement('div');
+      card.className = 'today-card';
+      const added = formatDate(doc.addeddate.slice(0, 10));
+      card.innerHTML = `
+        <div class="today-card-year">${added}</div>
+        <div class="today-card-title">${esc(doc.title || doc.identifier)}</div>
+        <div class="today-card-artist">${esc(doc.creator || '')}</div>
+      `;
+      card.addEventListener('click', () => openConcert(doc));
+      strip.appendChild(card);
+    });
+    sec.appendChild(strip);
+    el.viewDiscover.appendChild(sec);
+  }
 
   // ── Today in Archive ──
   const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });

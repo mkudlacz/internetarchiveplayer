@@ -622,7 +622,7 @@ button {
   font-size: 15px; font-weight: 600;
   padding: 13px; border-radius: 10px; width: 100%;
 }
-.settings-hint { font-size: 13px; color: var(--text2); margin-top: -12px; }
+.settings-hint { font-size: 13px; color: var(--text2); margin-top: 4px; }
 .settings-divider { border-top: 1px solid var(--border); margin: 8px 0; }
 
 /* ── Track action sheet ───────────────────────────────────────────── */
@@ -753,6 +753,22 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Surprise Me button */
+.surprise-btn {
+  display: block;
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.surprise-btn:active { opacity: 0.75; }
 
 /* Year pills */
 .year-pill {
