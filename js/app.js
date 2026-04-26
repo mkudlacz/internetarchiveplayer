@@ -77,6 +77,8 @@ const el = {
   collectionInput: $('collection-input'),
   settingsSave:   $('settings-save'),
   favsExport:     $('favs-export'),
+  favsImportInput: $('favs-import-input'),
+  favsImport:     $('favs-import'),
 };
 
 // ── Sorting ────────────────────────────────────────────────────────
@@ -986,6 +988,18 @@ function init() {
     navigator.clipboard?.writeText(url).then(() => {
       flashConfirm(`Copied! (${ids.length} favorites)`);
     }).catch(() => flashConfirm('Could not copy — try again'));
+  });
+
+  el.favsImport.addEventListener('click', () => {
+    const pasted = el.favsImportInput.value.trim();
+    const match = pasted.match(/#favs=(.+)$/);
+    if (!match) { flashConfirm('No favorites found in that link.'); return; }
+    const ids = match[1].split(',').map(decodeURIComponent).filter(Boolean);
+    if (!ids.length) { flashConfirm('No favorites found in that link.'); return; }
+    importFavIds(ids);
+    el.favsImportInput.value = '';
+    el.settingsSheet.classList.remove('visible');
+    flashConfirm(`Restored ${ids.length} favorite${ids.length !== 1 ? 's' : ''}`);
   });
 
   el.settingsSave.addEventListener('click', () => {

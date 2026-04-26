@@ -198,7 +198,14 @@
     <div>
       <div class="settings-label">Favorites Backup</div>
       <button class="settings-save" id="favs-export">Export Favorites Link</button>
-      <p class="settings-hint">Copies a restore link to your clipboard. Open that link after reinstalling to get your favorites back.</p>
+      <p class="settings-hint">Copies a restore link to your clipboard. Save it somewhere before deleting the app.</p>
+      <div class="settings-divider"></div>
+      <div class="settings-label">Restore Favorites</div>
+      <input id="favs-import-input" class="settings-input" type="url"
+             placeholder="Paste your backup link here…"
+             autocapitalize="none" autocorrect="off" spellcheck="false">
+      <button class="settings-save" id="favs-import">Restore</button>
+      <p class="settings-hint">Paste your exported link above and tap Restore.</p>
     </div>
   </div>
 </div>
