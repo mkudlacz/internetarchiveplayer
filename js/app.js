@@ -533,6 +533,7 @@ function renderConcert(meta) {
       <div class="concert-header-date">${formatDate(m.date)}</div>
       <div class="concert-header-title">${esc(m.title || m.identifier)}</div>
       <div class="concert-header-creator">${esc(m.creator || '')}</div>
+      <div class="concert-context" id="concert-context"></div>
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>
@@ -541,6 +542,13 @@ function renderConcert(meta) {
     </div>
     <ul class="track-list" id="track-list"></ul>
   `;
+
+  if (m.date) {
+    fetchDayContext(m.date.slice(0, 10)).then(text => {
+      const el = $('concert-context');
+      if (el && text) el.textContent = text;
+    });
+  }
 
   $('concert-fav').addEventListener('click', e => {
     const active = toggleFav(m.identifier);

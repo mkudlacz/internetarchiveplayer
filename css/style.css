@@ -383,8 +383,17 @@ button {
 .concert-header-creator {
   font-size: 14px;
   color: var(--text2);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
+.concert-context {
+  font-size: 12px;
+  color: var(--text2);
+  opacity: 0.75;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  display: none;
+}
+.concert-context:not(:empty) { display: block; }
 
 .concert-actions {
   display: flex;
@@ -482,7 +491,7 @@ button {
   flex-shrink: 0;
   background: var(--bg2);
   border-top: 1px solid var(--border);
-  height: var(--bar-h);
+  height: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
   display: none;
   flex-direction: column;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -562,7 +571,7 @@ button {
 
 /* ── Queue Sheet ──────────────────────────────────────────────────── */
 #queue-sheet {
-  position: fixed; top: 0; left: 0; right: 0; bottom: var(--bar-h); z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); z-index: 100;
   display: none; flex-direction: column;
   background: var(--bg);
 }
