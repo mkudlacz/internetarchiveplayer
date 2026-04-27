@@ -9,10 +9,6 @@
     body { font-family: -apple-system, sans-serif; background: #111; color: #eee; margin: 0; padding: 16px; }
     h1 { font-size: 18px; margin-bottom: 4px; color: #aaa; font-weight: 400; }
     .note { font-size: 12px; color: #555; margin-bottom: 20px; }
-    .error { background: #2a1010; border: 1px solid #553; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #f99; max-width: 680px; margin-bottom: 20px; line-height: 1.6; }
-    .error code { background: #333; padding: 2px 6px; border-radius: 4px; color: #eee; font-size: 12px; }
-
-    /* ── Lookup tool ── */
     .lookup {
       background: #1c1c1c; border: 1px solid #333; border-radius: 10px;
       padding: 14px 16px; margin-bottom: 24px; max-width: 680px;
@@ -32,121 +28,207 @@
     .lookup-results { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 10px; }
     .result-card {
       background: #222; border: 1px solid #333; border-radius: 8px;
-      overflow: hidden; width: 160px; cursor: pointer;
-      transition: border-color 0.15s;
+      overflow: hidden; width: 160px; cursor: pointer; transition: border-color 0.15s;
     }
     .result-card:hover { border-color: #e8a020; }
     .result-card img { width: 160px; height: 120px; object-fit: cover; display: block; background: #2a2a2a; }
     .result-card-url { font-size: 10px; color: #888; padding: 6px 8px; word-break: break-all; line-height: 1.3; }
     .copied { font-size: 12px; color: #4caf50; padding: 6px 8px; }
     .lookup-msg { font-size: 13px; color: #888; margin-top: 8px; }
-
-    /* ── Venue grid ── */
-    .count { font-size: 13px; color: #666; margin-bottom: 12px; }
+    .count { font-size: 13px; color: #555; margin-bottom: 12px; }
     .grid { display: flex; flex-direction: column; max-width: 680px; }
-    .row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 12px 0; border-bottom: 1px solid #2a2a2a;
-    }
+    .row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #2a2a2a; }
     .row:last-child { border-bottom: none; }
-    .thumb-link img {
-      width: 80px; height: 80px; object-fit: cover;
-      border-radius: 8px; flex-shrink: 0; background: #222; display: block;
-    }
+    .row a img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; display: block; background: #222; }
     .info { min-width: 0; flex: 1; }
     .name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
     .alias { font-size: 11px; color: #555; margin-bottom: 6px; }
     .file-link { font-size: 11px; color: #e8a020; word-break: break-all; }
     .broken { opacity: 0.35; }
-    .broken .name::after { content: ' ✗ broken'; color: #f55; font-weight: 400; font-size: 11px; }
+    .broken .name::after { content: " ✗ broken"; color: #f55; font-weight: 400; font-size: 11px; }
   </style>
 </head>
 <body>
-
 <h1>Venue photos — venues.json</h1>
-<p class="note">Click any image to open full-size · Click search results to copy URL · Paste into venues.json to swap</p>
+<p class="note">Click any image to open full-size · Search to find replacements · Click a result to copy its URL</p>
 
-<div id="file-error" class="error" style="display:none">
-  ⚠️ Can't load <code>venues.json</code> — this page must be served, not opened as a local file.<br>
-  From the project root, run: <code>! npx serve .</code> then open
-  <code>http://localhost:3000/dev/validate-venues.html</code><br><br>
-  Or push to GitHub and open:
-  <code>https://mkudlacz.github.io/internetarchiveplayer/dev/validate-venues.html</code>
-</div>
-
-<!-- ── Wikimedia search tool ── -->
 <div class="lookup">
   <h2>Find a replacement image on Wikimedia Commons</h2>
   <div class="lookup-row">
-    <input id="lookup-input" type="text" placeholder="e.g. Aragon Ballroom Chicago">
+    <input id="lookup-input" type="text" placeholder="e.g. Schubas Tavern Chicago">
     <button id="lookup-btn">Search</button>
   </div>
   <div class="lookup-msg" id="lookup-msg"></div>
   <div class="lookup-results" id="lookup-results"></div>
 </div>
 
-<div class="count" id="count"></div>
-<div class="grid" id="grid"></div>
+<div class="count">19 unique photos covering 26 venue name variants</div>
+<div class="grid">
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/The_Abbey_Pub_%26_Grill_1%2C_Chicago%2C_IL%2C_2009.jpg/960px-The_Abbey_Pub_%26_Grill_1%2C_Chicago%2C_IL%2C_2009.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/The_Abbey_Pub_%26_Grill_1%2C_Chicago%2C_IL%2C_2009.jpg/960px-The_Abbey_Pub_%26_Grill_1%2C_Chicago%2C_IL%2C_2009.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Abbey Pub</div>
+        <div class="alias">also: The Abbey</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/The_Abbey_Pub_%26_Grill_1%2C_Chicago%2C_IL%2C_2009.jpg/960px-The_Abbey_Pub_%26_Grill_1%2C_Chicago%2C_IL%2C_2009.jpg" target="_blank">960px-The_Abbey_Pub_&_Grill_1,_Chicago,_IL,_2009.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Aragon_Ballroom_%283453018952%29.jpg/960px-Aragon_Ballroom_%283453018952%29.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Aragon_Ballroom_%283453018952%29.jpg/960px-Aragon_Ballroom_%283453018952%29.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Aragon Ballroom</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Aragon_Ballroom_%283453018952%29.jpg/960px-Aragon_Ballroom_%283453018952%29.jpg" target="_blank">960px-Aragon_Ballroom_(3453018952).jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bottom_Lounge%2C_Chicago.jpg/960px-Bottom_Lounge%2C_Chicago.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bottom_Lounge%2C_Chicago.jpg/960px-Bottom_Lounge%2C_Chicago.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Bottom Lounge</div>
+        <div class="alias">also: Bottom Lounge Upstairs</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bottom_Lounge%2C_Chicago.jpg/960px-Bottom_Lounge%2C_Chicago.jpg" target="_blank">960px-Bottom_Lounge,_Chicago.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/TheMetroChicagoJI1.jpg/960px-TheMetroChicagoJI1.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/TheMetroChicagoJI1.jpg/960px-TheMetroChicagoJI1.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Cabaret Metro</div>
+        <div class="alias">also: Metro</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/TheMetroChicagoJI1.jpg/960px-TheMetroChicagoJI1.jpg" target="_blank">960px-TheMetroChicagoJI1.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Cubby_Bear_Wrigleyville.jpg/960px-Cubby_Bear_Wrigleyville.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Cubby_Bear_Wrigleyville.jpg/960px-Cubby_Bear_Wrigleyville.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Cubby Bear</div>
+        <div class="alias">also: Live at Cubby Bear</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Cubby_Bear_Wrigleyville.jpg/960px-Cubby_Bear_Wrigleyville.jpg" target="_blank">960px-Cubby_Bear_Wrigleyville.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/c/c7/Double_door_2014-05-25_16-35.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Double_door_2014-05-25_16-35.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Double Door</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/c/c7/Double_door_2014-05-25_16-35.jpg" target="_blank">Double_door_2014-05-25_16-35.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/ZEV_08.JPEG/960px-ZEV_08.JPEG" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/ZEV_08.JPEG/960px-ZEV_08.JPEG" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Empty Bottle</div>
+        <div class="alias">also: Empty Bottel</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/ZEV_08.JPEG/960px-ZEV_08.JPEG" target="_blank">960px-ZEV_08.JPEG</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fireside_Bowling_Alley_in_Chicago.jpg/960px-Fireside_Bowling_Alley_in_Chicago.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fireside_Bowling_Alley_in_Chicago.jpg/960px-Fireside_Bowling_Alley_in_Chicago.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Fireside Bowl</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fireside_Bowling_Alley_in_Chicago.jpg/960px-Fireside_Bowling_Alley_in_Chicago.jpg" target="_blank">960px-Fireside_Bowling_Alley_in_Chicago.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/e/e7/Bottle_Rockets_performing_at_The_Hideout.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Bottle_Rockets_performing_at_The_Hideout.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Hideout</div>
+        <div class="alias">also: The Hideout</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/e/e7/Bottle_Rockets_performing_at_The_Hideout.jpg" target="_blank">Bottle_Rockets_performing_at_The_Hideout.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Jay_Pritzker_Pavilion%2C_Chicago%2C_Illinois%2C_Estados_Unidos%2C_2012-10-20%2C_DD_08.jpg/960px-Jay_Pritzker_Pavilion%2C_Chicago%2C_Illinois%2C_Estados_Unidos%2C_2012-10-20%2C_DD_08.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Jay_Pritzker_Pavilion%2C_Chicago%2C_Illinois%2C_Estados_Unidos%2C_2012-10-20%2C_DD_08.jpg/960px-Jay_Pritzker_Pavilion%2C_Chicago%2C_Illinois%2C_Estados_Unidos%2C_2012-10-20%2C_DD_08.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Jay Pritzker Pavilion</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Jay_Pritzker_Pavilion%2C_Chicago%2C_Illinois%2C_Estados_Unidos%2C_2012-10-20%2C_DD_08.jpg/960px-Jay_Pritzker_Pavilion%2C_Chicago%2C_Illinois%2C_Estados_Unidos%2C_2012-10-20%2C_DD_08.jpg" target="_blank">960px-Jay_Pritzker_Pavilion,_Chicago,_Illinois,_Estados_Unidos,_2012-10-20,_DD_08.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hipster_aftermath_%288365983817%29.jpg/960px-Hipster_aftermath_%288365983817%29.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hipster_aftermath_%288365983817%29.jpg/960px-Hipster_aftermath_%288365983817%29.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Logan Square Auditorium</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hipster_aftermath_%288365983817%29.jpg/960px-Hipster_aftermath_%288365983817%29.jpg" target="_blank">960px-Hipster_aftermath_(8365983817).jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Martyrs%27_Chicago.jpg/960px-Martyrs%27_Chicago.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Martyrs%27_Chicago.jpg/960px-Martyrs%27_Chicago.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Martyrs'</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Martyrs%27_Chicago.jpg/960px-Martyrs%27_Chicago.jpg" target="_blank">960px-Martyrs'_Chicago.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Pitchfork_Music_Festival%2C_Chicago_7_15_2017_%2839670115305%29.jpg/960px-Pitchfork_Music_Festival%2C_Chicago_7_15_2017_%2839670115305%29.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Pitchfork_Music_Festival%2C_Chicago_7_15_2017_%2839670115305%29.jpg/960px-Pitchfork_Music_Festival%2C_Chicago_7_15_2017_%2839670115305%29.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Pitchfork Music Festival</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Pitchfork_Music_Festival%2C_Chicago_7_15_2017_%2839670115305%29.jpg/960px-Pitchfork_Music_Festival%2C_Chicago_7_15_2017_%2839670115305%29.jpg" target="_blank">960px-Pitchfork_Music_Festival,_Chicago_7_15_2017_(39670115305).jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Riviera_Theatre%2C_Chicago.jpg/960px-Riviera_Theatre%2C_Chicago.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Riviera_Theatre%2C_Chicago.jpg/960px-Riviera_Theatre%2C_Chicago.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Riviera Theatre</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Riviera_Theatre%2C_Chicago.jpg/960px-Riviera_Theatre%2C_Chicago.jpg" target="_blank">960px-Riviera_Theatre,_Chicago.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Film_School_%28band%29.jpg/960px-Film_School_%28band%29.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Film_School_%28band%29.jpg/960px-Film_School_%28band%29.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Schubas Tavern</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Film_School_%28band%29.jpg/960px-Film_School_%28band%29.jpg" target="_blank">960px-Film_School_(band).jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/c/c3/Breastfeeders-subterranean-chicago-2005.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Breastfeeders-subterranean-chicago-2005.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Subterranean</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/c/c3/Breastfeeders-subterranean-chicago-2005.jpg" target="_blank">Breastfeeders-subterranean-chicago-2005.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Uncommon_Ground_on_clark%2C_Chicago%2C_IL%2C_2011.jpg/960px-Uncommon_Ground_on_clark%2C_Chicago%2C_IL%2C_2011.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Uncommon_Ground_on_clark%2C_Chicago%2C_IL%2C_2011.jpg/960px-Uncommon_Ground_on_clark%2C_Chicago%2C_IL%2C_2011.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Uncommon Ground</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Uncommon_Ground_on_clark%2C_Chicago%2C_IL%2C_2011.jpg/960px-Uncommon_Ground_on_clark%2C_Chicago%2C_IL%2C_2011.jpg" target="_blank">960px-Uncommon_Ground_on_clark,_Chicago,_IL,_2011.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/The_Vic_Theatre_Chicago_Illinois_2020.jpg/960px-The_Vic_Theatre_Chicago_Illinois_2020.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/The_Vic_Theatre_Chicago_Illinois_2020.jpg/960px-The_Vic_Theatre_Chicago_Illinois_2020.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Vic Theater</div>
+        <div class="alias">also: Vic Theatre</div>
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/The_Vic_Theatre_Chicago_Illinois_2020.jpg/960px-The_Vic_Theatre_Chicago_Illinois_2020.jpg" target="_blank">960px-The_Vic_Theatre_Chicago_Illinois_2020.jpg</a>
+      </div>
+    </div>
+    <div class="row">
+      <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Wicker_Park_Fest_%282708293700%29.jpg/960px-Wicker_Park_Fest_%282708293700%29.jpg" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Wicker_Park_Fest_%282708293700%29.jpg/960px-Wicker_Park_Fest_%282708293700%29.jpg" alt="" onerror="this.closest('.row').classList.add('broken')"></a>
+      <div class="info">
+        <div class="name">Wicker Park Fest</div>
+        
+        <a class="file-link" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Wicker_Park_Fest_%282708293700%29.jpg/960px-Wicker_Park_Fest_%282708293700%29.jpg" target="_blank">960px-Wicker_Park_Fest_(2708293700).jpg</a>
+      </div>
+    </div></div>
 
 <script>
 const API = 'https://commons.wikimedia.org/w/api.php';
 const IMAGE_EXT = /\.(jpe?g|png|gif|webp)$/i;
 
-// ── Load venues.json dynamically ────────────────────────────────────────────
-fetch('../js/venues.json')
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(renderGrid)
-  .catch(() => {
-    document.getElementById('file-error').style.display = 'block';
-  });
-
-function renderGrid(venues) {
-  // Deduplicate by URL — show each unique photo once, list aliases
-  const seen = new Map();
-  Object.entries(venues).forEach(([name, url]) => {
-    if (!seen.has(url)) seen.set(url, { primary: name, aliases: [] });
-    else seen.get(url).aliases.push(name);
-  });
-
-  document.getElementById('count').textContent =
-    `${seen.size} unique photos covering ${Object.keys(venues).length} venue name variants`;
-
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  seen.forEach(({ primary, aliases }, url) => {
-    const row = document.createElement('div');
-    row.className = 'row';
-
-    const link = document.createElement('a');
-    link.className = 'thumb-link';
-    link.href = url;
-    link.target = '_blank';
-    const img = document.createElement('img');
-    img.src = url;
-    img.alt = primary;
-    img.onerror = () => row.classList.add('broken');
-    link.appendChild(img);
-
-    const info = document.createElement('div');
-    info.className = 'info';
-    info.innerHTML = `
-      <div class="name">${primary}</div>
-      ${aliases.length ? `<div class="alias">also: ${aliases.join(', ')}</div>` : ''}
-      <a class="file-link" href="${url}" target="_blank">${decodeURIComponent(url.split('/').pop())}</a>
-    `;
-    row.appendChild(link);
-    row.appendChild(info);
-    grid.appendChild(row);
-  });
-}
-
-// ── Wikimedia search ────────────────────────────────────────────────────────
 async function searchWikimedia(query) {
-  const searchUrl = `${API}?action=query&list=search&srnamespace=6&srsearch=${encodeURIComponent(query)}&srlimit=12&format=json&origin=*`;
+  const searchUrl = API + '?action=query&list=search&srnamespace=6&srsearch=' +
+    encodeURIComponent(query) + '&srlimit=12&format=json&origin=*';
   const data = await fetch(searchUrl).then(r => r.json());
   const titles = (data.query?.search || []).map(r => r.title).filter(t => IMAGE_EXT.test(t));
   if (!titles.length) return [];
-  const infoUrl = `${API}?action=query&prop=imageinfo&iiprop=url&iiurlwidth=600&titles=${titles.map(encodeURIComponent).join('|')}&format=json&origin=*`;
+  const infoUrl = API + '?action=query&prop=imageinfo&iiprop=url&iiurlwidth=600&titles=' +
+    titles.map(encodeURIComponent).join('|') + '&format=json&origin=*';
   const info = await fetch(infoUrl).then(r => r.json());
   return Object.values(info.query?.pages || {})
     .filter(p => p.imageinfo?.[0]?.thumburl)
@@ -162,24 +244,21 @@ document.getElementById('lookup-btn').addEventListener('click', async () => {
   results.innerHTML = '';
   try {
     const imgs = await searchWikimedia(q);
-    msg.textContent = imgs.length ? `${imgs.length} results — click any to copy its URL` : 'No image results found.';
+    msg.textContent = imgs.length ? imgs.length + ' results — click any to copy its URL' : 'No image results found.';
     imgs.forEach(({ thumb, title }) => {
       const card = document.createElement('div');
       card.className = 'result-card';
-      card.title = title;
-      card.innerHTML = `<img src="${thumb}" alt=""><div class="result-card-url">${decodeURIComponent(title.replace('File:', ''))}</div>`;
+      card.innerHTML = '<img src="' + thumb + '" alt=""><div class="result-card-url">' +
+        decodeURIComponent(title.replace('File:', '')) + '</div>';
       card.addEventListener('click', () => {
         navigator.clipboard.writeText(thumb).then(() => {
-          card.innerHTML = `<img src="${thumb}" alt=""><div class="copied">✓ URL copied!</div>`;
+          card.innerHTML = '<img src="' + thumb + '" alt=""><div class="copied">✓ URL copied!</div>';
         });
       });
       results.appendChild(card);
     });
-  } catch {
-    msg.textContent = 'Search failed — check network connection.';
-  }
+  } catch { msg.textContent = 'Search failed.'; }
 });
-
 document.getElementById('lookup-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('lookup-btn').click();
 });
