@@ -416,6 +416,7 @@ button {
 
 .concert-history {
   font-size: 12px;
+  font-style: italic;
   color: var(--text2);
   opacity: 0.75;
   line-height: 1.5;
