@@ -103,6 +103,8 @@ const SORTS = [
   { label: 'Year',   value: 'year desc' },
 ];
 
+const dateAsc = docs => [...docs].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+
 function sortDocs(docs) {
   const d = [...docs];
   switch (state.sort) {
@@ -405,8 +407,8 @@ function selectArtist(artistObj) {
 
 function renderArtistConcerts(fallbackDocs) {
   const docs = state.selectedArtist
-    ? sortDocs(state.selectedArtist.docs)
-    : sortDocs(fallbackDocs || state.index);
+    ? dateAsc(state.selectedArtist.docs)
+    : dateAsc(fallbackDocs || state.index);
 
   el.artistConcerts.innerHTML = '';
   if (!docs.length) {
@@ -484,10 +486,10 @@ function renderFavorites() {
     const [name, docs] = groups[0];
     state.selectedFavArtist = name;
     el.favArtistList.querySelector('.artist-item')?.classList.add('selected');
-    renderFavConcerts(sortDocs(docs));
+    renderFavConcerts(dateAsc(docs));
   } else if (state.selectedFavArtist) {
     const entry = groups.find(([n]) => n === state.selectedFavArtist);
-    renderFavConcerts(sortDocs(entry?.[1] || []));
+    renderFavConcerts(dateAsc(entry?.[1] || []));
   }
 }
 
@@ -496,7 +498,7 @@ function selectFavArtist(name, docs) {
   el.favArtistList.querySelectorAll('.artist-item').forEach(item => {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === name);
   });
-  renderFavConcerts(sortDocs(docs));
+  renderFavConcerts(dateAsc(docs));
 }
 
 function renderFavConcerts(docs) {
@@ -840,10 +842,10 @@ function renderYear() {
     const [year, docs] = byYear[0];
     state.selectedYear = year;
     el.yearList.querySelector('.artist-item')?.classList.add('selected');
-    renderYearConcerts(sortDocs(docs));
+    renderYearConcerts(dateAsc(docs));
   } else if (state.selectedYear) {
     const entry = byYear.find(([y]) => y === state.selectedYear);
-    renderYearConcerts(sortDocs(entry?.[1] || []));
+    renderYearConcerts(dateAsc(entry?.[1] || []));
   }
 }
 
@@ -852,7 +854,7 @@ function selectYear(year, docs) {
   el.yearList.querySelectorAll('.artist-item').forEach(item => {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === year);
   });
-  renderYearConcerts(sortDocs(docs));
+  renderYearConcerts(dateAsc(docs));
 }
 
 function renderYearConcerts(docs) {
@@ -896,10 +898,10 @@ function renderVenue() {
     const [venue, docs] = byVenue[0];
     state.selectedVenue = venue;
     el.venueList.querySelector('.artist-item')?.classList.add('selected');
-    renderVenueConcerts(sortDocs(docs));
+    renderVenueConcerts(dateAsc(docs));
   } else if (state.selectedVenue) {
     const entry = byVenue.find(([v]) => v === state.selectedVenue);
-    renderVenueConcerts(sortDocs(entry?.[1] || []));
+    renderVenueConcerts(dateAsc(entry?.[1] || []));
   }
 }
 
@@ -908,7 +910,7 @@ function selectVenue(venue, docs) {
   el.venueList.querySelectorAll('.artist-item').forEach(item => {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === venue);
   });
-  renderVenueConcerts(sortDocs(docs));
+  renderVenueConcerts(dateAsc(docs));
 }
 
 function renderVenueConcerts(docs) {
