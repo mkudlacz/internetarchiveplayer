@@ -29,6 +29,15 @@
   "1984-04-05": [
     "1984 · Cubs defeat San Francisco Giants 11–7"
   ],
+  "1984-05-27": [
+    "1984 · Cubs fall to Reds 4–3"
+  ],
+  "1984-06-16": [
+    "1984 · Cubs fall to Phillies 8–2"
+  ],
+  "1984-08-17": [
+    "1984 · Cubs fall to Reds 6–4"
+  ],
   "1984-08-18": [
     "1984 · White Sox defeat Toronto Blue Jays 7–6"
   ],
@@ -38,6 +47,12 @@
   "1985-05-03": [
     "1985 · White Sox defeat Detroit Tigers 7–1"
   ],
+  "1985-06-23": [
+    "1985 · Cubs fall to Cardinals 7–0"
+  ],
+  "1985-06-25": [
+    "1985 · Cubs fall to Mets 3–2"
+  ],
   "1985-08-11": [
     "1985 · White Sox defeat Milwaukee Brewers 4–1"
   ],
@@ -46,6 +61,9 @@
   ],
   "1985-08-31": [
     "1985 · Cubs defeat Atlanta Braves 5–4"
+  ],
+  "1985-09-14": [
+    "1985 · Cubs fall to Cardinals 5–4"
   ],
   "1985-09-17": [
     "1985 · White Sox defeat California Angels 5–2"
@@ -59,17 +77,32 @@
   "1986-04-11": [
     "1986 · Cubs defeat Pittsburgh Pirates 5–4"
   ],
+  "1986-05-07": [
+    "1986 · Cubs fall to Dodgers 8–4"
+  ],
   "1986-05-08": [
     "1986 · Cubs defeat Los Angeles Dodgers 6–5"
   ],
   "1986-05-09": [
     "1986 · White Sox defeat Cleveland Indians 4–3"
   ],
+  "1986-05-25": [
+    "1986 · Cubs fall to Astros 3–1"
+  ],
+  "1986-06-14": [
+    "1986 · Cubs fall to Cardinals 1–0"
+  ],
   "1986-06-16": [
     "1986 · Cubs defeat Philadelphia Phillies 7–5"
   ],
   "1986-06-29": [
     "1986 · White Sox defeat Oakland Athletics 6–5"
+  ],
+  "1986-07-17": [
+    "1986 · Cubs fall to Giants 6–4"
+  ],
+  "1986-08-07": [
+    "1986 · Cubs fall to Mets 12–3"
   ],
   "1986-09-26": [
     "1986 · Cubs defeat St. Louis Cardinals 4–1"
@@ -92,8 +125,14 @@
   "1987-07-22": [
     "1987 · Cubs defeat San Diego Padres 6–3"
   ],
+  "1987-08-07": [
+    "1987 · Cubs fall to Mets 7–1"
+  ],
   "1987-08-13": [
     "1987 · White Sox defeat Toronto Blue Jays 10–3"
+  ],
+  "1987-08-16": [
+    "1987 · Cubs fall to Mets 23–10"
   ],
   "1987-08-23": [
     "1987 · White Sox defeat Texas Rangers 8–1"
@@ -103,6 +142,9 @@
   ],
   "1987-09-18": [
     "1987 · Cubs defeat St. Louis Cardinals 8–1"
+  ],
+  "1987-09-23": [
+    "1987 · Cubs fall to Phillies 5–0"
   ],
   "1987-09-30": [
     "1987 · White Sox defeat California Angels 5–2"
@@ -119,6 +161,9 @@
   "1988-05-07": [
     "1988 · White Sox defeat Baltimore Orioles 11–7"
   ],
+  "1988-05-18": [
+    "1988 · Cubs fall to Cardinals 4–1"
+  ],
   "1988-05-28": [
     "1988 · White Sox defeat Toronto Blue Jays 3–2"
   ],
@@ -134,17 +179,35 @@
   "1988-07-03": [
     "1988 · White Sox defeat New York Yankees 4–3"
   ],
+  "1988-07-15": [
+    "1988 · Cubs fall to Dodgers 3–2"
+  ],
   "1988-08-11": [
     "1988 · White Sox defeat Seattle Mariners 4–3"
   ],
   "1988-08-31": [
     "1988 · Cubs defeat Houston Astros 3–1"
   ],
+  "1988-09-08": [
+    "1988 · Cubs fall to Mets 13–6"
+  ],
+  "1988-09-14": [
+    "1988 · Cubs fall to Mets 3–1"
+  ],
   "1988-09-23": [
     "1988 · White Sox defeat Kansas City Royals 2–0"
   ],
+  "1988-09-30": [
+    "1988 · Cubs fall to Pirates 10–9"
+  ],
+  "1989-04-19": [
+    "1989 · Cubs fall to Expos 3–2"
+  ],
   "1989-05-05": [
     "1989 · Cubs defeat Los Angeles Dodgers 4–2"
+  ],
+  "1989-05-26": [
+    "1989 · Cubs fall to Reds 10–8"
   ],
   "1989-06-07": [
     "1989 · White Sox defeat Texas Rangers 6–4"
@@ -157,6 +220,9 @@
   ],
   "1989-07-06": [
     "1989 · Cubs defeat San Diego Padres 7–3"
+  ],
+  "1989-07-08": [
+    "1989 · Cubs fall to Dodgers 8–2"
   ],
   "1989-07-16": [
     "1989 · White Sox defeat Milwaukee Brewers 2–0"
@@ -185,6 +251,12 @@
   "1990-06-14": [
     "1990 · White Sox defeat Oakland Athletics 3–2"
   ],
+  "1990-06-16": [
+    "1990 · Cubs fall to Phillies 2–1"
+  ],
+  "1990-07-07": [
+    "1990 · Cubs fall to Giants 10–9"
+  ],
   "1990-07-14": [
     "1990 · White Sox defeat New York Yankees 8–7"
   ],
@@ -197,11 +269,17 @@
   "1990-08-02": [
     "1990 · White Sox defeat Milwaukee Brewers 4–3"
   ],
+  "1990-08-26": [
+    "1990 · Cubs fall to Braves 4–3"
+  ],
   "1990-09-08": [
     "1990 · Cubs defeat St. Louis Cardinals 5–4"
   ],
   "1990-09-21": [
     "1990 · White Sox defeat Seattle Mariners 5–4"
+  ],
+  "1990-09-28": [
+    "1990 · Cubs fall to Mets 7–1"
   ],
   "1991-05-04": [
     "1991 · Bulls defeat Philadelphia 76ers 105–92, Eastern Semifinals Game 1"
@@ -214,6 +292,9 @@
   ],
   "1991-07-06": [
     "1991 · Cubs defeat St. Louis Cardinals 12–2"
+  ],
+  "1991-07-11": [
+    "1991 · Cubs fall to Astros 6–4"
   ],
   "1991-07-27": [
     "1991 · White Sox defeat Boston Red Sox 10–8"
@@ -233,17 +314,38 @@
   "1991-08-08": [
     "1991 · White Sox defeat New York Yankees 4–1"
   ],
+  "1991-08-17": [
+    "1991 · Cubs fall to Phillies 5–2"
+  ],
   "1991-08-28": [
     "1991 · Cubs defeat San Francisco Giants 8–6"
   ],
+  "1991-09-11": [
+    "1991 · Cubs fall to Mets 4–1"
+  ],
+  "1991-09-21": [
+    "1991 · White Sox fall to Angels 4–3"
+  ],
   "1991-10-03": [
     "1991 · White Sox defeat Minnesota Twins 3–2"
+  ],
+  "1991-10-04": [
+    "1991 · White Sox fall to Mariners 6–4"
   ],
   "1992-04-11": [
     "1992 · Cubs defeat St. Louis Cardinals 5–1"
   ],
   "1992-04-13": [
     "1992 · Great Chicago Flood: freight tunnel breach fills the Loop with river water"
+  ],
+  "1992-04-15": [
+    "1992 · Cubs fall to Pirates 7–2"
+  ],
+  "1992-04-17": [
+    "1992 · White Sox fall to Twins 7–0"
+  ],
+  "1992-04-25": [
+    "1992 · Cubs fall to Pirates 1–0"
   ],
   "1992-05-08": [
     "1992 · White Sox defeat Baltimore Orioles 4–3"
@@ -260,6 +362,9 @@
   "1992-05-28": [
     "1992 · Cubs defeat San Francisco Giants 5–0"
   ],
+  "1992-06-06": [
+    "1992 · White Sox fall to Athletics 6–4"
+  ],
   "1992-06-07": [
     "1992 · Portland Trail Blazers defeat Bulls 94–84, NBA Finals Game 3 (Portland pulls within 2–1)"
   ],
@@ -275,11 +380,17 @@
   "1992-06-14": [
     "1992 · Bulls win NBA Championship, defeating Portland Trail Blazers 97–93 (Finals Game 6) — Jordan's 2nd title"
   ],
+  "1992-06-27": [
+    "1992 · Cubs fall to Phillies 5–4"
+  ],
   "1992-07-23": [
     "1992 · White Sox defeat Milwaukee Brewers 6–2"
   ],
   "1992-08-05": [
     "1992 · White Sox defeat Minnesota Twins 9–5"
+  ],
+  "1992-09-12": [
+    "1992 · Cubs fall to Cardinals 11–3"
   ],
   "1992-09-23": [
     "1992 · White Sox defeat Oakland Athletics 17–6"
@@ -287,11 +398,20 @@
   "1992-09-28": [
     "1992 · White Sox defeat Minnesota Twins 9–4"
   ],
+  "1992-10-03": [
+    "1992 · Cubs fall to Expos 3–1"
+  ],
+  "1993-04-10": [
+    "1993 · Cubs fall to Phillies 5–4"
+  ],
   "1993-04-29": [
     "1993 · White Sox defeat Milwaukee Brewers 7–4"
   ],
   "1993-05-15": [
     "1993 · Bulls defeat Cleveland Cavaliers in Eastern Conference Semifinals (series clincher)"
+  ],
+  "1993-05-21": [
+    "1993 · Cubs fall to Marlins 5–3"
   ],
   "1993-05-22": [
     "1993 · Cubs defeat Florida Marlins 2–1"
@@ -299,8 +419,14 @@
   "1993-05-27": [
     "1993 · Cubs defeat San Francisco Giants 5–4"
   ],
+  "1993-05-28": [
+    "1993 · White Sox fall to Yankees 4–0"
+  ],
   "1993-05-29": [
     "1993 · Bulls defeat New York Knicks, Eastern Conference Finals Game 6 (Bulls advance to Finals)"
+  ],
+  "1993-06-03": [
+    "1993 · Cubs fall to Expos 7–1"
   ],
   "1993-06-11": [
     "1993 · Phoenix Suns defeat Bulls 103–108, NBA Finals Game 2 (Suns tie series 1–1)"
@@ -320,8 +446,14 @@
   "1993-07-09": [
     "1993 · Cubs defeat Houston Astros 5–2"
   ],
+  "1993-07-10": [
+    "1993 · Cubs fall to Astros 5–2"
+  ],
   "1993-07-17": [
     "1993 · White Sox defeat Milwaukee Brewers 9–4"
+  ],
+  "1993-07-23": [
+    "1993 · Cubs fall to Astros 5–1"
   ],
   "1993-08-06": [
     "1993 · Cubs defeat St. Louis Cardinals 6–4"
@@ -340,6 +472,9 @@
   ],
   "1993-09-03": [
     "1993 · White Sox defeat Detroit Tigers 8–6"
+  ],
+  "1993-09-09": [
+    "1993 · Cubs fall to Phillies 10–8"
   ],
   "1993-10-01": [
     "1993 · White Sox defeat Cleveland Indians 4–2"
@@ -362,8 +497,14 @@
   "1994-04-28": [
     "1994 · White Sox defeat Cleveland Indians 5–3"
   ],
+  "1994-04-29": [
+    "1994 · Cubs fall to Rockies 6–5"
+  ],
   "1994-05-06": [
     "1994 · Cubs defeat Pittsburgh Pirates 10–1"
+  ],
+  "1994-05-14": [
+    "1994 · Cubs fall to Marlins 6–4"
   ],
   "1994-05-20": [
     "1994 · White Sox defeat Oakland Athletics 13–6"
@@ -377,8 +518,14 @@
   "1994-06-08": [
     "1994 · White Sox defeat Toronto Blue Jays 3–2"
   ],
+  "1994-06-10": [
+    "1994 · Cubs fall to Dodgers 2–1"
+  ],
   "1994-06-11": [
     "1994 · Cubs defeat Los Angeles Dodgers 7–4"
+  ],
+  "1994-06-12": [
+    "1994 · Cubs fall to Dodgers 2–1"
   ],
   "1994-06-25": [
     "1994 · White Sox defeat Seattle Mariners 2–1"
@@ -404,6 +551,9 @@
   "1994-07-28": [
     "1994 · Cubs defeat Pittsburgh Pirates 10–3"
   ],
+  "1994-08-04": [
+    "1994 · Cubs fall to Marlins 5–1"
+  ],
   "1994-08-07": [
     "1994 · White Sox defeat California Angels 10–5"
   ],
@@ -419,8 +569,26 @@
   "1995-05-21": [
     "1995 · Cubs defeat Los Angeles Dodgers 2–1"
   ],
+  "1995-05-26": [
+    "1995 · Cubs fall to Marlins 5–3"
+  ],
+  "1995-06-01": [
+    "1995 · Cubs fall to Phillies 5–3"
+  ],
+  "1995-06-08": [
+    "1995 · Cubs fall to Rockies 5–3"
+  ],
+  "1995-06-09": [
+    "1995 · Cubs fall to Rockies 2–1"
+  ],
   "1995-06-10": [
     "1995 · Cubs defeat Colorado Rockies 3–0"
+  ],
+  "1995-06-11": [
+    "1995 · Cubs fall to Rockies 5–1"
+  ],
+  "1995-06-17": [
+    "1995 · Cubs fall to Dodgers 12–5"
   ],
   "1995-06-21": [
     "1995 · White Sox defeat Seattle Mariners 5–4"
@@ -443,6 +611,9 @@
   "1995-07-09": [
     "1995 · Cubs defeat Philadelphia Phillies 7–6"
   ],
+  "1995-07-14": [
+    "1995 · Cubs fall to Reds 5–4"
+  ],
   "1995-07-27": [
     "1995 · White Sox defeat Boston Red Sox 5–4"
   ],
@@ -451,6 +622,9 @@
   ],
   "1995-08-18": [
     "1995 · White Sox defeat Texas Rangers 3–1"
+  ],
+  "1995-08-26": [
+    "1995 · Cubs fall to Braves 7–2"
   ],
   "1995-08-28": [
     "1995 · White Sox defeat Milwaukee Brewers 6–5"
@@ -467,14 +641,23 @@
   "1995-09-13": [
     "1995 · White Sox defeat California Angels 6–1"
   ],
+  "1995-09-16": [
+    "1995 · Cubs fall to Padres 12–4"
+  ],
   "1996-04-04": [
     "1996 · Cubs defeat Los Angeles Dodgers 9–4"
   ],
   "1996-04-08": [
     "1996 · Cubs defeat Colorado Rockies 9–6"
   ],
+  "1996-04-09": [
+    "1996 · White Sox fall to Rangers 3–2"
+  ],
   "1996-04-20": [
     "1996 · White Sox defeat Oakland Athletics 8–3"
+  ],
+  "1996-04-26": [
+    "1996 · Cubs fall to Dodgers 1–0"
   ],
   "1996-05-01": [
     "1996 · Cubs defeat St. Louis Cardinals 9–3"
@@ -497,8 +680,14 @@
   "1996-05-25": [
     "1996 · White Sox defeat Milwaukee Brewers 9–7"
   ],
+  "1996-05-29": [
+    "1996 · Cubs fall to Braves 2–0"
+  ],
   "1996-06-05": [
     "1996 · Bulls defeat Seattle SuperSonics 107–90, NBA Finals Game 1"
+  ],
+  "1996-06-06": [
+    "1996 · White Sox fall to Red Sox 7–4"
   ],
   "1996-06-07": [
     "1996 · Bulls defeat Seattle SuperSonics 92–88, NBA Finals Game 2 (Bulls lead 2–0)"
@@ -515,11 +704,23 @@
   "1996-06-20": [
     "1996 · Cubs defeat San Diego Padres 3–2"
   ],
+  "1996-06-21": [
+    "1996 · Cubs fall to Padres 2–1"
+  ],
   "1996-06-23": [
     "1996 · White Sox defeat Seattle Mariners 7–6"
   ],
   "1996-06-26": [
     "1996 · Cubs defeat Los Angeles Dodgers 6–4"
+  ],
+  "1996-06-29": [
+    "1996 · Cubs fall to Reds 9–5"
+  ],
+  "1996-07-03": [
+    "1996 · Cubs fall to Pirates 3–2"
+  ],
+  "1996-07-19": [
+    "1996 · Cubs fall to Cardinals 9–1"
   ],
   "1996-07-20": [
     "1996 · Cubs defeat St. Louis Cardinals 3–0"
@@ -532,6 +733,15 @@
   ],
   "1996-08-10": [
     "1996 · Cubs defeat Montreal Expos 3–2"
+  ],
+  "1996-08-22": [
+    "1996 · White Sox fall to Blue Jays 1–0"
+  ],
+  "1996-08-23": [
+    "1996 · Cubs fall to Braves 4–3"
+  ],
+  "1996-08-24": [
+    "1996 · Cubs fall to Braves 6–5"
   ],
   "1996-08-28": [
     "1996 · White Sox defeat Milwaukee Brewers 2–0"
@@ -554,8 +764,29 @@
   "1996-09-14": [
     "1996 · White Sox defeat Boston Red Sox 13–5"
   ],
+  "1996-09-25": [
+    "1996 · Cubs fall to Reds 4–3"
+  ],
+  "1997-04-11": [
+    "1997 · White Sox fall to Tigers 5–4"
+  ],
+  "1997-04-12": [
+    "1997 · Cubs fall to Braves 2–1"
+  ],
+  "1997-04-17": [
+    "1997 · White Sox fall to Orioles 1–0"
+  ],
+  "1997-04-22": [
+    "1997 · White Sox fall to Orioles 3–2"
+  ],
+  "1997-04-24": [
+    "1997 · Cubs fall to Pirates 4–3"
+  ],
   "1997-04-25": [
     "1997 · Cubs defeat Pittsburgh Pirates 11–1"
+  ],
+  "1997-05-01": [
+    "1997 · Cubs fall to Rockies 5–4"
   ],
   "1997-05-06": [
     "1997 · Cubs defeat San Diego Padres 2–1"
@@ -578,6 +809,9 @@
   "1997-06-16": [
     "1997 · Cubs defeat White Sox 8–3"
   ],
+  "1997-06-20": [
+    "1997 · White Sox fall to Twins 3–0"
+  ],
   "1997-06-21": [
     "1997 · White Sox defeat Minnesota Twins 5–3"
   ],
@@ -596,11 +830,20 @@
   "1997-07-24": [
     "1997 · White Sox defeat Texas Rangers 2–1"
   ],
+  "1997-07-26": [
+    "1997 · White Sox fall to Rangers 4–1"
+  ],
+  "1997-07-28": [
+    "1997 · Cubs fall to Braves 6–0"
+  ],
   "1997-08-02": [
     "1997 · Cubs defeat Los Angeles Dodgers 5–1"
   ],
   "1997-08-07": [
     "1997 · Cubs defeat San Francisco Giants 6–3"
+  ],
+  "1997-08-16": [
+    "1997 · White Sox fall to Mariners 11–6"
   ],
   "1997-08-21": [
     "1997 · White Sox defeat Toronto Blue Jays 6–3"
@@ -620,11 +863,17 @@
   "1997-09-13": [
     "1997 · Cubs defeat Pittsburgh Pirates 4–1"
   ],
+  "1997-09-15": [
+    "1997 · White Sox fall to Brewers 11–10"
+  ],
   "1997-09-18": [
     "1997 · Cubs defeat St. Louis Cardinals 4–3"
   ],
   "1997-09-20": [
     "1997 · White Sox defeat Boston Red Sox 6–4"
+  ],
+  "1997-09-23": [
+    "1997 · White Sox fall to Twins 5–3"
   ],
   "1998-04-03": [
     "1998 · White Sox defeat Tampa Bay Rays 10–4"
@@ -637,6 +886,9 @@
   ],
   "1998-04-10": [
     "1998 · White Sox defeat Tampa Bay Rays 3–0"
+  ],
+  "1998-04-11": [
+    "1998 · Cubs fall to Expos 5–4"
   ],
   "1998-04-25": [
     "1998 · White Sox defeat Toronto Blue Jays 8–1"
@@ -665,14 +917,29 @@
   "1998-06-14": [
     "1998 · Bulls complete the second three-peat, defeating Utah Jazz — Jordan's last title"
   ],
+  "1998-06-16": [
+    "1998 · Cubs fall to Brewers 11–2"
+  ],
   "1998-06-24": [
     "1998 · White Sox defeat Cincinnati Reds 4–2"
+  ],
+  "1998-06-26": [
+    "1998 · Cubs fall to Royals 6–3"
   ],
   "1998-07-02": [
     "1998 · Cubs defeat Arizona Diamondbacks 3–2"
   ],
+  "1998-07-16": [
+    "1998 · White Sox fall to Blue Jays 5–2"
+  ],
   "1998-07-25": [
     "1998 · White Sox defeat New York Yankees 6–2"
+  ],
+  "1998-08-11": [
+    "1998 · Cubs fall to Giants 8–7"
+  ],
+  "1998-08-15": [
+    "1998 · Cubs fall to Astros 5–4"
   ],
   "1998-09-19": [
     "1998 · White Sox defeat Boston Red Sox 5–2"
@@ -686,6 +953,9 @@
   "1999-05-03": [
     "1999 · White Sox defeat Anaheim Angels 8–1"
   ],
+  "1999-05-06": [
+    "1999 · White Sox fall to Orioles 4–2"
+  ],
   "1999-05-22": [
     "1999 · White Sox defeat New York Yankees 2–1"
   ],
@@ -695,8 +965,20 @@
   "1999-06-14": [
     "1999 · White Sox defeat Tampa Bay Rays 9–7"
   ],
+  "1999-06-26": [
+    "1999 · Cubs fall to Phillies 6–2"
+  ],
+  "1999-07-18": [
+    "1999 · White Sox fall to Brewers 5–4"
+  ],
   "1999-07-20": [
     "1999 · Cubs defeat Kansas City Royals 8–7"
+  ],
+  "1999-08-07": [
+    "1999 · Cubs fall to Astros 10–4"
+  ],
+  "1999-09-10": [
+    "1999 · Cubs fall to Astros 6–4"
   ],
   "1999-09-16": [
     "1999 · Cubs defeat Cincinnati Reds 7–6"
@@ -713,6 +995,12 @@
   "1999-11-21": [
     "1999 · Bears defeat San Diego Chargers 23–20"
   ],
+  "2000-05-06": [
+    "2000 · White Sox fall to Royals 11–5"
+  ],
+  "2000-05-11": [
+    "2000 · Cubs fall to Brewers 14–8"
+  ],
   "2000-05-20": [
     "2000 · White Sox defeat Toronto Blue Jays 6–2"
   ],
@@ -725,6 +1013,9 @@
   "2000-06-23": [
     "2000 · White Sox defeat New York Yankees 4–3"
   ],
+  "2000-07-13": [
+    "2000 · Cubs fall to Twins 5–1"
+  ],
   "2000-07-14": [
     "2000 · Cubs defeat Minnesota Twins 6–2"
   ],
@@ -734,11 +1025,26 @@
   "2000-07-29": [
     "2000 · Cubs defeat San Francisco Giants 8–1"
   ],
+  "2000-08-10": [
+    "2000 · White Sox fall to Mariners 6–3"
+  ],
+  "2000-09-10": [
+    "2000 · Cubs fall to Astros 7–6"
+  ],
+  "2000-09-15": [
+    "2000 · White Sox fall to Blue Jays 6–5"
+  ],
+  "2000-09-28": [
+    "2000 · White Sox fall to Red Sox 7–6"
+  ],
   "2000-09-29": [
     "2000 · White Sox defeat Kansas City Royals 6–4"
   ],
   "2001-04-07": [
     "2001 · Cubs defeat Philadelphia Phillies 8–4"
+  ],
+  "2001-04-08": [
+    "2001 · Cubs fall to Phillies 3–1"
   ],
   "2001-04-21": [
     "2001 · Cubs defeat Pittsburgh Pirates 4–3"
@@ -748,6 +1054,12 @@
   ],
   "2001-05-02": [
     "2001 · Cubs defeat San Diego Padres 8–3"
+  ],
+  "2001-05-03": [
+    "2001 · Cubs fall to Padres 5–3"
+  ],
+  "2001-05-10": [
+    "2001 · Cubs fall to Brewers 11–1"
   ],
   "2001-06-09": [
     "2001 · Cubs defeat White Sox 4–3"
@@ -770,6 +1082,18 @@
   "2001-08-04": [
     "2001 · White Sox defeat Tampa Bay Rays 8–6"
   ],
+  "2001-08-05": [
+    "2001 · Cubs fall to Dodgers 3–2"
+  ],
+  "2001-08-09": [
+    "2001 · Cubs fall to Rockies 14–5"
+  ],
+  "2001-08-13": [
+    "2001 · Cubs fall to Astros 9–5"
+  ],
+  "2001-08-17": [
+    "2001 · Cubs fall to Diamondbacks 7–2"
+  ],
   "2001-08-24": [
     "2001 · White Sox defeat Tampa Bay Rays 5–4"
   ],
@@ -779,11 +1103,26 @@
   "2001-09-01": [
     "2001 · Cubs defeat Atlanta Braves 5–3"
   ],
+  "2001-09-06": [
+    "2001 · White Sox fall to Tigers 6–2"
+  ],
+  "2001-09-09": [
+    "2001 · Cubs fall to Braves 9–5"
+  ],
   "2001-09-22": [
     "2001 · White Sox defeat Kansas City Royals 5–4"
   ],
+  "2001-10-02": [
+    "2001 · Cubs fall to Reds 5–4"
+  ],
   "2001-10-14": [
     "2001 · Bears defeat Arizona Cardinals 20–13"
+  ],
+  "2002-04-04": [
+    "2002 · Cubs fall to Reds 3–1"
+  ],
+  "2002-04-07": [
+    "2002 · White Sox fall to Royals 9–2"
   ],
   "2002-04-16": [
     "2002 · White Sox defeat Cleveland Indians 10–5"
@@ -806,6 +1145,24 @@
   "2002-05-24": [
     "2002 · White Sox defeat Detroit Tigers 12–1"
   ],
+  "2002-05-26": [
+    "2002 · Cubs fall to Astros 7–5"
+  ],
+  "2002-05-27": [
+    "2002 · Cubs fall to Pirates 3–2"
+  ],
+  "2002-05-31": [
+    "2002 · Cubs fall to Astros 4–1"
+  ],
+  "2002-06-01": [
+    "2002 · Cubs fall to Astros 7–3"
+  ],
+  "2002-06-08": [
+    "2002 · Cubs fall to Mariners 4–2"
+  ],
+  "2002-06-10": [
+    "2002 · Cubs fall to Astros 4–2"
+  ],
   "2002-06-12": [
     "2002 · White Sox defeat New York Mets 2–1"
   ],
@@ -820,6 +1177,9 @@
   ],
   "2002-06-27": [
     "2002 · White Sox defeat Minnesota Twins 7–4"
+  ],
+  "2002-07-01": [
+    "2002 · Cubs fall to Marlins 11–1"
   ],
   "2002-07-02": [
     "2002 · White Sox defeat Detroit Tigers 17–9"
@@ -839,17 +1199,26 @@
   "2002-07-23": [
     "2002 · White Sox defeat Minnesota Twins 8–7"
   ],
+  "2002-07-25": [
+    "2002 · Cubs fall to Phillies 6–2"
+  ],
   "2002-08-01": [
     "2002 · Cubs defeat San Diego Padres 8–7"
   ],
   "2002-08-02": [
     "2002 · White Sox defeat Tampa Bay Rays 8–5"
   ],
+  "2002-08-03": [
+    "2002 · Cubs fall to Rockies 2–1"
+  ],
   "2002-08-04": [
     "2002 · Cubs defeat Colorado Rockies 4–1"
   ],
   "2002-08-07": [
     "2002 · White Sox defeat Anaheim Angels 7–6"
+  ],
+  "2002-08-17": [
+    "2002 · Cubs fall to Diamondbacks 6–2"
   ],
   "2002-08-18": [
     "2002 · Cubs defeat Arizona Diamondbacks 3–2"
@@ -878,6 +1247,9 @@
   "2002-09-26": [
     "2002 · White Sox defeat Boston Red Sox 3–2"
   ],
+  "2002-09-27": [
+    "2002 · Cubs fall to Pirates 13–3"
+  ],
   "2002-09-28": [
     "2002 · Cubs defeat Pittsburgh Pirates 5–4"
   ],
@@ -905,6 +1277,9 @@
   "2003-04-11": [
     "2003 · White Sox defeat Detroit Tigers 5–0"
   ],
+  "2003-04-14": [
+    "2003 · Cubs fall to Reds 11–3"
+  ],
   "2003-04-16": [
     "2003 · White Sox defeat Kansas City Royals 4–3"
   ],
@@ -923,8 +1298,20 @@
   "2003-04-27": [
     "2003 · White Sox defeat Minnesota Twins 3–1"
   ],
+  "2003-05-03": [
+    "2003 · Cubs fall to Rockies 6–4"
+  ],
+  "2003-05-06": [
+    "2003 · Cubs fall to Brewers 9–6"
+  ],
+  "2003-05-09": [
+    "2003 · Cubs fall to Cardinals 6–3"
+  ],
   "2003-05-14": [
     "2003 · White Sox defeat Baltimore Orioles 5–1"
+  ],
+  "2003-05-23": [
+    "2003 · Cubs fall to Astros 7–5"
   ],
   "2003-05-24": [
     "2003 · Cubs defeat Houston Astros 3–2"
@@ -935,8 +1322,17 @@
   "2003-05-29": [
     "2003 · White Sox defeat Toronto Blue Jays 3–2"
   ],
+  "2003-05-30": [
+    "2003 · Cubs fall to Astros 9–1"
+  ],
   "2003-05-31": [
     "2003 · Cubs defeat Houston Astros 1–0"
+  ],
+  "2003-06-04": [
+    "2003 · Cubs fall to Rays 5–2"
+  ],
+  "2003-06-06": [
+    "2003 · White Sox fall to Dodgers 2–1"
   ],
   "2003-06-07": [
     "2003 · Cubs defeat New York Yankees 5–2"
@@ -953,11 +1349,26 @@
   "2003-06-14": [
     "2003 · White Sox defeat San Diego Padres 6–5"
   ],
+  "2003-06-21": [
+    "2003 · Cubs fall to White Sox 7–6"
+  ],
+  "2003-06-25": [
+    "2003 · Cubs fall to Brewers 12–6"
+  ],
+  "2003-07-11": [
+    "2003 · Cubs fall to Braves 9–5"
+  ],
+  "2003-07-17": [
+    "2003 · White Sox fall to Tigers 10–9"
+  ],
   "2003-07-18": [
     "2003 · White Sox defeat Detroit Tigers 7–5"
   ],
   "2003-07-21": [
     "2003 · White Sox defeat Cleveland Indians 4–3"
+  ],
+  "2003-07-26": [
+    "2003 · Cubs fall to Astros 3–1"
   ],
   "2003-07-29": [
     "2003 · White Sox defeat Kansas City Royals 9–6"
@@ -967,6 +1378,9 @@
   ],
   "2003-08-03": [
     "2003 · Cubs defeat Arizona Diamondbacks 2–1"
+  ],
+  "2003-08-28": [
+    "2003 · Cubs fall to Cardinals 3–2"
   ],
   "2003-08-30": [
     "2003 · White Sox defeat Detroit Tigers 5–2"
@@ -979,6 +1393,9 @@
   ],
   "2003-09-14": [
     "2003 · White Sox defeat Boston Red Sox 7–2"
+  ],
+  "2003-09-20": [
+    "2003 · Cubs fall to Pirates 8–2"
   ],
   "2003-09-22": [
     "2003 · White Sox defeat New York Yankees 6–3"
@@ -1022,6 +1439,9 @@
   "2004-04-10": [
     "2004 · White Sox defeat New York Yankees 7–3"
   ],
+  "2004-04-12": [
+    "2004 · Cubs fall to Pirates 13–2"
+  ],
   "2004-04-17": [
     "2004 · White Sox defeat Tampa Bay Rays 4–1"
   ],
@@ -1039,6 +1459,9 @@
   ],
   "2004-04-22": [
     "2004 · White Sox defeat New York Yankees 4–3"
+  ],
+  "2004-04-26": [
+    "2004 · Cubs fall to Diamondbacks 9–0"
   ],
   "2004-05-05": [
     "2004 · White Sox defeat Baltimore Orioles 6–5"
@@ -1058,11 +1481,17 @@
   "2004-05-27": [
     "2004 · White Sox defeat Texas Rangers 9–0"
   ],
+  "2004-05-29": [
+    "2004 · White Sox fall to Angels 5–1"
+  ],
   "2004-05-30": [
     "2004 · Cubs defeat Pittsburgh Pirates 12–1"
   ],
   "2004-05-31": [
     "2004 · Cubs defeat Houston Astros 3–1"
+  ],
+  "2004-06-07": [
+    "2004 · Cubs fall to Cardinals 4–3"
   ],
   "2004-06-10": [
     "2004 · Cubs defeat St. Louis Cardinals 12–3"
@@ -1082,6 +1511,9 @@
   "2004-07-02": [
     "2004 · Cubs defeat White Sox 6–2"
   ],
+  "2004-07-05": [
+    "2004 · Cubs fall to Brewers 1–0"
+  ],
   "2004-07-09": [
     "2004 · White Sox defeat Seattle Mariners 6–2"
   ],
@@ -1090,6 +1522,12 @@
   ],
   "2004-07-11": [
     "2004 · Cubs defeat St. Louis Cardinals 8–4"
+  ],
+  "2004-07-16": [
+    "2004 · White Sox fall to Athletics 5–1"
+  ],
+  "2004-07-18": [
+    "2004 · White Sox fall to Athletics 5–3"
   ],
   "2004-07-21": [
     "2004 · Cubs defeat Cincinnati Reds 5–4"
@@ -1136,8 +1574,14 @@
   "2004-09-27": [
     "2004 · Cubs defeat Cincinnati Reds 12–5"
   ],
+  "2004-09-28": [
+    "2004 · White Sox fall to Tigers 6–4"
+  ],
   "2004-09-30": [
     "2004 · White Sox defeat Kansas City Royals 9–2"
+  ],
+  "2004-10-02": [
+    "2004 · White Sox fall to Royals 10–2"
   ],
   "2004-10-31": [
     "2004 · Bears defeat San Francisco 49ers 23–13"
@@ -1223,6 +1667,9 @@
   "2005-08-19": [
     "2005 · Cubs defeat Colorado Rockies 5–3"
   ],
+  "2005-08-20": [
+    "2005 · Cubs fall to Rockies 4–2"
+  ],
   "2005-08-21": [
     "2005 · White Sox defeat New York Yankees 6–2"
   ],
@@ -1235,8 +1682,14 @@
   "2005-09-13": [
     "2005 · White Sox defeat Kansas City Royals 6–4"
   ],
+  "2005-09-15": [
+    "2005 · Cubs fall to Cardinals 6–1"
+  ],
   "2005-09-16": [
     "2005 · White Sox defeat Minnesota Twins 2–1"
+  ],
+  "2005-09-17": [
+    "2005 · Cubs fall to Cardinals 5–1"
   ],
   "2005-09-29": [
     "2005 · White Sox defeat Detroit Tigers 4–2"
@@ -1246,6 +1699,9 @@
   ],
   "2005-12-18": [
     "2005 · Bears defeat Atlanta Falcons 16–3"
+  ],
+  "2006-04-04": [
+    "2006 · White Sox fall to Indians 8–2"
   ],
   "2006-04-21": [
     "2006 · White Sox defeat Minnesota Twins 7–1"
@@ -1289,6 +1745,9 @@
   "2006-08-30": [
     "2006 · White Sox defeat Tampa Bay Rays 5–4"
   ],
+  "2006-08-31": [
+    "2006 · White Sox fall to Rays 5–3"
+  ],
   "2006-09-02": [
     "2006 · White Sox defeat Kansas City Royals 5–3"
   ],
@@ -1304,11 +1763,20 @@
   "2007-05-25": [
     "2007 · White Sox defeat Tampa Bay Rays 5–4"
   ],
+  "2007-05-31": [
+    "2007 · White Sox fall to Blue Jays 2–0"
+  ],
+  "2007-06-17": [
+    "2007 · White Sox fall to Pirates 8–7"
+  ],
   "2007-06-30": [
     "2007 · White Sox defeat Kansas City Royals 3–1"
   ],
   "2007-07-13": [
     "2007 · Cubs defeat Houston Astros 6–0"
+  ],
+  "2007-07-17": [
+    "2007 · White Sox fall to Indians 6–5"
   ],
   "2007-07-20": [
     "2007 · Cubs defeat Arizona Diamondbacks 6–2"
@@ -1322,11 +1790,17 @@
   "2007-08-18": [
     "2007 · Cubs defeat St. Louis Cardinals 5–3"
   ],
+  "2007-09-09": [
+    "2007 · White Sox fall to Twins 5–2"
+  ],
   "2007-09-28": [
     "2007 · Cubs defeat Cincinnati Reds 6–0"
   ],
   "2007-10-03": [
     "2007 · Arizona Diamondbacks defeat Cubs 3–1, NLDS Game 1"
+  ],
+  "2008-04-29": [
+    "2008 · White Sox fall to Twins 3–1"
   ],
   "2008-05-25": [
     "2008 · White Sox defeat Anaheim Angels 3–2"
@@ -1342,6 +1816,12 @@
   ],
   "2008-07-26": [
     "2008 · White Sox defeat Detroit Tigers 7–6"
+  ],
+  "2008-08-07": [
+    "2008 · White Sox fall to Tigers 8–3"
+  ],
+  "2008-09-26": [
+    "2008 · White Sox fall to Indians 11–8"
   ],
   "2008-09-27": [
     "2008 · Cubs defeat Milwaukee Brewers 7–3"
@@ -1391,6 +1871,9 @@
   "2010-04-16": [
     "2010 · Cubs defeat Houston Astros 7–2"
   ],
+  "2010-04-18": [
+    "2010 · Cubs fall to Astros 3–2"
+  ],
   "2010-04-30": [
     "2010 · Cubs defeat Arizona Diamondbacks 11–5"
   ],
@@ -1415,11 +1898,17 @@
   "2010-06-09": [
     "2010 · Blackhawks win first Stanley Cup in 49 years, defeating Philadelphia Flyers"
   ],
+  "2010-07-17": [
+    "2010 · Cubs fall to Phillies 4–1"
+  ],
   "2010-07-18": [
     "2010 · Cubs defeat Philadelphia Phillies 11–6"
   ],
   "2010-07-30": [
     "2010 · White Sox defeat Oakland Athletics 6–1"
+  ],
+  "2010-07-31": [
+    "2010 · Cubs fall to Rockies 6–5"
   ],
   "2010-08-24": [
     "2010 · White Sox defeat Baltimore Orioles 7–5"
@@ -1442,11 +1931,17 @@
   "2011-01-16": [
     "2011 · Bears defeat Seattle Seahawks 35–24 (NFC Divisional playoff)"
   ],
+  "2011-04-22": [
+    "2011 · White Sox fall to Tigers 9–3"
+  ],
   "2011-04-29": [
     "2011 · Cubs defeat Arizona Diamondbacks 4–2"
   ],
   "2011-05-21": [
     "2011 · Cubs defeat Boston Red Sox 9–3"
+  ],
+  "2011-06-04": [
+    "2011 · White Sox fall to Tigers 4–2"
   ],
   "2011-06-14": [
     "2011 · Cubs defeat Milwaukee Brewers 5–4"
@@ -1454,11 +1949,20 @@
   "2011-06-25": [
     "2011 · White Sox defeat Washington Nationals 3–0"
   ],
+  "2011-06-26": [
+    "2011 · Cubs fall to Royals 6–3"
+  ],
+  "2011-07-14": [
+    "2011 · Cubs fall to Marlins 6–3"
+  ],
   "2011-07-15": [
     "2011 · Cubs defeat Florida Marlins 2–1"
   ],
   "2011-08-27": [
     "2011 · White Sox defeat Seattle Mariners 3–0"
+  ],
+  "2011-09-09": [
+    "2011 · White Sox fall to Indians 8–4"
   ],
   "2011-09-17": [
     "2011 · Cubs defeat Houston Astros 2–1"
@@ -1466,8 +1970,17 @@
   "2011-09-20": [
     "2011 · White Sox defeat Cleveland Indians 5–4"
   ],
+  "2011-09-25": [
+    "2011 · White Sox fall to Royals 2–1"
+  ],
   "2011-10-16": [
     "2011 · Bears defeat Minnesota Vikings 39–10"
+  ],
+  "2012-04-06": [
+    "2012 · White Sox fall to Rangers 3–2"
+  ],
+  "2012-04-17": [
+    "2012 · Cubs fall to Marlins 5–2"
   ],
   "2012-04-21": [
     "2012 · White Sox defeat Seattle Mariners 4–0"
@@ -1478,17 +1991,29 @@
   "2012-05-06": [
     "2012 · Cubs defeat Los Angeles Dodgers 4–3"
   ],
+  "2012-05-15": [
+    "2012 · Cubs fall to Cardinals 7–6"
+  ],
   "2012-05-24": [
     "2012 · White Sox defeat Minnesota Twins 11–8"
   ],
   "2012-05-25": [
     "2012 · White Sox defeat Cleveland Indians 9–3"
   ],
+  "2012-06-02": [
+    "2012 · Cubs fall to Giants 2–1"
+  ],
   "2012-06-09": [
     "2012 · White Sox defeat Houston Astros 10–1"
   ],
   "2012-06-12": [
     "2012 · Cubs defeat Detroit Tigers 4–3"
+  ],
+  "2012-06-17": [
+    "2012 · White Sox fall to Dodgers 2–1"
+  ],
+  "2012-06-22": [
+    "2012 · Cubs fall to Diamondbacks 6–1"
   ],
   "2012-06-23": [
     "2012 · White Sox defeat Milwaukee Brewers 8–6"
@@ -1499,6 +2024,12 @@
   "2012-07-01": [
     "2012 · Cubs defeat Houston Astros 3–0"
   ],
+  "2012-07-20": [
+    "2012 · Cubs fall to Cardinals 4–1"
+  ],
+  "2012-07-22": [
+    "2012 · Cubs fall to Cardinals 7–0"
+  ],
   "2012-07-27": [
     "2012 · White Sox defeat Texas Rangers 9–5"
   ],
@@ -1507,6 +2038,15 @@
   ],
   "2012-08-16": [
     "2012 · White Sox defeat Toronto Blue Jays 7–2"
+  ],
+  "2012-08-17": [
+    "2012 · Cubs fall to Reds 7–3"
+  ],
+  "2012-08-28": [
+    "2012 · Cubs fall to Brewers 4–1"
+  ],
+  "2012-09-01": [
+    "2012 · Cubs fall to Giants 5–2"
   ],
   "2012-09-09": [
     "2012 · Bears defeat Indianapolis Colts 41–21"
@@ -1519,6 +2059,9 @@
   ],
   "2012-09-18": [
     "2012 · White Sox defeat Kansas City Royals 3–2"
+  ],
+  "2012-09-29": [
+    "2012 · Cubs fall to Diamondbacks 8–2"
   ],
   "2013-05-14": [
     "2013 · White Sox defeat Minnesota Twins 4–2"
@@ -1535,11 +2078,17 @@
   "2013-06-09": [
     "2013 · White Sox defeat Oakland Athletics 4–2"
   ],
+  "2013-06-16": [
+    "2013 · Cubs fall to Mets 4–3"
+  ],
   "2013-06-22": [
     "2013 · Blackhawks defeat Boston Bruins 3–1, Stanley Cup Finals Game 5 (Hawks lead series 3–2)"
   ],
   "2013-06-24": [
     "2013 · Blackhawks rally to win Stanley Cup over Boston Bruins"
+  ],
+  "2013-06-28": [
+    "2013 · Cubs fall to Mariners 5–4"
   ],
   "2013-06-29": [
     "2013 · Cubs defeat Seattle Mariners 5–3"
@@ -1553,6 +2102,9 @@
   "2013-07-13": [
     "2013 · Cubs defeat St. Louis Cardinals 6–4"
   ],
+  "2013-07-14": [
+    "2013 · White Sox fall to Phillies 4–3"
+  ],
   "2013-07-19": [
     "2013 · Cubs defeat Colorado Rockies 3–1"
   ],
@@ -1564,6 +2116,18 @@
   ],
   "2013-08-12": [
     "2013 · White Sox defeat Detroit Tigers 6–2"
+  ],
+  "2013-08-23": [
+    "2013 · Cubs fall to Padres 8–6"
+  ],
+  "2013-08-30": [
+    "2013 · Cubs fall to Phillies 6–5"
+  ],
+  "2013-09-03": [
+    "2013 · Cubs fall to Marlins 6–2"
+  ],
+  "2013-09-07": [
+    "2013 · Cubs fall to Brewers 5–3"
   ],
   "2013-09-10": [
     "2013 · Cubs defeat Cincinnati Reds 9–1"
@@ -1583,11 +2147,20 @@
   "2013-09-23": [
     "2013 · White Sox defeat Toronto Blue Jays 3–2"
   ],
+  "2013-09-24": [
+    "2013 · Cubs fall to Pirates 8–2"
+  ],
   "2013-09-28": [
     "2013 · White Sox defeat Kansas City Royals 6–5"
   ],
+  "2013-09-29": [
+    "2013 · Cubs fall to Cardinals 4–0"
+  ],
   "2013-12-15": [
     "2013 · Bears defeat Cleveland Browns 38–31"
+  ],
+  "2014-04-05": [
+    "2014 · Cubs fall to Phillies 2–0"
   ],
   "2014-04-06": [
     "2014 · White Sox defeat Kansas City Royals 5–1"
@@ -1595,11 +2168,17 @@
   "2014-04-13": [
     "2014 · White Sox defeat Cleveland Indians 4–3"
   ],
+  "2014-04-17": [
+    "2014 · White Sox fall to Red Sox 3–1"
+  ],
   "2014-04-20": [
     "2014 · White Sox defeat Texas Rangers 16–2"
   ],
   "2014-04-21": [
     "2014 · White Sox defeat Detroit Tigers 3–1"
+  ],
+  "2014-04-24": [
+    "2014 · Cubs fall to Diamondbacks 5–2"
   ],
   "2014-04-27": [
     "2014 · White Sox defeat Tampa Bay Rays 9–2"
@@ -1607,26 +2186,44 @@
   "2014-05-03": [
     "2014 · Cubs defeat St. Louis Cardinals 3–0"
   ],
+  "2014-05-10": [
+    "2014 · Cubs fall to Braves 2–0"
+  ],
   "2014-05-16": [
     "2014 · White Sox defeat Houston Astros 7–2"
   ],
   "2014-05-22": [
     "2014 · White Sox defeat New York Yankees 3–2"
   ],
+  "2014-05-25": [
+    "2014 · Cubs fall to Padres 4–3"
+  ],
   "2014-06-07": [
     "2014 · Cubs defeat Miami Marlins 5–2"
+  ],
+  "2014-06-14": [
+    "2014 · Cubs fall to Phillies 7–4"
   ],
   "2014-06-15": [
     "2014 · Cubs defeat Philadelphia Phillies 3–0"
   ],
+  "2014-07-20": [
+    "2014 · Cubs fall to Diamondbacks 3–2"
+  ],
   "2014-08-18": [
     "2014 · Cubs defeat New York Mets 4–1"
+  ],
+  "2014-09-06": [
+    "2014 · Cubs fall to Pirates 5–0"
   ],
   "2014-09-08": [
     "2014 · White Sox defeat Oakland Athletics 5–4"
   ],
   "2014-09-11": [
     "2014 · White Sox defeat Oakland Athletics 1–0"
+  ],
+  "2014-09-18": [
+    "2014 · Cubs fall to Dodgers 8–4"
   ],
   "2014-09-19": [
     "2014 · White Sox defeat Tampa Bay Rays 4–3"
@@ -1646,6 +2243,9 @@
   "2015-04-26": [
     "2015 · White Sox defeat Kansas City Royals 5–3"
   ],
+  "2015-04-30": [
+    "2015 · White Sox fall to Twins 12–2"
+  ],
   "2015-05-01": [
     "2015 · Cubs defeat Milwaukee Brewers 1–0"
   ],
@@ -1655,8 +2255,14 @@
   "2015-05-15": [
     "2015 · White Sox defeat Oakland Athletics 7–6"
   ],
+  "2015-05-25": [
+    "2015 · Cubs fall to Nationals 2–1"
+  ],
   "2015-05-29": [
     "2015 · White Sox defeat Houston Astros 6–3"
+  ],
+  "2015-05-30": [
+    "2015 · White Sox fall to Astros 3–0"
   ],
   "2015-06-04": [
     "2015 · Cubs defeat Washington Nationals 2–1"
@@ -1676,11 +2282,23 @@
   "2015-06-15": [
     "2015 · Blackhawks win third Stanley Cup in six seasons, defeating Tampa Bay Lightning"
   ],
+  "2015-06-19": [
+    "2015 · Cubs fall to Twins 7–2"
+  ],
   "2015-06-25": [
     "2015 · White Sox defeat Detroit Tigers 8–7"
   ],
+  "2015-06-27": [
+    "2015 · Cubs fall to Cardinals 8–1"
+  ],
   "2015-07-09": [
     "2015 · White Sox defeat Toronto Blue Jays 2–0"
+  ],
+  "2015-07-10": [
+    "2015 · Cubs fall to White Sox 1–0"
+  ],
+  "2015-07-11": [
+    "2015 · Cubs fall to White Sox 5–1"
   ],
   "2015-07-12": [
     "2015 · Cubs defeat White Sox 3–1"
@@ -1697,6 +2315,9 @@
   "2015-08-09": [
     "2015 · Cubs defeat San Francisco Giants 2–0"
   ],
+  "2015-08-31": [
+    "2015 · Cubs fall to Reds 13–6"
+  ],
   "2015-09-04": [
     "2015 · White Sox defeat Kansas City Royals 12–1"
   ],
@@ -1705,6 +2326,9 @@
   ],
   "2015-09-12": [
     "2015 · White Sox defeat Minnesota Twins 8–2"
+  ],
+  "2015-09-26": [
+    "2015 · Cubs fall to Pirates 4–0"
   ],
   "2015-10-04": [
     "2015 · Cubs defeat St. Louis Cardinals 4–0, NLDS Game 1 (Arrieta complete-game shutout)"
@@ -1736,6 +2360,12 @@
   "2016-06-19": [
     "2016 · Cubs defeat Pittsburgh Pirates 10–5"
   ],
+  "2016-06-25": [
+    "2016 · Cubs fall to Marlins 9–6"
+  ],
+  "2016-07-07": [
+    "2016 · Cubs fall to Braves 4–3"
+  ],
   "2016-07-09": [
     "2016 · White Sox defeat Atlanta Braves 5–4"
   ],
@@ -1750,6 +2380,9 @@
   ],
   "2016-08-06": [
     "2016 · White Sox defeat Baltimore Orioles 4–2"
+  ],
+  "2016-09-10": [
+    "2016 · Cubs fall to Astros 2–1"
   ],
   "2016-09-16": [
     "2016 · White Sox defeat Kansas City Royals 7–4"
@@ -1769,6 +2402,12 @@
   "2016-11-02": [
     "2016 · Cubs defeat Cleveland Indians in Game 7, ending a 108-year World Series drought"
   ],
+  "2017-04-02": [
+    "2017 · Cubs fall to Cardinals 4–3"
+  ],
+  "2017-04-17": [
+    "2017 · White Sox fall to Yankees 7–4"
+  ],
   "2017-04-18": [
     "2017 · Cubs defeat Milwaukee Brewers 9–7"
   ],
@@ -1777,6 +2416,9 @@
   ],
   "2017-04-25": [
     "2017 · Cubs defeat Pittsburgh Pirates 1–0"
+  ],
+  "2017-04-30": [
+    "2017 · White Sox fall to Tigers 7–3"
   ],
   "2017-05-09": [
     "2017 · Cubs defeat Colorado Rockies 8–1"
@@ -1811,23 +2453,41 @@
   "2017-09-16": [
     "2017 · Cubs defeat St. Louis Cardinals 4–1"
   ],
+  "2017-09-23": [
+    "2017 · White Sox fall to Royals 8–2"
+  ],
   "2017-09-25": [
     "2017 · Cubs defeat St. Louis Cardinals 10–2"
   ],
   "2018-03-31": [
     "2018 · Cubs defeat Miami Marlins 10–6"
   ],
+  "2018-04-21": [
+    "2018 · White Sox fall to Astros 10–1"
+  ],
   "2018-04-28": [
     "2018 · Cubs defeat Milwaukee Brewers 3–0"
   ],
+  "2018-05-05": [
+    "2018 · White Sox fall to Twins 8–4"
+  ],
   "2018-05-11": [
     "2018 · Cubs defeat White Sox 11–2"
+  ],
+  "2018-07-06": [
+    "2018 · White Sox fall to Astros 11–4"
   ],
   "2018-07-13": [
     "2018 · Cubs defeat San Diego Padres 5–4"
   ],
   "2018-07-15": [
     "2018 · Cubs defeat San Diego Padres 7–4"
+  ],
+  "2018-07-20": [
+    "2018 · White Sox fall to Mariners 3–1"
+  ],
+  "2018-08-11": [
+    "2018 · White Sox fall to Indians 3–1"
   ],
   "2018-08-12": [
     "2018 · Cubs defeat Washington Nationals 4–3"
