@@ -642,16 +642,18 @@ button {
 .settings-divider { border-top: 1px solid var(--border); margin: 8px 0; }
 
 /* ── Track action sheet ───────────────────────────────────────────── */
-#track-action-sheet {
+#track-action-sheet,
+#queue-item-sheet {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 150;
+  z-index: 200;
   display: none;
   background: rgba(0,0,0,0.55);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
-#track-action-sheet.visible { display: block; }
+#track-action-sheet.visible,
+#queue-item-sheet.visible { display: block; }
 
 .action-sheet-inner {
   position: absolute;

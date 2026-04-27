@@ -548,6 +548,7 @@ function renderConcert(meta) {
   // IA cover art — always show first
   const photoStrip = $('concert-photos');
   const addPhoto = (src, alt) => {
+    if (photoStrip.querySelectorAll('.concert-photo-item').length >= 3) return;
     const img = document.createElement('img');
     img.className = 'concert-photo-item';
     img.alt = alt;
@@ -557,7 +558,7 @@ function renderConcert(meta) {
   };
   addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '');
 
-  // Wikimedia venue + artist photos (async)
+  // Wikimedia venue then artist photos (async) — capped at 3 total
   if (venueName) {
     fetchWikimediaImages(`${venueName} Chicago`, 2).then(imgs =>
       imgs.forEach(i => addPhoto(i.url, venueName))
