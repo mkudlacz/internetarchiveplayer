@@ -549,37 +549,41 @@ function renderConcert(meta) {
     <ul class="track-list" id="track-list"></ul>
   `;
 
-  // IA cover art — always show first
+  // Photos: artist (order 1) → venue (order 2) → IA cover (order 3)
+  // CSS order controls display sequence regardless of DOM insertion order
   const photoStrip = $('concert-photos');
-  const addPhoto = (src, alt) => {
+  const addPhoto = (src, alt, order) => {
     if (photoStrip.querySelectorAll('.concert-photo-item').length >= 3) return;
     const img = document.createElement('img');
     img.className = 'concert-photo-item';
+    img.style.order = order;
     img.alt = alt;
     img.src = src;
     img.onerror = () => img.remove();
     photoStrip.appendChild(img);
   };
-  addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '');
 
-  // Venue photo: curated lookup first, then Wikimedia search as fallback
+  // IA cover — slot 3 (added immediately so it's always present)
+  addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '', 3);
+
+  // Venue — slot 2: curated lookup or Wikimedia search fallback
   if (venueName) {
     if (VENUES[venueName]) {
-      addPhoto(VENUES[venueName], venueName);
+      addPhoto(VENUES[venueName], venueName, 2);
     } else {
       fetchWikimediaImages(`${venueName} Chicago`, 1).then(imgs =>
-        imgs.forEach(i => addPhoto(i.url, venueName))
+        imgs.forEach(i => addPhoto(i.url, venueName, 2))
       );
     }
   }
 
-  // Artist photo: search with concert/live terms, fallback to band name alone
+  // Artist — slot 1 (first in carousel)
   if (m.creator) {
     fetchWikimediaImages(
       `${m.creator} concert live`,
       1,
       `${m.creator} band`
-    ).then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator)));
+    ).then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator, 1)));
   }
 
   if (m.date) {
@@ -690,22 +694,23 @@ function renderDiscover() {
 
   // ── Surprises from the Archive ──
   {
-    const doc = index[Math.floor(Math.random() * index.length)];
+    const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 10);
     const sec = discoverSection('Surprises from the Archive', '');
-    const card = document.createElement('div');
-    card.className = 'surprise-card';
-    const venueStr = extractVenueName(doc) || '';
-    card.innerHTML = `
-      <img class="surprise-card-art" src="https://archive.org/services/img/${esc(doc.identifier)}"
-           onerror="this.style.display='none'" alt="">
-      <div class="surprise-card-info">
-        <div class="surprise-card-artist">${esc(doc.creator || '')}</div>
-        ${venueStr ? `<div class="surprise-card-venue">${esc(venueStr)}</div>` : ''}
-        <div class="surprise-card-date">${formatDate(doc.date)}</div>
-      </div>
-    `;
-    card.addEventListener('click', () => openConcert(doc));
-    sec.appendChild(card);
+    const strip = document.createElement('div');
+    strip.className = 'discover-h-scroll';
+    picks.forEach(doc => {
+      const card = document.createElement('div');
+      card.className = 'today-card';
+      const venueStr = extractVenueName(doc) || '';
+      card.innerHTML = `
+        <div class="today-card-year">${(doc.date || '').slice(0, 4)}</div>
+        <div class="today-card-title">${esc(doc.creator || doc.title || '')}</div>
+        ${venueStr ? `<div class="today-card-artist">${esc(venueStr)}</div>` : ''}
+      `;
+      card.addEventListener('click', () => openConcert(doc));
+      strip.appendChild(card);
+    });
+    sec.appendChild(strip);
     el.viewDiscover.appendChild(sec);
   }
 

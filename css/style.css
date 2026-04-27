@@ -807,47 +807,6 @@ button {
   text-overflow: ellipsis;
 }
 
-/* Surprise card */
-.surprise-card {
-  display: flex;
-  gap: 14px;
-  padding: 12px 16px;
-  cursor: pointer;
-  align-items: center;
-  border-radius: 12px;
-  transition: background 0.1s;
-}
-.surprise-card:active { background: var(--bg3); }
-.surprise-card-art {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: var(--bg3);
-}
-.surprise-card-info { min-width: 0; }
-.surprise-card-artist {
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.surprise-card-venue {
-  font-size: 13px;
-  color: var(--text2);
-  margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.surprise-card-date {
-  font-size: 12px;
-  color: var(--accent);
-  margin-top: 4px;
-}
-
 /* Year pills */
 .year-pill {
   flex-shrink: 0;
