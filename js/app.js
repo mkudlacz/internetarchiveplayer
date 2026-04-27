@@ -563,7 +563,7 @@ function renderConcert(meta) {
       }
       if (histEntry) {
         const entries = Array.isArray(histEntry) ? histEntry : [histEntry];
-        parts.push(`<strong>${entries.join('; ')}</strong>`);
+        parts.push(`<strong>${entries.map(e => e.replace(/^\d{4}\s*·\s*/, '')).join('; ')}</strong>`);
       }
       if (parts.length) ctx.innerHTML = 'On this date: ' + parts.join(' | ');
     });
