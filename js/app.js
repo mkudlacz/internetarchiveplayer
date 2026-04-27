@@ -556,8 +556,7 @@ function renderConcert(meta) {
     <ul class="track-list" id="track-list"></ul>
   `;
 
-  // Photos: artist (order 1) → venue (order 2) → IA cover (order 3)
-  // CSS order controls display sequence regardless of DOM insertion order
+  // Photos: IA cover (order 1) → venue (order 2) → artist at venue (order 3)
   const photoStrip = $('concert-photos');
   const addPhoto = (src, alt, order) => {
     if (photoStrip.querySelectorAll('.concert-photo-item').length >= 3) return;
@@ -570,29 +569,18 @@ function renderConcert(meta) {
     photoStrip.appendChild(img);
   };
 
-  // IA cover — slot 3 (added immediately so it's always present)
-  addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '', 3);
+  // IA cover — slot 1 (always present, added immediately)
+  addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '', 1);
 
-  // Venue — slot 2: curated lookup or Wikimedia search fallback
-  if (venueName) {
-    if (VENUES[venueName]) {
-      addPhoto(VENUES[venueName], venueName, 2);
-    } else {
-      fetchWikimediaImages(`${venueName} Chicago`, 1).then(imgs =>
-        imgs.forEach(i => addPhoto(i.url, venueName, 2))
-      );
-    }
+  // Venue — slot 2: curated lookup only (no Wikimedia fallback)
+  if (venueName && VENUES[venueName]) {
+    addPhoto(VENUES[venueName], venueName, 2);
   }
 
-  // Artist — slot 1 (first in carousel)
-  // Primary: artist name + venue (highly specific); fallback: artist + concert/live
-  if (m.creator) {
-    const artistPrimary = venueName
-      ? `${m.creator} ${venueName}`
-      : `${m.creator} concert live`;
-    const artistFallback = venueName ? `${m.creator} concert live` : null;
-    fetchWikimediaImages(artistPrimary, 1, artistFallback)
-      .then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator, 1)));
+  // Artist at venue — slot 3: only if we have both artist and venue; no fallback
+  if (m.creator && venueName) {
+    fetchWikimediaImages(`${m.creator} ${venueName}`, 1)
+      .then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator, 3)));
   }
 
   if (m.date) {
