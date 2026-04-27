@@ -330,8 +330,13 @@ function onSearchInput() {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
     state.searchQuery = el.searchInput.value.trim();
+    state.searching   = state.searchQuery.length > 0;
     state.displayPage = 1;
-    renderForSearch();
+    if (state.searching) {
+      renderForSearch();
+    } else {
+      setMode(state.mode);
+    }
   }, 250);
 }
 
@@ -700,12 +705,15 @@ function renderDiscover() {
     strip.className = 'discover-h-scroll';
     picks.forEach(doc => {
       const card = document.createElement('div');
-      card.className = 'today-card';
+      card.className = 'surprise-tile';
       const venueStr = extractVenueName(doc) || '';
       card.innerHTML = `
-        <div class="today-card-year">${(doc.date || '').slice(0, 4)}</div>
-        <div class="today-card-title">${esc(doc.creator || doc.title || '')}</div>
-        ${venueStr ? `<div class="today-card-artist">${esc(venueStr)}</div>` : ''}
+        <img class="surprise-tile-img" src="https://archive.org/services/img/${esc(doc.identifier)}"
+             onerror="this.style.display='none'" alt="">
+        <div class="surprise-tile-body">
+          <div class="surprise-tile-artist">${esc(doc.creator || doc.title || '')}</div>
+          ${venueStr ? `<div class="surprise-tile-venue">${esc(venueStr)}</div>` : ''}
+        </div>
       `;
       card.addEventListener('click', () => openConcert(doc));
       strip.appendChild(card);
@@ -1131,6 +1139,9 @@ function init() {
   });
 
   // Search (persistent input — no toggle)
+  el.searchInput.addEventListener('focus', () => {
+    el.searchInput.placeholder = SEARCH_PLACEHOLDERS[state.mode] || 'Search…';
+  });
   el.searchInput.addEventListener('input', onSearchInput);
   el.searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
 
