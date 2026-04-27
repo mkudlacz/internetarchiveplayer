@@ -693,7 +693,7 @@ function renderDiscover() {
   // ── Surprises from the Archive ──
   {
     const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 5);
-    const sec = discoverSection('Surprises from the Archive', '');
+    const sec = discoverSection('Surprises from the Archive', `${picks.length} show${picks.length !== 1 ? 's' : ''}`);
     const strip = document.createElement('div');
     strip.className = 'discover-h-scroll';
     picks.forEach(doc => {
