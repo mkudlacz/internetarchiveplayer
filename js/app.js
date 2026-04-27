@@ -540,7 +540,6 @@ function renderConcert(meta) {
       <div class="concert-header-title">${esc(m.title || m.identifier)}</div>
       <div class="concert-header-creator">${esc(m.creator || '')}</div>
       <div class="concert-context" id="concert-context"></div>
-      <div class="concert-history" id="concert-history"></div>
       <div class="concert-photos" id="concert-photos"></div>
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
@@ -552,16 +551,22 @@ function renderConcert(meta) {
   `;
 
   if (m.date) {
-    fetchDayContext(m.date.slice(0, 10)).then(text => {
+    const dateKey = m.date.slice(0, 10);
+    const histEntry = HISTORY[dateKey];
+    fetchDayContext(dateKey).then(wx => {
       const ctx = $('concert-context');
-      if (ctx) ctx.innerHTML = text;
+      if (!ctx) return;
+      const parts = [];
+      if (wx) {
+        parts.push(`<strong>${wx.condition} and ${wx.hi}°</strong>`);
+        if (wx.sunset) parts.push(`<strong>sunset at ${wx.sunset}</strong>`);
+      }
+      if (histEntry) {
+        const entries = Array.isArray(histEntry) ? histEntry : [histEntry];
+        parts.push(`<strong>${entries.join('; ')}</strong>`);
+      }
+      if (parts.length) ctx.innerHTML = 'On this date: ' + parts.join(' | ');
     });
-    const histEntry = HISTORY[m.date.slice(0, 10)];
-    const histEl = $('concert-history');
-    if (histEl && histEntry) {
-      const entries = Array.isArray(histEntry) ? histEntry : [histEntry];
-      histEl.innerHTML = `<strong>Events on this date:</strong> ${entries.join('; ')}`;
-    }
   }
 
   const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
@@ -978,24 +983,23 @@ function wmoDesc(c) { return WMO[c] || WMO[Math.floor(c/10)*10] || 'variable'; }
 
 async function fetchDayContext(dateStr) {
   if (_contextCache.has(dateStr)) return _contextCache.get(dateStr);
-  let text = '';
+  let result = null;
   try {
     const url = `https://archive-api.open-meteo.com/v1/archive?latitude=41.8781&longitude=-87.6298&start_date=${dateStr}&end_date=${dateStr}&daily=temperature_2m_max,temperature_2m_min,weathercode,sunset&timezone=America%2FChicago&temperature_unit=fahrenheit`;
     const d = await fetch(url).then(r => r.json());
     if (d.daily?.temperature_2m_max?.[0] != null) {
       const hi = Math.round(d.daily.temperature_2m_max[0]);
-      const lo = Math.round(d.daily.temperature_2m_min[0]);
-      let sunsetPart = '';
+      let sunset = null;
       const sunsetRaw = d.daily.sunset?.[0];
       if (sunsetRaw) {
-        const [h, m] = sunsetRaw.split('T')[1].split(':').map(Number);
-        sunsetPart = ` • <strong>Sunset on this date:</strong> ${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+        const [h, mn] = sunsetRaw.split('T')[1].split(':').map(Number);
+        sunset = `${h % 12 || 12}:${String(mn).padStart(2, '0')}`;
       }
-      text = `<strong>Weather on this date:</strong> ${wmoDesc(d.daily.weathercode[0])}, high ${hi}°F / low ${lo}°F${sunsetPart}`;
+      result = { condition: wmoDesc(d.daily.weathercode[0]), hi, sunset };
     }
   } catch {}
-  _contextCache.set(dateStr, text);
-  return text;
+  _contextCache.set(dateStr, result);
+  return result;
 }
 
 function updateBar() {

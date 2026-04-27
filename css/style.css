@@ -407,16 +407,6 @@ button {
 }
 .concert-context {
   font-size: 12px;
-  font-style: italic;
-  color: var(--text2);
-  opacity: 0.75;
-  line-height: 1.5;
-  margin-bottom: 6px;
-}
-
-.concert-history {
-  font-size: 12px;
-  font-style: italic;
   color: var(--text2);
   opacity: 0.75;
   line-height: 1.5;
