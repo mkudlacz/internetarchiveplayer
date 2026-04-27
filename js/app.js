@@ -699,26 +699,27 @@ function renderDiscover() {
 
   // ── Surprises from the Archive ──
   {
-    const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 10);
+    const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 5);
     const sec = discoverSection('Surprises from the Archive', '');
-    const strip = document.createElement('div');
-    strip.className = 'discover-h-scroll';
+    const list = document.createElement('ul');
+    list.className = 'surprise-list';
     picks.forEach(doc => {
-      const card = document.createElement('div');
-      card.className = 'surprise-tile';
+      const li = document.createElement('li');
+      li.className = 'surprise-item';
       const venueStr = extractVenueName(doc) || '';
-      card.innerHTML = `
-        <img class="surprise-tile-img" src="https://archive.org/services/img/${esc(doc.identifier)}"
+      li.innerHTML = `
+        <img class="surprise-art" src="https://archive.org/services/img/${esc(doc.identifier)}"
              onerror="this.style.display='none'" alt="">
-        <div class="surprise-tile-body">
-          <div class="surprise-tile-artist">${esc(doc.creator || doc.title || '')}</div>
-          ${venueStr ? `<div class="surprise-tile-venue">${esc(venueStr)}</div>` : ''}
+        <div class="surprise-info">
+          <div class="surprise-artist">${esc(doc.creator || doc.title || '')}</div>
+          ${venueStr ? `<div class="surprise-venue">${esc(venueStr)}</div>` : ''}
+          <div class="surprise-date">${formatDate(doc.date)}</div>
         </div>
       `;
-      card.addEventListener('click', () => openConcert(doc));
-      strip.appendChild(card);
+      li.addEventListener('click', () => openConcert(doc));
+      list.appendChild(li);
     });
-    sec.appendChild(strip);
+    sec.appendChild(list);
     el.viewDiscover.appendChild(sec);
   }
 
