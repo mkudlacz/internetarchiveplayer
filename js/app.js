@@ -701,13 +701,13 @@ function renderDiscover() {
   {
     const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 5);
     const sec = discoverSection('Surprises from the Archive', '');
-    const list = document.createElement('ul');
-    list.className = 'surprise-list';
+    const strip = document.createElement('div');
+    strip.className = 'discover-h-scroll';
     picks.forEach(doc => {
-      const li = document.createElement('li');
-      li.className = 'surprise-item';
+      const card = document.createElement('div');
+      card.className = 'surprise-card';
       const venueStr = extractVenueName(doc) || '';
-      li.innerHTML = `
+      card.innerHTML = `
         <img class="surprise-art" src="https://archive.org/services/img/${esc(doc.identifier)}"
              onerror="this.style.display='none'" alt="">
         <div class="surprise-info">
@@ -716,10 +716,10 @@ function renderDiscover() {
           <div class="surprise-date">${formatDate(doc.date)}</div>
         </div>
       `;
-      li.addEventListener('click', () => openConcert(doc));
-      list.appendChild(li);
+      card.addEventListener('click', () => openConcert(doc));
+      strip.appendChild(card);
     });
-    sec.appendChild(list);
+    sec.appendChild(strip);
     el.viewDiscover.appendChild(sec);
   }
 

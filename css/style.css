@@ -772,18 +772,21 @@ button {
   text-overflow: ellipsis;
 }
 
-/* Surprise list (Discover — square art + artist/venue/date rows) */
-.surprise-list { list-style: none; padding: 0 16px; }
-.surprise-item {
+/* Surprise cards (Discover — horizontal scroll, image-left layout) */
+.surprise-card {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
+  gap: 10px;
+  width: 230px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
   cursor: pointer;
+  transition: background 0.1s;
 }
-.surprise-item:last-child { border-bottom: none; }
-.surprise-item:active { opacity: 0.6; }
+.surprise-card:active { background: var(--bg3); }
 .surprise-art {
   width: 56px;
   height: 56px;
@@ -794,7 +797,7 @@ button {
 }
 .surprise-info { min-width: 0; }
 .surprise-artist {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
   white-space: nowrap;
@@ -802,7 +805,7 @@ button {
   text-overflow: ellipsis;
 }
 .surprise-venue {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text2);
   white-space: nowrap;
   overflow: hidden;
@@ -810,9 +813,9 @@ button {
   margin-top: 1px;
 }
 .surprise-date {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--accent);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 /* Recently Added list */
