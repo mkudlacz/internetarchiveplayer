@@ -1,7 +1,7 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
-import { fetchVenuePhotos, getFlickrKey, setFlickrKey } from './flickr.js';
+import { fetchWikimediaImages } from './wikimedia.js';
 
 // ── Chicago history ────────────────────────────────────────────────
 let HISTORY = {};
@@ -33,11 +33,8 @@ const $ = id => document.getElementById(id);
 
 const el = {
   backBtn:        $('back-btn'),
-  searchToggle:   $('search-toggle'),
   settingsBtn:    $('settings-btn'),
-  searchBar:      $('search-bar'),
   searchInput:    $('search-input'),
-  searchCancel:   $('search-cancel'),
   modeBar:        $('mode-bar'),
   sortBar:        $('sort-bar'),
   main:           $('main'),
@@ -86,8 +83,12 @@ const el = {
   favsExport:     $('favs-export'),
   favsImportInput: $('favs-import-input'),
   favsImport:     $('favs-import'),
-  flickrKeyInput: $('flickr-key-input'),
-  flickrKeySave:  $('flickr-key-save'),
+  queueItemSheet:  $('queue-item-sheet'),
+  queueItemTitle:  $('queue-item-title'),
+  queueItemShow:   $('queue-item-show'),
+  queueItemArtist: $('queue-item-artist'),
+  queueItemRemove: $('queue-item-remove'),
+  queueItemCancel: $('queue-item-cancel'),
 };
 
 // ── Sorting ────────────────────────────────────────────────────────
@@ -154,8 +155,6 @@ function setMode(mode) {
   // Sort bar — only in library mode (and not searching)
   el.sortBar.classList.toggle('hidden', mode !== 'library');
 
-  // Search bar off
-  el.searchBar.classList.remove('visible');
   state.searching = false;
   state.searchQuery = '';
   el.searchInput.value = '';
@@ -274,13 +273,8 @@ function openSearch() {
   state.searching = true;
   state.searchQuery = '';
   state.displayPage = 1;
-  el.searchBar.classList.add('visible');
-  el.modeBar.classList.add('hidden');
-  el.sortBar.classList.add('hidden');
-  el.backBtn.classList.remove('visible');
   el.searchInput.placeholder = SEARCH_PLACEHOLDERS[state.mode] || 'Search…';
   renderForSearch();
-  requestAnimationFrame(() => el.searchInput.focus());
 }
 
 function renderForSearch() {
@@ -325,7 +319,6 @@ function closeSearch() {
   state.searching = false;
   state.searchQuery = '';
   el.searchInput.value = '';
-  el.searchBar.classList.remove('visible');
   setMode(state.mode);
 }
 
@@ -515,7 +508,7 @@ async function openConcert(doc) {
   el.backBtn.classList.add('visible');
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
-  el.searchBar.classList.remove('visible');
+  el.searchInput.classList.add('search-hidden');
   showView('concert');
   el.viewConcert.innerHTML = '<div class="spinner"></div>';
   el.viewConcert.scrollTop = 0;
@@ -534,13 +527,15 @@ function renderConcert(meta) {
   const tracks = buildTracks(meta);
   const faved = isFav(m.identifier);
 
+  const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
+
   el.viewConcert.innerHTML = `
+    <div class="concert-photos has-photos" id="concert-photos"></div>
     <div class="concert-header">
       <div class="concert-header-date">${formatDate(m.date)}</div>
-      <div class="concert-header-title">${esc(m.title || m.identifier)}</div>
       <div class="concert-header-creator">${esc(m.creator || '')}</div>
+      <div class="concert-header-venue">${esc(venueName || '')}</div>
       <div class="concert-context" id="concert-context"></div>
-      <div class="concert-photos" id="concert-photos"></div>
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>
@@ -549,6 +544,30 @@ function renderConcert(meta) {
     </div>
     <ul class="track-list" id="track-list"></ul>
   `;
+
+  // IA cover art — always show first
+  const photoStrip = $('concert-photos');
+  const addPhoto = (src, alt) => {
+    const img = document.createElement('img');
+    img.className = 'concert-photo-item';
+    img.alt = alt;
+    img.src = src;
+    img.onerror = () => img.remove();
+    photoStrip.appendChild(img);
+  };
+  addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '');
+
+  // Wikimedia venue + artist photos (async)
+  if (venueName) {
+    fetchWikimediaImages(`${venueName} Chicago`, 2).then(imgs =>
+      imgs.forEach(i => addPhoto(i.url, venueName))
+    );
+  }
+  if (m.creator) {
+    fetchWikimediaImages(`${m.creator} concert`, 2).then(imgs =>
+      imgs.forEach(i => addPhoto(i.url, m.creator))
+    );
+  }
 
   if (m.date) {
     const dateKey = m.date.slice(0, 10);
@@ -566,23 +585,6 @@ function renderConcert(meta) {
         parts.push(`<strong>${entries.map(e => e.replace(/^\d{4}\s*·\s*/, '')).join('; ')}</strong>`);
       }
       if (parts.length) ctx.innerHTML = 'On this date: ' + parts.join(' | ');
-    });
-  }
-
-  const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
-  if (venueName) {
-    fetchVenuePhotos(venueName).then(urls => {
-      const strip = $('concert-photos');
-      if (!strip || !urls.length) return;
-      urls.forEach(url => {
-        const img = document.createElement('img');
-        img.className = 'concert-photo-item';
-        img.alt = venueName;
-        img.src = url;
-        img.onerror = () => img.remove();
-        strip.appendChild(img);
-      });
-      strip.classList.add('has-photos');
     });
   }
 
@@ -675,15 +677,22 @@ function renderDiscover() {
 
   // ── Surprises from the Archive ──
   {
+    const doc = index[Math.floor(Math.random() * index.length)];
     const sec = discoverSection('Surprises from the Archive', '');
-    const btn = document.createElement('button');
-    btn.className = 'surprise-btn';
-    btn.textContent = '▶ Play a Random Show';
-    btn.addEventListener('click', () => {
-      const doc = index[Math.floor(Math.random() * index.length)];
-      openConcert(doc);
-    });
-    sec.appendChild(btn);
+    const card = document.createElement('div');
+    card.className = 'surprise-card';
+    const venueStr = extractVenueName(doc) || '';
+    card.innerHTML = `
+      <img class="surprise-card-art" src="https://archive.org/services/img/${esc(doc.identifier)}"
+           onerror="this.style.display='none'" alt="">
+      <div class="surprise-card-info">
+        <div class="surprise-card-artist">${esc(doc.creator || '')}</div>
+        ${venueStr ? `<div class="surprise-card-venue">${esc(venueStr)}</div>` : ''}
+        <div class="surprise-card-date">${formatDate(doc.date)}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => openConcert(doc));
+    sec.appendChild(card);
     el.viewDiscover.appendChild(sec);
   }
 
@@ -710,7 +719,7 @@ function renderDiscover() {
 
   // ── Recently Uploaded ──
   if (recentShows.length) {
-    const sec = discoverSection('Recently Added to the Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 30 days`);
+    const sec = discoverSection('New to the Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 30 days`);
     const list = document.createElement('ul');
     list.className = 'recent-list';
     recentShows.forEach(doc => {
@@ -900,6 +909,7 @@ function openFilteredList(label, docs) {
   el.backBtn.classList.add('visible');
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
+  el.searchInput.classList.add('search-hidden');
   showView('filtered');
   el.viewFiltered.scrollTop = 0;
 
@@ -948,13 +958,7 @@ function flashConfirm(msg) {
 
 // ── Back navigation ────────────────────────────────────────────────
 function goBack() {
-  if (state.searching && state.inConcert) {
-    // came from search → concert, go back to search results
-    state.inConcert = false;
-    el.backBtn.classList.remove('visible');
-    openSearch();
-    return;
-  }
+  el.searchInput.classList.remove('search-hidden');
   if (state.inFiltered) {
     state.inFiltered = false;
     state.inConcert = false;
@@ -1043,27 +1047,43 @@ function renderQueue() {
     li.innerHTML = `
       <div class="queue-track-info">
         <div class="queue-track-title">${esc(track.title)}</div>
-        <div class="queue-track-meta">${esc(track.album || track.artist || '')}</div>
+        <div class="queue-track-meta">${esc(track.artist || '')}</div>
       </div>
-      ${i !== currentIndex ? `<button class="queue-remove" data-i="${i}">×</button>` : ''}
+      <button class="queue-menu-btn" data-i="${i}" aria-label="Options">···</button>
     `;
     if (i !== currentIndex) {
       li.style.cursor = 'pointer';
       li.addEventListener('click', e => {
-        if (e.target.classList.contains('queue-remove')) return;
+        if (e.target.classList.contains('queue-menu-btn')) return;
         player.replaceQueue(player.queue, i);
         renderQueue();
       });
     }
     el.queueList.appendChild(li);
   });
-  el.queueList.querySelectorAll('.queue-remove').forEach(btn => {
+  el.queueList.querySelectorAll('.queue-menu-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      player.removeFromQueue(Number(btn.dataset.i));
-      renderQueue();
+      openQueueItemMenu(player.queue[Number(btn.dataset.i)], Number(btn.dataset.i));
     });
   });
+}
+
+// ── Queue item menu ────────────────────────────────────────────────
+let _queueMenuTrack = null;
+let _queueMenuIndex = -1;
+
+function openQueueItemMenu(track, index) {
+  _queueMenuTrack = track;
+  _queueMenuIndex = index;
+  el.queueItemTitle.textContent = track.title;
+  el.queueItemSheet.classList.add('visible');
+}
+
+function closeQueueItemMenu() {
+  el.queueItemSheet.classList.remove('visible');
+  _queueMenuTrack = null;
+  _queueMenuIndex = -1;
 }
 
 // ── Settings ───────────────────────────────────────────────────────
@@ -1092,9 +1112,7 @@ function init() {
     // Scroll to where we were
   });
 
-  // Search
-  el.searchToggle.addEventListener('click', openSearch);
-  el.searchCancel.addEventListener('click', closeSearch);
+  // Search (persistent input — no toggle)
   el.searchInput.addEventListener('input', onSearchInput);
   el.searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
 
@@ -1110,6 +1128,7 @@ function init() {
       el.backBtn.classList.add('visible');
       el.modeBar.classList.add('hidden');
       el.sortBar.classList.add('hidden');
+      el.searchInput.classList.add('search-hidden');
       showView('concert');
       renderConcert(state.currentConcert);
     }
@@ -1142,11 +1161,32 @@ function init() {
     }).catch(() => flashConfirm('Could not copy — try again'));
   });
 
-  el.flickrKeyInput.value = getFlickrKey();
-  el.flickrKeySave.addEventListener('click', () => {
-    setFlickrKey(el.flickrKeyInput.value);
-    flashConfirm('Flickr API key saved.');
+  // Queue item action sheet
+  el.queueItemShow.addEventListener('click', () => {
+    if (!_queueMenuTrack) return;
+    const doc = state.index?.find(d => d.identifier === _queueMenuTrack.identifier);
+    closeQueueItemMenu();
+    el.queueSheet.classList.remove('visible');
+    if (doc) openConcert(doc);
   });
+  el.queueItemArtist.addEventListener('click', () => {
+    if (!_queueMenuTrack) return;
+    const artistName = _queueMenuTrack.artist;
+    const docs = state.index?.filter(d => d.creator === artistName) || [];
+    closeQueueItemMenu();
+    el.queueSheet.classList.remove('visible');
+    setMode('artists');
+    state.selectedArtist = { name: artistName, docs };
+    renderArtistView();
+  });
+  el.queueItemRemove.addEventListener('click', () => {
+    if (_queueMenuIndex < 0) return;
+    player.removeFromQueue(_queueMenuIndex);
+    closeQueueItemMenu();
+    renderQueue();
+  });
+  el.queueItemCancel.addEventListener('click', closeQueueItemMenu);
+  el.queueItemSheet.addEventListener('click', e => { if (e.target === el.queueItemSheet) closeQueueItemMenu(); });
 
   el.favsImport.addEventListener('click', () => {
     const pasted = el.favsImportInput.value.trim();

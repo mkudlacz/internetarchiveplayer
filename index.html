@@ -24,12 +24,9 @@
       </svg>
       Back
     </button>
+    <input id="search-input" type="search" placeholder="Artists, titles, dates…"
+           autocapitalize="none" autocorrect="off" spellcheck="false">
     <div class="header-actions">
-      <button id="search-toggle" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </button>
       <button id="settings-btn" aria-label="Settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="3"/>
@@ -38,13 +35,6 @@
       </button>
     </div>
   </header>
-
-  <!-- ── Search bar (shown when searching) ── -->
-  <div id="search-bar">
-    <input id="search-input" type="search" placeholder="Artists, titles, dates…"
-           autocapitalize="none" autocorrect="off" spellcheck="false">
-    <button id="search-cancel">Cancel</button>
-  </div>
 
   <!-- ── Mode tabs ── -->
   <nav id="mode-bar">
@@ -172,6 +162,17 @@
   </div>
 </div>
 
+<!-- ── Queue Item Action Sheet ── -->
+<div id="queue-item-sheet" role="dialog" aria-modal="true">
+  <div class="action-sheet-inner">
+    <div class="action-sheet-title" id="queue-item-title"></div>
+    <button class="action-sheet-btn" id="queue-item-show">Go to Show</button>
+    <button class="action-sheet-btn" id="queue-item-artist">Go to Artist</button>
+    <button class="action-sheet-btn danger" id="queue-item-remove">Delete from Queue</button>
+    <button class="action-sheet-btn cancel" id="queue-item-cancel">Cancel</button>
+  </div>
+</div>
+
 <!-- ── Queue Sheet ── -->
 <div id="queue-sheet" role="dialog" aria-label="Queue" aria-modal="true">
   <div class="sheet-header">
@@ -211,13 +212,6 @@
              autocapitalize="none" autocorrect="off" spellcheck="false">
       <button class="settings-save" id="favs-import">Restore</button>
       <p class="settings-hint">Paste your exported link above and tap Restore.</p>
-      <div class="settings-divider"></div>
-      <div class="settings-label">Flickr API Key</div>
-      <input id="flickr-key-input" class="settings-input" type="text"
-             placeholder="Paste your Flickr API key…"
-             autocapitalize="none" autocorrect="off" spellcheck="false">
-      <button class="settings-save" id="flickr-key-save">Save Key</button>
-      <p class="settings-hint">Get a free key at flickr.com/services/apps/create — enables venue photos in the Venue tab.</p>
     </div>
   </div>
 </div>

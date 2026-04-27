@@ -103,40 +103,25 @@ button {
 .header-actions button:active { background: var(--bg3); }
 .header-actions svg { width: 20px; height: 20px; display: block; }
 
-/* ── Search Bar ───────────────────────────────────────────────────── */
-#search-bar {
-  display: none;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-#search-bar.visible { display: flex; }
-
+/* ── Search Input (persistent in header) ─────────────────────────── */
 #search-input {
   flex: 1;
+  min-width: 0;
   background: var(--bg3);
   border: none;
   border-radius: 10px;
-  padding: 8px 12px;
+  padding: 6px 10px;
   color: var(--text);
   font-size: 16px;
   font-family: var(--font);
   outline: none;
   -webkit-appearance: none;
   appearance: none;
+  margin: 0 8px;
 }
 #search-input::placeholder { color: var(--text3); }
 #search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
-
-#search-cancel {
-  color: var(--accent);
-  font-size: 15px;
-  padding: 6px 2px;
-  white-space: nowrap;
-}
+#search-input.search-hidden { display: none; }
 
 /* ── Mode Bar ─────────────────────────────────────────────────────── */
 #mode-bar {
@@ -304,24 +289,6 @@ button {
 }
 
 /* Concert detail photo carousel */
-.concert-photos {
-  display: none;
-  gap: 6px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0 16px 14px;
-  scrollbar-width: none;
-}
-.concert-photos::-webkit-scrollbar { display: none; }
-.concert-photos.has-photos { display: flex; }
-.concert-photo-item {
-  flex-shrink: 0;
-  height: 130px;
-  width: auto;
-  border-radius: 8px;
-  object-fit: cover;
-  cursor: pointer;
-}
 
 .artist-item {
   padding: 11px 14px;
@@ -381,8 +348,25 @@ button {
 }
 
 /* ── Concert Detail View ──────────────────────────────────────────── */
+.concert-photos {
+  display: none;
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  background: var(--bg2);
+}
+.concert-photos::-webkit-scrollbar { display: none; }
+.concert-photos.has-photos { display: flex; }
+.concert-photo-item {
+  flex-shrink: 0;
+  height: 200px;
+  width: auto;
+  object-fit: cover;
+}
+
 .concert-header {
-  padding: 16px 16px 14px;
+  padding: 14px 16px 14px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -391,16 +375,16 @@ button {
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-
-.concert-header-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
 }
 
 .concert-header-creator {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.concert-header-venue {
   font-size: 14px;
   color: var(--text2);
   margin-bottom: 10px;
@@ -614,6 +598,11 @@ button {
   color: var(--text3); font-size: 20px;
   padding: 8px; margin-right: -8px;
 }
+.queue-menu-btn {
+  font-size: 18px; color: var(--text2);
+  padding: 4px 8px; letter-spacing: 1px;
+  flex-shrink: 0;
+}
 
 /* ── Settings Sheet ───────────────────────────────────────────────── */
 #settings-sheet {
@@ -816,21 +805,46 @@ button {
   text-overflow: ellipsis;
 }
 
-/* Surprise Me button */
-.surprise-btn {
-  display: block;
-  width: 100%;
-  background: var(--accent);
-  color: #000;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 14px;
-  border-radius: 12px;
-  text-align: center;
+/* Surprise card */
+.surprise-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px 16px;
   cursor: pointer;
-  transition: opacity 0.15s;
+  align-items: center;
+  border-radius: 12px;
+  transition: background 0.1s;
 }
-.surprise-btn:active { opacity: 0.75; }
+.surprise-card:active { background: var(--bg3); }
+.surprise-card-art {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg3);
+}
+.surprise-card-info { min-width: 0; }
+.surprise-card-artist {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.surprise-card-venue {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.surprise-card-date {
+  font-size: 12px;
+  color: var(--accent);
+  margin-top: 4px;
+}
 
 /* Year pills */
 .year-pill {
