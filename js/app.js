@@ -583,12 +583,14 @@ function renderConcert(meta) {
   }
 
   // Artist — slot 1 (first in carousel)
+  // Primary: artist name + venue (highly specific); fallback: artist + concert/live
   if (m.creator) {
-    fetchWikimediaImages(
-      `${m.creator} concert live`,
-      1,
-      `${m.creator} band`
-    ).then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator, 1)));
+    const artistPrimary = venueName
+      ? `${m.creator} ${venueName}`
+      : `${m.creator} concert live`;
+    const artistFallback = venueName ? `${m.creator} concert live` : null;
+    fetchWikimediaImages(artistPrimary, 1, artistFallback)
+      .then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator, 1)));
   }
 
   if (m.date) {
