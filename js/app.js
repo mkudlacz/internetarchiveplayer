@@ -547,6 +547,7 @@ function renderConcert(meta) {
       <div class="concert-header-creator">${esc(m.creator || '')}</div>
       <div class="concert-header-venue">${esc(venueName || '')}</div>
       <div class="concert-context" id="concert-context"></div>
+      <div class="concert-archive-link">from the archive <a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>

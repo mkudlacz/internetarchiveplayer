@@ -394,8 +394,23 @@ button {
   color: var(--text2);
   opacity: 0.75;
   line-height: 1.5;
-  margin-bottom: 14px;
+  margin-bottom: 6px;
 }
+
+.concert-archive-link {
+  font-size: 12px;
+  color: var(--text2);
+  opacity: 0.75;
+  margin-bottom: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.concert-archive-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.concert-archive-link a:active { opacity: 0.7; }
 
 .concert-actions {
   display: flex;
