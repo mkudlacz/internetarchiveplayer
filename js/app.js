@@ -7,6 +7,10 @@ import { fetchWikimediaImages } from './wikimedia.js';
 let HISTORY = {};
 fetch('./js/chicago-history.json').then(r => r.json()).then(d => { HISTORY = d; }).catch(() => {});
 
+// ── Curated venue photos ───────────────────────────────────────────
+let VENUES = {};
+fetch('./js/venues.json').then(r => r.json()).then(d => { VENUES = d; }).catch(() => {});
+
 // ── State ──────────────────────────────────────────────────────────
 const state = {
   collectionId: localStorage.getItem('collectionId') || DEFAULT_COLLECTION,
@@ -558,16 +562,24 @@ function renderConcert(meta) {
   };
   addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '');
 
-  // Wikimedia venue then artist photos (async) — capped at 3 total
+  // Venue photo: curated lookup first, then Wikimedia search as fallback
   if (venueName) {
-    fetchWikimediaImages(`${venueName} Chicago`, 2).then(imgs =>
-      imgs.forEach(i => addPhoto(i.url, venueName))
-    );
+    if (VENUES[venueName]) {
+      addPhoto(VENUES[venueName], venueName);
+    } else {
+      fetchWikimediaImages(`${venueName} Chicago`, 1).then(imgs =>
+        imgs.forEach(i => addPhoto(i.url, venueName))
+      );
+    }
   }
+
+  // Artist photo: search with concert/live terms, fallback to band name alone
   if (m.creator) {
-    fetchWikimediaImages(`${m.creator} concert`, 2).then(imgs =>
-      imgs.forEach(i => addPhoto(i.url, m.creator))
-    );
+    fetchWikimediaImages(
+      `${m.creator} concert live`,
+      1,
+      `${m.creator} band`
+    ).then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator)));
   }
 
   if (m.date) {
