@@ -891,7 +891,7 @@ button {
 }
 
 .bill-artists {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--text2);
   display: -webkit-box;
@@ -1140,7 +1140,8 @@ button {
   flex-shrink: 0;
   min-width: 72px;
 }
-.recent-info { min-width: 0; }
+.recent-info { min-width: 0; flex: 1; }
+.recent-fav { margin-left: auto; flex-shrink: 0; }
 .recent-title {
   font-size: 14px;
   color: var(--text);

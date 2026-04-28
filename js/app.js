@@ -65,6 +65,7 @@ const el = {
   trackActionTitle:   $('track-action-title'),
   trackActionPlay:    $('track-action-play'),
   trackActionQueue:   $('track-action-queue'),
+  trackActionArtist:  $('track-action-artist'),
   trackActionCancel:  $('track-action-cancel'),
   nowBar:         $('now-playing-bar'),
   barTitle:       $('bar-title'),
@@ -559,6 +560,7 @@ async function openConcert(doc) {
   el.backBtn.classList.add('visible');
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
+  el.statBanner.style.display = 'none';
   el.searchInput.classList.add('search-hidden');
   showView('concert');
   el.viewConcert.innerHTML = '<div class="spinner"></div>';
@@ -875,7 +877,8 @@ function renderDiscover() {
 
     if (allBills.length) {
       const buildBillStrip = () => {
-        const bills = [...allBills].sort(() => Math.random() - 0.5).slice(0, 5);
+        const billLimit = Math.min(Math.max(todayShows.length, 5), 8);
+        const bills = [...allBills].sort(() => Math.random() - 0.5).slice(0, billLimit);
         const strip = document.createElement('div');
         strip.className = 'discover-h-scroll';
         bills.forEach(([key, docs]) => {
@@ -908,7 +911,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', `${allBills.length} bills`, () => {
+      const sec = discoverSection('Time Travel to a Show', `${allBills.length} performances`, () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
@@ -934,7 +937,14 @@ function renderDiscover() {
           <div class="recent-title">${esc(doc.creator || doc.title || '')}</div>
           ${subline ? `<div class="recent-artist">${esc(subline)}</div>` : ''}
         </div>
+        <button class="concert-fav recent-fav${isFav(doc.identifier) ? ' active' : ''}" title="Favorite">♥</button>
       `;
+      li.querySelector('.recent-fav').addEventListener('click', e => {
+        e.stopPropagation();
+        const active = toggleFav(doc.identifier);
+        e.currentTarget.classList.toggle('active', active);
+        updateStatBanner();
+      });
       li.addEventListener('click', () => openConcert(doc));
       list.appendChild(li);
     });
@@ -1309,6 +1319,15 @@ function init() {
   // Track action sheet
   el.trackActionPlay.addEventListener('click', () => { if (_actionTrack) { player.addNext(_actionTrack); flashConfirm('Playing next'); } closeTrackAction(); });
   el.trackActionQueue.addEventListener('click', () => { if (_actionTrack) { player.addToEnd(_actionTrack); flashConfirm('Added to queue'); } closeTrackAction(); });
+  el.trackActionArtist.addEventListener('click', () => {
+    if (!_actionTrack) return;
+    const artistName = _actionTrack.artist;
+    const docs = state.index?.filter(d => d.creator === artistName) || [];
+    closeTrackAction();
+    setMode('artists');
+    state.selectedArtist = { name: artistName, docs };
+    renderArtistView();
+  });
   el.trackActionCancel.addEventListener('click', closeTrackAction);
   el.trackActionSheet.addEventListener('click', e => { if (e.target === el.trackActionSheet) closeTrackAction(); });
 
