@@ -702,6 +702,45 @@ button {
 .action-sheet-btn:active { background: var(--bg3); }
 .action-sheet-btn.cancel { color: var(--text2); margin-top: 4px; border-top: 1px solid var(--border); }
 
+/* ── Dive into the Archives ──────────────────────────────────────── */
+.dive-body { padding: 0 16px 16px; }
+.dive-desc {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.dive-select {
+  display: block;
+  width: 100%;
+  background: var(--bg3);
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+  font-family: var(--font);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  -webkit-appearance: auto;
+  appearance: auto;
+}
+.dive-btn {
+  display: block;
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font);
+  border-radius: 10px;
+  padding: 13px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.dive-btn:active { opacity: 0.75; }
+
 /* ── Discover view ────────────────────────────────────────────────── */
 #view-discover,
 #view-filtered {

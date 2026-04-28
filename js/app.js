@@ -716,6 +716,56 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
+  // ── Dive into the Archives ──
+  {
+    const randomYear = byYear[Math.floor(Math.random() * byYear.length)][0];
+    const sec = discoverSection('Dive into the Archives', '');
+    const body = document.createElement('div');
+    body.className = 'dive-body';
+
+    const desc = document.createElement('p');
+    desc.className = 'dive-desc';
+    desc.textContent = 'Select a year to queue a show and take a trip back in time.';
+
+    const select = document.createElement('select');
+    select.className = 'dive-select';
+    byYear.forEach(([year]) => {
+      const opt = document.createElement('option');
+      opt.value = year;
+      opt.textContent = year;
+      if (year === randomYear) opt.selected = true;
+      select.appendChild(opt);
+    });
+
+    const btn = document.createElement('button');
+    btn.className = 'dive-btn';
+    btn.textContent = `Play a show from ${select.value}`;
+
+    select.addEventListener('change', () => {
+      btn.textContent = `Play a show from ${select.value}`;
+    });
+
+    btn.addEventListener('click', async () => {
+      const year = select.value;
+      const entry = byYear.find(([y]) => y === year);
+      if (!entry) return;
+      const docs = entry[1];
+      const doc = docs[Math.floor(Math.random() * docs.length)];
+      await openConcert(doc);
+      const meta = state.currentConcert;
+      if (meta) {
+        const tracks = buildTracks(meta);
+        player.replaceQueue(tracks, 0);
+      }
+    });
+
+    body.appendChild(desc);
+    body.appendChild(select);
+    body.appendChild(btn);
+    sec.appendChild(body);
+    el.viewDiscover.appendChild(sec);
+  }
+
   // ── Today in Archive ──
   const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
   if (todayShows.length) {
