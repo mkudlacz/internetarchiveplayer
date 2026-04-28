@@ -800,20 +800,24 @@ function renderDiscover() {
       .slice(0, 5);
 
     if (bills.length) {
-      const sec = discoverSection('Go to a Show', `${bills.length} bills`);
+      const sec = discoverSection('Time Travel to a Show', `${bills.length} bills`);
+      const desc = document.createElement('p');
+      desc.className = 'discover-section-desc';
+      desc.textContent = 'Tap any night to queue the full bill and start playing.';
+      sec.appendChild(desc);
       const strip = document.createElement('div');
       strip.className = 'discover-h-scroll';
       bills.forEach(([key, docs]) => {
         const [date, venue] = key.split('|');
-        const year    = date.slice(0, 4);
-        const artists = [...new Set(docs.map(d => d.creator))];
+        const year      = date.slice(0, 4);
+        const artists   = [...new Set(docs.map(d => d.creator))];
         const showCount = docs.length;
         const card = document.createElement('div');
         card.className = 'bill-card';
         card.innerHTML = `
           <div class="bill-year">${esc(year)}</div>
-          <div class="bill-venue">${esc(venue)}</div>
           <div class="bill-artists">${esc(artists.join(' · '))}</div>
+          <div class="bill-venue">${esc(venue)}</div>
           <div class="bill-date">${showCount} show${showCount !== 1 ? 's' : ''}</div>
         `;
         card.addEventListener('click', async () => {
