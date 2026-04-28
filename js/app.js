@@ -883,15 +883,13 @@ function renderDiscover() {
         strip.className = 'discover-h-scroll';
         bills.forEach(([key, docs]) => {
           const [date, venue] = key.split('|');
-          const artists   = [...new Set(docs.map(d => d.creator))];
-          const showCount = docs.length;
+          const artists = [...new Set(docs.map(d => d.creator))];
           const card = document.createElement('div');
           card.className = 'bill-card';
           card.innerHTML = `
             <div class="bill-date-full">${esc(formatDateBill(date))}</div>
             <div class="bill-artists">${esc(artists.join(' · '))}</div>
             <div class="bill-venue">${esc(venue)}</div>
-            <div class="bill-count">${showCount} show${showCount !== 1 ? 's' : ''}</div>
           `;
           card.addEventListener('click', async () => {
             card.style.opacity = '0.45';
