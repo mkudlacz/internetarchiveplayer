@@ -1109,6 +1109,8 @@ function closeQueueItemMenu() {
 // ── Settings ───────────────────────────────────────────────────────
 function openSettings() {
   el.collectionInput.value = state.collectionId;
+  const count = getFavIds().length;
+  $('favs-hint').textContent = `You have saved ${count} favorite${count !== 1 ? 's' : ''}. This app stores all data locally. To backup or to migrate your favorites to another browser, use the "Export Favorites Link" above and copy the provided URL.`;
   el.settingsSheet.classList.add('visible');
 }
 
