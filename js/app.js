@@ -909,7 +909,7 @@ function renderDiscover() {
         });
         requestAnimationFrame(() => {
           strip.querySelectorAll('.bill-artists').forEach(el => {
-            el.style.fontSize = '13px';
+            el.style.fontSize = '15px';
             while (el.scrollHeight > el.clientHeight && parseFloat(el.style.fontSize) > 9) {
               el.style.fontSize = (parseFloat(el.style.fontSize) - 0.5) + 'px';
             }
