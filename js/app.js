@@ -906,6 +906,14 @@ function renderDiscover() {
           });
           strip.appendChild(card);
         });
+        requestAnimationFrame(() => {
+          strip.querySelectorAll('.bill-artists').forEach(el => {
+            el.style.fontSize = '13px';
+            while (el.scrollHeight > el.clientHeight && parseFloat(el.style.fontSize) > 9) {
+              el.style.fontSize = (parseFloat(el.style.fontSize) - 0.5) + 'px';
+            }
+          });
+        });
         return strip;
       };
 
