@@ -549,6 +549,7 @@ function renderConcert(meta) {
         <div class="concert-header-creator${m.creator ? ' concert-artist-link' : ''}" id="concert-artist-link">${esc(m.creator || '')}</div>
         ${venueName ? `<div class="concert-header-venue">${esc(venueName)}</div>` : ''}
         <div class="concert-archive-mini"><a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
+        ${m.addeddate ? `<div class="concert-upload-date">uploaded ${formatUploadDate(m.addeddate)}</div>` : ''}
       </div>
     </div>
     <div id="concert-context-section"></div>
@@ -606,7 +607,8 @@ function renderConcert(meta) {
   }
 
   // From the Artist section
-  const artistData = m.creator && ARTIST_CONTEXT[m.creator];
+  const concertYear = dateKey ? dateKey.slice(0, 4) : null;
+  const artistData = m.creator && concertYear && ARTIST_CONTEXT[m.creator]?.[concertYear];
   if (artistData) {
     const sec = $('concert-snippets-section');
     if (sec) {
@@ -739,16 +741,9 @@ function renderDiscover() {
   const todayShows = index.filter(d => (d.date || '').slice(5, 10) === todaySlice)
                           .sort((a, b) => (a.date || '').localeCompare(b.date || ''));
 
-  const byYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
-    .filter(([y]) => y && y.length === 4)
-    .sort((a, b) => a[0] - b[0]);
-
   const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
-  const years = index.map(d => +(d.date || '').slice(0, 4)).filter(Boolean);
-  const minYear = Math.min(...years), maxYear = Math.max(...years);
-  const topYear = [...byYear].sort((a, b) => b[1].length - a[1].length)[0];
+  const uniqueVenues  = new Set(index.map(d => extractVenueName(d)).filter(Boolean)).size;
 
-  // ── Recently Uploaded ──
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - 30);
   const cutoffStr = cutoff.toISOString().slice(0, 10);
@@ -758,10 +753,46 @@ function renderDiscover() {
 
   el.viewDiscover.innerHTML = '';
 
-  // ── Surprises from the Archive ──
+  // ── 1. Today in the Archive ──
+  const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+  if (todayShows.length) {
+    const sec = discoverSection(`Today in the Archive — ${todayLabel}`, `${todayShows.length} show${todayShows.length !== 1 ? 's' : ''}`);
+    const strip = document.createElement('div');
+    strip.className = 'discover-h-scroll';
+    todayShows.forEach(doc => {
+      const card = document.createElement('div');
+      card.className = 'today-card';
+      card.innerHTML = `
+        <div class="today-card-year">${(doc.date || '').slice(0, 4)}</div>
+        <div class="today-card-title">${esc(doc.title || doc.identifier)}</div>
+        <div class="today-card-artist">${esc(doc.creator || '')}</div>
+      `;
+      card.addEventListener('click', () => openConcert(doc));
+      strip.appendChild(card);
+    });
+    sec.appendChild(strip);
+    el.viewDiscover.appendChild(sec);
+  }
+
+  // ── 2. Archive stats ──
+  {
+    const sec = discoverSection('The Archive');
+    const grid = document.createElement('div');
+    grid.className = 'stats-grid';
+    [[index.length, 'Shows'], [uniqueArtists, 'Artists'], [uniqueVenues, 'Venues']].forEach(([val, label]) => {
+      const card = document.createElement('div');
+      card.className = 'stat-card';
+      card.innerHTML = `<div class="stat-value">${val}</div><div class="stat-label">${label}</div>`;
+      grid.appendChild(card);
+    });
+    sec.appendChild(grid);
+    el.viewDiscover.appendChild(sec);
+  }
+
+  // ── 3. Randos from the Archive ──
   {
     const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 5);
-    const sec = discoverSection('Surprises from the Archive', `${picks.length} show${picks.length !== 1 ? 's' : ''}`);
+    const sec = discoverSection('Randos from the Archive', `${picks.length} shows`);
     const strip = document.createElement('div');
     strip.className = 'discover-h-scroll';
     picks.forEach(doc => {
@@ -784,84 +815,61 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
-  // ── Dive into the Archives ──
+  // ── 4. Go to a Show (multi-artist bills) ──
   {
-    const randomIdx = Math.floor(Math.random() * byYear.length);
-    const randomYear = byYear[randomIdx][0];
-    const randomCount = byYear[randomIdx][1].length;
-    const countStr = n => `${n} show${n !== 1 ? 's' : ''}`;
-    const sec = discoverSection('Dive into the Archives', countStr(randomCount));
-    const countEl = sec.querySelector('.discover-section-count');
-    const body = document.createElement('div');
-    body.className = 'dive-body';
-
-    const desc = document.createElement('p');
-    desc.className = 'dive-desc';
-    desc.textContent = 'Select a year to queue a show and take a trip back in time.';
-
-    const select = document.createElement('select');
-    select.className = 'dive-select';
-    byYear.forEach(([year]) => {
-      const opt = document.createElement('option');
-      opt.value = year;
-      opt.textContent = year;
-      if (year === randomYear) opt.selected = true;
-      select.appendChild(opt);
+    const billMap = {};
+    index.forEach(doc => {
+      const date  = (doc.date || '').slice(0, 10);
+      const venue = extractVenueName(doc);
+      if (!date || !venue || !doc.creator) return;
+      const key = `${date}|${venue}`;
+      if (!billMap[key]) billMap[key] = [];
+      billMap[key].push(doc);
     });
 
-    const btn = document.createElement('button');
-    btn.className = 'dive-btn';
-    btn.textContent = `Play a show from ${select.value}`;
+    const bills = Object.entries(billMap)
+      .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 5);
 
-    select.addEventListener('change', () => {
-      btn.textContent = `Play a show from ${select.value}`;
-      const entry = byYear.find(([y]) => y === select.value);
-      if (countEl && entry) countEl.textContent = countStr(entry[1].length);
-    });
-
-    btn.addEventListener('click', async () => {
-      const year = select.value;
-      const entry = byYear.find(([y]) => y === year);
-      if (!entry) return;
-      const docs = entry[1];
-      const doc = docs[Math.floor(Math.random() * docs.length)];
-      await openConcert(doc);
-      const meta = state.currentConcert;
-      if (meta) {
-        const tracks = buildTracks(meta);
-        player.replaceQueue(tracks, 0);
-      }
-    });
-
-    body.appendChild(desc);
-    body.appendChild(select);
-    body.appendChild(btn);
-    sec.appendChild(body);
-    el.viewDiscover.appendChild(sec);
+    if (bills.length) {
+      const sec = discoverSection('Go to a Show', `${bills.length} bills`);
+      const strip = document.createElement('div');
+      strip.className = 'discover-h-scroll';
+      bills.forEach(([key, docs]) => {
+        const [date, venue] = key.split('|');
+        const year    = date.slice(0, 4);
+        const artists = [...new Set(docs.map(d => d.creator))];
+        const dateShort = formatDate(date).replace(`, ${year}`, '');
+        const card = document.createElement('div');
+        card.className = 'bill-card';
+        card.innerHTML = `
+          <div class="bill-year">${esc(year)}</div>
+          <div class="bill-venue">${esc(venue)}</div>
+          <div class="bill-artists">${esc(artists.join(' · '))}</div>
+          <div class="bill-date">${esc(dateShort)}</div>
+        `;
+        card.addEventListener('click', async () => {
+          card.style.opacity = '0.45';
+          card.style.pointerEvents = 'none';
+          try {
+            const metas    = await Promise.all(docs.map(d => getItemMetadata(d.identifier)));
+            const allTracks = metas.flatMap(meta => buildTracks(meta));
+            if (allTracks.length) player.replaceQueue(allTracks, 0);
+          } catch (e) { console.error('Go to a Show:', e); }
+          finally {
+            card.style.opacity = '';
+            card.style.pointerEvents = '';
+          }
+        });
+        strip.appendChild(card);
+      });
+      sec.appendChild(strip);
+      el.viewDiscover.appendChild(sec);
+    }
   }
 
-  // ── Today in Archive ──
-  const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-  if (todayShows.length) {
-    const sec = discoverSection(`Today in the Archive — ${todayLabel}`, `${todayShows.length} show${todayShows.length !== 1 ? 's' : ''}`);
-    const strip = document.createElement('div');
-    strip.className = 'discover-h-scroll';
-    todayShows.forEach(doc => {
-      const card = document.createElement('div');
-      card.className = 'today-card';
-      card.innerHTML = `
-        <div class="today-card-year">${(doc.date || '').slice(0, 4)}</div>
-        <div class="today-card-title">${esc(doc.title || doc.identifier)}</div>
-        <div class="today-card-artist">${esc(doc.creator || '')}</div>
-      `;
-      card.addEventListener('click', () => openConcert(doc));
-      strip.appendChild(card);
-    });
-    sec.appendChild(strip);
-    el.viewDiscover.appendChild(sec);
-  }
-
-  // ── Recently Uploaded ──
+  // ── 5. New to the Archive ──
   if (recentShows.length) {
     const sec = discoverSection('New to the Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 30 days`);
     const list = document.createElement('ul');
@@ -869,12 +877,13 @@ function renderDiscover() {
     recentShows.forEach(doc => {
       const li = document.createElement('li');
       li.className = 'recent-item';
-      const added = doc.addeddate.slice(0, 10);
+      const venue = extractVenueName(doc) || '';
       li.innerHTML = `
-        <div class="recent-date">${added}</div>
+        <div class="recent-date">${formatUploadDate(doc.addeddate)}</div>
         <div class="recent-info">
-          <div class="recent-title">${esc(doc.title || doc.identifier)}</div>
-          <div class="recent-artist">${esc(doc.creator || '')}</div>
+          <div class="recent-title">${esc(doc.creator || doc.title || '')}</div>
+          ${venue ? `<div class="recent-artist">${esc(venue)}</div>` : ''}
+          <div class="recent-artist">${formatDate(doc.date)}</div>
         </div>
       `;
       li.addEventListener('click', () => openConcert(doc));
@@ -883,48 +892,6 @@ function renderDiscover() {
     sec.appendChild(list);
     el.viewDiscover.appendChild(sec);
   }
-}
-
-function buildUploadChart(index) {
-  const counts = new Map();
-  index.forEach(doc => {
-    const d = doc.addeddate;
-    if (!d) return;
-    const month = d.slice(0, 7); // "2024-12"
-    counts.set(month, (counts.get(month) || 0) + 1);
-  });
-  const months = [...counts.keys()].sort().filter(m => m >= '2024-01');
-  if (months.length < 2) return null;
-
-  const values = months.map(m => counts.get(m));
-  const max = Math.max(...values);
-  const W = 320, H = 90;
-  const pad = { top: 8, right: 4, bottom: 22, left: 4 };
-  const cW = W - pad.left - pad.right;
-  const cH = H - pad.top - pad.bottom;
-  const barW = Math.max(2, (cW / months.length) * 0.7);
-  const gap   = cW / months.length;
-  const xS = i => pad.left + i * gap + gap / 2;
-  const yS = v => pad.top + cH - (v / max) * cH;
-
-  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const labelEvery = Math.ceil(months.length / 5);
-
-  const bars = months.map((m, i) => {
-    const bh = (values[i] / max) * cH;
-    return `<rect x="${(xS(i) - barW / 2).toFixed(1)}" y="${yS(values[i]).toFixed(1)}" width="${barW.toFixed(1)}" height="${bh.toFixed(1)}" class="chart-bar"/>`;
-  }).join('');
-
-  const labels = months.map((m, i) => {
-    if (i % labelEvery !== 0 && i !== months.length - 1) return '';
-    const [y, mo] = m.split('-');
-    return `<text x="${xS(i).toFixed(1)}" y="${H - 4}" text-anchor="middle" class="chart-label">${monthNames[+mo - 1]} '${y.slice(2)}</text>`;
-  }).join('');
-
-  return `<svg viewBox="0 0 ${W} ${H}" class="upload-chart" preserveAspectRatio="none">
-    ${bars}
-    ${labels}
-  </svg>`;
 }
 
 // ── Year tab ───────────────────────────────────────────────────────
@@ -1384,6 +1351,12 @@ function init() {
 }
 
 // ── Helpers ────────────────────────────────────────────────────────
+function formatUploadDate(dateStr) {
+  if (!dateStr || dateStr.length < 10) return '';
+  const [y, m, d] = dateStr.slice(0, 10).split('-');
+  return `${m}-${d}-${y.slice(2)}`;
+}
+
 function formatDate(s) {
   if (!s) return '';
   const d = s.slice(0, 10);
