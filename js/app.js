@@ -40,6 +40,7 @@ const el = {
   searchInput:    $('search-input'),
   modeBar:        $('mode-bar'),
   sortBar:        $('sort-bar'),
+  statBanner:     $('stat-banner'),
   main:           $('main'),
   viewLibrary:    $('view-library'),
   viewArtists:    $('view-artists'),
@@ -183,6 +184,43 @@ function setMode(mode) {
     showView('favorites');
     if (state.index) renderFavorites();
   }
+  updateStatBanner();
+}
+
+function updateStatBanner() {
+  const index = state.index;
+  if (!index) { el.statBanner.style.display = 'none'; return; }
+  el.statBanner.style.display = '';
+  const { mode, searching, searchQuery, selectedArtist, selectedVenue, selectedYear } = state;
+  if (searching && searchQuery) {
+    const count = filterIndex(searchQuery).length;
+    el.statBanner.textContent = `${count.toLocaleString()} result${count !== 1 ? 's' : ''}`;
+    return;
+  }
+  if (mode === 'artists' && selectedArtist) {
+    const count = selectedArtist.docs.length;
+    el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedArtist.name}`;
+    return;
+  }
+  if (mode === 'venue' && selectedVenue) {
+    const docs = index.filter(d => extractVenueName(d) === selectedVenue);
+    el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedVenue}`;
+    return;
+  }
+  if (mode === 'year' && selectedYear) {
+    const docs = index.filter(d => (d.date || '').slice(0, 4) === selectedYear);
+    el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedYear}`;
+    return;
+  }
+  if (mode === 'favorites') {
+    const count = getFavIds().length;
+    el.statBanner.textContent = `${count} favorited show${count !== 1 ? 's' : ''}`;
+    return;
+  }
+  const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
+  const uniqueVenues  = new Set(index.map(d => extractVenueName(d)).filter(Boolean)).size;
+  const uniqueYears   = new Set(index.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
+  el.statBanner.textContent = `${index.length.toLocaleString()} shows · ${uniqueArtists} artists · ${uniqueVenues} venues · ${uniqueYears} years`;
 }
 
 function collectionName() {
@@ -195,6 +233,7 @@ async function loadIndex() {
   try {
     state.index = await loadFullIndex(state.collectionId);
     state.displayPage = 1;
+    updateStatBanner();
     if (state.mode === 'discover') renderDiscover();
     else if (state.mode === 'artists') renderArtistView();
     else if (state.mode === 'year') renderYear();
@@ -317,6 +356,7 @@ function renderForSearch() {
       renderDiscover();
     }
   }
+  updateStatBanner();
 }
 
 function closeSearch() {
@@ -402,6 +442,7 @@ function selectArtist(artistObj) {
     item.classList.toggle('selected', artistObj === null ? isAll : item.querySelector('.artist-name').textContent === artistObj.name);
   });
   renderArtistConcerts();
+  updateStatBanner();
 }
 
 function renderArtistConcerts(fallbackDocs) {
@@ -545,7 +586,7 @@ function renderConcert(meta) {
       <img class="concert-hero-art" id="concert-hero-art"
            src="${artUrl}" alt="${esc(m.creator || '')}">
       <div class="concert-hero-meta">
-        <div class="concert-header-date">${formatDate(m.date)}</div>
+        <div class="concert-header-date">${formatDateWithDay(m.date)}</div>
         <div class="concert-header-creator${m.creator ? ' concert-artist-link' : ''}" id="concert-artist-link">${esc(m.creator || '')}</div>
         ${venueName ? `<div class="concert-header-venue">${esc(venueName)}</div>` : ''}
         <div class="concert-archive-mini"><a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
@@ -640,7 +681,7 @@ function renderConcert(meta) {
       const header = document.createElement('div');
       header.className = 'concert-section-header concert-also-toggle';
       header.innerHTML = `
-        <span>Also in the archive on ${esc(formatDate(m.date))}</span>
+        <span>Also in the archive on ${esc(formatDateWithDay(m.date))}</span>
         <span class="concert-also-toggle-right">
           <span class="concert-also-count">${sameDate.length}</span>
           <svg class="concert-also-chevron-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -741,9 +782,6 @@ function renderDiscover() {
   const todayShows = index.filter(d => (d.date || '').slice(5, 10) === todaySlice)
                           .sort((a, b) => (a.date || '').localeCompare(b.date || ''));
 
-  const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
-  const uniqueVenues  = new Set(index.map(d => extractVenueName(d)).filter(Boolean)).size;
-
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - 30);
   const cutoffStr = cutoff.toISOString().slice(0, 10);
@@ -752,14 +790,7 @@ function renderDiscover() {
     .sort((a, b) => b.addeddate.localeCompare(a.addeddate));
 
   el.viewDiscover.innerHTML = '';
-
-  // ── Stat banner ──
-  {
-    const banner = document.createElement('div');
-    banner.className = 'discover-stat-banner';
-    banner.textContent = `${index.length.toLocaleString()} shows · ${uniqueArtists.toLocaleString()} artists · ${uniqueVenues.toLocaleString()} venues`;
-    el.viewDiscover.appendChild(banner);
-  }
+  updateStatBanner();
 
   // ── 1. Today in the Archive ──
   const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
@@ -782,7 +813,53 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
-  // ── 2. Time Travel to a Show (multi-artist bills) ──
+  // ── 2. Popular in the Archive ──
+  {
+    let popularDocs = [];
+    const buildPopularStrip = () => {
+      const strip = document.createElement('div');
+      strip.className = 'discover-h-scroll';
+      const picks = [...popularDocs].sort(() => Math.random() - 0.5).slice(0, 8);
+      picks.forEach(doc => {
+        const card = document.createElement('div');
+        card.className = 'popular-card';
+        const artUrl = `https://archive.org/services/img/${doc.identifier}`;
+        const city   = doc.coverage || '';
+        const plays  = doc.downloads ? `${Number(doc.downloads).toLocaleString()} plays` : '';
+        card.innerHTML = `
+          <img class="popular-card-img" src="${esc(artUrl)}" alt="" loading="lazy">
+          <div class="popular-card-info">
+            <div class="popular-card-artist">${esc(doc.creator || doc.title || '')}</div>
+            ${city ? `<div class="popular-card-city">${esc(city)}</div>` : ''}
+            <div class="popular-card-date">${formatDate(doc.date)}</div>
+            ${plays ? `<div class="popular-card-plays">${esc(plays)}</div>` : ''}
+          </div>
+        `;
+        card.addEventListener('click', () => openConcert(doc));
+        strip.appendChild(card);
+      });
+      return strip;
+    };
+
+    const popularSec = discoverSection('Popular in the Archive', '', () => {
+      const old = popularSec.querySelector('.discover-h-scroll');
+      const neo = buildPopularStrip();
+      if (old) popularSec.replaceChild(neo, old); else popularSec.appendChild(neo);
+    });
+    el.viewDiscover.appendChild(popularSec);
+
+    fetch(`https://archive.org/advancedsearch.php?q=collection%3A${encodeURIComponent(state.collectionId)}+AND+mediatype%3Aaudio&fl[]=identifier&fl[]=creator&fl[]=date&fl[]=title&fl[]=coverage&fl[]=downloads&sort[]=downloads+desc&rows=50&output=json`)
+      .then(r => r.json())
+      .then(data => {
+        popularDocs = (data.response?.docs ?? []).filter(d => (d.downloads || 0) >= 400);
+        const countEl = popularSec.querySelector('.discover-section-count');
+        if (countEl) countEl.textContent = popularDocs.length ? `${popularDocs.length} shows` : '';
+        if (popularDocs.length) popularSec.appendChild(buildPopularStrip());
+      })
+      .catch(() => {});
+  }
+
+  // ── 3. Time Travel to a Show (multi-artist bills) ──
   {
     const billMap = {};
     index.forEach(doc => {
@@ -803,16 +880,15 @@ function renderDiscover() {
         strip.className = 'discover-h-scroll';
         bills.forEach(([key, docs]) => {
           const [date, venue] = key.split('|');
-          const year      = date.slice(0, 4);
           const artists   = [...new Set(docs.map(d => d.creator))];
           const showCount = docs.length;
           const card = document.createElement('div');
           card.className = 'bill-card';
           card.innerHTML = `
-            <div class="bill-year">${esc(year)}</div>
+            <div class="bill-date-full">${esc(formatDateBill(date))}</div>
             <div class="bill-artists">${esc(artists.join(' · '))}</div>
             <div class="bill-venue">${esc(venue)}</div>
-            <div class="bill-date">${showCount} show${showCount !== 1 ? 's' : ''}</div>
+            <div class="bill-count">${showCount} show${showCount !== 1 ? 's' : ''}</div>
           `;
           card.addEventListener('click', async () => {
             card.style.opacity = '0.45';
@@ -820,7 +896,7 @@ function renderDiscover() {
             try {
               const metas     = await Promise.all(docs.map(d => getItemMetadata(d.identifier)));
               const allTracks = metas.flatMap(meta => buildTracks(meta));
-              if (allTracks.length) player.replaceQueue(allTracks, 0);
+              if (allTracks.length) { player.replaceQueue(allTracks, 0); openQueue(); }
             } catch (e) { console.error('Time Travel to a Show:', e); }
             finally {
               card.style.opacity = '';
@@ -837,45 +913,9 @@ function renderDiscover() {
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
       });
-      const desc = document.createElement('p');
-      desc.className = 'discover-section-desc';
-      desc.textContent = 'Tap any night to queue the full bill and start playing.';
-      sec.appendChild(desc);
       sec.appendChild(buildBillStrip());
       el.viewDiscover.appendChild(sec);
     }
-  }
-
-  // ── 3. Randos from the Archive ──
-  {
-    const buildRandoStrip = () => {
-      const picks = [...index].sort(() => Math.random() - 0.5).slice(0, 5);
-      const strip = document.createElement('div');
-      strip.className = 'discover-h-scroll';
-      picks.forEach(doc => {
-        const card = document.createElement('div');
-        card.className = 'surprise-card';
-        const venueStr = extractVenueName(doc) || '';
-        card.innerHTML = `
-          <div class="surprise-info">
-            <div class="surprise-artist">${esc(doc.creator || doc.title || '')}</div>
-            ${venueStr ? `<div class="surprise-venue">${esc(venueStr)}</div>` : ''}
-            <div class="surprise-date">${formatDate(doc.date)}</div>
-          </div>
-        `;
-        card.addEventListener('click', () => openConcert(doc));
-        strip.appendChild(card);
-      });
-      return strip;
-    };
-
-    const sec = discoverSection('Randos from the Archive', '5 shows', () => {
-      const old = sec.querySelector('.discover-h-scroll');
-      const neo = buildRandoStrip();
-      if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
-    });
-    sec.appendChild(buildRandoStrip());
-    el.viewDiscover.appendChild(sec);
   }
 
   // ── 4. New to the Archive ──
@@ -944,6 +984,7 @@ function selectYear(year, docs) {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === year);
   });
   renderYearConcerts(dateAsc(docs));
+  updateStatBanner();
 }
 
 function renderYearConcerts(docs) {
@@ -1000,6 +1041,7 @@ function selectVenue(venue, docs) {
     item.classList.toggle('selected', item.querySelector('.artist-name').textContent === venue);
   });
   renderVenueConcerts(dateAsc(docs));
+  updateStatBanner();
 }
 
 function renderVenueConcerts(docs) {
@@ -1157,6 +1199,10 @@ function updateTrackHighlight() {
 function openQueue() {
   renderQueue();
   el.queueSheet.classList.add('visible');
+  requestAnimationFrame(() => {
+    const cur = el.queueList.querySelector('.queue-item.current');
+    if (cur) cur.scrollIntoView({ block: 'center' });
+  });
 }
 
 function renderQueue() {
@@ -1252,16 +1298,7 @@ function init() {
   el.barNext.addEventListener('click', () => player.next());
   el.barQueue.addEventListener('click', openQueue);
   el.barInfo.addEventListener('click', () => {
-    if (state.currentConcert && !state.inConcert) {
-      state.prevMode = state.mode;
-      state.inConcert = true;
-      el.backBtn.classList.add('visible');
-      el.modeBar.classList.add('hidden');
-      el.sortBar.classList.add('hidden');
-      el.searchInput.classList.add('search-hidden');
-      showView('concert');
-      renderConcert(state.currentConcert);
-    }
+    if (player.queue.length) openQueue();
   });
 
   el.barProgress.addEventListener('click', e => {
@@ -1367,8 +1404,8 @@ function init() {
 // ── Helpers ────────────────────────────────────────────────────────
 function formatUploadDate(dateStr) {
   if (!dateStr || dateStr.length < 10) return '';
-  const [, m, d] = dateStr.slice(0, 10).split('-');
-  return `${m}-${d}`;
+  const [y, m, d] = dateStr.slice(0, 10).split('-');
+  return `${m}-${d}-${y.slice(2)}`;
 }
 
 function formatDate(s) {
@@ -1378,6 +1415,28 @@ function formatDate(s) {
   if (!y || !m || !day) return d;
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return `${months[+m - 1]} ${+day}, ${y}`;
+}
+
+function formatDateWithDay(s) {
+  if (!s) return '';
+  const d = s.slice(0, 10);
+  const [y, m, day] = d.split('-');
+  if (!y || !m || !day) return d;
+  const dt = new Date(`${d}T12:00:00Z`);
+  const dow = dt.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' });
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${dow}, ${months[+m - 1]} ${+day}, ${y}`;
+}
+
+function formatDateBill(s) {
+  if (!s || s.length < 10) return '';
+  const d = s.slice(0, 10);
+  const [y, m, day] = d.split('-');
+  if (!y || !m || !day) return d;
+  const dt = new Date(`${d}T12:00:00Z`);
+  const dow = dt.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' });
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${dow} · ${months[+m - 1]} ${+day}, ${y}`;
 }
 
 function stripExt(name) { return name.replace(/\.[^.]+$/, ''); }
