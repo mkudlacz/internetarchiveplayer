@@ -753,6 +753,14 @@ function renderDiscover() {
 
   el.viewDiscover.innerHTML = '';
 
+  // ── Stat banner ──
+  {
+    const banner = document.createElement('div');
+    banner.className = 'discover-stat-banner';
+    banner.textContent = `${index.length.toLocaleString()} shows · ${uniqueArtists.toLocaleString()} artists · ${uniqueVenues.toLocaleString()} venues`;
+    el.viewDiscover.appendChild(banner);
+  }
+
   // ── 1. Today in the Archive ──
   const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
   if (todayShows.length) {
@@ -774,19 +782,58 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
-  // ── 2. Archive stats ──
+  // ── 2. Go to a Show (multi-artist bills) ──
   {
-    const sec = discoverSection('The Archive');
-    const grid = document.createElement('div');
-    grid.className = 'stats-grid';
-    [[index.length, 'Shows'], [uniqueArtists, 'Artists'], [uniqueVenues, 'Venues']].forEach(([val, label]) => {
-      const card = document.createElement('div');
-      card.className = 'stat-card';
-      card.innerHTML = `<div class="stat-value">${val}</div><div class="stat-label">${label}</div>`;
-      grid.appendChild(card);
+    const billMap = {};
+    index.forEach(doc => {
+      const date  = (doc.date || '').slice(0, 10);
+      const venue = extractVenueName(doc);
+      if (!date || !venue || !doc.creator) return;
+      const key = `${date}|${venue}`;
+      if (!billMap[key]) billMap[key] = [];
+      billMap[key].push(doc);
     });
-    sec.appendChild(grid);
-    el.viewDiscover.appendChild(sec);
+
+    const bills = Object.entries(billMap)
+      .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 5);
+
+    if (bills.length) {
+      const sec = discoverSection('Go to a Show', `${bills.length} bills`);
+      const strip = document.createElement('div');
+      strip.className = 'discover-h-scroll';
+      bills.forEach(([key, docs]) => {
+        const [date, venue] = key.split('|');
+        const year    = date.slice(0, 4);
+        const artists = [...new Set(docs.map(d => d.creator))];
+        const showCount = docs.length;
+        const card = document.createElement('div');
+        card.className = 'bill-card';
+        card.innerHTML = `
+          <div class="bill-year">${esc(year)}</div>
+          <div class="bill-venue">${esc(venue)}</div>
+          <div class="bill-artists">${esc(artists.join(' · '))}</div>
+          <div class="bill-date">${showCount} show${showCount !== 1 ? 's' : ''}</div>
+        `;
+        card.addEventListener('click', async () => {
+          card.style.opacity = '0.45';
+          card.style.pointerEvents = 'none';
+          try {
+            const metas     = await Promise.all(docs.map(d => getItemMetadata(d.identifier)));
+            const allTracks = metas.flatMap(meta => buildTracks(meta));
+            if (allTracks.length) player.replaceQueue(allTracks, 0);
+          } catch (e) { console.error('Go to a Show:', e); }
+          finally {
+            card.style.opacity = '';
+            card.style.pointerEvents = '';
+          }
+        });
+        strip.appendChild(card);
+      });
+      sec.appendChild(strip);
+      el.viewDiscover.appendChild(sec);
+    }
   }
 
   // ── 3. Randos from the Archive ──
@@ -815,61 +862,7 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
-  // ── 4. Go to a Show (multi-artist bills) ──
-  {
-    const billMap = {};
-    index.forEach(doc => {
-      const date  = (doc.date || '').slice(0, 10);
-      const venue = extractVenueName(doc);
-      if (!date || !venue || !doc.creator) return;
-      const key = `${date}|${venue}`;
-      if (!billMap[key]) billMap[key] = [];
-      billMap[key].push(doc);
-    });
-
-    const bills = Object.entries(billMap)
-      .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 5);
-
-    if (bills.length) {
-      const sec = discoverSection('Go to a Show', `${bills.length} bills`);
-      const strip = document.createElement('div');
-      strip.className = 'discover-h-scroll';
-      bills.forEach(([key, docs]) => {
-        const [date, venue] = key.split('|');
-        const year    = date.slice(0, 4);
-        const artists = [...new Set(docs.map(d => d.creator))];
-        const dateShort = formatDate(date).replace(`, ${year}`, '');
-        const card = document.createElement('div');
-        card.className = 'bill-card';
-        card.innerHTML = `
-          <div class="bill-year">${esc(year)}</div>
-          <div class="bill-venue">${esc(venue)}</div>
-          <div class="bill-artists">${esc(artists.join(' · '))}</div>
-          <div class="bill-date">${esc(dateShort)}</div>
-        `;
-        card.addEventListener('click', async () => {
-          card.style.opacity = '0.45';
-          card.style.pointerEvents = 'none';
-          try {
-            const metas    = await Promise.all(docs.map(d => getItemMetadata(d.identifier)));
-            const allTracks = metas.flatMap(meta => buildTracks(meta));
-            if (allTracks.length) player.replaceQueue(allTracks, 0);
-          } catch (e) { console.error('Go to a Show:', e); }
-          finally {
-            card.style.opacity = '';
-            card.style.pointerEvents = '';
-          }
-        });
-        strip.appendChild(card);
-      });
-      sec.appendChild(strip);
-      el.viewDiscover.appendChild(sec);
-    }
-  }
-
-  // ── 5. New to the Archive ──
+  // ── 4. New to the Archive ──
   if (recentShows.length) {
     const sec = discoverSection('New to the Archive', `${recentShows.length} show${recentShows.length !== 1 ? 's' : ''} in last 30 days`);
     const list = document.createElement('ul');
@@ -877,13 +870,13 @@ function renderDiscover() {
     recentShows.forEach(doc => {
       const li = document.createElement('li');
       li.className = 'recent-item';
-      const venue = extractVenueName(doc) || '';
+      const venue   = extractVenueName(doc) || '';
+      const subline = [venue, formatDate(doc.date)].filter(Boolean).join(' · ');
       li.innerHTML = `
         <div class="recent-date">${formatUploadDate(doc.addeddate)}</div>
         <div class="recent-info">
           <div class="recent-title">${esc(doc.creator || doc.title || '')}</div>
-          ${venue ? `<div class="recent-artist">${esc(venue)}</div>` : ''}
-          <div class="recent-artist">${formatDate(doc.date)}</div>
+          ${subline ? `<div class="recent-artist">${esc(subline)}</div>` : ''}
         </div>
       `;
       li.addEventListener('click', () => openConcert(doc));
@@ -1353,8 +1346,8 @@ function init() {
 // ── Helpers ────────────────────────────────────────────────────────
 function formatUploadDate(dateStr) {
   if (!dateStr || dateStr.length < 10) return '';
-  const [y, m, d] = dateStr.slice(0, 10).split('-');
-  return `${m}-${d}-${y.slice(2)}`;
+  const [, m, d] = dateStr.slice(0, 10).split('-');
+  return `${m}-${d}`;
 }
 
 function formatDate(s) {
