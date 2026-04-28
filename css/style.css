@@ -1037,13 +1037,10 @@ button {
   text-overflow: ellipsis;
 }
 
-/* Surprise cards (Discover — horizontal scroll, image-left layout) */
+/* Surprise cards (Discover — horizontal scroll) */
 .surprise-card {
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 230px;
+  width: 150px;
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -1052,14 +1049,6 @@ button {
   transition: background 0.1s;
 }
 .surprise-card:active { background: var(--bg3); }
-.surprise-art {
-  width: 56px;
-  height: 56px;
-  border-radius: 6px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: var(--bg3);
-}
 .surprise-info { min-width: 0; }
 .surprise-artist {
   font-size: 13px;

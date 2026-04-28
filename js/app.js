@@ -814,11 +814,6 @@ function renderDiscover() {
             <div class="bill-venue">${esc(venue)}</div>
             <div class="bill-date">${showCount} show${showCount !== 1 ? 's' : ''}</div>
           `;
-          // Fetch weather and append async
-          fetchDayContext(date).then(wx => {
-            const dateEl = card.querySelector('.bill-date');
-            if (dateEl && wx) dateEl.textContent += ` · ${wx.condition}, ${wx.hi}°`;
-          });
           card.addEventListener('click', async () => {
             card.style.opacity = '0.45';
             card.style.pointerEvents = 'none';
