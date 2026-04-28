@@ -1,15 +1,14 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
-import { fetchWikimediaImages } from './wikimedia.js';
 
 // ── Chicago history ────────────────────────────────────────────────
 let HISTORY = {};
 fetch('./js/chicago-history.json').then(r => r.json()).then(d => { HISTORY = d; }).catch(() => {});
 
-// ── Curated venue photos ───────────────────────────────────────────
-let VENUES = {};
-fetch('./js/venues.json').then(r => r.json()).then(d => { VENUES = d; }).catch(() => {});
+// ── Artist context ─────────────────────────────────────────────────
+let ARTIST_CONTEXT = {};
+fetch('./js/artist-context.json').then(r => r.json()).then(d => { ARTIST_CONTEXT = d; }).catch(() => {});
 
 // ── State ──────────────────────────────────────────────────────────
 const state = {
@@ -537,17 +536,25 @@ function renderConcert(meta) {
   const m = meta.metadata;
   const tracks = buildTracks(meta);
   const faved = isFav(m.identifier);
-
   const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
+  const artUrl = `https://archive.org/services/img/${esc(m.identifier)}`;
+  const dateKey = m.date ? m.date.slice(0, 10) : null;
 
   el.viewConcert.innerHTML = `
-    <div class="concert-photos has-photos" id="concert-photos"></div>
-    <div class="concert-header">
-      <div class="concert-header-date">${formatDate(m.date)}</div>
-      <div class="concert-header-creator">${esc(m.creator || '')}</div>
-      <div class="concert-header-venue">${esc(venueName || '')}</div>
-      <div class="concert-context" id="concert-context"></div>
-      <div class="concert-archive-link">from the archive <a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
+    <div class="concert-hero">
+      <img class="concert-hero-art" id="concert-hero-art"
+           src="${artUrl}" alt="${esc(m.creator || '')}">
+      <div class="concert-hero-meta">
+        <div class="concert-header-date">${formatDate(m.date)}</div>
+        <div class="concert-header-creator${m.creator ? ' concert-artist-link' : ''}" id="concert-artist-link">${esc(m.creator || '')}</div>
+        ${venueName ? `<div class="concert-header-venue">${esc(venueName)}</div>` : ''}
+        <div class="concert-archive-mini"><a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
+      </div>
+    </div>
+    <div id="concert-context-section"></div>
+    <div id="concert-snippets-section"></div>
+    <div id="concert-also-date"></div>
+    <div class="concert-info-block">
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>
@@ -557,50 +564,111 @@ function renderConcert(meta) {
     <ul class="track-list" id="track-list"></ul>
   `;
 
-  // Photos: IA cover (order 1) → venue (order 2) → artist at venue (order 3)
-  const photoStrip = $('concert-photos');
-  const addPhoto = (src, alt, order) => {
-    if (photoStrip.querySelectorAll('.concert-photo-item').length >= 3) return;
-    const img = document.createElement('img');
-    img.className = 'concert-photo-item';
-    img.style.order = order;
-    img.alt = alt;
-    img.src = src;
-    img.onerror = () => img.remove();
-    photoStrip.appendChild(img);
-  };
+  // Lightbox: tap art to see full-size
+  $('concert-hero-art').addEventListener('click', () => {
+    const lb = document.createElement('div');
+    lb.id = 'concert-lightbox';
+    lb.innerHTML = `<img src="${artUrl}" alt="">`;
+    lb.addEventListener('click', () => lb.remove());
+    document.body.appendChild(lb);
+  });
 
-  // IA cover — slot 1 (always present, added immediately)
-  addPhoto(`https://archive.org/services/img/${m.identifier}`, m.creator || '', 1);
-
-  // Venue — slot 2: curated lookup only (no Wikimedia fallback)
-  if (venueName && VENUES[venueName]) {
-    addPhoto(VENUES[venueName], venueName, 2);
+  // Artist name → navigate to Artists view for that artist
+  if (m.creator) {
+    $('concert-artist-link').addEventListener('click', () => {
+      const groups = groupByArtist(state.index);
+      const entry = groups.find(([name]) => name === m.creator);
+      if (entry) state.selectedArtist = { name: m.creator, docs: entry[1] };
+      setMode('artists');
+    });
   }
 
-  // Artist at venue — slot 3: only if we have both artist and venue; no fallback
-  if (m.creator && venueName) {
-    fetchWikimediaImages(`${m.creator} ${venueName}`, 1)
-      .then(imgs => imgs.forEach(i => addPhoto(i.url, m.creator, 3)));
-  }
-
-  if (m.date) {
-    const dateKey = m.date.slice(0, 10);
+  // "On This Date" section: weather + Chicago history
+  if (dateKey) {
     const histEntry = HISTORY[dateKey];
     fetchDayContext(dateKey).then(wx => {
-      const ctx = $('concert-context');
-      if (!ctx) return;
       const parts = [];
       if (wx) {
-        parts.push(`<strong>${wx.condition} and ${wx.hi}°</strong>`);
-        if (wx.sunset) parts.push(`<strong>sunset at ${wx.sunset}</strong>`);
+        parts.push(`${wx.condition} · ${wx.hi}°`);
+        if (wx.sunset) parts.push(`sunset ${wx.sunset}`);
       }
       if (histEntry) {
         const entries = Array.isArray(histEntry) ? histEntry : [histEntry];
-        parts.push(`<strong>${entries.map(e => e.replace(/^\d{4}\s*·\s*/, '')).join('; ')}</strong>`);
+        entries.forEach(e => parts.push(e.replace(/^\d{4}\s*·\s*/, '')));
       }
-      if (parts.length) ctx.innerHTML = 'On this date: ' + parts.join(' | ');
+      if (parts.length) {
+        const sec = $('concert-context-section');
+        if (!sec) return;
+        sec.className = 'concert-date-context';
+        sec.innerHTML = `<span class="concert-date-label">On this date</span>${esc(parts.join(' · '))}`;
+      }
     });
+  }
+
+  // From the Artist section
+  const artistData = m.creator && ARTIST_CONTEXT[m.creator];
+  if (artistData) {
+    const sec = $('concert-snippets-section');
+    if (sec) {
+      sec.className = 'concert-also';
+      let html = `<div class="concert-section-header">From the Artist</div>`;
+      if (artistData.blurb) {
+        html += `<p class="concert-artist-blurb">${esc(artistData.blurb)}</p>`;
+      }
+      (artistData.quotes || []).forEach(q => {
+        html += `
+          <div class="concert-snippet">
+            <div class="concert-snippet-quote">“${esc(q.text)}”</div>
+            ${q.attr ? `<div class="concert-snippet-attr">— ${esc(q.attr)}</div>` : ''}
+          </div>`;
+      });
+      sec.innerHTML = html;
+    }
+  }
+
+  // Also in the archive on this date
+  if (dateKey && state.index) {
+    const sameDate = state.index
+      .filter(d => d.date && d.date.slice(0, 10) === dateKey && d.identifier !== m.identifier)
+      .sort((a, b) => (a.creator || '').localeCompare(b.creator || ''));
+    if (sameDate.length) {
+      const alsoEl = $('concert-also-date');
+      alsoEl.className = 'concert-also';
+
+      const header = document.createElement('div');
+      header.className = 'concert-section-header concert-also-toggle';
+      header.innerHTML = `
+        <span>Also in the archive on ${esc(formatDate(m.date))}</span>
+        <span class="concert-also-toggle-right">
+          <span class="concert-also-count">${sameDate.length}</span>
+          <svg class="concert-also-chevron-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6,9 12,15 18,9"/>
+          </svg>
+        </span>
+      `;
+      alsoEl.appendChild(header);
+
+      const list = document.createElement('div');
+      list.className = 'concert-also-list';
+      sameDate.forEach(doc => {
+        const row = document.createElement('div');
+        row.className = 'concert-also-item';
+        row.innerHTML = `
+          <div class="concert-also-info">
+            <div class="concert-also-creator">${esc(doc.creator || doc.title || '')}</div>
+            <div class="concert-also-title">${esc(doc.title || '')}</div>
+          </div>
+          <svg class="concert-also-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"/>
+          </svg>
+        `;
+        row.addEventListener('click', () => openConcert(doc));
+        list.appendChild(row);
+      });
+      alsoEl.appendChild(list);
+
+      header.addEventListener('click', () => alsoEl.classList.toggle('open'));
+    }
   }
 
   $('concert-fav').addEventListener('click', e => {
