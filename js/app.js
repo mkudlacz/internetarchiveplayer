@@ -803,10 +803,11 @@ function renderDiscover() {
     todayShows.forEach(doc => {
       const card = document.createElement('div');
       card.className = 'today-card';
+      const venueStr = extractVenueName(doc) || '';
       card.innerHTML = `
         <div class="today-card-year">${(doc.date || '').slice(0, 4)}</div>
-        <div class="today-card-title">${esc(doc.title || doc.identifier)}</div>
-        <div class="today-card-artist">${esc(doc.creator || '')}</div>
+        <div class="today-card-title">${esc(doc.creator || doc.title || '')}</div>
+        ${venueStr ? `<div class="today-card-artist">${esc(venueStr)}</div>` : ''}
       `;
       card.addEventListener('click', () => openConcert(doc));
       strip.appendChild(card);
