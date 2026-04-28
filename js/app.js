@@ -718,8 +718,12 @@ function renderDiscover() {
 
   // ── Dive into the Archives ──
   {
-    const randomYear = byYear[Math.floor(Math.random() * byYear.length)][0];
-    const sec = discoverSection('Dive into the Archives', '');
+    const randomIdx = Math.floor(Math.random() * byYear.length);
+    const randomYear = byYear[randomIdx][0];
+    const randomCount = byYear[randomIdx][1].length;
+    const countStr = n => `${n} show${n !== 1 ? 's' : ''}`;
+    const sec = discoverSection('Dive into the Archives', countStr(randomCount));
+    const countEl = sec.querySelector('.discover-section-count');
     const body = document.createElement('div');
     body.className = 'dive-body';
 
@@ -743,6 +747,8 @@ function renderDiscover() {
 
     select.addEventListener('change', () => {
       btn.textContent = `Play a show from ${select.value}`;
+      const entry = byYear.find(([y]) => y === select.value);
+      if (countEl && entry) countEl.textContent = countStr(entry[1].length);
     });
 
     btn.addEventListener('click', async () => {
