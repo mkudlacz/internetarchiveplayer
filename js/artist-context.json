@@ -1,19 +1,25 @@
 {
   "The Feelies": {
-    "blurb": "New Jersey art-rock band formed in 1976, known for frenetic live performances and meticulous studio work. Reunited in 2008 after a 17-year hiatus.",
-    "quotes": [
-      {
-        "text": "We were getting kind of burnt with playing and touring at that point.",
-        "attr": "Glenn Mercer"
-      }
-    ]
+    "2008": {
+      "blurb": "New Jersey art-rock band reunited in 2008 after a 17-year hiatus, known for frenetic live performances and meticulous studio work.",
+      "quotes": [
+        {
+          "text": "We were getting kind of burnt with playing and touring at that point.",
+          "attr": "Glenn Mercer"
+        }
+      ]
+    }
   },
   "Diarrhea Planet": {
-    "blurb": "Nashville rock band active 2009–2018, known for a four-guitar lineup and ferociously energetic live shows.",
-    "quotes": []
+    "2014": {
+      "blurb": "Nashville rock band at peak momentum in 2014, known for their four-guitar lineup and ferociously energetic live shows.",
+      "quotes": []
+    }
   },
   "Marnie Stern": {
-    "blurb": "New York-based guitarist known for her two-handed tapping technique, recorded for Kill Rock Stars. Praised for relentlessly high-energy live performances.",
-    "quotes": []
+    "2012": {
+      "blurb": "New York-based guitarist touring behind her album 'The Chronicles of Marnia', known for two-handed tapping and relentless live energy.",
+      "quotes": []
+    }
   }
 }
