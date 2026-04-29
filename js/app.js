@@ -699,12 +699,11 @@ function renderConcert(meta) {
     <ul class="track-list" id="track-list"></ul>
   `;
 
-  // Lightbox: tap art to see full-size (use original file if available)
+  // Lightbox: tap art to see hi-res original of the thumbnail (skip if unavailable)
   $('concert-hero-art').addEventListener('click', () => {
-    const best = findBestArtFile(meta.files);
-    const hiRes = best
-      ? `https://archive.org/download/${esc(m.identifier)}/${encodeURIComponent(best.name)}`
-      : artUrl;
+    const orig = findHiResArt(meta.files);
+    if (!orig) return;
+    const hiRes = `https://archive.org/download/${esc(m.identifier)}/${encodeURIComponent(orig.name)}`;
     const lb = document.createElement('div');
     lb.id = 'concert-lightbox';
     lb.innerHTML = `<img src="${hiRes}" alt="">`;
@@ -1234,16 +1233,13 @@ function openFilteredList(label, docs) {
   appendConcertRows(el.filteredList, docs, doc => openConcert(doc));
 }
 
-function findBestArtFile(files) {
-  const good = (files || []).filter(f => {
-    if (!['JPEG', 'PNG'].includes(f.format)) return false;
-    const n = (f.name || '').toLowerCase();
-    return !n.includes('spectrogram') && !n.includes('waveform') && !n.includes('thumb');
-  });
-  if (!good.length) return null;
-  const originals = good.filter(f => f.source === 'original');
-  const pool = originals.length ? originals : good;
-  return pool.reduce((best, f) => Number(f.size) > Number(best?.size ?? 0) ? f : best, null);
+function findHiResArt(files) {
+  // services/img serves a JPEG Thumb derivative; its 'original' field is the hi-res source
+  const thumb = (files || []).find(f => f.format === 'JPEG Thumb');
+  if (thumb?.original) {
+    return (files || []).find(f => f.name === thumb.original) || null;
+  }
+  return null;
 }
 
 function groupBy(arr, keyFn) {
