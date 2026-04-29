@@ -13,7 +13,7 @@
   --accent2:     #a07020;
   --accent-dim:  rgba(200,144,42,0.12);
   --danger:      #c0392b;
-  --bar-h:       152px;
+  --bar-h:       178px;
   --header-h:    52px;
   --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
@@ -39,6 +39,7 @@ button {
   display: flex;
   flex-direction: column;
   height: 100dvh;
+  overflow: hidden;
 }
 
 /* ── Header ───────────────────────────────────────────────────────── */
@@ -737,7 +738,6 @@ button {
   flex-shrink: 0;
   background: var(--bg2);
   border-top: 1px solid var(--border);
-  height: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
   display: none;
   flex-direction: column;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -748,7 +748,7 @@ button {
 .bar-body {
   display: flex;
   align-items: center;
-  padding: 12px 14px 8px;
+  padding: 14px 14px 10px;
   gap: 12px;
 }
 
@@ -828,8 +828,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 4px 14px 10px;
+  gap: 8px;
+  padding: 6px 14px 12px;
 }
 
 .bar-btn {
