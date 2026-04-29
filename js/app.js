@@ -699,14 +699,15 @@ function renderConcert(meta) {
     <ul class="track-list" id="track-list"></ul>
   `;
 
-  // Lightbox: tap art to see hi-res original of the thumbnail (skip if unavailable)
+  // Lightbox: tap art to see hi-res original; fall back to thumbnail
   $('concert-hero-art').addEventListener('click', () => {
     const orig = findHiResArt(meta.files);
-    if (!orig) return;
-    const hiRes = `https://archive.org/download/${esc(m.identifier)}/${encodeURIComponent(orig.name)}`;
+    const src = orig
+      ? `https://archive.org/download/${esc(m.identifier)}/${encodeURIComponent(orig.name)}`
+      : artUrl;
     const lb = document.createElement('div');
     lb.id = 'concert-lightbox';
-    lb.innerHTML = `<img src="${hiRes}" alt="">`;
+    lb.innerHTML = `<img src="${src}" alt="">`;
     lb.addEventListener('click', () => lb.remove());
     document.body.appendChild(lb);
   });
