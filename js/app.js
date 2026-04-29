@@ -1243,9 +1243,7 @@ function groupBy(arr, keyFn) {
 
 function extractVenueName(doc) {
   // Try coverage field first, then parse from title
-  if (doc.coverage && doc.coverage.trim()) {
-    return doc.coverage.trim().replace(/\s+on\b.*/i, '');
-  }
+  if (doc.coverage && doc.coverage.trim()) return doc.coverage.trim();
   const title = doc.title || '';
   const m = title.match(/(?:live\s+)?at\s+([^,\d\(\[]+?)(?:\s+\d{4}|\s*[,\(\[\-]|$)/i);
   return m ? m[1].trim() : null;
