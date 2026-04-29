@@ -203,19 +203,34 @@ function updateStatBanner() {
     el.statBanner.textContent = `${count.toLocaleString()} result${count !== 1 ? 's' : ''}`;
     return;
   }
-  if (mode === 'artists' && selectedArtist) {
-    const count = selectedArtist.docs.length;
-    el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedArtist.name}`;
+  if (mode === 'artists') {
+    if (selectedArtist) {
+      const count = selectedArtist.docs.length;
+      el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedArtist.name}`;
+    } else {
+      const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
+      el.statBanner.textContent = `${uniqueArtists} artists · ${index.length} shows`;
+    }
     return;
   }
-  if (mode === 'venue' && selectedVenue) {
-    const docs = index.filter(d => extractVenueName(d) === selectedVenue);
-    el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedVenue}`;
+  if (mode === 'venue') {
+    if (selectedVenue) {
+      const docs = index.filter(d => extractVenueName(d) === selectedVenue);
+      el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedVenue}`;
+    } else {
+      const uniqueVenues = new Set(index.map(d => extractVenueName(d)).filter(Boolean)).size;
+      el.statBanner.textContent = `${uniqueVenues} venues · ${index.length} shows`;
+    }
     return;
   }
-  if (mode === 'year' && selectedYear) {
-    const docs = index.filter(d => (d.date || '').slice(0, 4) === selectedYear);
-    el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedYear}`;
+  if (mode === 'year') {
+    if (selectedYear) {
+      const docs = index.filter(d => (d.date || '').slice(0, 4) === selectedYear);
+      el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedYear}`;
+    } else {
+      const uniqueYears = new Set(index.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
+      el.statBanner.textContent = `${uniqueYears} years · ${index.length} shows`;
+    }
     return;
   }
   if (mode === 'favorites') {
@@ -475,6 +490,10 @@ function renderArtistView() {
   // Left column: artist list
   el.artistList.innerHTML = '';
   const frag = document.createDocumentFragment();
+
+  const allArtistItem = makeArtistItem('All', totalVisible, state.selectedArtist === null);
+  allArtistItem.addEventListener('click', () => selectArtist(null));
+  frag.appendChild(allArtistItem);
 
   groups.forEach(([name, docs]) => {
     const item = makeArtistItem(name, docs.length, state.selectedArtist?.name === name);
@@ -1060,8 +1079,15 @@ function renderYear() {
     }
   }
 
+  const allYearDocs = byYear.flatMap(([, docs]) => docs);
+
   el.yearList.innerHTML = '';
   const frag = document.createDocumentFragment();
+
+  const allYearItem = makeArtistItem('All', allYearDocs.length, state.selectedYear === null);
+  allYearItem.addEventListener('click', () => selectYear(null, allYearDocs));
+  frag.appendChild(allYearItem);
+
   byYear.forEach(([year, docs]) => {
     const item = makeArtistItem(year, docs.length, state.selectedYear === year);
     item.addEventListener('click', () => selectYear(year, docs));
@@ -1069,21 +1095,19 @@ function renderYear() {
   });
   el.yearList.appendChild(frag);
 
-  if (!state.selectedYear && byYear.length) {
-    const [year, docs] = byYear[0];
-    state.selectedYear = year;
-    el.yearList.querySelector('.artist-item')?.classList.add('selected');
-    renderYearConcerts(dateAsc(docs));
-  } else if (state.selectedYear) {
+  if (state.selectedYear) {
     const entry = byYear.find(([y]) => y === state.selectedYear);
     renderYearConcerts(dateAsc(entry?.[1] || []));
+  } else {
+    renderYearConcerts(dateAsc(allYearDocs));
   }
 }
 
 function selectYear(year, docs) {
   state.selectedYear = year;
-  el.yearList.querySelectorAll('.artist-item').forEach(item => {
-    item.classList.toggle('selected', item.querySelector('.artist-name').textContent === year);
+  el.yearList.querySelectorAll('.artist-item').forEach((item, i) => {
+    const isAll = i === 0;
+    item.classList.toggle('selected', year === null ? isAll : item.querySelector('.artist-name').textContent === year);
   });
   renderYearConcerts(dateAsc(docs));
   updateStatBanner();
@@ -1118,7 +1142,14 @@ function renderVenue() {
     el.venueList.innerHTML = '<li class="empty-msg">No venues found.</li>';
     return;
   }
+
+  const allVenueDocs = byVenue.flatMap(([, docs]) => docs);
   const frag = document.createDocumentFragment();
+
+  const allVenueItem = makeArtistItem('All', allVenueDocs.length, state.selectedVenue === null);
+  allVenueItem.addEventListener('click', () => selectVenue(null, allVenueDocs));
+  frag.appendChild(allVenueItem);
+
   byVenue.forEach(([venue, docs]) => {
     const item = makeArtistItem(venue, docs.length, state.selectedVenue === venue);
     item.addEventListener('click', () => selectVenue(venue, docs));
@@ -1126,21 +1157,19 @@ function renderVenue() {
   });
   el.venueList.appendChild(frag);
 
-  if (!state.selectedVenue && byVenue.length) {
-    const [venue, docs] = byVenue[0];
-    state.selectedVenue = venue;
-    el.venueList.querySelector('.artist-item')?.classList.add('selected');
-    renderVenueConcerts(dateAsc(docs));
-  } else if (state.selectedVenue) {
+  if (state.selectedVenue) {
     const entry = byVenue.find(([v]) => v === state.selectedVenue);
     renderVenueConcerts(dateAsc(entry?.[1] || []));
+  } else {
+    renderVenueConcerts(dateAsc(allVenueDocs));
   }
 }
 
 function selectVenue(venue, docs) {
   state.selectedVenue = venue;
-  el.venueList.querySelectorAll('.artist-item').forEach(item => {
-    item.classList.toggle('selected', item.querySelector('.artist-name').textContent === venue);
+  el.venueList.querySelectorAll('.artist-item').forEach((item, i) => {
+    const isAll = i === 0;
+    item.classList.toggle('selected', venue === null ? isAll : item.querySelector('.artist-name').textContent === venue);
   });
   renderVenueConcerts(dateAsc(docs));
   updateStatBanner();
