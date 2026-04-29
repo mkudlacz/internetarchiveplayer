@@ -909,13 +909,27 @@ function renderDiscover() {
     el.viewDiscover.appendChild(sec);
   }
 
+  // Pre-compute multi-artist bill data so Popular can match the tile count
+  const billMap = {};
+  index.forEach(doc => {
+    const date  = (doc.date || '').slice(0, 10);
+    const venue = extractVenueName(doc);
+    if (!date || !venue || !doc.creator) return;
+    const key = `${date}|${venue}`;
+    if (!billMap[key]) billMap[key] = [];
+    billMap[key].push(doc);
+  });
+  const allBills = Object.entries(billMap)
+    .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2);
+  const billLimit = Math.min(Math.max(todayShows.length, 5), 8);
+
   // ── 2. Popular in the Archive ──
   {
     let popularDocs = [];
     const buildPopularStrip = () => {
       const strip = document.createElement('div');
       strip.className = 'discover-h-scroll';
-      const picks = [...popularDocs].sort(() => Math.random() - 0.5).slice(0, 8);
+      const picks = [...popularDocs].sort(() => Math.random() - 0.5).slice(0, billLimit);
       picks.forEach(doc => {
         const card = document.createElement('div');
         card.className = 'popular-card';
@@ -968,21 +982,8 @@ function renderDiscover() {
 
   // ── 3. Time Travel to a Show (multi-artist bills) ──
   {
-    const billMap = {};
-    index.forEach(doc => {
-      const date  = (doc.date || '').slice(0, 10);
-      const venue = extractVenueName(doc);
-      if (!date || !venue || !doc.creator) return;
-      const key = `${date}|${venue}`;
-      if (!billMap[key]) billMap[key] = [];
-      billMap[key].push(doc);
-    });
-    const allBills = Object.entries(billMap)
-      .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2);
-
     if (allBills.length) {
       const buildBillStrip = () => {
-        const billLimit = Math.min(Math.max(todayShows.length, 5), 8);
         const bills = [...allBills].sort(() => Math.random() - 0.5).slice(0, billLimit);
         const strip = document.createElement('div');
         strip.className = 'discover-h-scroll';
@@ -1022,7 +1023,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', `${allBills.length} performances`, () => {
+      const sec = discoverSection('Time Travel to a Show', `${allBills.length} multi-artist lineups`, () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
