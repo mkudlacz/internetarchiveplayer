@@ -700,11 +700,15 @@ function renderConcert(meta) {
     <ul class="track-list" id="track-list"></ul>
   `;
 
-  // Lightbox: tap art to see full-size
+  // Lightbox: tap art to see full-size (use original file if available)
   $('concert-hero-art').addEventListener('click', () => {
+    const best = findBestArtFile(meta.files);
+    const hiRes = best
+      ? `https://archive.org/download/${esc(m.identifier)}/${encodeURIComponent(best.name)}`
+      : artUrl;
     const lb = document.createElement('div');
     lb.id = 'concert-lightbox';
-    lb.innerHTML = `<img src="${artUrl}" alt="">`;
+    lb.innerHTML = `<img src="${hiRes}" alt="">`;
     lb.addEventListener('click', () => lb.remove());
     document.body.appendChild(lb);
   });
@@ -1229,6 +1233,18 @@ function openFilteredList(label, docs) {
   labelEl.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''}`;
   el.filteredList.appendChild(labelEl);
   appendConcertRows(el.filteredList, docs, doc => openConcert(doc));
+}
+
+function findBestArtFile(files) {
+  const good = (files || []).filter(f => {
+    if (!['JPEG', 'PNG'].includes(f.format)) return false;
+    const n = (f.name || '').toLowerCase();
+    return !n.includes('spectrogram') && !n.includes('waveform') && !n.includes('thumb');
+  });
+  if (!good.length) return null;
+  const originals = good.filter(f => f.source === 'original');
+  const pool = originals.length ? originals : good;
+  return pool.reduce((best, f) => Number(f.size) > Number(best?.size ?? 0) ? f : best, null);
 }
 
 function groupBy(arr, keyFn) {
