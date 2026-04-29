@@ -407,7 +407,6 @@ function onSearchInput() {
     state.searching   = state.searchQuery.length > 0;
     state.displayPage = 1;
     if (state.searching) {
-      addToSearchHistory(state.searchQuery);
       renderForSearch();
     } else {
       setMode(state.mode);
@@ -1470,10 +1469,14 @@ function init() {
     if (!el.searchInput.value) showSearchHistory();
   });
   el.searchInput.addEventListener('blur', () => {
+    if (state.searchQuery) addToSearchHistory(state.searchQuery);
     setTimeout(hideSearchHistory, 200);
   });
   el.searchInput.addEventListener('input', onSearchInput);
-  el.searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+  el.searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeSearch(); return; }
+    if (e.key === 'Enter' && state.searchQuery) addToSearchHistory(state.searchQuery);
+  });
 
   el.searchClear.addEventListener('click', () => {
     el.searchInput.value = '';
