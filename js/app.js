@@ -1475,7 +1475,10 @@ function init() {
     const t = player.currentTrack;
     if (!t) return;
     const doc = state.index?.find(d => d.identifier === t.identifier);
-    if (doc) openConcert(doc);
+    if (doc) {
+      el.queueSheet.classList.remove('visible');
+      openConcert(doc);
+    }
   });
 
   el.barProgress.addEventListener('click', e => {
