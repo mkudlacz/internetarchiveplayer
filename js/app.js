@@ -78,6 +78,8 @@ const el = {
   barNext:        $('bar-next'),
   barProgress:    $('bar-progress'),
   barFill:        $('bar-progress-fill'),
+  barElapsed:     $('bar-elapsed'),
+  barRemaining:   $('bar-remaining'),
   barInfo:        $('bar-info'),
   barQueue:       $('bar-queue'),
   queueSheet:     $('queue-sheet'),
@@ -1031,7 +1033,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', `${allBills.length} multi-artist lineups`, () => {
+      const sec = discoverSection('Time Travel to a Show', `${allBills.length} multi-artist shows`, () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
@@ -1343,6 +1345,10 @@ function updateProgress() {
   const { currentTime, duration } = player;
   const pct = duration > 0 ? (currentTime / duration) * 100 : 0;
   el.barFill.style.width = `${pct}%`;
+  el.barElapsed.textContent = formatDuration(currentTime);
+  if (duration > 0) {
+    el.barRemaining.textContent = `-${formatDuration(duration - currentTime)}`;
+  }
 }
 
 function updateTrackHighlight() {
