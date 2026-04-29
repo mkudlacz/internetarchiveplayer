@@ -77,9 +77,10 @@ const el = {
   barFill:        $('bar-progress-fill'),
   barInfo:        $('bar-info'),
   barQueue:       $('bar-queue'),
-  queueSheet:     $('queue-sheet'),
-  queueList:      $('queue-list'),
-  queueClear:     $('queue-clear'),
+  queueSheet:       $('queue-sheet'),
+  queueNowPlaying:  $('queue-now-playing'),
+  queueList:        $('queue-list'),
+  queueClear:       $('queue-clear'),
   queueClose:     $('queue-close'),
   settingsSheet:  $('settings-sheet'),
   settingsClose:  $('settings-close'),
@@ -1224,6 +1225,31 @@ function openQueue() {
 
 function renderQueue() {
   const { queue, currentIndex } = player;
+
+  // Mini concert hero for currently playing show
+  const cur = queue[currentIndex];
+  if (cur) {
+    const doc = state.index?.find(d => d.identifier === cur.identifier);
+    const venue = doc ? extractVenueName(doc) : '';
+    el.queueNowPlaying.style.display = '';
+    el.queueNowPlaying.innerHTML = `
+      <div class="queue-hero">
+        <img class="queue-hero-art" src="https://archive.org/services/img/${esc(cur.identifier)}" alt="">
+        <div class="queue-hero-info">
+          <div class="queue-hero-artist">${esc(cur.artist)}</div>
+          ${venue ? `<div class="queue-hero-venue">${esc(venue)}</div>` : ''}
+          <div class="queue-hero-date">${formatDateWithDay(cur.date)}</div>
+        </div>
+      </div>
+    `;
+    el.queueNowPlaying.querySelector('.queue-hero').addEventListener('click', () => {
+      el.queueSheet.classList.remove('visible');
+      if (doc) openConcert(doc);
+    });
+  } else {
+    el.queueNowPlaying.style.display = 'none';
+  }
+
   if (!queue.length) {
     el.queueList.innerHTML = '<li class="empty-msg">Queue is empty.</li>';
     return;

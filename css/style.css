@@ -756,6 +756,50 @@ button {
 .sheet-close { color: var(--accent); font-size: 15px; padding: 8px 0; }
 .sheet-clear { color: var(--text2); font-size: 15px; padding: 8px 0; }
 
+/* ── Queue now-playing mini hero ─────────────────────────────────── */
+#queue-now-playing {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+.queue-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+.queue-hero:active { opacity: 0.7; }
+.queue-hero-art {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg2);
+}
+.queue-hero-info { flex: 1; min-width: 0; }
+.queue-hero-artist {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.queue-hero-venue {
+  font-size: 12px;
+  color: var(--text2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.queue-hero-date {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
 .queue-list { list-style: none; overflow-y: auto; flex: 1; }
 
 .queue-item {
