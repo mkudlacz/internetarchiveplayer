@@ -26,6 +26,7 @@
     </button>
     <input id="search-input" type="search" placeholder="Artists, titles, dates…"
            autocapitalize="none" autocorrect="off" spellcheck="false">
+    <button id="search-clear" class="search-clear-btn" aria-label="Clear search" style="display:none">✕</button>
     <div class="header-actions">
       <button id="settings-btn" aria-label="Settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -44,6 +45,9 @@
     <button class="mode-btn" data-mode="year">Years</button>
     <button class="mode-btn" data-mode="favorites">Favs</button>
   </nav>
+
+  <!-- ── Search history dropdown ── -->
+  <div id="search-history" style="display:none"></div>
 
   <!-- ── Stat banner (persists across all tabs) ── -->
   <div id="stat-banner" style="display:none"></div>
@@ -115,14 +119,22 @@
 
   <!-- ── Now Playing Bar ── -->
   <div id="now-playing-bar" role="region" aria-label="Now playing">
-    <div class="bar-progress" id="bar-progress">
-      <div class="bar-progress-fill" id="bar-progress-fill"></div>
-    </div>
     <div class="bar-body">
       <img id="bar-art" class="bar-art" src="" alt="" aria-hidden="true">
-      <div class="bar-info" id="bar-info">
-        <div class="bar-title" id="bar-title">–</div>
-        <div class="bar-artist" id="bar-artist"></div>
+      <div class="bar-main">
+        <div class="bar-info" id="bar-info">
+          <div class="bar-title" id="bar-title">–</div>
+          <div class="bar-artist" id="bar-artist"></div>
+        </div>
+        <div class="bar-scrub-row">
+          <span class="bar-time" id="bar-elapsed">0:00</span>
+          <div class="bar-scrub-track" id="bar-progress">
+            <div class="bar-scrub-rail">
+              <div class="bar-progress-fill" id="bar-progress-fill"></div>
+            </div>
+          </div>
+          <span class="bar-time" id="bar-remaining"></span>
+        </div>
       </div>
       <div class="bar-controls">
         <button class="bar-btn small" id="bar-prev" aria-label="Previous">

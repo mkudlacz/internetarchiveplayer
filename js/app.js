@@ -38,6 +38,8 @@ const el = {
   backBtn:        $('back-btn'),
   settingsBtn:    $('settings-btn'),
   searchInput:    $('search-input'),
+  searchClear:    $('search-clear'),
+  searchHistory:  $('search-history'),
   modeBar:        $('mode-bar'),
   sortBar:        $('sort-bar'),
   statBanner:     $('stat-banner'),
@@ -76,6 +78,8 @@ const el = {
   barNext:        $('bar-next'),
   barProgress:    $('bar-progress'),
   barFill:        $('bar-progress-fill'),
+  barElapsed:     $('bar-elapsed'),
+  barRemaining:   $('bar-remaining'),
   barInfo:        $('bar-info'),
   barQueue:       $('bar-queue'),
   queueSheet:     $('queue-sheet'),
@@ -366,16 +370,23 @@ function closeSearch() {
   state.searching = false;
   state.searchQuery = '';
   el.searchInput.value = '';
+  el.searchClear.style.display = 'none';
+  hideSearchHistory();
   setMode(state.mode);
 }
 
 function onSearchInput() {
+  const val = el.searchInput.value;
+  el.searchClear.style.display = val ? '' : 'none';
+  if (!val) { showSearchHistory(); return; }
+  hideSearchHistory();
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => {
-    state.searchQuery = el.searchInput.value.trim();
+    state.searchQuery = val.trim();
     state.searching   = state.searchQuery.length > 0;
     state.displayPage = 1;
     if (state.searching) {
+      addToSearchHistory(state.searchQuery);
       renderForSearch();
     } else {
       setMode(state.mode);
@@ -394,6 +405,56 @@ function filterDocs(docs, query) {
 
 function filterIndex(query) {
   return filterDocs(state.index, query);
+}
+
+// ── Search history ─────────────────────────────────────────────────
+const SEARCH_HISTORY_KEY = 'searchHistory';
+
+function getSearchHistory() {
+  try { return JSON.parse(localStorage.getItem(SEARCH_HISTORY_KEY) || '[]'); }
+  catch { return []; }
+}
+
+function addToSearchHistory(q) {
+  if (!q || q.length < 2) return;
+  let h = getSearchHistory().filter(s => s !== q);
+  h.unshift(q);
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(h.slice(0, 10)));
+}
+
+function showSearchHistory() {
+  const h = getSearchHistory();
+  if (!h.length) { el.searchHistory.style.display = 'none'; return; }
+  el.searchHistory.innerHTML = '';
+  h.forEach(q => {
+    const item = document.createElement('div');
+    item.className = 'search-history-item';
+    item.innerHTML = `<span class="search-history-icon">↩</span><span>${esc(q)}</span>`;
+    item.addEventListener('click', () => {
+      el.searchInput.value = q;
+      el.searchClear.style.display = '';
+      hideSearchHistory();
+      state.searchQuery = q;
+      state.searching = true;
+      state.displayPage = 1;
+      renderForSearch();
+      updateStatBanner();
+    });
+    el.searchHistory.appendChild(item);
+  });
+  const clearBtn = document.createElement('div');
+  clearBtn.className = 'search-history-clear';
+  clearBtn.textContent = 'Clear recent searches';
+  clearBtn.addEventListener('click', () => {
+    localStorage.removeItem(SEARCH_HISTORY_KEY);
+    hideSearchHistory();
+  });
+  el.searchHistory.appendChild(clearBtn);
+  el.searchHistory.style.display = 'block';
+}
+
+function hideSearchHistory() {
+  el.searchHistory.style.display = 'none';
 }
 
 // ── Artist column view ─────────────────────────────────────────────
@@ -563,6 +624,7 @@ async function openConcert(doc) {
   el.sortBar.classList.add('hidden');
   el.statBanner.style.display = 'none';
   el.searchInput.classList.add('search-hidden');
+  el.searchClear.style.display = 'none';
   showView('concert');
   el.viewConcert.innerHTML = '<div class="spinner"></div>';
   el.viewConcert.scrollTop = 0;
@@ -722,7 +784,7 @@ function renderConcert(meta) {
     e.currentTarget.classList.toggle('active', active);
   });
 
-  $('play-all').addEventListener('click', () => player.replaceQueue(tracks, 0));
+  $('play-all').addEventListener('click', () => { player.replaceQueue(tracks, 0); openQueue(); });
   $('queue-all').addEventListener('click', () => tracks.forEach(t => player.addToEnd(t)));
 
   const trackList = $('track-list');
@@ -810,6 +872,17 @@ function renderDiscover() {
         <div class="today-card-title">${esc(doc.creator || doc.title || '')}</div>
         ${venueStr ? `<div class="today-card-artist">${esc(venueStr)}</div>` : ''}
       `;
+      const todayFav = document.createElement('button');
+      todayFav.className = `card-fav${isFav(doc.identifier) ? ' active' : ''}`;
+      todayFav.title = 'Favorite';
+      todayFav.textContent = '♥';
+      todayFav.addEventListener('click', e => {
+        e.stopPropagation();
+        const active = toggleFav(doc.identifier);
+        todayFav.classList.toggle('active', active);
+        updateStatBanner();
+      });
+      card.appendChild(todayFav);
       card.addEventListener('click', () => openConcert(doc));
       strip.appendChild(card);
     });
@@ -839,6 +912,17 @@ function renderDiscover() {
             ${plays ? `<div class="popular-card-plays">${esc(plays)}</div>` : ''}
           </div>
         `;
+        const popFav = document.createElement('button');
+        popFav.className = `card-fav${isFav(doc.identifier) ? ' active' : ''}`;
+        popFav.title = 'Favorite';
+        popFav.textContent = '♥';
+        popFav.addEventListener('click', e => {
+          e.stopPropagation();
+          const active = toggleFav(doc.identifier);
+          popFav.classList.toggle('active', active);
+          updateStatBanner();
+        });
+        card.appendChild(popFav);
         card.addEventListener('click', () => openConcert(doc));
         strip.appendChild(card);
       });
@@ -1095,6 +1179,7 @@ function openFilteredList(label, docs) {
   el.modeBar.classList.add('hidden');
   el.sortBar.classList.add('hidden');
   el.searchInput.classList.add('search-hidden');
+  el.searchClear.style.display = 'none';
   showView('filtered');
   el.viewFiltered.scrollTop = 0;
 
@@ -1217,8 +1302,13 @@ function updateBar() {
 }
 
 function updateProgress() {
-  const pct = player.duration > 0 ? (player.currentTime / player.duration) * 100 : 0;
+  const { currentTime, duration } = player;
+  const pct = duration > 0 ? (currentTime / duration) * 100 : 0;
   el.barFill.style.width = `${pct}%`;
+  el.barElapsed.textContent = formatDuration(currentTime);
+  if (duration > 0) {
+    el.barRemaining.textContent = `-${formatDuration(duration - currentTime)}`;
+  }
 }
 
 function updateTrackHighlight() {
@@ -1321,9 +1411,20 @@ function init() {
   // Search (persistent input — no toggle)
   el.searchInput.addEventListener('focus', () => {
     el.searchInput.placeholder = SEARCH_PLACEHOLDERS[state.mode] || 'Search…';
+    if (!el.searchInput.value) showSearchHistory();
+  });
+  el.searchInput.addEventListener('blur', () => {
+    setTimeout(hideSearchHistory, 200);
   });
   el.searchInput.addEventListener('input', onSearchInput);
   el.searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+  el.searchClear.addEventListener('click', () => {
+    el.searchInput.value = '';
+    el.searchClear.style.display = 'none';
+    hideSearchHistory();
+    closeSearch();
+  });
 
   // Player bar
   el.barPlay.addEventListener('click', () => { player.toggle(); updateBar(); });
@@ -1331,7 +1432,10 @@ function init() {
   el.barNext.addEventListener('click', () => player.next());
   el.barQueue.addEventListener('click', openQueue);
   el.barInfo.addEventListener('click', () => {
-    if (player.queue.length) openQueue();
+    const t = player.currentTrack;
+    if (!t) return;
+    const doc = state.index?.find(d => d.identifier === t.identifier);
+    if (doc) openConcert(doc);
   });
 
   el.barProgress.addEventListener('click', e => {
