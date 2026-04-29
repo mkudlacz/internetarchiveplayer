@@ -13,7 +13,7 @@
   --accent2:     #a07020;
   --accent-dim:  rgba(200,144,42,0.12);
   --danger:      #c0392b;
-  --bar-h:       92px;
+  --bar-h:       76px;
   --header-h:    52px;
   --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
@@ -767,29 +767,24 @@ button {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+  justify-content: center;
 }
 
 .bar-info { min-width: 0; cursor: pointer; }
 
-/* Scrub row */
-.bar-scrub-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+/* Progress strip — pinned to bottom of bar */
 .bar-scrub-track {
-  flex: 1;
-  height: 28px;
+  height: 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .bar-scrub-rail {
   width: 100%;
   height: 3px;
   background: var(--border);
-  border-radius: 2px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -799,25 +794,17 @@ button {
   width: 0%;
   transition: width 0.5s linear;
 }
-.bar-time {
-  font-size: 10px;
-  color: var(--text3);
-  white-space: nowrap;
-  flex-shrink: 0;
-  min-width: 28px;
-}
-#bar-remaining { text-align: right; }
 
 .bar-title {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .bar-artist {
   font-size: 12px;
-  color: var(--text2);
+  color: var(--accent);
   white-space: nowrap;
   overflow: hidden;
 }
