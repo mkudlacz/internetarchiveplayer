@@ -1196,11 +1196,24 @@ function updateBar() {
   if (!t) { el.nowBar.classList.remove('visible'); return; }
   el.nowBar.classList.add('visible');
   el.barArt.src = `https://archive.org/services/img/${t.identifier}`;
-  el.barTitle.textContent  = t.title;
-  const datePart = t.date ? formatDate(t.date) : '';
+  el.barTitle.textContent = t.title;
+  const datePart   = t.date ? formatDate(t.date) : '';
   const artistPart = t.artist || '';
-  el.barArtist.textContent = [artistPart, datePart].filter(Boolean).join(' · ');
-  el.barPlay.innerHTML     = player.paused ? svgPlay() : svgPause();
+  const doc        = state.index?.find(d => d.identifier === t.identifier);
+  const venuePart  = doc ? (extractVenueName(doc) || '') : '';
+  const subtext    = [artistPart, datePart, venuePart].filter(Boolean).join(' · ');
+  const inner      = document.createElement('span');
+  inner.className  = 'bar-artist-inner';
+  inner.textContent = subtext;
+  el.barArtist.innerHTML = '';
+  el.barArtist.appendChild(inner);
+  requestAnimationFrame(() => {
+    if (inner.offsetWidth > el.barArtist.clientWidth) {
+      inner.textContent = subtext + '      ' + subtext;
+      inner.classList.add('scrolling');
+    }
+  });
+  el.barPlay.innerHTML = player.paused ? svgPlay() : svgPause();
 }
 
 function updateProgress() {
