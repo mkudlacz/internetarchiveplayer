@@ -197,7 +197,7 @@ function updateStatBanner() {
   const index = state.index;
   if (!index) { el.statBanner.style.display = 'none'; return; }
   el.statBanner.style.display = '';
-  const { mode, searching, searchQuery, selectedArtist, selectedVenue, selectedYear } = state;
+  const { mode, searching, searchQuery, selectedArtist, selectedVenue, selectedYear, selectedFavArtist } = state;
   if (searching && searchQuery) {
     const count = filterIndex(searchQuery).length;
     el.statBanner.textContent = `${count.toLocaleString()} result${count !== 1 ? 's' : ''}`;
@@ -234,8 +234,14 @@ function updateStatBanner() {
     return;
   }
   if (mode === 'favorites') {
-    const count = getFavIds().length;
-    el.statBanner.textContent = `${count} favorited show${count !== 1 ? 's' : ''}`;
+    const ids = new Set(getFavIds());
+    const total = ids.size;
+    if (selectedFavArtist) {
+      const count = index.filter(d => ids.has(d.identifier) && d.creator === selectedFavArtist).length;
+      el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedFavArtist}`;
+    } else {
+      el.statBanner.textContent = `${total} favorited show${total !== 1 ? 's' : ''}`;
+    }
     return;
   }
   const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
@@ -597,6 +603,11 @@ function renderFavorites() {
   }
 
   const frag = document.createDocumentFragment();
+
+  const allFavItem = makeArtistItem('All', favDocs.length, state.selectedFavArtist === null);
+  allFavItem.addEventListener('click', () => selectFavArtist(null, favDocs));
+  frag.appendChild(allFavItem);
+
   groups.forEach(([name, docs]) => {
     const item = makeArtistItem(name, docs.length, state.selectedFavArtist === name);
     item.addEventListener('click', () => selectFavArtist(name, docs));
@@ -604,23 +615,22 @@ function renderFavorites() {
   });
   el.favArtistList.appendChild(frag);
 
-  if (!state.selectedFavArtist && groups.length) {
-    const [name, docs] = groups[0];
-    state.selectedFavArtist = name;
-    el.favArtistList.querySelector('.artist-item')?.classList.add('selected');
-    renderFavConcerts(dateAsc(docs));
-  } else if (state.selectedFavArtist) {
+  if (state.selectedFavArtist) {
     const entry = groups.find(([n]) => n === state.selectedFavArtist);
     renderFavConcerts(dateAsc(entry?.[1] || []));
+  } else {
+    renderFavConcerts(dateAsc(favDocs));
   }
 }
 
 function selectFavArtist(name, docs) {
   state.selectedFavArtist = name;
-  el.favArtistList.querySelectorAll('.artist-item').forEach(item => {
-    item.classList.toggle('selected', item.querySelector('.artist-name').textContent === name);
+  el.favArtistList.querySelectorAll('.artist-item').forEach((item, i) => {
+    const isAll = i === 0;
+    item.classList.toggle('selected', name === null ? isAll : item.querySelector('.artist-name').textContent === name);
   });
   renderFavConcerts(dateAsc(docs));
+  updateStatBanner();
 }
 
 function renderFavConcerts(docs) {
@@ -1233,7 +1243,9 @@ function groupBy(arr, keyFn) {
 
 function extractVenueName(doc) {
   // Try coverage field first, then parse from title
-  if (doc.coverage && doc.coverage.trim()) return doc.coverage.trim();
+  if (doc.coverage && doc.coverage.trim()) {
+    return doc.coverage.trim().replace(/\s+on$/i, '');
+  }
   const title = doc.title || '';
   const m = title.match(/(?:live\s+)?at\s+([^,\d\(\[]+?)(?:\s+\d{4}|\s*[,\(\[\-]|$)/i);
   return m ? m[1].trim() : null;
