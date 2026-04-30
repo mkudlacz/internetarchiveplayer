@@ -1004,8 +1004,7 @@ function renderDiscover() {
       .then(data => {
         popularDocs = (data.response?.docs ?? []).filter(d => (d.downloads || 0) >= 400);
         const countEl = popularSec.querySelector('.discover-section-count');
-        const displayed = Math.min(billLimit, popularDocs.length);
-        if (countEl) countEl.textContent = popularDocs.length ? `${displayed} of ${popularDocs.length} shows with 400+ plays` : '';
+        if (countEl) countEl.textContent = '';
         if (popularDocs.length) popularSec.appendChild(buildPopularStrip());
       })
       .catch(() => {});
@@ -1054,7 +1053,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', `${billLimit} of ${allBills.length} multi-artist shows`, () => {
+      const sec = discoverSection('Time Travel to a Show', '', () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
