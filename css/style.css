@@ -833,15 +833,15 @@ button {
 }
 
 .bar-btn {
-  width: 44px; height: 44px;
+  width: 52px; height: 52px;
   display: flex; align-items: center; justify-content: center;
   color: var(--text);
   border-radius: 50%;
 }
 .bar-btn:active { background: var(--bg3); }
 .bar-btn.primary { color: var(--accent); }
-.bar-btn svg { width: 26px; height: 26px; display: block; }
-.bar-btn.small svg { width: 22px; height: 22px; }
+.bar-btn svg { width: 32px; height: 32px; display: block; }
+.bar-btn.small svg { width: 26px; height: 26px; }
 
 /* ── Queue Sheet ──────────────────────────────────────────────────── */
 #queue-sheet {
@@ -1108,7 +1108,7 @@ button {
 .today-card {
   flex-shrink: 0;
   width: 140px;
-  height: 100px;
+  height: 120px;
   overflow: hidden;
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -1141,6 +1141,15 @@ button {
 .today-card-artist {
   font-size: 11px;
   color: var(--text2);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.today-card-weather {
+  font-size: 10px;
+  color: var(--text3);
   margin-top: 4px;
   white-space: nowrap;
   overflow: hidden;

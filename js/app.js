@@ -260,6 +260,13 @@ async function loadIndex() {
   try {
     state.index = await loadFullIndex(state.collectionId);
     state.displayPage = 1;
+    const uniqueArtistCount = new Set(state.index.map(d => d.creator).filter(Boolean)).size;
+    const discoverBtn = el.modeBar.querySelector('[data-mode="discover"]');
+    if (discoverBtn) {
+      const hide = uniqueArtistCount < 5;
+      discoverBtn.style.display = hide ? 'none' : '';
+      if (hide && state.mode === 'discover') setMode('artists');
+    }
     updateStatBanner();
     if (state.mode === 'discover') renderDiscover();
     else if (state.mode === 'artists') renderArtistView();
@@ -684,6 +691,7 @@ function renderConcert(meta) {
         ${venueName ? `<div class="concert-header-venue">${esc(venueName)}</div>` : ''}
         <div class="concert-archive-mini"><a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
         ${m.addeddate ? `<div class="concert-upload-date">uploaded ${formatUploadDate(m.addeddate)}</div>` : ''}
+        ${m.downloads ? `<div class="concert-upload-date">${Number(m.downloads).toLocaleString()} plays</div>` : ''}
       </div>
     </div>
     <div id="concert-context-section"></div>
@@ -904,6 +912,15 @@ function renderDiscover() {
         <div class="today-card-title">${esc(doc.creator || doc.title || '')}</div>
         ${venueStr ? `<div class="today-card-artist">${esc(venueStr)}</div>` : ''}
       `;
+      if (doc.date) {
+        fetchDayContext(doc.date.slice(0, 10)).then(wx => {
+          if (!wx) return;
+          const wxEl = document.createElement('div');
+          wxEl.className = 'today-card-weather';
+          wxEl.textContent = `${wx.hi}°F · ${wx.condition}`;
+          card.insertBefore(wxEl, card.querySelector('.card-fav') || null);
+        }).catch(() => {});
+      }
       const todayFav = document.createElement('button');
       todayFav.className = `card-fav${isFav(doc.identifier) ? ' active' : ''}`;
       todayFav.title = 'Favorite';
@@ -987,7 +1004,8 @@ function renderDiscover() {
       .then(data => {
         popularDocs = (data.response?.docs ?? []).filter(d => (d.downloads || 0) >= 400);
         const countEl = popularSec.querySelector('.discover-section-count');
-        if (countEl) countEl.textContent = popularDocs.length ? `${popularDocs.length} shows` : '';
+        const displayed = Math.min(billLimit, popularDocs.length);
+        if (countEl) countEl.textContent = popularDocs.length ? `${displayed} of ${popularDocs.length} shows with 400+ plays` : '';
         if (popularDocs.length) popularSec.appendChild(buildPopularStrip());
       })
       .catch(() => {});
@@ -1036,7 +1054,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', `${allBills.length} multi-artist shows`, () => {
+      const sec = discoverSection('Time Travel to a Show', `${billLimit} of ${allBills.length} multi-artist shows`, () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
