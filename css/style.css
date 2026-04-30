@@ -748,7 +748,6 @@ button {
 .bar-body {
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 10px 14px 6px;
   gap: 12px;
 }
@@ -763,9 +762,8 @@ button {
 }
 
 .bar-info {
-  flex: 0 1 auto;
+  flex: 1;
   min-width: 0;
-  max-width: 220px;
   cursor: pointer;
 }
 
