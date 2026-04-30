@@ -73,6 +73,7 @@ const el = {
   barArt:         $('bar-art'),
   barTitle:       $('bar-title'),
   barArtist:      $('bar-artist'),
+  barDiscover:    $('bar-discover'),
   barPlay:        $('bar-play'),
   barPrev:        $('bar-prev'),
   barNext:        $('bar-next'),
@@ -1500,6 +1501,10 @@ function init() {
   });
 
   // Player bar
+  el.barDiscover.addEventListener('click', () => {
+    el.queueSheet.classList.remove('visible');
+    setMode('discover');
+  });
   el.barPlay.addEventListener('click', () => { player.toggle(); updateBar(); });
   el.barPrev.addEventListener('click', () => player.prev());
   el.barNext.addEventListener('click', () => player.next());

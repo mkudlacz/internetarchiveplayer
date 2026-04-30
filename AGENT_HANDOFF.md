@@ -286,7 +286,7 @@ Each tab has:
 Three-row layout:
 1. `.bar-body`: 52×52 artwork, title, artist/date/venue subtitle
 2. `.bar-scrub-wrap`: progress rail + elapsed/remaining times
-3. `.bar-controls`: prev, play/pause, next, queue — buttons are 52×52px touch targets; play SVG 32px, prev/next SVGs 26px
+3. `.bar-controls`: discover, prev, play/pause, next, queue — buttons are 52×52px touch targets; play SVG 32px, prev/next/discover/queue SVGs 26px. Discover button (compass icon, `#bar-discover`) is leftmost; tapping closes the queue sheet and calls `setMode('discover')`.
 
 **Artist subtitle:** Combines artist, formatted date, and venue (looked up from `state.index` by identifier). If the combined text overflows `.bar-artist`, the `inner` span is duplicated with spaces and gets `.scrolling` class for a CSS marquee animation (16s linear infinite).
 
