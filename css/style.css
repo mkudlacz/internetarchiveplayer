@@ -906,26 +906,35 @@ button {
 #settings-sheet.visible,
 #help-sheet.visible { display: flex; }
 
-.help-row {
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.5;
-  padding: 5px 0;
+.help-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 8px 0;
 }
-.help-tag {
-  font-size: 12px;
-  font-weight: 600;
+.help-feature-icon {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
   background: var(--bg3);
-  color: var(--text);
-  border-radius: 5px;
-  padding: 1px 7px;
-  margin-right: 4px;
-  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
 }
-.help-icon {
-  color: var(--text3);
-  margin-right: 4px;
+.help-feature-icon svg { width: 16px; height: 16px; }
+.help-feature-body { min-width: 0; }
+.help-feature-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.help-feature-desc {
   font-size: 13px;
+  color: var(--text2);
+  line-height: 1.45;
 }
 
 .settings-body {
