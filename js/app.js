@@ -691,7 +691,7 @@ function renderConcert(meta) {
         ${venueName ? `<div class="concert-header-venue">${esc(venueName)}</div>` : ''}
         <div class="concert-archive-mini"><a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
         ${m.addeddate ? `<div class="concert-upload-date">uploaded ${formatUploadDate(m.addeddate)}</div>` : ''}
-        ${m.downloads ? `<div class="concert-upload-date">${Number(m.downloads).toLocaleString()} plays</div>` : ''}
+        ${(()=>{ const d = state.index?.find(x=>x.identifier===m.identifier); const n = d?.downloads || m.downloads; return n ? `<div class="concert-upload-date">${Number(n).toLocaleString()} plays</div>` : ''; })()}
       </div>
     </div>
     <div id="concert-context-section"></div>
