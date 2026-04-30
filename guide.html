@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No Tape Left Behind — Guide</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:  #c8902a;
+      --bg:      #0e0e0e;
+      --bg2:     #1a1a1a;
+      --bg3:     #252525;
+      --border:  #2e2e2e;
+      --text:    #e8e8e8;
+      --text2:   #888;
+      --text3:   #555;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    .guide-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .guide-logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .guide-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .guide-subtitle {
+      font-size: 15px;
+      color: var(--text2);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 52px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Feature rows ── */
+    .feature {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 22px;
+      align-items: flex-start;
+    }
+    .feature-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .feature-icon svg { width: 18px; height: 18px; }
+    .feature-body {}
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* ── Tab pills ── */
+    .tab-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tab-pill {
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      color: var(--text2);
+    }
+    .tab-pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    /* ── Control bar diagram ── */
+    .control-bar {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 20px 20px;
+      margin-bottom: 20px;
+    }
+    .control-bar-scrub {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-bottom: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .control-bar-scrub-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 38%;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .control-bar-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text3);
+      margin-bottom: 14px;
+    }
+    .control-bar-buttons {
+      display: flex;
+      align-items: center;
+    }
+    .ctrl-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: none;
+      border: none;
+      color: var(--text2);
+      position: relative;
+    }
+    .ctrl-btn svg { width: 22px; height: 22px; }
+    .ctrl-btn.primary { color: var(--accent); }
+    .ctrl-btn.primary svg { width: 28px; height: 28px; }
+    .ctrl-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0 auto;
+    }
+    .ctrl-label {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      color: var(--text3);
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+    .ctrl-wrap {
+      position: relative;
+      padding-bottom: 22px;
+    }
+
+    /* ── Steps ── */
+    .steps { list-style: none; }
+    .steps li {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: var(--bg3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 1px;
+    }
+
+    /* ── Tips ── */
+    .tip {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    .tip strong { color: var(--text); }
+
+    /* ── Install callout ── */
+    .install-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .install-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--bg3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .install-icon svg { width: 22px; height: 22px; }
+    .install-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .install-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    strong { color: var(--text); }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <div class="guide-header">
+    <div class="guide-logo">No Tape Left Behind</div>
+    <div class="guide-title">A Field Guide</div>
+    <div class="guide-subtitle">Thousands of live recordings, one tap away.</div>
+  </div>
+
+  <!-- ── 1. Getting Around ── -->
+  <div class="section">
+    <div class="section-label">Getting Around</div>
+
+    <div class="tab-row">
+      <div class="tab-pill active">Discover</div>
+      <div class="tab-pill">Artists</div>
+      <div class="tab-pill">Venues</div>
+      <div class="tab-pill">Years</div>
+      <div class="tab-pill">Favs</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <div class="feature-title">Discover</div>
+        <div class="feature-desc">Your daily digest. Shows recorded on today's date, the most-played recordings, multi-artist nights, and recent arrivals to the archive.</div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <div class="feature-title">Artists · Venues · Years</div>
+        <div class="feature-desc">Browse the full archive by category. Tap any item on the left to filter the shows on the right. "All" at the top shows everything.</div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <div class="feature-title">Favs</div>
+        <div class="feature-desc">All your saved shows, organized by artist. Tap the ♥ on any show, card, or list item to add it.</div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <div class="feature-title">Search</div>
+        <div class="feature-desc">The search bar filters whichever tab you're on — artists, venues, dates, or show titles. Tap the ✕ or press Escape to clear.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Playing a Show ── -->
+  <div class="section">
+    <div class="section-label">Playing a Show</div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div>Tap any show in a list or card to open its detail page.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>Tap <strong>Play All</strong> to load the whole concert, or tap any track in the list to start from that point. Either one opens the Now Playing bar at the bottom.</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div><strong>Add to Queue</strong> appends all the tracks without interrupting what's playing.</div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div>Long-press any track for more options: <strong>Play Next</strong>, <strong>Add to Queue</strong>, or <strong>Go to Artist</strong>.</div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div>Tap the album art thumbnail on the detail page to open a full-screen lightbox with a higher-resolution image.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── 3. Now Playing Bar ── -->
+  <div class="section">
+    <div class="section-label">Now Playing Bar</div>
+
+    <div class="control-bar">
+      <!-- Scrub -->
+      <div class="control-bar-scrub"><div class="control-bar-scrub-fill"></div></div>
+      <div class="control-bar-times"><span>14:22</span><span>-23:08</span></div>
+
+      <!-- Buttons -->
+      <div class="control-bar-buttons">
+        <!-- Compass -->
+        <div class="ctrl-wrap">
+          <div class="ctrl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76"/>
+            </svg>
+          </div>
+          <div class="ctrl-label">Discover</div>
+        </div>
+
+        <!-- Transport center -->
+        <div class="ctrl-center">
+          <div class="ctrl-wrap">
+            <div class="ctrl-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="19,20 9,12 19,4"/>
+                <rect x="5" y="4" width="2" height="16"/>
+              </svg>
+            </div>
+            <div class="ctrl-label">Prev</div>
+          </div>
+          <div class="ctrl-wrap">
+            <div class="ctrl-btn primary">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <div class="ctrl-label">Play/Pause</div>
+          </div>
+          <div class="ctrl-wrap">
+            <div class="ctrl-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5,4 15,12 5,20"/>
+                <rect x="17" y="4" width="2" height="16"/>
+              </svg>
+            </div>
+            <div class="ctrl-label">Next</div>
+          </div>
+        </div>
+
+        <!-- Queue -->
+        <div class="ctrl-wrap" style="margin-left:auto">
+          <div class="ctrl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </div>
+          <div class="ctrl-label">Queue</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-body">
+        <div class="feature-desc">Tap the <strong>title or artist text</strong> in the bar to jump directly to that show's detail page — works even when the Queue is open.</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-body">
+        <div class="feature-desc">Tap anywhere on the <strong>scrub bar</strong> to seek within the current track. The elapsed and remaining times are shown on either side.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. Queue ── -->
+  <div class="section">
+    <div class="section-label">Queue</div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div>Tap the Queue button (≡) in the Now Playing bar to open it.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>Drag any track up or down to reorder it.</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div>Long-press any queue item for options: <strong>Go to Show</strong>, <strong>Go to Artist</strong>, or <strong>Delete</strong> from the queue.</div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div>Tap <strong>Clear</strong> in the top-left to remove everything and start fresh.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── 5. Favorites ── -->
+  <div class="section">
+    <div class="section-label">Favorites</div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--accent)">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <div class="feature-title">Saving a show</div>
+        <div class="feature-desc">Tap the ♥ on any show detail page, list item, or Discover card. The heart turns amber. Tap again to unsave.</div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+          <polyline points="16 6 12 2 8 6"/>
+          <line x1="12" y1="2" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <div class="feature-title">Backup &amp; restore</div>
+        <div class="feature-desc">All favorites are stored locally on your device. To back up or move them to another browser, go to <strong>Settings → Export Favorites Link</strong> and copy the URL. Paste it into <strong>Settings → Restore</strong> on any device to import.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. Tips ── -->
+  <div class="section">
+    <div class="section-label">Tips</div>
+
+    <div class="tip">
+      <strong>Time Travel to a Show</strong> — tap any card in this Discover section to instantly load a complete multi-artist night into your queue. Great for discovering acts you'd never search for directly.
+    </div>
+
+    <div class="tip">
+      <strong>Today in the Archive</strong> — every show in the collection recorded on today's date, across all years. Scroll through to see who played on this date in 1989, 1994, 2003…
+    </div>
+
+    <div class="tip">
+      <strong>Popular</strong> — the most-played shows in the collection. Results are reshuffled each visit. Tap the ↺ button to reshuffle again without reloading.
+    </div>
+
+    <div class="tip">
+      <strong>Concert detail</strong> — each show page includes an "On This Date" note with the weather that night and a Chicago historical event from the same date, when available.
+    </div>
+
+    <div class="tip">
+      <strong>Search is tab-aware</strong> — searching on the Artists tab finds artists, searching on Venues finds venues. Switch tabs to change what you're filtering.
+    </div>
+  </div>
+
+  <!-- ── Install ── -->
+  <div class="section">
+    <div class="section-label">Install as an App</div>
+    <div class="install-box">
+      <div class="install-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+          <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="install-title">Add to Home Screen</div>
+        <div class="install-desc">Open the app in <strong>Safari</strong> on iPhone, tap the Share button, then tap <strong>Add to Home Screen</strong>. This gives you a full-screen experience with no browser chrome, lock-screen controls, and the app icon on your home screen.</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

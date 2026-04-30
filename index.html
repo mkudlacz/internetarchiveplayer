@@ -28,6 +28,13 @@
            autocapitalize="none" autocorrect="off" spellcheck="false">
     <button id="search-clear" class="search-clear-btn" aria-label="Clear search" style="display:none">✕</button>
     <div class="header-actions">
+      <button id="help-btn" aria-label="Help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+        </svg>
+      </button>
       <button id="settings-btn" aria-label="Settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="3"/>
@@ -236,6 +243,73 @@
       <button class="settings-save" id="favs-import">Restore</button>
       <p class="settings-hint">Paste your exported link above and tap Restore.</p>
     </div>
+  </div>
+</div>
+
+<!-- ── Help Sheet ── -->
+<div id="help-sheet" role="dialog" aria-label="Help" aria-modal="true">
+  <div class="sheet-header">
+    <h2>Help</h2>
+    <button class="sheet-close" id="help-close">Done</button>
+  </div>
+  <div class="settings-body">
+
+    <div>
+      <div class="settings-label">Getting Around</div>
+      <div class="help-row"><span class="help-tag">Discover</span> Your daily digest — today's shows, popular picks, multi-artist nights, and new arrivals.</div>
+      <div class="help-row"><span class="help-tag">Artists · Venues · Years</span> Browse the full archive by category. Tap any item to filter the shows on the right.</div>
+      <div class="help-row"><span class="help-tag">Favs</span> All your saved shows, organized by artist.</div>
+      <div class="help-row"><span class="help-tag">Search</span> Filters the current tab — artists, venues, dates, or titles.</div>
+    </div>
+
+    <div class="settings-divider"></div>
+
+    <div>
+      <div class="settings-label">Playing a Show</div>
+      <div class="help-row">Tap any show to open its detail page.</div>
+      <div class="help-row">Tap <strong>Play All</strong> to load the whole concert, or tap any track to start from there.</div>
+      <div class="help-row">Long-press a track for <strong>Play Next</strong>, <strong>Add to Queue</strong>, or <strong>Go to Artist</strong>.</div>
+    </div>
+
+    <div class="settings-divider"></div>
+
+    <div>
+      <div class="settings-label">Now Playing Bar</div>
+      <div class="help-row"><span class="help-icon">◎</span> <strong>Compass</strong> — returns you to Discover.</div>
+      <div class="help-row"><span class="help-icon">⏮ ⏯ ⏭</span> Previous, Play/Pause, Next.</div>
+      <div class="help-row"><span class="help-icon">≡</span> <strong>Queue</strong> — opens your queue.</div>
+      <div class="help-row">Tap the <strong>title or artist</strong> to jump to that show's detail page.</div>
+      <div class="help-row">Tap the <strong>scrub bar</strong> to seek within the current track.</div>
+    </div>
+
+    <div class="settings-divider"></div>
+
+    <div>
+      <div class="settings-label">Queue</div>
+      <div class="help-row"><strong>Play All</strong> replaces the queue. <strong>Add to Queue</strong> appends to it.</div>
+      <div class="help-row">Drag items to reorder. Long-press a queue item for <strong>Go to Show</strong>, <strong>Go to Artist</strong>, or <strong>Delete</strong>.</div>
+      <div class="help-row"><strong>Clear</strong> removes everything from the queue.</div>
+    </div>
+
+    <div class="settings-divider"></div>
+
+    <div>
+      <div class="settings-label">Favorites</div>
+      <div class="help-row">Tap <strong>♥</strong> on any show, card, or list item to save it.</div>
+      <div class="help-row">All saved shows live in the <strong>Favs</strong> tab, organized by artist.</div>
+      <div class="help-row">Settings → <strong>Export Favorites Link</strong> to back up or share your collection. <strong>Restore</strong> to import on another device.</div>
+    </div>
+
+    <div class="settings-divider"></div>
+
+    <div>
+      <div class="settings-label">Tips</div>
+      <div class="help-row"><strong>Time Travel</strong> — tap a card to instantly load a full multi-artist night into your queue.</div>
+      <div class="help-row"><strong>Today in the Archive</strong> — every show recorded on today's date, across all years in the collection.</div>
+      <div class="help-row"><strong>Popular</strong> — most-played shows in the collection. Tap ↺ to reshuffle.</div>
+      <div class="help-row"><strong>Install as app</strong> — tap Share → Add to Home Screen in Safari for the full native experience.</div>
+    </div>
+
   </div>
 </div>
 

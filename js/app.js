@@ -36,6 +36,9 @@ const $ = id => document.getElementById(id);
 
 const el = {
   backBtn:        $('back-btn'),
+  helpBtn:        $('help-btn'),
+  helpSheet:      $('help-sheet'),
+  helpClose:      $('help-close'),
   settingsBtn:    $('settings-btn'),
   searchInput:    $('search-input'),
   searchClear:    $('search-clear'),
@@ -1544,6 +1547,8 @@ function init() {
   el.queueClose.addEventListener('click', () => el.queueSheet.classList.remove('visible'));
 
   // Settings
+  el.helpBtn.addEventListener('click', () => el.helpSheet.classList.add('visible'));
+  el.helpClose.addEventListener('click', () => el.helpSheet.classList.remove('visible'));
   el.settingsBtn.addEventListener('click', openSettings);
   el.settingsClose.addEventListener('click', () => el.settingsSheet.classList.remove('visible'));
   el.favsExport.addEventListener('click', () => {
