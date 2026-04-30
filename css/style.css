@@ -827,10 +827,11 @@ button {
 .bar-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   padding: 2px 14px 12px;
 }
+#bar-prev  { margin-left: auto; }
+#bar-queue { margin-left: auto; }
 
 .bar-btn {
   width: 52px; height: 52px;
