@@ -216,15 +216,15 @@ Search history: `localStorage` key `'searchHistory'`, max 10 entries (oldest rem
 Rendered by `renderDiscover()`. Four sections, each a `.discover-section` with a `.discover-h-scroll` strip or vertical list.
 
 **1. Today in the Archive**
-Filters `state.index` where `date.slice(5,10) === 'MM-DD'` (today's month-day). Shows horizontal scroll strip of `.today-card` cards. Each card: large year in accent color, creator name, venue, and a 4th line with weather (temp + condition from `fetchDayContext`). Weather is fetched async after card renders; card height is fixed at 120px to accommodate it. Fav button bottom-right. Sorted chronologically (earliest year first).
+Filters `state.index` where `date.slice(5,10) === 'MM-DD'` (today's month-day). Shows horizontal scroll strip of `.today-card` cards. Each card is flex-column (120px tall): large year in accent color, bold creator name (13px, weight 600, flex:1), venue, and weather pinned to the bottom via `margin-top:auto` (temp + condition from `fetchDayContext`, async). Fav button bottom-right (absolute). Sorted chronologically (earliest year first).
 
 **2. Popular in the Archive**
-Separate IA fetch (async, renders when data arrives). Filters to `downloads >= 400`. Randomly shuffles, shows up to `billLimit` cards (min 5, max 8, derived from todayShows.length). `.popular-card` includes a thumbnail image, artist, city, date, play count. Fav button. Has a refresh button (re-shuffles without re-fetching). Section count reads `"N of M shows with 400+ plays"` where N = displayed, M = total qualifying.
+Separate IA fetch (async, renders when data arrives). Filters to `downloads >= 400`. Randomly shuffles, shows up to `billLimit` cards (min 5, max 8, derived from todayShows.length). `.popular-card` includes a thumbnail image, artist, city, date, play count. Fav button. Has a refresh button (↺) in the section header — no count text shown.
 
 `billLimit = Math.min(Math.max(todayShows.length, 5), 8)` — this controls how many cards appear in both Popular and Time Travel sections.
 
 **3. Time Travel to a Show**
-Multi-artist bills: concerts that share the same date AND venue (extracted via `extractVenueName`), with at least 2 distinct creators. Built from the main index client-side. `billMap` is a `{date|venue}` → docs[] map. Filtered to entries with `>= 2 distinct creators`. Shows `.bill-card` cards with date, artist names (font-size auto-shrinks to fit), and venue. Section count reads `"N of M multi-artist shows"` where N = displayed (billLimit), M = total qualifying.
+Multi-artist bills: concerts that share the same date AND venue (extracted via `extractVenueName`), with at least 2 distinct creators. Built from the main index client-side. `billMap` is a `{date|venue}` → docs[] map. Filtered to entries with `>= 2 distinct creators`. Shows `.bill-card` cards with date, artist names (font-size auto-shrinks to fit), and venue. Has a refresh button (↺) in the section header — no count text shown.
 
 Tapping a bill card: fetches full metadata for ALL shows on that bill simultaneously (`Promise.all`), builds combined track list, loads into player, opens queue sheet. Card dims during load.
 
@@ -286,7 +286,7 @@ Each tab has:
 Three-row layout:
 1. `.bar-body`: 52×52 artwork, title, artist/date/venue subtitle
 2. `.bar-scrub-wrap`: progress rail + elapsed/remaining times
-3. `.bar-controls`: discover, prev, play/pause, next, queue — buttons are 52×52px touch targets; play SVG 32px, prev/next/discover/queue SVGs 26px. Discover button (compass icon, `#bar-discover`) is leftmost; tapping closes the queue sheet and calls `setMode('discover')`.
+3. `.bar-controls`: five buttons in a spread layout — compass (`#bar-discover`) pinned left, prev/play/next centered via `margin-left:auto` on `#bar-prev` and `#bar-queue`, queue pinned right. Buttons are 52×52px; play SVG 32px, others 26px. Compass is a Feather-style circle + rotated diamond needle (stroke, not fill). Tapping compass closes queue sheet and calls `setMode('discover')`.
 
 **Artist subtitle:** Combines artist, formatted date, and venue (looked up from `state.index` by identifier). If the combined text overflows `.bar-artist`, the `inner` span is duplicated with spaces and gets `.scrolling` class for a CSS marquee animation (16s linear infinite).
 
