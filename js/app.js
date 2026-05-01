@@ -255,7 +255,28 @@ function updateStatBanner() {
 }
 
 function collectionName() {
-  return state.collectionId === DEFAULT_COLLECTION ? 'No Tape Left Behind Collection' : state.collectionId;
+  if (state.collectionId === DEFAULT_COLLECTION) return 'No Tape Left Behind Collection';
+  const pretty = state.collectionId.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  return pretty + ' Collection';
+}
+
+async function updatePageTitle() {
+  if (state.collectionId === DEFAULT_COLLECTION) {
+    document.title = 'No Tape Left Behind Collection';
+    return;
+  }
+  try {
+    const meta = await getItemMetadata(state.collectionId);
+    let name = meta.metadata?.title;
+    if (name) {
+      if (!name.toLowerCase().includes('collection')) name += ' Collection';
+    } else {
+      name = collectionName();
+    }
+    document.title = name;
+  } catch {
+    document.title = collectionName();
+  }
 }
 
 // ── Index loading ──────────────────────────────────────────────────
@@ -272,6 +293,7 @@ async function loadIndex() {
       if (hide && state.mode === 'discover') setMode('artists');
     }
     updateStatBanner();
+    updatePageTitle();
     if (state.mode === 'discover') renderDiscover();
     else if (state.mode === 'artists') renderArtistView();
     else if (state.mode === 'year') renderYear();
