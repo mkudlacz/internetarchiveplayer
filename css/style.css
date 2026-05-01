@@ -906,6 +906,10 @@ button {
 #settings-sheet.visible,
 #help-sheet.visible { display: flex; }
 
+.help-body {
+  padding: 16px 16px 12px;
+  gap: 4px;
+}
 .help-feature {
   display: flex;
   gap: 14px;
