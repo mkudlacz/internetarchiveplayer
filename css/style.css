@@ -936,6 +936,15 @@ button {
   color: var(--text2);
   line-height: 1.45;
 }
+.help-guide-link {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 12px 0 4px;
+  opacity: 0.85;
+}
 
 .settings-body {
   padding: 24px 16px;
