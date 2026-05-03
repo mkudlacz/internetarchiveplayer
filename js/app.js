@@ -1018,7 +1018,7 @@ function renderDiscover() {
       return strip;
     };
 
-    const popularSec = discoverSection('Popular in the Archive', '', () => {
+    const popularSec = discoverSection('Popular in the Archive', '…', () => {
       const old = popularSec.querySelector('.discover-h-scroll');
       const neo = buildPopularStrip();
       if (old) popularSec.replaceChild(neo, old); else popularSec.appendChild(neo);
@@ -1030,7 +1030,7 @@ function renderDiscover() {
       .then(data => {
         popularDocs = (data.response?.docs ?? []).filter(d => (d.downloads || 0) >= 400);
         const countEl = popularSec.querySelector('.discover-section-count');
-        if (countEl) countEl.textContent = '';
+        if (countEl) countEl.textContent = `${Math.min(billLimit, popularDocs.length)} of ${popularDocs.length}`;
         if (popularDocs.length) popularSec.appendChild(buildPopularStrip());
       })
       .catch(() => {});
@@ -1045,7 +1045,10 @@ function renderDiscover() {
         strip.className = 'discover-h-scroll';
         bills.forEach(([key, docs]) => {
           const [date, venue] = key.split('|');
-          const artists = [...new Set(docs.map(d => d.creator))];
+          // headliner (highest plays) first on card, last in queue
+          const byPlaysDesc = [...docs].sort((a, b) => (Number(b.downloads) || 0) - (Number(a.downloads) || 0));
+          const byPlaysAsc  = [...docs].sort((a, b) => (Number(a.downloads) || 0) - (Number(b.downloads) || 0));
+          const artists = [...new Set(byPlaysDesc.map(d => d.creator))];
           const card = document.createElement('div');
           card.className = 'bill-card';
           card.innerHTML = `
@@ -1057,7 +1060,7 @@ function renderDiscover() {
             card.style.opacity = '0.45';
             card.style.pointerEvents = 'none';
             try {
-              const metas     = await Promise.all(docs.map(d => getItemMetadata(d.identifier)));
+              const metas     = await Promise.all(byPlaysAsc.map(d => getItemMetadata(d.identifier)));
               const allTracks = metas.flatMap(meta => buildTracks(meta));
               if (allTracks.length) { player.replaceQueue(allTracks, 0); openQueue(); }
             } catch (e) { console.error('Time Travel to a Show:', e); }
@@ -1079,7 +1082,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', '', () => {
+      const sec = discoverSection('Time Travel to a Show', `${billLimit} of ${allBills.length}`, () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
