@@ -1295,12 +1295,16 @@ button {
 /* Uploads by Year chart */
 .upload-chart-wrap { padding: 2px 16px 14px; }
 .upload-chart-svg  { width: 100%; height: 56px; display: block; }
-.upload-chart-range {
-  display: flex;
-  justify-content: space-between;
+.upload-chart-labels {
+  position: relative;
+  height: 16px;
+  margin-top: 4px;
+}
+.upload-chart-year-label {
+  position: absolute;
   font-size: 10px;
   color: var(--text3);
-  margin-top: 5px;
+  white-space: nowrap;
 }
 
 /* Recently Added list */

@@ -1111,12 +1111,25 @@ function renderDiscover() {
         const opacity = (0.28 + 0.72 * (counts[i] / maxC)).toFixed(2);
         return `<rect x="${x.toFixed(1)}" y="${(VH - h).toFixed(1)}" width="${Math.max(1, barW).toFixed(1)}" height="${h.toFixed(1)}" fill="var(--accent)" opacity="${opacity}" rx="1"/>`;
       }).join('');
+      // Year labels: find first month index for each year
+      const yearStarts = {};
+      months.forEach((mo, i) => {
+        const yr = mo.slice(0, 4);
+        if (!(yr in yearStarts)) yearStarts[yr] = i;
+      });
+      const n = months.length;
+      const yearLabels = Object.entries(yearStarts).map(([yr, idx], j) => {
+        const pct = (idx / n * 100).toFixed(1);
+        const transform = j === 0 ? '' : 'transform:translateX(-50%)';
+        return `<span class="upload-chart-year-label" style="left:${pct}%;${transform}">${yr}</span>`;
+      }).join('');
+
       const sec = discoverSection('Uploads by Month', '');
       const wrap = document.createElement('div');
       wrap.className = 'upload-chart-wrap';
       wrap.innerHTML = `
         <svg viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="none" class="upload-chart-svg">${bars}</svg>
-        <div class="upload-chart-range"><span>${months[0].slice(0, 4)}</span><span>${months[months.length - 1].slice(0, 4)}</span></div>
+        <div class="upload-chart-labels">${yearLabels}</div>
       `;
       sec.appendChild(wrap);
       el.viewDiscover.appendChild(sec);
