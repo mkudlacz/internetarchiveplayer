@@ -1094,29 +1094,29 @@ function renderDiscover() {
 
   // ── 4. Uploads by Year chart ──
   {
-    const yearCounts = {};
+    const monthCounts = {};
     index.forEach(d => {
-      const yr = d.addeddate?.slice(0, 4);
-      if (yr) yearCounts[yr] = (yearCounts[yr] || 0) + 1;
+      const mo = d.addeddate?.slice(0, 7);
+      if (mo) monthCounts[mo] = (monthCounts[mo] || 0) + 1;
     });
-    const years = Object.keys(yearCounts).sort();
-    if (years.length >= 2) {
-      const counts = years.map(y => yearCounts[y]);
+    const months = Object.keys(monthCounts).sort();
+    if (months.length >= 2) {
+      const counts = months.map(m => monthCounts[m]);
       const maxC = Math.max(...counts);
-      const VW = 400, VH = 56, gap = 2;
-      const barW = (VW - gap * (years.length - 1)) / years.length;
-      const bars = years.map((yr, i) => {
-        const h = Math.max(3, (counts[i] / maxC) * VH);
+      const VW = 400, VH = 56, gap = 1;
+      const barW = (VW - gap * (months.length - 1)) / months.length;
+      const bars = months.map((mo, i) => {
+        const h = Math.max(2, (counts[i] / maxC) * VH);
         const x = i * (barW + gap);
         const opacity = (0.28 + 0.72 * (counts[i] / maxC)).toFixed(2);
         return `<rect x="${x.toFixed(1)}" y="${(VH - h).toFixed(1)}" width="${Math.max(1, barW).toFixed(1)}" height="${h.toFixed(1)}" fill="var(--accent)" opacity="${opacity}" rx="1"/>`;
       }).join('');
-      const sec = discoverSection('Uploads by Year', '');
+      const sec = discoverSection('Uploads by Month', '');
       const wrap = document.createElement('div');
       wrap.className = 'upload-chart-wrap';
       wrap.innerHTML = `
         <svg viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="none" class="upload-chart-svg">${bars}</svg>
-        <div class="upload-chart-range"><span>${years[0]}</span><span>${years[years.length - 1]}</span></div>
+        <div class="upload-chart-range"><span>${months[0].slice(0, 4)}</span><span>${months[months.length - 1].slice(0, 4)}</span></div>
       `;
       sec.appendChild(wrap);
       el.viewDiscover.appendChild(sec);
