@@ -7,7 +7,7 @@ export const DEFAULT_COLLECTION = 'aadamjacobs';
 // With ~2500 items × 5 fields this is ~200KB — acceptable for a personal app.
 export async function loadFullIndex(collectionId) {
   const params = new URLSearchParams({
-    q:      `collection:${collectionId}`,
+    q:      `collection:${collectionId} AND mediatype:audio`,
     output: 'json',
     rows:   9999,
     fl:     'identifier,title,creator,date,year,coverage,addeddate,downloads',
