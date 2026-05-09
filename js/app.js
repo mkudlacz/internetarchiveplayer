@@ -22,7 +22,9 @@ const state = {
   displayPage:  1,
   searching:    false,
   searchQuery:  '',
-  selectedArtist:   null,   // { name, docs[] } or null = all
+  selectedArtist:     null,   // { name, docs[] } or null = all
+  artistLetterFilter: null,   // 'A'–'Z' or null = all
+  venueLetterFilter:  null,   // 'A'–'Z' or null = all
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
   selectedVenue:    null,   // venue string
@@ -55,6 +57,8 @@ const el = {
   viewConcert:    $('view-concert'),
   concertList:    $('concert-list'),
   loadMore:       $('load-more'),
+  artistAlphaBar: $('artist-alpha-bar'),
+  venueAlphaBar:  $('venue-alpha-bar'),
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
   viewDiscover:       $('view-discover'),
@@ -174,6 +178,8 @@ function setMode(mode) {
   state.searching = false;
   state.searchQuery = '';
   el.searchInput.value = '';
+  if (mode !== 'artists') state.artistLetterFilter = null;
+  if (mode !== 'venue')   state.venueLetterFilter  = null;
 
   if (mode === 'library') {
     showView('library');
@@ -512,16 +518,28 @@ function hideSearchHistory() {
 
 // ── Artist column view ─────────────────────────────────────────────
 function renderArtistView() {
-  let groups = groupByArtist(state.index);
+  const allGroups = groupByArtist(state.index);
+  let groups = allGroups;
 
   if (state.searching && state.searchQuery) {
     const q = state.searchQuery.toLowerCase();
     groups = groups.filter(([name]) => name.toLowerCase().includes(q));
-    // Clear selected artist if it was filtered away
     if (state.selectedArtist && !groups.find(([name]) => name === state.selectedArtist.name)) {
       state.selectedArtist = null;
     }
   }
+
+  if (state.artistLetterFilter) {
+    const letter = state.artistLetterFilter;
+    groups = groups.filter(([name]) =>
+      name.replace(/^the\s+/i, '').charAt(0).toUpperCase() === letter
+    );
+    if (state.selectedArtist && !groups.find(([name]) => name === state.selectedArtist.name)) {
+      state.selectedArtist = null;
+    }
+  }
+
+  renderAlphaPills(allGroups);
 
   const totalVisible = groups.reduce((sum, [, docs]) => sum + docs.length, 0);
 
@@ -542,6 +560,45 @@ function renderArtistView() {
 
   // Right column
   renderArtistConcerts(groups.flatMap(([, docs]) => docs));
+}
+
+function renderAlphaPills(allGroups) {
+  const letters = new Set();
+  allGroups.forEach(([name]) => {
+    const ch = name.replace(/^the\s+/i, '').charAt(0).toUpperCase();
+    if (ch >= 'A' && ch <= 'Z') letters.add(ch);
+  });
+  const sorted = [...letters].sort();
+
+  el.artistAlphaBar.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  const allPill = makeAlphaPill('All', state.artistLetterFilter === null);
+  allPill.addEventListener('click', () => {
+    state.artistLetterFilter = null;
+    state.selectedArtist = null;
+    renderArtistView();
+  });
+  frag.appendChild(allPill);
+
+  sorted.forEach(letter => {
+    const pill = makeAlphaPill(letter, state.artistLetterFilter === letter);
+    pill.addEventListener('click', () => {
+      state.artistLetterFilter = letter;
+      state.selectedArtist = null;
+      renderArtistView();
+    });
+    frag.appendChild(pill);
+  });
+
+  el.artistAlphaBar.appendChild(frag);
+}
+
+function makeAlphaPill(label, active) {
+  const btn = document.createElement('button');
+  btn.className = 'alpha-pill' + (active ? ' active' : '');
+  btn.textContent = label;
+  return btn;
 }
 
 function makeArtistItem(name, count, selected) {
@@ -1229,9 +1286,10 @@ function renderYearConcerts(docs) {
 // ── Venue tab ──────────────────────────────────────────────────────
 function renderVenue() {
   const index = state.index;
-  let byVenue = groupBy(index, d => extractVenueName(d) || '__none__')
+  const allByVenue = groupBy(index, d => extractVenueName(d) || '__none__')
     .filter(([v]) => v !== '__none__')
     .sort((a, b) => a[0].localeCompare(b[0]));
+  let byVenue = allByVenue;
 
   if (state.searching && state.searchQuery) {
     const q = state.searchQuery.toLowerCase();
@@ -1240,6 +1298,18 @@ function renderVenue() {
       state.selectedVenue = null;
     }
   }
+
+  if (state.venueLetterFilter) {
+    const letter = state.venueLetterFilter;
+    byVenue = byVenue.filter(([v]) =>
+      v.replace(/^the\s+/i, '').charAt(0).toUpperCase() === letter
+    );
+    if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
+      state.selectedVenue = null;
+    }
+  }
+
+  renderVenueAlphaPills(allByVenue);
 
   el.venueList.innerHTML = '';
   if (!byVenue.length) {
@@ -1277,6 +1347,38 @@ function selectVenue(venue, docs) {
   });
   renderVenueConcerts(dateAsc(docs));
   updateStatBanner();
+}
+
+function renderVenueAlphaPills(allByVenue) {
+  const letters = new Set();
+  allByVenue.forEach(([v]) => {
+    const ch = v.replace(/^the\s+/i, '').charAt(0).toUpperCase();
+    if (ch >= 'A' && ch <= 'Z') letters.add(ch);
+  });
+  const sorted = [...letters].sort();
+
+  el.venueAlphaBar.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  const allPill = makeAlphaPill('All', state.venueLetterFilter === null);
+  allPill.addEventListener('click', () => {
+    state.venueLetterFilter = null;
+    state.selectedVenue = null;
+    renderVenue();
+  });
+  frag.appendChild(allPill);
+
+  sorted.forEach(letter => {
+    const pill = makeAlphaPill(letter, state.venueLetterFilter === letter);
+    pill.addEventListener('click', () => {
+      state.venueLetterFilter = letter;
+      state.selectedVenue = null;
+      renderVenue();
+    });
+    frag.appendChild(pill);
+  });
+
+  el.venueAlphaBar.appendChild(frag);
 }
 
 function renderVenueConcerts(docs) {

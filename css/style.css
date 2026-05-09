@@ -330,9 +330,71 @@ button {
 #load-more:disabled { color: var(--text3); }
 
 /* ── Artist Column View ───────────────────────────────────────────── */
-#view-artists, #view-year, #view-venue {
+#view-artists {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#view-venue {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* A–Z pill bar in Venue tab */
+#venue-alpha-bar {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+}
+#venue-alpha-bar::-webkit-scrollbar { display: none; }
+
+#view-year {
   display: flex;
   height: 100%;
+}
+
+/* A–Z pill bar in Artists tab */
+#artist-alpha-bar {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+}
+#artist-alpha-bar::-webkit-scrollbar { display: none; }
+
+.alpha-pill {
+  flex-shrink: 0;
+  padding: 5px 11px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--bg2);
+  color: var(--text2);
+  cursor: pointer;
+  border: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+.alpha-pill.active {
+  background: var(--accent);
+  color: #fff;
+}
+.alpha-pill:active { opacity: 0.7; }
+
+.artist-two-col {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
 }
 
 .artist-col {
