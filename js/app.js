@@ -25,6 +25,7 @@ const state = {
   selectedArtist:     null,   // { name, docs[] } or null = all
   artistLetterFilter: null,   // 'A'–'Z' or null = all
   venueLetterFilter:  null,   // 'A'–'Z' or null = all
+  favLetterFilter:    null,   // 'A'–'Z' or null = all
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
   selectedVenue:    null,   // venue string
@@ -59,6 +60,7 @@ const el = {
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
   venueAlphaBar:  $('venue-alpha-bar'),
+  favAlphaBar:    $('fav-alpha-bar'),
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
   viewDiscover:       $('view-discover'),
@@ -179,7 +181,8 @@ function setMode(mode) {
   state.searchQuery = '';
   el.searchInput.value = '';
   if (mode !== 'artists') state.artistLetterFilter = null;
-  if (mode !== 'venue')   state.venueLetterFilter  = null;
+  if (mode !== 'venue')      state.venueLetterFilter = null;
+  if (mode !== 'favorites')  state.favLetterFilter   = null;
 
   if (mode === 'library') {
     showView('library');
@@ -672,7 +675,8 @@ function renderFavorites() {
   const ids = new Set(getFavIds());
   const favDocs = state.index.filter(d => ids.has(d.identifier));
 
-  let groups = groupByArtist(favDocs).sort((a, b) => a[0].localeCompare(b[0]));
+  const allGroups = groupByArtist(favDocs).sort((a, b) => a[0].localeCompare(b[0]));
+  let groups = allGroups;
 
   if (state.searching && state.searchQuery) {
     const q = state.searchQuery.toLowerCase();
@@ -680,6 +684,25 @@ function renderFavorites() {
     if (state.selectedFavArtist && !groups.find(([name]) => name === state.selectedFavArtist)) {
       state.selectedFavArtist = null;
     }
+  }
+
+  if (state.favLetterFilter) {
+    const letter = state.favLetterFilter;
+    groups = groups.filter(([name]) =>
+      name.replace(/^the\s+/i, '').charAt(0).toUpperCase() === letter
+    );
+    if (state.selectedFavArtist && !groups.find(([name]) => name === state.selectedFavArtist)) {
+      state.selectedFavArtist = null;
+    }
+  }
+
+  // Only show pill bar when collection is large enough to warrant it
+  if (allGroups.length > 40) {
+    renderFavAlphaPills(allGroups);
+    el.favAlphaBar.style.display = '';
+  } else {
+    el.favAlphaBar.style.display = 'none';
+    state.favLetterFilter = null;
   }
 
   el.favArtistList.innerHTML = '';
@@ -710,6 +733,38 @@ function renderFavorites() {
   } else {
     renderFavConcerts(dateAsc(favDocs));
   }
+}
+
+function renderFavAlphaPills(allGroups) {
+  const letters = new Set();
+  allGroups.forEach(([name]) => {
+    const ch = name.replace(/^the\s+/i, '').charAt(0).toUpperCase();
+    if (ch >= 'A' && ch <= 'Z') letters.add(ch);
+  });
+  const sorted = [...letters].sort();
+
+  el.favAlphaBar.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  const allPill = makeAlphaPill('All', state.favLetterFilter === null);
+  allPill.addEventListener('click', () => {
+    state.favLetterFilter = null;
+    state.selectedFavArtist = null;
+    renderFavorites();
+  });
+  frag.appendChild(allPill);
+
+  sorted.forEach(letter => {
+    const pill = makeAlphaPill(letter, state.favLetterFilter === letter);
+    pill.addEventListener('click', () => {
+      state.favLetterFilter = letter;
+      state.selectedFavArtist = null;
+      renderFavorites();
+    });
+    frag.appendChild(pill);
+  });
+
+  el.favAlphaBar.appendChild(frag);
 }
 
 function selectFavArtist(name, docs) {

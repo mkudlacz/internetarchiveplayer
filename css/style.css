@@ -243,8 +243,20 @@ button {
 
 #view-favorites {
   display: flex;
+  flex-direction: column;
   height: 100%;
 }
+
+#fav-alpha-bar {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+}
+#fav-alpha-bar::-webkit-scrollbar { display: none; }
 
 /* ── Concert List (shared by library, favorites, search) ──────────── */
 .concert-list { list-style: none; }
