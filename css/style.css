@@ -1617,8 +1617,8 @@ button {
 }
 
 @keyframes donate-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%, 12% { transform: translateX(0); }
+  100%    { transform: translateX(-50%); }
 }
 
 .ia-donate-collection {
