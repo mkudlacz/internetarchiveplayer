@@ -309,12 +309,20 @@ function updateStatBanner() {
   }
   if (mode === 'favorites') {
     const ids = new Set(getFavIds());
-    const total = ids.size;
+    const favDocs = index.filter(d => ids.has(d.identifier));
     if (selectedFavArtist) {
-      const count = index.filter(d => ids.has(d.identifier) && d.creator === selectedFavArtist).length;
+      const count = favDocs.filter(d => d.creator === selectedFavArtist).length;
       el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedFavArtist}`;
+    } else if (state.favLetterFilter) {
+      const L = state.favLetterFilter;
+      const filtered = favDocs.filter(d => (d.creator || '').replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
+      const ua = new Set(filtered.map(d => d.creator).filter(Boolean)).size;
+      el.statBanner.textContent = `${ua} artist${ua !== 1 ? 's' : ''} · ${filtered.length} show${filtered.length !== 1 ? 's' : ''} · ${L}`;
     } else {
-      el.statBanner.textContent = `${total} favorited show${total !== 1 ? 's' : ''}`;
+      const ua = new Set(favDocs.map(d => d.creator).filter(Boolean)).size;
+      const uv = new Set(favDocs.map(d => extractVenueName(d)).filter(Boolean)).size;
+      const uy = new Set(favDocs.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
+      el.statBanner.textContent = `${favDocs.length} show${favDocs.length !== 1 ? 's' : ''} · ${ua} artist${ua !== 1 ? 's' : ''} · ${uv} venue${uv !== 1 ? 's' : ''} · ${uy} year${uy !== 1 ? 's' : ''}`;
     }
     return;
   }
@@ -819,6 +827,7 @@ function renderFavAlphaPills(allGroups) {
     state.favLetterFilter = null;
     state.selectedFavArtist = null;
     renderFavorites();
+    updateStatBanner();
   });
   frag.appendChild(allPill);
 
@@ -828,6 +837,7 @@ function renderFavAlphaPills(allGroups) {
       state.favLetterFilter = letter;
       state.selectedFavArtist = null;
       renderFavorites();
+      updateStatBanner();
     });
     frag.appendChild(pill);
   });
