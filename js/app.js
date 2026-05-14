@@ -11,35 +11,6 @@ let ARTIST_CONTEXT = {};
 fetch('./js/artist-context.json').then(r => r.json()).then(d => { ARTIST_CONTEXT = d; }).catch(() => {});
 
 // ── Chicago community area → chibarproject neighborhood mapping ────
-const COMMUNITY_NEIGHBORHOODS = {
-  'ROGERS PARK':     ['East Rogers Park', 'West Rogers Park'],
-  'WEST RIDGE':      ['West Rogers Park'],
-  'UPTOWN':          ['Uptown', 'Buena Park Neighbors', 'Bowmanville'],
-  'LINCOLN SQUARE':  ['Lincoln Square', 'Ravenswood', 'Ravenswood Gardens'],
-  'NORTH CENTER':    ['North Center', 'Roscoe Village'],
-  'LAKE VIEW':       ['Wrigleyville', 'East Lakeview', 'West Lakeview', 'Southport Corridor', 'Boystown'],
-  'LINCOLN PARK':    ['Lincoln Park & Park West', 'Old Town', 'Old Town Triangle', 'Sheffield Neighbors'],
-  'NEAR NORTH SIDE': ['Gold Coast', 'River North', 'Magnificent Mile', 'Streeterville', 'River West'],
-  'EDISON PARK':     ['Edison Park'],
-  'JEFFERSON PARK':  ['Jefferson Park'],
-  'ALBANY PARK':     ['Albany Park'],
-  'PORTAGE PARK':    ['Portage Park'],
-  'IRVING PARK':     ['Irving Park'],
-  'AVONDALE':        ['Avondale'],
-  'LOGAN SQUARE':    ['Logan Square', 'Bucktown', 'Wrightwood Neighbors'],
-  'HUMBOLDT PARK':   ['Humboldt Park'],
-  'WEST TOWN':       ['Wicker Park', 'Ukrainian Village', 'West Town', 'Noble Square'],
-  'NEAR WEST SIDE':  ['Greektown & West Loop'],
-  'LOOP':            ['Loop', 'Printers Row'],
-  'NEAR SOUTH SIDE': ['South Loop', 'SoNo'],
-  'OHARE':           ["O'Hare Airport"],
-  'EDGEWATER':       ['Edgewater', 'Andersonville'],
-};
-
-// ── Venue map SVG ──────────────────────────────────────────────────
-let MAP_SVG = null;
-fetch('./js/chicago-map.svg').then(r => r.text()).then(t => { MAP_SVG = t; }).catch(() => {});
-
 // ── Venue neighborhood data ────────────────────────────────────────
 let CHIBAR = {};
 let CHIBAR_OVERRIDES = {};
@@ -96,7 +67,6 @@ const state = {
   artistLetterFilter: null,   // 'A'–'Z' or null = all
   venueLetterFilter:       null,   // 'A'–'Z' or null = all
   venueNeighborhoodFilter: null,   // neighborhood string or null = all
-  venueCommunityFilter:    null,   // community area name (ALLCAPS) or null
   favLetterFilter:    null,   // 'A'–'Z' or null = all
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
@@ -131,9 +101,6 @@ const el = {
   concertList:    $('concert-list'),
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
-  venueMapSection:      $('venue-map-section'),
-  venueMapContainer:    $('venue-map-container'),
-  venueMapTitle:        $('venue-map-title'),
   venueNeighborhoodBar: $('venue-neighborhood-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
   favAlphaBar:    $('fav-alpha-bar'),
@@ -257,7 +224,7 @@ function setMode(mode) {
   state.searchQuery = '';
   el.searchInput.value = '';
   if (mode !== 'artists') state.artistLetterFilter = null;
-  if (mode !== 'venue')      state.venueLetterFilter = state.venueNeighborhoodFilter = state.venueCommunityFilter = null;
+  if (mode !== 'venue')      state.venueLetterFilter = state.venueNeighborhoodFilter = null;
   if (mode !== 'favorites')  state.favLetterFilter   = null;
 
   if (mode === 'library') {
@@ -1430,20 +1397,6 @@ function renderVenue() {
     }
   }
 
-  // Community area filter (from map) — scopes neighborhood pills too
-  let communityByVenue = allByVenue;
-  if (state.venueCommunityFilter) {
-    const nbhds = new Set(COMMUNITY_NEIGHBORHOODS[state.venueCommunityFilter] || []);
-    communityByVenue = allByVenue.filter(([v]) => {
-      const n = getVenueNeighborhood(v);
-      return n && nbhds.has(n);
-    });
-    byVenue = communityByVenue;
-    if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
-      state.selectedVenue = null;
-    }
-  }
-
   if (state.venueNeighborhoodFilter) {
     byVenue = byVenue.filter(([v]) => getVenueNeighborhood(v) === state.venueNeighborhoodFilter);
     if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
@@ -1461,20 +1414,8 @@ function renderVenue() {
     }
   }
 
-  // Update map section title to reflect active community filter
-  if (el.venueMapTitle) {
-    const c = state.venueCommunityFilter;
-    if (c) {
-      el.venueMapTitle.textContent = c.split(' ').map(w => w[0] + w.slice(1).toLowerCase()).join(' ');
-      el.venueMapTitle.classList.add('has-filter');
-    } else {
-      el.venueMapTitle.textContent = 'Browse by Neighborhood';
-      el.venueMapTitle.classList.remove('has-filter');
-    }
-  }
-
-  renderVenueNeighborhoodPills(communityByVenue);
-  renderVenueAlphaPills(communityByVenue);
+  renderVenueNeighborhoodPills(allByVenue);
+  renderVenueAlphaPills(allByVenue);
 
   el.venueList.innerHTML = '';
   if (!byVenue.length) {
@@ -1519,49 +1460,6 @@ function selectVenue(venue, docs) {
   });
   renderVenueConcerts(dateAsc(docs));
   updateStatBanner();
-}
-
-function renderVenueMap() {
-  const container = el.venueMapContainer;
-  if (!MAP_SVG) {
-    container.innerHTML = '<div style="padding:16px;font-size:12px;color:var(--text3)">Loading map…</div>';
-    return;
-  }
-  if (container.querySelector('svg')) return; // already rendered
-
-  container.innerHTML = MAP_SVG;
-  const svg = container.querySelector('svg');
-
-  // Build set of neighborhoods present in the collection
-  const activeNeighborhoods = new Set();
-  (state.index || []).forEach(d => {
-    const v = extractVenueName(d);
-    const n = v ? getVenueNeighborhood(v) : null;
-    if (n) activeNeighborhoods.add(n);
-  });
-
-  svg.querySelectorAll('path[data-community]').forEach(path => {
-    const community = path.dataset.community;
-    const nbhds = COMMUNITY_NEIGHBORHOODS[community] || [];
-    const hasVenues = nbhds.some(n => activeNeighborhoods.has(n));
-
-    if (hasVenues) path.classList.add('map-active');
-    if (state.venueCommunityFilter === community) path.classList.add('map-selected');
-
-    if (!hasVenues) return;
-    path.addEventListener('click', () => {
-      const selecting = state.venueCommunityFilter !== community;
-      state.venueCommunityFilter    = selecting ? community : null;
-      state.venueNeighborhoodFilter = null;
-      state.selectedVenue           = null;
-      // Update visual without re-injecting SVG
-      svg.querySelectorAll('path').forEach(p => p.classList.remove('map-selected'));
-      if (selecting) path.classList.add('map-selected');
-      // Collapse map after selection
-      el.venueMapSection.classList.remove('open');
-      renderVenue();
-    });
-  });
 }
 
 function renderVenueNeighborhoodPills(allByVenue) {
@@ -1886,14 +1784,6 @@ function openSettings() {
 
 // ── Init ───────────────────────────────────────────────────────────
 function init() {
-  // Venue map toggle
-  $('venue-map-header').addEventListener('click', () => {
-    el.venueMapSection.classList.toggle('open');
-    if (el.venueMapSection.classList.contains('open')) {
-      renderVenueMap();
-    }
-  });
-
   // Back
   el.backBtn.addEventListener('click', goBack);
 
