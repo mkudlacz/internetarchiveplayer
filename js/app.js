@@ -1078,6 +1078,18 @@ function renderDiscover() {
   el.viewDiscover.innerHTML = '';
   updateStatBanner();
 
+  // ── Donate bar ──
+  const donateBar = document.createElement('a');
+  donateBar.href = 'https://archive.org/donate';
+  donateBar.target = '_blank';
+  donateBar.rel = 'noopener';
+  donateBar.className = 'ia-donate-bar';
+  donateBar.innerHTML = `
+    <span class="ia-donate-text">All content in this app is provided by the Internet Archive. Help keep it free.</span>
+    <span class="ia-donate-cta">Donate</span>
+  `;
+  el.viewDiscover.appendChild(donateBar);
+
   // ── 1. Today in the Archive ──
   const todayLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
   if (todayShows.length) {
@@ -1321,6 +1333,7 @@ function renderDiscover() {
     sec.appendChild(list);
     el.viewDiscover.appendChild(sec);
   }
+
 }
 
 // ── Year tab ───────────────────────────────────────────────────────
@@ -1432,13 +1445,6 @@ function renderVenue() {
 
   byVenue.forEach(([venue, docs]) => {
     const item = makeArtistItem(venue, docs.length, state.selectedVenue === venue);
-    const nbhd = getVenueNeighborhood(venue);
-    if (nbhd) {
-      const badge = document.createElement('div');
-      badge.className = 'venue-nbhd-badge';
-      badge.textContent = nbhd;
-      item.appendChild(badge);
-    }
     item.addEventListener('click', () => selectVenue(venue, docs));
     frag.appendChild(item);
   });
