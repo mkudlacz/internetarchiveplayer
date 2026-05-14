@@ -1,0 +1,3822 @@
+{
+  "17 west": {
+    "name": "17 WEST",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/17west/"
+  },
+  "17 west at the berghoff": {
+    "name": "17 West at the Berghoff",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/berghoff/"
+  },
+  "3160 piano cabaret": {
+    "name": "3160 Piano & Cabaret",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/3160-piano/"
+  },
+  "44th ward": {
+    "name": "44th Ward",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/44th-ward/"
+  },
+  "7313 club": {
+    "name": "7313 Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/7313-club/"
+  },
+  "a roman quickie": {
+    "name": "A Roman Quickie",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/black-falcon-rome/"
+  },
+  "abbey pub": {
+    "name": "Abbey Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/abbey/"
+  },
+  "abner’s yard": {
+    "name": "Abner’s Yard",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/abners/"
+  },
+  "acre": {
+    "name": "Acre",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/acre/"
+  },
+  "agave bar grill": {
+    "name": "Agave Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/agave/"
+  },
+  "al capone’s hideaway": {
+    "name": "Al Capone’s Hideaway",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/al-capones/"
+  },
+  "alfredo’s": {
+    "name": "Alfredo’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/alfredos/"
+  },
+  "aliveone": {
+    "name": "ALIVEONE",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/aliveone/"
+  },
+  "alumni club": {
+    "name": "Alumni Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/alumni-lincoln/"
+  },
+  "america’s bar": {
+    "name": "America’s Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/americas-bar/"
+  },
+  "andy’s jazz club": {
+    "name": "Andy’s Jazz Club",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/andys/"
+  },
+  "angels mariachis": {
+    "name": "Angels & Mariachis",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/angels-mariachis/"
+  },
+  "angie’s": {
+    "name": "Angie’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/angies-2/"
+  },
+  "annoyance theater bar": {
+    "name": "Annoyance Theater & Bar",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/annoyance-theater-bar/"
+  },
+  "archie’s iowa rockwell tavern": {
+    "name": "ARCHIE’S IOWA & ROCKWELL TAVERN",
+    "neighborhood": "Humboldt Park",
+    "chibarUrl": "https://chibarproject.com/reviews/archies/"
+  },
+  "artful dodger pub": {
+    "name": "Artful Dodger Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/artful/"
+  },
+  "augenblick": {
+    "name": "Augenblick",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/augenblick/"
+  },
+  "augie’s booze schmooze": {
+    "name": "Augie’s Booze & Schmooze",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/augies/"
+  },
+  "avenue tavern": {
+    "name": "Avenue Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/avenue/"
+  },
+  "backroom": {
+    "name": "BackRoom",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/back-room/"
+  },
+  "bad dog tavern": {
+    "name": "Bad Dog Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bad-dog/"
+  },
+  "bamboo bernie’s": {
+    "name": "BAMBOO BERNIE’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bamboo-bernies/"
+  },
+  "banana leaf": {
+    "name": "Banana Leaf",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/banana-leaf/"
+  },
+  "bar celona bar grill": {
+    "name": "BAR CELONA BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/barcelonaclark/"
+  },
+  "bar louie": {
+    "name": "Bar Louie",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bar-louie/"
+  },
+  "bar louie restaurant row": {
+    "name": "Bar Louie Restaurant Row",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bar-loui-rr/"
+  },
+  "bar louie wrigley": {
+    "name": "Bar Louie Wrigley",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bar-louie-wrigley/"
+  },
+  "bar millennium": {
+    "name": "Bar Millennium",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bar-millennium/"
+  },
+  "bar on buena": {
+    "name": "BAR ON BUENA",
+    "neighborhood": "Buena Park Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/barbuena/"
+  },
+  "bar san miguel": {
+    "name": "Bar San Miguel",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bar-san-miguel/"
+  },
+  "beachwood inn": {
+    "name": "Beachwood Inn",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/beachwood/"
+  },
+  "beacon tavern": {
+    "name": "Beacon Tavern",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/beacon/"
+  },
+  "beat kitchen": {
+    "name": "BEAT KITCHEN",
+    "neighborhood": "Roscoe Village",
+    "chibarUrl": "https://chibarproject.com/reviews/beatkitchen/"
+  },
+  "beaumont bar grill": {
+    "name": "BEAUMONT BAR & GRILL",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/beaumont/"
+  },
+  "beer bistro": {
+    "name": "BEER BISTRO",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/beerbistro/"
+  },
+  "beetle bar grill": {
+    "name": "BEETLE BAR & GRILL",
+    "neighborhood": "Humboldt Park",
+    "chibarUrl": "https://chibarproject.com/reviews/beetle/"
+  },
+  "belair lounge": {
+    "name": "Belair Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/belair/"
+  },
+  "belly’s bar grill": {
+    "name": "Belly’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bellys/"
+  },
+  "benz beer oyster bar": {
+    "name": "Benz Beer & Oyster Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/benz-beer-oyster-bar/"
+  },
+  "berlin": {
+    "name": "BERLIN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/berlin/"
+  },
+  "bernie’s tap grill": {
+    "name": "BERNIE’S TAP & GRILL",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/bernies/"
+  },
+  "betty’s blue star lounge": {
+    "name": "BETTY’S BLUE STAR LOUNGE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bettys/"
+  },
+  "big chicks": {
+    "name": "Big Chicks",
+    "neighborhood": "Uptown",
+    "chibarUrl": "https://chibarproject.com/reviews/bigchicks/"
+  },
+  "big city tap": {
+    "name": "BIG CITY TAP",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/bigcitytap/"
+  },
+  "big downtown": {
+    "name": "Big Downtown",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/big-downtown/"
+  },
+  "big joe’s 2 6 pub": {
+    "name": "BIG JOE’S 2 & 6 PUB",
+    "neighborhood": "Andersonville",
+    "chibarUrl": "https://chibarproject.com/reviews/bigjoes/"
+  },
+  "billy goat tavern": {
+    "name": "BILLY GOAT TAVERN",
+    "neighborhood": "Magnificent Mile",
+    "chibarUrl": "https://chibarproject.com/reviews/billygoat/"
+  },
+  "billy goat tavern #2": {
+    "name": "Billy Goat Tavern #2",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/billy-goat-2/"
+  },
+  "billy goat tavern #3": {
+    "name": "Billy Goat Tavern #3",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/billy-goat-3/"
+  },
+  "billy goat tavern archive": {
+    "name": "Billy Goat Tavern Archive",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/billy-goat-archive/"
+  },
+  "billy goat tavern navy pier": {
+    "name": "BILLY GOAT TAVERN NAVY PIER",
+    "neighborhood": "Navy Pier",
+    "chibarUrl": "https://chibarproject.com/reviews/billygoatnavypier/"
+  },
+  "bird’s nest": {
+    "name": "BIRD’S NEST",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/birdsnest/"
+  },
+  "black falcon pub": {
+    "name": "Black Falcon Pub",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/black-falcon/"
+  },
+  "black rock pub kitchen": {
+    "name": "Black Rock Pub & Kitchen",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/black-rock/"
+  },
+  "blackie’s": {
+    "name": "BLACKIE’S",
+    "neighborhood": "Printers Row",
+    "chibarUrl": "https://chibarproject.com/reviews/blackies/"
+  },
+  "blue bayou bar grill": {
+    "name": "Blue Bayou Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/blue-bayou/"
+  },
+  "blue frog": {
+    "name": "BLUE FROG",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bluefrog/"
+  },
+  "blue line lounge grill": {
+    "name": "BLUE LINE LOUNGE & GRILL",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/blueline/"
+  },
+  "blue parrot": {
+    "name": "Blue Parrot",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/blue-parrot/"
+  },
+  "bluebird": {
+    "name": "Bluebird",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bluebird/"
+  },
+  "bluelight": {
+    "name": "BLUELIGHT",
+    "neighborhood": "Roscoe Village",
+    "chibarUrl": "https://chibarproject.com/reviews/bluelight/"
+  },
+  "blues": {
+    "name": "B.L.U.E.S.",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/blues/"
+  },
+  "bobbie’s runaway": {
+    "name": "BOBBIE’S RUNAWAY",
+    "neighborhood": "Bowmanville",
+    "chibarUrl": "https://chibarproject.com/reviews/bobbiesrunaway/"
+  },
+  "bohemian hall beer garden": {
+    "name": "Bohemian Hall & Beer Garden",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/bohemian-hall/"
+  },
+  "bohica bar grill": {
+    "name": "Bohica Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bohica/"
+  },
+  "bon v": {
+    "name": "Bon V",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bon-v/"
+  },
+  "border line tap": {
+    "name": "BORDER LINE TAP",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/borderline/"
+  },
+  "boss bar": {
+    "name": "BOSS BAR",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/boss/"
+  },
+  "boston blackie’s west loop": {
+    "name": "BOSTON BLACKIE’S WEST LOOP",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/bostonblackieswestloop/"
+  },
+  "bottom lounge": {
+    "name": "BOTTOM LOUNGE",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/bottomlounge/"
+  },
+  "brando’s speakeasy": {
+    "name": "BRANDO’S SPEAKEASY",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/brandos/"
+  },
+  "brehon pub": {
+    "name": "BREHON PUB",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/brehonpub/"
+  },
+  "brewster apartments": {
+    "name": "Brewster Apartments",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/galway-bay-brewster/"
+  },
+  "brian boru’s": {
+    "name": "Brian Boru’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/brian-boru/"
+  },
+  "bricks": {
+    "name": "BRICKS",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bricks/"
+  },
+  "brother jimmy’s": {
+    "name": "Brother Jimmy’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/brother-jimmys/"
+  },
+  "brownstone tavern grill": {
+    "name": "BROWNSTONE TAVERN & GRILL",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/brownstone/"
+  },
+  "bruno tim’s lounge": {
+    "name": "BRUNO & TIM’S LOUNGE",
+    "neighborhood": "East Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/brunotims/"
+  },
+  "bubba gump shrimp company": {
+    "name": "BUBBA GUMP SHRIMP COMPANY",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bubbagump/"
+  },
+  "bucket of blood": {
+    "name": "Bucket of Blood",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bucket-of-blood/"
+  },
+  "bucktown pub": {
+    "name": "Bucktown Pub",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/bucktown-pub/"
+  },
+  "buddy guy’s legends": {
+    "name": "BUDDY GUY’S LEGENDS",
+    "neighborhood": "South Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/buddyguys/"
+  },
+  "buffalo wild wings": {
+    "name": "BUFFALO WILD WINGS",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/buffalowildwings/"
+  },
+  "buffalo wings rings": {
+    "name": "BUFFALO WINGS & RINGS",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/buffalo-wings-and-rings/"
+  },
+  "bull bear": {
+    "name": "Bull & Bear",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bull-bear/"
+  },
+  "bull finch pub": {
+    "name": "Bull & Finch Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bull/"
+  },
+  "bullpen sports bar": {
+    "name": "Bullpen Sports Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bullpen-bar/"
+  },
+  "bungalow": {
+    "name": "Bungalow",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bungalow/"
+  },
+  "burgundy inn": {
+    "name": "Burgundy Inn",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/burgundy-inn/"
+  },
+  "burke’s web pub": {
+    "name": "Burke’s Web Pub",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/burkes/"
+  },
+  "burp castle": {
+    "name": "Burp Castle",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/burp-castle/"
+  },
+  "burton place": {
+    "name": "BURTON PLACE",
+    "neighborhood": "Old Town",
+    "chibarUrl": "https://chibarproject.com/reviews/burtonplace/"
+  },
+  "burwood tap": {
+    "name": "BURWOOD TAP",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/burwood/"
+  },
+  "butch mcguire’s": {
+    "name": "BUTCH MCGUIRE’S",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/butchmcguires/"
+  },
+  "bw3": {
+    "name": "Bw3",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/bw-3/"
+  },
+  "cactus bar grill": {
+    "name": "CACTUS BAR & GRILL",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/cactus/"
+  },
+  "café fresco": {
+    "name": "Café Fresco",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cafe-fresco/"
+  },
+  "café wheaton": {
+    "name": "Café Wheaton",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cafe-wheaton/"
+  },
+  "california clipper": {
+    "name": "CALIFORNIA CLIPPER",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/californiaclipper/"
+  },
+  "cal’s liquors": {
+    "name": "CaL’s Liquors",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cals-liquors/"
+  },
+  "candlelite chicago": {
+    "name": "CANDLELITE CHICAGO",
+    "neighborhood": "West Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/candlelite/"
+  },
+  "cans bar canteen": {
+    "name": "Cans Bar & Canteen",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cans/"
+  },
+  "captain morgan club": {
+    "name": "Captain Morgan Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/captain-morgan/"
+  },
+  "cardozo’s pub": {
+    "name": "CARDOZO’S PUB",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/cardozos/"
+  },
+  "carnivale": {
+    "name": "CARNIVALE",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/carnivale/"
+  },
+  "carola’s hansa clipper": {
+    "name": "CAROLA’S HANSA CLIPPER",
+    "neighborhood": "Lincoln Square",
+    "chibarUrl": "https://chibarproject.com/reviews/hansaclipper/"
+  },
+  "carol’s pub": {
+    "name": "CAROL’S PUB",
+    "neighborhood": "Uptown",
+    "chibarUrl": "https://chibarproject.com/reviews/carols/"
+  },
+  "casey moran’s tavern on clark": {
+    "name": "CASEY MORAN’S TAVERN ON CLARK",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/caseymorans/"
+  },
+  "castaways": {
+    "name": "CASTAWAYS",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/castaways/"
+  },
+  "cedar hotel": {
+    "name": "Cedar Hotel",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cedar-hotel/"
+  },
+  "cell block": {
+    "name": "CELL BLOCK",
+    "neighborhood": "Boystown",
+    "chibarUrl": "https://chibarproject.com/reviews/cellblock/"
+  },
+  "celtic crossings": {
+    "name": "Celtic Crossings",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/celtic-crossings/"
+  },
+  "central": {
+    "name": "The Central",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/central/"
+  },
+  "ceres café": {
+    "name": "CERES CAFÉ",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/ceres/"
+  },
+  "chaise lounge": {
+    "name": "Chaise Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/chaise/"
+  },
+  "charleston": {
+    "name": "Charleston",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/charleston/"
+  },
+  "charlie’s ale house": {
+    "name": "Charlie’s Ale House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/charlies/"
+  },
+  "charlie’s ale house navy pier": {
+    "name": "Charlie’s Ale House Navy Pier",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/charlies-navy-pier/"
+  },
+  "charlie’s on webster": {
+    "name": "Charlie’s on Webster",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/charlies-webster/"
+  },
+  "chicago ale house": {
+    "name": "Chicago Ale House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/chicago-ale-house/"
+  },
+  "chicago bear sports bar grill": {
+    "name": "Chicago Bear Sports Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/chicago-bear/"
+  },
+  "chicago blarney stone": {
+    "name": "CHICAGO BLARNEY STONE",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/blarney/"
+  },
+  "chicago brauhaus restaurant cocktail lounge": {
+    "name": "Chicago Brauhaus Restaurant & Cocktail Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/brauhaus/"
+  },
+  "chicago draft house": {
+    "name": "Chicago Draft House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/chicago-draft-house/"
+  },
+  "chicago joe’s": {
+    "name": "CHICAGO JOE’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/chicagojoes/"
+  },
+  "chicago playboy club": {
+    "name": "CHICAGO PLAYBOY CLUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/playboyclub/"
+  },
+  "chief o’neill’s pub restaurant": {
+    "name": "Chief O’Neill’s Pub & Restaurant",
+    "neighborhood": "Avondale",
+    "chibarUrl": "https://chibarproject.com/reviews/chief/"
+  },
+  "chinaski’s bar": {
+    "name": "Chinaski’s Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/chinaskis/"
+  },
+  "chipp inn": {
+    "name": "CHIPP INN",
+    "neighborhood": "Noble Square",
+    "chibarUrl": "https://chibarproject.com/reviews/chippinn/"
+  },
+  "cinner’s": {
+    "name": "Cinner’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cinners/"
+  },
+  "ciral’s house of tiki": {
+    "name": "Ciral’s House of Tiki",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cirals/"
+  },
+  "circuit night club": {
+    "name": "CIRCUIT NIGHT CLUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/circuit/"
+  },
+  "circuits": {
+    "name": "Circuits",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/circuits/"
+  },
+  "citizen bar": {
+    "name": "Citizen Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/citizen/"
+  },
+  "city pool hall": {
+    "name": "CITY POOL HALL",
+    "neighborhood": "River West",
+    "chibarUrl": "https://chibarproject.com/reviews/citypoolhall/"
+  },
+  "clark st dog": {
+    "name": "CLARK ST. DOG",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/clark/"
+  },
+  "clark street ale house": {
+    "name": "CLARK STREET ALE HOUSE",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/clarkst/"
+  },
+  "cleo’s": {
+    "name": "CLEO’S",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/cleos/"
+  },
+  "closet": {
+    "name": "THE CLOSET",
+    "neighborhood": "Boystown",
+    "chibarUrl": "https://chibarproject.com/reviews/closet/"
+  },
+  "club 505": {
+    "name": "Club 505",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/club-505/"
+  },
+  "club 81 too": {
+    "name": "Club 81 Too",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/club-81-too/"
+  },
+  "club 950 lucky number": {
+    "name": "Club 950 Lucky Number",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/club-950/"
+  },
+  "club foot": {
+    "name": "Club Foot",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/clubfoot/"
+  },
+  "club lago": {
+    "name": "CLUB LAGO",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/clublago/"
+  },
+  "club lucky": {
+    "name": "Club Lucky",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/club-lucky/"
+  },
+  "clybar and grill": {
+    "name": "Clybar and Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/clybar/"
+  },
+  "cnd gyros lounge": {
+    "name": "CND Gyros & Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cnd/"
+  },
+  "cobra lounge": {
+    "name": "COBRA LOUNGE",
+    "neighborhood": "West Town",
+    "chibarUrl": "https://chibarproject.com/reviews/cobralounge/"
+  },
+  "cody’s public house": {
+    "name": "Cody’s Public House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/codys/"
+  },
+  "continental": {
+    "name": "The Continental",
+    "neighborhood": "Humboldt Park",
+    "chibarUrl": "https://chibarproject.com/reviews/continental/"
+  },
+  "coogan’s riverside saloon": {
+    "name": "Coogan’s Riverside Saloon",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/coogans/"
+  },
+  "cooper’s": {
+    "name": "Cooper’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/coopers/"
+  },
+  "coppolino’s bar grill": {
+    "name": "Coppolino’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/coppolinos/"
+  },
+  "coq d’or": {
+    "name": "Coq d’Or",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/coqdor/"
+  },
+  "corcoran’s": {
+    "name": "Corcoran’s",
+    "neighborhood": "Old Town Triangle",
+    "chibarUrl": "https://chibarproject.com/reviews/corcorans/"
+  },
+  "cork kerry": {
+    "name": "Cork & Kerry",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/cork-kerry/"
+  },
+  "cork lounge": {
+    "name": "Cork Lounge",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/corklounge/"
+  },
+  "corner 41": {
+    "name": "Corner 41",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/corner-41/"
+  },
+  "corner pocket": {
+    "name": "Corner Pocket",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/corner-pocket/"
+  },
+  "corosh": {
+    "name": "Corosh",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/corosh/"
+  },
+  "cortland’s garage": {
+    "name": "Cortland’s Garage",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/cortlands/"
+  },
+  "country house": {
+    "name": "Country House",
+    "neighborhood": "Suburbs",
+    "chibarUrl": "https://chibarproject.com/reviews/country-house/"
+  },
+  "cove lounge": {
+    "name": "Cove Lounge",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/cove/"
+  },
+  "coyle’s tippling house": {
+    "name": "Coyle’s Tippling House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/coyles/"
+  },
+  "crabbby kim’s bikini bar": {
+    "name": "Crabbby Kim’s Bikini Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/crabby/"
+  },
+  "crash palace": {
+    "name": "Crash Palace",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/crash-palace/"
+  },
+  "crew bar + grill": {
+    "name": "CREW BAR + GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/crew/"
+  },
+  "crossroads bar grill": {
+    "name": "CROSSROADS BAR & GRILL",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/crossroadsbar/"
+  },
+  "crossroads public house": {
+    "name": "CROSSROADS PUBLIC HOUSE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/crossroads/"
+  },
+  "cubby bear": {
+    "name": "CUBBY BEAR",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/cubbybear/"
+  },
+  "cullen’s bar grill": {
+    "name": "Cullen’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cullens/"
+  },
+  "cunneen’s": {
+    "name": "CUNNEEN’S",
+    "neighborhood": "East Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/cunneens/"
+  },
+  "curragh irish pub": {
+    "name": "CURRAGH IRISH PUB",
+    "neighborhood": "Edison Park",
+    "chibarUrl": "https://chibarproject.com/reviews/curragh/"
+  },
+  "cview": {
+    "name": "C-View",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/c-view/"
+  },
+  "cy’s crabhouse sports bar grill": {
+    "name": "Cy’s CrabHouse Sports Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/cys/"
+  },
+  "czar bar": {
+    "name": "Czar Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/czar-bar/"
+  },
+  "d4": {
+    "name": "D4",
+    "neighborhood": "Streeterville",
+    "chibarUrl": "https://chibarproject.com/reviews/d4/"
+  },
+  "daily bar grill": {
+    "name": "DAILY BAR & GRILL",
+    "neighborhood": "Lincoln Square",
+    "chibarUrl": "https://chibarproject.com/reviews/daily/"
+  },
+  "damen bar grill": {
+    "name": "Damen Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/damen/"
+  },
+  "danny’s tavern": {
+    "name": "Danny’s Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/dannys/"
+  },
+  "dark horse tap grille": {
+    "name": "DARK HORSE TAP & GRILLE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/darkhorse/"
+  },
+  "darwin’s bar grill": {
+    "name": "Darwin’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/darwins/"
+  },
+  "davenport’s piano bar cabaret": {
+    "name": "DAVENPORT’S PIANO BAR & CABARET",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/davenports/"
+  },
+  "deja vu": {
+    "name": "DEJA VU",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/dejavu/"
+  },
+  "delilah’s": {
+    "name": "DELILAH’S",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/delilahs/"
+  },
+  "detroit": {
+    "name": "Detroit",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/detroit/"
+  },
+  "dick’s last resort": {
+    "name": "DICK’S LAST RESORT",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/dicks/"
+  },
+  "dino’s liquors": {
+    "name": "DINO’S LIQUORS",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/dinosliquors/"
+  },
+  "dirty martini lounge": {
+    "name": "Dirty Martini Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/dirty-martini/"
+  },
+  "district bar": {
+    "name": "District Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/district/"
+  },
+  "doc wine bar": {
+    "name": "DOC WINE BAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/doc/"
+  },
+  "doc’s": {
+    "name": "Doc’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/docs/"
+  },
+  "domino lounge": {
+    "name": "Domino Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/domino/"
+  },
+  "double bubble": {
+    "name": "DOUBLE BUBBLE",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/bubble/"
+  },
+  "double door": {
+    "name": "Double Door",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/double-door/"
+  },
+  "dram shop": {
+    "name": "DRAM SHOP",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/dramshop/"
+  },
+  "dublin’s bar grill": {
+    "name": "DUBLIN’S BAR & GRILL",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/dublins/"
+  },
+  "duffy’s place": {
+    "name": "Duffy’s Place",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/duffys-place/"
+  },
+  "duffy’s tavern grille": {
+    "name": "DUFFY’S TAVERN GRILLE",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/duffys/"
+  },
+  "dugan’s on halsted": {
+    "name": "DUGAN’S ON HALSTED",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/dugans/"
+  },
+  "dugout sports bar grill": {
+    "name": "DUGOUT SPORTS BAR & GRILL",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/dugout/"
+  },
+  "duke of perth": {
+    "name": "DUKE OF PERTH",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/duke/"
+  },
+  "dunlay’s on clark": {
+    "name": "DUNLAY’S ON CLARK",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/dunlays/"
+  },
+  "durkin’s": {
+    "name": "DURKIN’S",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/durkins/"
+  },
+  "d’agostino’s pizza pub": {
+    "name": "D’AGOSTINO’S PIZZA & PUB",
+    "neighborhood": "Southport Corridor",
+    "chibarUrl": "https://chibarproject.com/reviews/dagostinos/"
+  },
+  "east of the ryan": {
+    "name": "East of the Ryan",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/east/"
+  },
+  "edgewater lounge": {
+    "name": "Edgewater Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/edgewater-lounge/"
+  },
+  "el pelenque": {
+    "name": "El Pelenque",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/el-pelenque/"
+  },
+  "el toro loco bar": {
+    "name": "El Toro Loco Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/el-toro/"
+  },
+  "elbo room": {
+    "name": "ELBO ROOM",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/elboroom/"
+  },
+  "elephant castle pub and restaurant": {
+    "name": "ELEPHANT & CASTLE PUB AND RESTAURANT",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/elephanthuron/"
+  },
+  "elm street liquors": {
+    "name": "Elm Street Liquors",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/elm-street/"
+  },
+  "emerald isle": {
+    "name": "EMERALD ISLE",
+    "neighborhood": "Edison Park",
+    "chibarUrl": "https://chibarproject.com/reviews/emerald/"
+  },
+  "emerald loop bar grill": {
+    "name": "EMERALD LOOP BAR & GRILL",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/emeraldloop/"
+  },
+  "emmit’s irish pub": {
+    "name": "EMMIT’S IRISH PUB",
+    "neighborhood": "River West",
+    "chibarUrl": "https://chibarproject.com/reviews/emmits/"
+  },
+  "empty bottle": {
+    "name": "EMPTY BOTTLE",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/emptybottle/"
+  },
+  "enclave": {
+    "name": "Enclave",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/enclave/"
+  },
+  "english": {
+    "name": "English",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/english/"
+  },
+  "eno": {
+    "name": "ENO",
+    "neighborhood": "Magnificent Mile",
+    "chibarUrl": "https://chibarproject.com/reviews/eno/"
+  },
+  "estelle’s cafe pub": {
+    "name": "ESTELLE’S CAFE & PUB",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/estelles/"
+  },
+  "ethyl’s party": {
+    "name": "Ethyl’s Party",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ethyls-party/"
+  },
+  "everleigh club": {
+    "name": "EVERLEIGH CLUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/everleigh/"
+  },
+  "excalibur nightclub": {
+    "name": "EXCALIBUR NIGHTCLUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/excalibur/"
+  },
+  "exchequer restaurant pub": {
+    "name": "EXCHEQUER RESTAURANT & PUB",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/exchequer/"
+  },
+  "fadó irish pub": {
+    "name": "FADÓ IRISH PUB",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/fado/"
+  },
+  "falcon inn": {
+    "name": "Falcon inn",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/falcon-inn/"
+  },
+  "fearon’s public house": {
+    "name": "Fearon’s Public House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fearons/"
+  },
+  "field house": {
+    "name": "FIELD HOUSE",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/fieldhouse/"
+  },
+  "fifty/50": {
+    "name": "Fifty/50",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/fifty-50/"
+  },
+  "finley dunne’s tavern": {
+    "name": "FINLEY DUNNE’S TAVERN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/finleys/"
+  },
+  "fireplace inn": {
+    "name": "FIREPLACE INN",
+    "neighborhood": "Old Town",
+    "chibarUrl": "https://chibarproject.com/reviews/fireplaceinn/"
+  },
+  "fireside restaurant lounge": {
+    "name": "FIRESIDE RESTAURANT & LOUNGE",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/fireside/"
+  },
+  "fitzgerald’s": {
+    "name": "FitzGerald’s",
+    "neighborhood": "Suburbs",
+    "chibarUrl": "https://chibarproject.com/reviews/fitz-geralds/"
+  },
+  "five star bar": {
+    "name": "FIVE STAR BAR",
+    "neighborhood": "Noble Square",
+    "chibarUrl": "https://chibarproject.com/reviews/fivestar/"
+  },
+  "fizz bar grill": {
+    "name": "Fizz Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fizz/"
+  },
+  "flatwater": {
+    "name": "Flatwater",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/flatwater/"
+  },
+  "florence’s lounge liquors": {
+    "name": "Florence’s Lounge & Liquors",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/florence/"
+  },
+  "floyd’s pub": {
+    "name": "Floyd’s Pub",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/floyds/"
+  },
+  "foley’s bar grill": {
+    "name": "FOLEY’S BAR & GRILL",
+    "neighborhood": "Irving Park",
+    "chibarUrl": "https://chibarproject.com/reviews/foleys/"
+  },
+  "forno diablo": {
+    "name": "Forno Diablo",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/forno-diablo/"
+  },
+  "fountainhead": {
+    "name": "FOUNTAINHEAD",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fountainhead/"
+  },
+  "four farthings tavern grill": {
+    "name": "FOUR FARTHINGS TAVERN & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fourfarthings/"
+  },
+  "four moon tavern": {
+    "name": "FOUR MOON TAVERN",
+    "neighborhood": "Roscoe Village",
+    "chibarUrl": "https://chibarproject.com/reviews/fourmoon/"
+  },
+  "four shadows": {
+    "name": "FOUR SHADOWS",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/fourshadows/"
+  },
+  "frankie z’s tumble inn": {
+    "name": "FRANKIE Z’S TUMBLE INN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/frankiezs/"
+  },
+  "franklin tap": {
+    "name": "FRANKLIN TAP",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/franklintap/"
+  },
+  "friar tuck": {
+    "name": "FRIAR TUCK",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/friartuck/"
+  },
+  "fuel kitchen cocktail lounge": {
+    "name": "Fuel Kitchen & Cocktail Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fuel/"
+  },
+  "full shilling": {
+    "name": "FULL SHILLING",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/fullshilling/"
+  },
+  "fulton lounge": {
+    "name": "Fulton Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fulton-lounge/"
+  },
+  "fulton’s on the river": {
+    "name": "FULTON’S ON THE RIVER",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/fultonsriver/"
+  },
+  "gage": {
+    "name": "THE GAGE",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/gage/"
+  },
+  "gale street inn": {
+    "name": "GALE STREET INN",
+    "neighborhood": "Jefferson Park",
+    "chibarUrl": "https://chibarproject.com/reviews/galestreet/"
+  },
+  "gallery cabaret": {
+    "name": "Gallery Cabaret",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gallery/"
+  },
+  "galvin’s public house": {
+    "name": "GALVIN’S PUBLIC HOUSE",
+    "neighborhood": "Jefferson Park",
+    "chibarUrl": "https://chibarproject.com/reviews/galvins/"
+  },
+  "galway arms": {
+    "name": "GALWAY ARMS",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/galwayarms/"
+  },
+  "galway bay irish pub": {
+    "name": "GALWAY BAY IRISH PUB",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/galway/"
+  },
+  "gamekeepers tavern grill": {
+    "name": "GAMEKEEPERS TAVERN & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gamekeepers/"
+  },
+  "gannon’s pub": {
+    "name": "GANNON’S PUB",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/gannons/"
+  },
+  "garrett ripley’s": {
+    "name": "Garrett Ripley’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/garrett-ripleys/"
+  },
+  "gaslight bar grille": {
+    "name": "GASLIGHT BAR & GRILLE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gaslight/"
+  },
+  "gaslight club": {
+    "name": "GASLIGHT CLUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gaslightclub/"
+  },
+  "gaslight corner": {
+    "name": "Gaslight Corner",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gaslight-corner/"
+  },
+  "gcue billiards": {
+    "name": "G-CUE BILLIARDS",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/g-cue/"
+  },
+  "gilhooley’s grande saloon": {
+    "name": "Gilhooley’s Grande Saloon",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/gilhooleys/"
+  },
+  "gilt bar": {
+    "name": "GILT BAR",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/gilt/"
+  },
+  "gingerman tavern": {
+    "name": "GINGERMAN TAVERN",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/gingerman/"
+  },
+  "ginger’s ale house": {
+    "name": "Ginger’s Ale House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gingers/"
+  },
+  "glascott’s groggery": {
+    "name": "GLASCOTT’S GROGGERY",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/glascotts/"
+  },
+  "glenwood": {
+    "name": "THE GLENWOOD",
+    "neighborhood": "East Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/glenwood/"
+  },
+  "globe pub": {
+    "name": "THE GLOBE PUB",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/globe/"
+  },
+  "gold star bar": {
+    "name": "GOLD STAR BAR",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/goldstar/"
+  },
+  "gold star sardine bar": {
+    "name": "Gold Star Sardine Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gold-star-sardine-bar/"
+  },
+  "goldie’s": {
+    "name": "GOLDIE’S",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/goldies/"
+  },
+  "goodbar": {
+    "name": "Goodbar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/goodbar/"
+  },
+  "goose island brew pub": {
+    "name": "GOOSE ISLAND BREW PUB",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/gooseisland/"
+  },
+  "goose island wrigleyville": {
+    "name": "GOOSE ISLAND WRIGLEYVILLE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/goosewrigleyville/"
+  },
+  "grafton pub grill": {
+    "name": "THE GRAFTON PUB & GRILL",
+    "neighborhood": "Lincoln Square",
+    "chibarUrl": "https://chibarproject.com/reviews/grafton/"
+  },
+  "gramercy": {
+    "name": "Gramercy",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gramercy/"
+  },
+  "grand central": {
+    "name": "Grand Central",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/grand-central/"
+  },
+  "grand river bar grill": {
+    "name": "GRAND RIVER BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/grandriver/"
+  },
+  "great beer palace": {
+    "name": "Great Beer Palace",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/great-beer/"
+  },
+  "greatest bar on earth": {
+    "name": "Greatest Bar on Earth",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/greatest/"
+  },
+  "green dolphin street": {
+    "name": "GREEN DOLPHIN STREET",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/greendolphin/"
+  },
+  "green door tavern": {
+    "name": "GREEN DOOR TAVERN",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/greendoor/"
+  },
+  "green eye lounge": {
+    "name": "GREEN EYE LOUNGE",
+    "neighborhood": "Humboldt Park",
+    "chibarUrl": "https://chibarproject.com/reviews/greeneye/"
+  },
+  "green mill cocktail lounge": {
+    "name": "GREEN MILL COCKTAIL LOUNGE",
+    "neighborhood": "Uptown",
+    "chibarUrl": "https://chibarproject.com/reviews/greenmill/"
+  },
+  "grizzly’s lodge": {
+    "name": "Grizzly’s Lodge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/grizzlys/"
+  },
+  "gunther murphy’s": {
+    "name": "Gunther Murphy’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/gunther-murphys/"
+  },
+  "guthries tavern": {
+    "name": "GUTHRIES TAVERN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/guthries/"
+  },
+  "hackney’s": {
+    "name": "Hackney’s",
+    "neighborhood": "Suburbs",
+    "chibarUrl": "https://chibarproject.com/reviews/hackneys-1/"
+  },
+  "hackney’s printers row": {
+    "name": "Hackney’s Printers Row",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hackneys/"
+  },
+  "hala kahiki": {
+    "name": "Hala Kahiki",
+    "neighborhood": "Suburbs",
+    "chibarUrl": "https://chibarproject.com/reviews/hala-kahiki/"
+  },
+  "half shell": {
+    "name": "Half Shell",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/half-shell/"
+  },
+  "halligan bar": {
+    "name": "HALLIGAN BAR",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/halligan/"
+  },
+  "hamburger mary’s rec room": {
+    "name": "HAMBURGER MARY’S REC ROOM",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/recroom/"
+  },
+  "hamilton’s bar grill": {
+    "name": "Hamilton’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hamiltons/"
+  },
+  "handlebar bar grill": {
+    "name": "HANDLEBAR BAR & GRILL",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/handlebar/"
+  },
+  "hangge uppe": {
+    "name": "HANGGE UPPE",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/hanggeuppe/"
+  },
+  "happy village": {
+    "name": "HAPPY VILLAGE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/happyvillage/"
+  },
+  "harrigan’s pub": {
+    "name": "HARRIGAN’S PUB",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/harrigans/"
+  },
+  "harry’s bar": {
+    "name": "Harry’s Bar",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/harrys-bar/"
+  },
+  "hawkeye’s": {
+    "name": "Hawkeye’s",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/hawkeyes/"
+  },
+  "heartland café buffalo bar": {
+    "name": "HEARTLAND CAFÉ & BUFFALO BAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/heartland/"
+  },
+  "hideout": {
+    "name": "Hideout",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/hideout/"
+  },
+  "higgins’ tavern": {
+    "name": "HIGGINS’ TAVERN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/higgins/"
+  },
+  "hinky dinks pub": {
+    "name": "Hinky Dinks Pub",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/hinky-dinks/"
+  },
+  "hitops": {
+    "name": "Hi-Tops",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hi-tops/"
+  },
+  "holiday club": {
+    "name": "Holiday Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/holiday-club/"
+  },
+  "holiday neighborhood grill bar": {
+    "name": "Holiday Neighborhood Grill & Bar",
+    "neighborhood": "West Town",
+    "chibarUrl": "https://chibarproject.com/reviews/holidaybar/"
+  },
+  "hollywood lounge": {
+    "name": "Hollywood Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hollywood/"
+  },
+  "hop häus": {
+    "name": "HOP HÄUS",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hophaus/"
+  },
+  "hopleaf bar": {
+    "name": "HOPLEAF BAR",
+    "neighborhood": "Andersonville",
+    "chibarUrl": "https://chibarproject.com/reviews/hopleaf/"
+  },
+  "horseshoe casino": {
+    "name": "HORSESHOE CASINO",
+    "neighborhood": "Suburbs",
+    "chibarUrl": "https://chibarproject.com/reviews/horseshoecasino/"
+  },
+  "hotel congress": {
+    "name": "Hotel Congress",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/hotel-congress/"
+  },
+  "hothouse": {
+    "name": "HotHouse",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hothouse/"
+  },
+  "hotti biscotti": {
+    "name": "Hotti Biscotti",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hotti-biscotti/"
+  },
+  "houndstooth saloon": {
+    "name": "HOUNDSTOOTH SALOON",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/houndstooth/"
+  },
+  "house of blues chicago": {
+    "name": "HOUSE OF BLUES CHICAGO",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/hobchicago/"
+  },
+  "house of glunz": {
+    "name": "HOUSE OF GLUNZ",
+    "neighborhood": "Old Town",
+    "chibarUrl": "https://chibarproject.com/reviews/houseofglunz/"
+  },
+  "howl at the moon": {
+    "name": "HOWL AT THE MOON",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/howl/"
+  },
+  "huettenbar": {
+    "name": "HUETTENBAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/huettenbar/"
+  },
+  "hugo’s frog bar": {
+    "name": "HUGO’S FROG BAR",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/hugos/"
+  },
+  "hungry brain": {
+    "name": "HUNGRY BRAIN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/hungrybrain/"
+  },
+  "hunt club": {
+    "name": "Hunt Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/hunt-club/"
+  },
+  "hydrate": {
+    "name": "HYDRATE",
+    "neighborhood": "Boystown",
+    "chibarUrl": "https://chibarproject.com/reviews/hydrate/"
+  },
+  "illinois bar grill": {
+    "name": "ILLINOIS BAR & GRILL",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/illinois-bar-and-grill/"
+  },
+  "in fine spirits": {
+    "name": "IN FINE SPIRITS",
+    "neighborhood": "Andersonville",
+    "chibarUrl": "https://chibarproject.com/reviews/infinespirits/"
+  },
+  "infamous lee elia tirade": {
+    "name": "The Infamous Lee Elia Tirade",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/elia/"
+  },
+  "inner town pub": {
+    "name": "INNER TOWN PUB",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/innertown/"
+  },
+  "innjoy": {
+    "name": "INNJOY",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/innjoy/"
+  },
+  "io godfrey rooftop bar": {
+    "name": "IO Godfrey Rooftop Bar",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/i-o-godfrey/"
+  },
+  "irish eyes": {
+    "name": "IRISH EYES",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/irisheyes/"
+  },
+  "irish oak": {
+    "name": "IRISH OAK",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/irishoak/"
+  },
+  "ivan’s lounge": {
+    "name": "Ivan’s Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ivans/"
+  },
+  "j patrick’s irish pub": {
+    "name": "J. Patrick’s Irish Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/j-patricks/"
+  },
+  "jack sullivan’s": {
+    "name": "Jack Sullivan’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jack-sullivans/"
+  },
+  "jackhammer": {
+    "name": "JACKHAMMER",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/jackhammer/"
+  },
+  "jack’s bar grill 404 wine bar": {
+    "name": "Jack’s Bar & Grill 404 Wine Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jacks/"
+  },
+  "jake melnick’s corner tap": {
+    "name": "JAKE MELNICK’S CORNER TAP",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/melnicks/"
+  },
+  "jake’s pub": {
+    "name": "JAKE’S PUB",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/jakes/"
+  },
+  "jak’s tap": {
+    "name": "Jak’s Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jaks-tap/"
+  },
+  "jarheads": {
+    "name": "JarHeads",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jarheads/"
+  },
+  "jazz showcase": {
+    "name": "JAZZ SHOWCASE",
+    "neighborhood": "Printers Row",
+    "chibarUrl": "https://chibarproject.com/reviews/jazzshowcase/"
+  },
+  "jedynka": {
+    "name": "JEDYNKA",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jedynka/"
+  },
+  "jefferson tap grille": {
+    "name": "JEFFERSON TAP & GRILLE",
+    "neighborhood": "River West",
+    "chibarUrl": "https://chibarproject.com/reviews/jefferson/"
+  },
+  "jj lounge": {
+    "name": "J&J Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jj/"
+  },
+  "joann piano bar": {
+    "name": "Joann Piano Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/joann/"
+  },
+  "joe’s bar on weed street": {
+    "name": "JOE’S BAR ON WEED STREET",
+    "neighborhood": "SoNo",
+    "chibarUrl": "https://chibarproject.com/reviews/joes/"
+  },
+  "joe’s bebop cafe jazz emporium": {
+    "name": "Joe’s Bebop Cafe & Jazz Emporium",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/joes-bebop/"
+  },
+  "john barleycorn’s wrigleyville": {
+    "name": "JOHN BARLEYCORN’S WRIGLEYVILLE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/barleycornwrigleyville/"
+  },
+  "johnnie’s lounge": {
+    "name": "Johnnie’s Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/johnnies/"
+  },
+  "johnny o’hagan’s": {
+    "name": "Johnny O’Hagan’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ohagens/"
+  },
+  "joie de vine": {
+    "name": "JOIE DE VINE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/joiedevine/"
+  },
+  "joy blue": {
+    "name": "Joy Blue",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/joy-blue/"
+  },
+  "joynt": {
+    "name": "The Joynt",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/joynt/"
+  },
+  "jr tap": {
+    "name": "J&R Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jr/"
+  },
+  "jt collins pub": {
+    "name": "JT Collins Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jts/"
+  },
+  "junior’s sports bar nightclub": {
+    "name": "Junior’s Sports Bar & Nightclub",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/juniors/"
+  },
+  "jury’s food drink": {
+    "name": "JURY’S FOOD & DRINK",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/jurys/"
+  },
+  "justin’s": {
+    "name": "Justin’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/justins/"
+  },
+  "karolinka polka club": {
+    "name": "Karolinka Polka Club",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/karolinka/"
+  },
+  "kasey’s tavern": {
+    "name": "KASEY’S TAVERN",
+    "neighborhood": "Printers Row",
+    "chibarUrl": "https://chibarproject.com/reviews/kaseys/"
+  },
+  "katerina’s": {
+    "name": "Katerina’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/katerinas/"
+  },
+  "keenan o’malley’s": {
+    "name": "Keenan O’Malley’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/keenan-omalleys/"
+  },
+  "keenan o’reilly’s pub": {
+    "name": "KEENAN O’REILLY’S PUB",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/keenans/"
+  },
+  "kelly’s pub": {
+    "name": "KELLY’S PUB",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/kellys/"
+  },
+  "kelly’s tavern": {
+    "name": "Kelly’s Tavern",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/kellys-tavern/"
+  },
+  "kelsey’s": {
+    "name": "KELSEY’S",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/kelseys/"
+  },
+  "kendall’s": {
+    "name": "Kendall’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/kendalls/"
+  },
+  "kerouac jack’s": {
+    "name": "Kerouac Jack’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/kerouac/"
+  },
+  "kerryman bar restaurant": {
+    "name": "KERRYMAN BAR & RESTAURANT",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/kerryman/"
+  },
+  "kincade’s": {
+    "name": "KINCADE’S",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/kincades/"
+  },
+  "kinderhook tap": {
+    "name": "Kinderhook Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/kinderhook/"
+  },
+  "king crab tavern": {
+    "name": "KING CRAB TAVERN",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/kingcrab/"
+  },
+  "kingston mines": {
+    "name": "KINGSTON MINES",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/kingstonmines/"
+  },
+  "kirkwood bar grill": {
+    "name": "KIRKWOOD BAR & GRILL",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/kirkwood/"
+  },
+  "kitty o’shea’s": {
+    "name": "KITTY O’SHEA’S",
+    "neighborhood": "South Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/kittyosheas/"
+  },
+  "kroll’s west": {
+    "name": "KROLL’S WEST",
+    "neighborhood": "South Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/krolls/"
+  },
+  "kuma’s corner": {
+    "name": "Kuma’s Corner",
+    "neighborhood": "Avondale",
+    "chibarUrl": "https://chibarproject.com/reviews/kumas/"
+  },
+  "k’s dugout": {
+    "name": "K’S DUGOUT",
+    "neighborhood": "Bowmanville",
+    "chibarUrl": "https://chibarproject.com/reviews/ksdugout/"
+  },
+  "la creperie": {
+    "name": "La Creperie",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/la-creperie/"
+  },
+  "ladner brothers": {
+    "name": "Ladner Brothers",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ladner-bros/"
+  },
+  "lake union grill tap": {
+    "name": "Lake & Union Grill & Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lake-union/"
+  },
+  "lakeview links": {
+    "name": "Lakeview Links",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lakeview-links/"
+  },
+  "lamp post": {
+    "name": "Lamp Post",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lamp-post/"
+  },
+  "lange’s lounge": {
+    "name": "LANGE’S LOUNGE",
+    "neighborhood": "Southport Corridor",
+    "chibarUrl": "https://chibarproject.com/reviews/langes/"
+  },
+  "lasalle power co": {
+    "name": "LaSalle Power Co.",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/la-salle-power/"
+  },
+  "laschet’s inn": {
+    "name": "LASCHET’S INN",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/laschets/"
+  },
+  "lava lounge": {
+    "name": "Lava Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lava/"
+  },
+  "lawry’s tavern": {
+    "name": "Lawry’s Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lawrys/"
+  },
+  "le passage": {
+    "name": "Le Passage",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/le-passage/"
+  },
+  "leadway bar gallery": {
+    "name": "LEADWAY BAR & GALLERY",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/leadway/"
+  },
+  "lee’s": {
+    "name": "Lee’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lees/"
+  },
+  "lee’s unleaded blues": {
+    "name": "Lee’s Unleaded Blues",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lees-unleaded-blues/"
+  },
+  "lemming’s on damen": {
+    "name": "Lemming’s on Damen",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/lemmings/"
+  },
+  "leopard lounge": {
+    "name": "Leopard Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/leopard-lounge/"
+  },
+  "liar’s club": {
+    "name": "LIAR’S CLUB",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/liars/"
+  },
+  "lilly’s": {
+    "name": "LILLY’S",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/lillys/"
+  },
+  "lincoln lodge": {
+    "name": "LINCOLN LODGE",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/lincolnlodge/"
+  },
+  "lincoln station": {
+    "name": "LINCOLN STATION",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/lincolnstation/"
+  },
+  "lincoln tavern": {
+    "name": "Lincoln Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lincoln-tavern/"
+  },
+  "linda’s place": {
+    "name": "Linda’s Place",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/lindas/"
+  },
+  "lion head pub": {
+    "name": "LION HEAD PUB",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/lionhead/"
+  },
+  "little jim’s": {
+    "name": "LITTLE JIM’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/littlejims/"
+  },
+  "lizzie mcneill’s irish pub": {
+    "name": "LIZZIE MCNEILL’S IRISH PUB",
+    "neighborhood": "Streeterville",
+    "chibarUrl": "https://chibarproject.com/reviews/lizzie/"
+  },
+  "ll tavern": {
+    "name": "L&L Tavern",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/l-and-l/"
+  },
+  "lloyd’s chicago": {
+    "name": "LLOYD’S CHICAGO",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lloyds/"
+  },
+  "local option": {
+    "name": "LOCAL OPTION",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/localoption/"
+  },
+  "lockdown bar grill": {
+    "name": "LOCKDOWN BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lockdown/"
+  },
+  "lodge tavern": {
+    "name": "LODGE TAVERN",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/lodge/"
+  },
+  "long room": {
+    "name": "LONG ROOM",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/longroom/"
+  },
+  "longman eagle": {
+    "name": "Longman & Eagle",
+    "neighborhood": "Logan Square",
+    "chibarUrl": "https://chibarproject.com/reviews/longman/"
+  },
+  "loop tavern": {
+    "name": "Loop Tavern",
+    "neighborhood": "West Town",
+    "chibarUrl": "https://chibarproject.com/reviews/loop-tavern/"
+  },
+  "los compadres bar": {
+    "name": "Los Compadres Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/los-compadres/"
+  },
+  "lottie’s pub grill": {
+    "name": "Lottie’s Pub & Grill",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/lotties/"
+  },
+  "lounge ax": {
+    "name": "Lounge Ax",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lounge-ax/"
+  },
+  "lucky lady": {
+    "name": "Lucky Lady",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lucky-lady/"
+  },
+  "lucky lady pub": {
+    "name": "Lucky Lady Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lucky-lady-pub/"
+  },
+  "lucky strike": {
+    "name": "Lucky Strike",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lucky-strike/"
+  },
+  "lucky’s sandwich co": {
+    "name": "LUCKY’S SANDWICH CO.",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/luckys/"
+  },
+  "lucky’s tap": {
+    "name": "Lucky’s Tap",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/luckys-tap/"
+  },
+  "lumen": {
+    "name": "Lumen",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lumen/"
+  },
+  "luxbar": {
+    "name": "LUXBAR",
+    "neighborhood": "Magnificent Mile",
+    "chibarUrl": "https://chibarproject.com/reviews/luxbar/"
+  },
+  "lyons den": {
+    "name": "Lyons Den",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/lyons-den/"
+  },
+  "mac’s american pub": {
+    "name": "MAC’S AMERICAN PUB",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/macs/"
+  },
+  "mad river bar grille": {
+    "name": "Mad River Bar & Grille",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/mad-river/"
+  },
+  "magikist": {
+    "name": "Magikist",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/berghoff-magikist/"
+  },
+  "mahoney’s pub grill": {
+    "name": "MAHONEY’S PUB & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mahoneys/"
+  },
+  "manhandler saloon": {
+    "name": "MANHANDLER SALOON",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/manhandler/"
+  },
+  "map room": {
+    "name": "Map Room",
+    "neighborhood": "Bucktown",
+    "chibarUrl": "https://chibarproject.com/reviews/map-room/"
+  },
+  "marge’s pub": {
+    "name": "Marge’s Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/marges/"
+  },
+  "marge’s still": {
+    "name": "MARGE’S STILL",
+    "neighborhood": "Old Town Triangle",
+    "chibarUrl": "https://chibarproject.com/reviews/margesstill/"
+  },
+  "marie’s riptide lounge": {
+    "name": "MARIE’S RIPTIDE LOUNGE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/maries/"
+  },
+  "marinero bar grill": {
+    "name": "MARINERO BAR & GRILL",
+    "neighborhood": "Albany Park",
+    "chibarUrl": "https://chibarproject.com/reviews/marinero/"
+  },
+  "mark ii lounge": {
+    "name": "MARK II LOUNGE",
+    "neighborhood": "West Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/markii/"
+  },
+  "market": {
+    "name": "Market",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/market/"
+  },
+  "marquee lounge": {
+    "name": "MARQUEE LOUNGE",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/marquee/"
+  },
+  "mart anthony’s italian restaurant steakhouse": {
+    "name": "MART ANTHONY’S ITALIAN RESTAURANT & STEAKHOUSE",
+    "neighborhood": "West Town",
+    "chibarUrl": "https://chibarproject.com/reviews/mart/"
+  },
+  "martini ranch": {
+    "name": "Martini Ranch",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/martini-ranch/"
+  },
+  "martyrs’ restaurant pub": {
+    "name": "MARTYRS’ RESTAURANT & PUB",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/martyrs/"
+  },
+  "marty’s wine martini bar": {
+    "name": "MARTY’S WINE & MARTINI BAR",
+    "neighborhood": "Andersonville",
+    "chibarUrl": "https://chibarproject.com/reviews/martys/"
+  },
+  "mary’s rec room": {
+    "name": "Mary’s Rec Room",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/marys/"
+  },
+  "mashed potato club": {
+    "name": "Mashed Potato Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mashed-potato-club/"
+  },
+  "matchbox": {
+    "name": "MATCHBOX",
+    "neighborhood": "River West",
+    "chibarUrl": "https://chibarproject.com/reviews/matchbox/"
+  },
+  "matilda (and baby atlas)": {
+    "name": "MATILDA (AND BABY ATLAS)",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/matilda/"
+  },
+  "matisse": {
+    "name": "MATISSE",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/matisse/"
+  },
+  "maxtavern": {
+    "name": "MaxTavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/max-tavern/"
+  },
+  "mccuddy’s": {
+    "name": "McCuddy’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mccuddys/"
+  },
+  "mcfadden’s": {
+    "name": "MCFADDEN’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mcfaddens/"
+  },
+  "mcgee’s": {
+    "name": "MCGEE’S",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/mcgees/"
+  },
+  "mcginny’s tap": {
+    "name": "McGinny’s Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mcginneys-tap/"
+  },
+  "mcnamara’s": {
+    "name": "MCNAMARA’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mcnamaras/"
+  },
+  "mcsorley’s old ale house": {
+    "name": "McSorley’s Old Ale House",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/mcsorleys/"
+  },
+  "melvin b’s truck stop": {
+    "name": "Melvin B’s Truck Stop",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/melvin-bs/"
+  },
+  "merkle’s": {
+    "name": "MERKLE’S",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/merkles/"
+  },
+  "messner’s wrigley grille": {
+    "name": "Messner’s Wrigley Grille",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/messners/"
+  },
+  "metro club": {
+    "name": "Metro Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/metro-club/"
+  },
+  "mickey’s": {
+    "name": "MICKEY’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mickeys/"
+  },
+  "mickey’s snack bar": {
+    "name": "Mickey’s snack bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mickeys-snack-bar/"
+  },
+  "midtown": {
+    "name": "MIDTOWN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/midtown/"
+  },
+  "miller’s pub": {
+    "name": "MILLER’S PUB",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/millerspub/"
+  },
+  "millie’s tavern": {
+    "name": "MILLIE’S TAVERN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/millies/"
+  },
+  "mirabell restaurant lounge": {
+    "name": "Mirabell Restaurant & Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mirabell/"
+  },
+  "moe’s cantina": {
+    "name": "MOE’S CANTINA",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/moes/"
+  },
+  "monk’s pub": {
+    "name": "MONK’S PUB",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/monks/"
+  },
+  "montrose saloon": {
+    "name": "MONTROSE SALOON",
+    "neighborhood": "Albany Park",
+    "chibarUrl": "https://chibarproject.com/reviews/montrose/"
+  },
+  "moody’s pub": {
+    "name": "MOODY’S PUB",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/moodys/"
+  },
+  "moonraker restaurant tavern": {
+    "name": "Moonraker Restaurant & Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/moonraker/"
+  },
+  "moonshine": {
+    "name": "Moonshine",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/moonshine/"
+  },
+  "moretti’s ristorante pizzeria": {
+    "name": "Moretti’s Ristorante & Pizzeria",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/morettis/"
+  },
+  "morgan’s on maxwell street": {
+    "name": "Morgan’s on Maxwell Street",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/morgans/"
+  },
+  "morseland": {
+    "name": "Morseland",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/morseland/"
+  },
+  "motel bar": {
+    "name": "MOTEL BAR",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/motel/"
+  },
+  "mother hubbard’s sports pub": {
+    "name": "MOTHER HUBBARD’S SPORTS PUB",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/motherhubbards/"
+  },
+  "mother’s (the original)": {
+    "name": "MOTHER’S (THE ORIGINAL)",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/mothers/"
+  },
+  "moxie": {
+    "name": "Moxie",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/moxie/"
+  },
+  "mr c’s midway bar": {
+    "name": "Mr. C’s Midway Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mr-cs/"
+  },
+  "mugs bunny": {
+    "name": "Mugs Bunny",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mugs-bunny/"
+  },
+  "mullen’s bar grill": {
+    "name": "Mullen’s Bar & Grill",
+    "neighborhood": "West Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/mullens-clark/"
+  },
+  "mullen’s sports bar grill": {
+    "name": "MULLEN’S SPORTS BAR & GRILL",
+    "neighborhood": "West Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/mullens/"
+  },
+  "mulligan’s public house": {
+    "name": "Mulligan’s Public House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mulligans/"
+  },
+  "murphy’s bleachers": {
+    "name": "MURPHY’S BLEACHERS",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/murphys/"
+  },
+  "mutiny": {
+    "name": "Mutiny",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mutiny/"
+  },
+  "mystic celt": {
+    "name": "Mystic Celt",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/mystic-celt/"
+  },
+  "nacional 27": {
+    "name": "NACIONAL 27",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/nacional27/"
+  },
+  "neo": {
+    "name": "Neo",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/neo/"
+  },
+  "new apartment lounge": {
+    "name": "NEW APARTMENT LOUNGE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/newapartment/"
+  },
+  "new checkerboard lounge": {
+    "name": "New Checkerboard Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/new-checkerboard/"
+  },
+  "newport bar grille": {
+    "name": "Newport Bar & Grille",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/newport/"
+  },
+  "nick’s beergarden": {
+    "name": "NICK’S BEERGARDEN",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/nicks/"
+  },
+  "nick’s uptown": {
+    "name": "NICK’S UPTOWN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/nicksuptown/"
+  },
+  "nisei lounge": {
+    "name": "NISEI LOUNGE",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/nisei/"
+  },
+  "nomi": {
+    "name": "NOMI",
+    "neighborhood": "Magnificent Mile",
+    "chibarUrl": "https://chibarproject.com/reviews/nomi/"
+  },
+  "northside bar grill": {
+    "name": "NORTHSIDE BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/northside/"
+  },
+  "ode to the new york mets": {
+    "name": "Ode to the New York Mets",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/mets/"
+  },
+  "old oak tap": {
+    "name": "OLD OAK TAP",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/oldoak/"
+  },
+  "old time tap": {
+    "name": "Old Time Tap",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/old-time/"
+  },
+  "old town ale house": {
+    "name": "THE OLD TOWN ALE HOUSE",
+    "neighborhood": "Old Town",
+    "chibarUrl": "https://chibarproject.com/reviews/oldtownalehouse/"
+  },
+  "old town pub": {
+    "name": "OLD TOWN PUB",
+    "neighborhood": "Old Town",
+    "chibarUrl": "https://chibarproject.com/reviews/oldtownpub/"
+  },
+  "orbit room": {
+    "name": "Orbit Room",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/orbitroom/"
+  },
+  "orion restaurant bar": {
+    "name": "Orion Restaurant & Bar",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/orion/"
+  },
+  "o’banion’s": {
+    "name": "O’Banion’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/obanions/"
+  },
+  "o’brien’s restaurant bar": {
+    "name": "O’BRIEN’S RESTAURANT & BAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/obriens/"
+  },
+  "o’brien’s riverwalk café": {
+    "name": "O’BRIEN’S RIVERWALK CAFÉ",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/obriensriver/"
+  },
+  "o’callaghan’s": {
+    "name": "O’CALLAGHAN’S",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/ocallaghans/"
+  },
+  "o’donovan’s pub and restaurant": {
+    "name": "O’DONOVAN’S PUB AND RESTAURANT",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/odonovans/"
+  },
+  "o’leary’s public house": {
+    "name": "O’LEARY’S PUBLIC HOUSE",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/olearys/"
+  },
+  "o’malley’s west bar grill": {
+    "name": "O’Malley’s West Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/omalleys/"
+  },
+  "o’rourke’s": {
+    "name": "O’Rourke’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/orourkes/"
+  },
+  "o’shaughnessy’s public house": {
+    "name": "O’SHAUGHNESSY’S PUBLIC HOUSE",
+    "neighborhood": "Ravenswood",
+    "chibarUrl": "https://chibarproject.com/reviews/oshaughnessys/"
+  },
+  "paddy long’s": {
+    "name": "Paddy Long’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/paddy-longs/"
+  },
+  "pagan o’leary public house": {
+    "name": "Pagan O’Leary Public House",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/pagan-olearys/"
+  },
+  "papi chulo’s bar grill": {
+    "name": "Papi Chulo’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/papi/"
+  },
+  "paradisus playa conchal": {
+    "name": "Paradisus Playa Conchal",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/playa-conchal/"
+  },
+  "paramount room": {
+    "name": "PARAMOUNT ROOM",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/paramountroom/"
+  },
+  "parkway tavern": {
+    "name": "Parkway Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/parkway-tavern/"
+  },
+  "patsy’s place": {
+    "name": "PATSY’S PLACE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/patsys/"
+  },
+  "paul bunyan of old town": {
+    "name": "Paul Bunyan of Old Town",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/paul-bunyan/"
+  },
+  "peek inn": {
+    "name": "PEEK INN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/peekinn/"
+  },
+  "peekaboo bar grille": {
+    "name": "Peek-a-Boo Bar & Grille",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/peek/"
+  },
+  "peninsula lobby bar": {
+    "name": "PENINSULA LOBBY BAR",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/peninsulalobby/"
+  },
+  "penthouse lounge": {
+    "name": "Penthouse Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/penthouse/"
+  },
+  "pete mary’s": {
+    "name": "Pete & Mary’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pete-marys/"
+  },
+  "pete miller’s seafood prime steak": {
+    "name": "Pete Miller’s Seafood & Prime Steak",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pete-millers/"
+  },
+  "philosofur’s": {
+    "name": "PhilosoFur’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/philoso-furs/"
+  },
+  "phyllis’ musical inn": {
+    "name": "PHYLLIS’ MUSICAL INN",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/phyllis/"
+  },
+  "piano man": {
+    "name": "Piano Man",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/piano-man/"
+  },
+  "piece": {
+    "name": "PIECE",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/piece/"
+  },
+  "pint": {
+    "name": "PINT",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/pint/"
+  },
+  "pippin’s tavern": {
+    "name": "PIPPIN’S TAVERN",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/pippins/"
+  },
+  "pitchfork saloon": {
+    "name": "PITCHFORK SALOON",
+    "neighborhood": "Albany Park",
+    "chibarUrl": "https://chibarproject.com/reviews/pitchfork/"
+  },
+  "players bar grill": {
+    "name": "PLAYERS BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/players/"
+  },
+  "plush": {
+    "name": "Plush",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/plush/"
+  },
+  "plymouth restaurant bar": {
+    "name": "PLYMOUTH RESTAURANT & BAR",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/plymouth/"
+  },
+  "poag mahone’s": {
+    "name": "Poag Mahone’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/poag-mahones/"
+  },
+  "polk street pub": {
+    "name": "POLK STREET PUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/polk/"
+  },
+  "pony inn": {
+    "name": "THE PONY INN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/pony/"
+  },
+  "pops for champagne": {
+    "name": "POPS FOR CHAMPAGNE",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/pops/"
+  },
+  "portillo bar": {
+    "name": "Portillo Bar",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/portillo/"
+  },
+  "pour house": {
+    "name": "Pour House",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pour-house/"
+  },
+  "prodigal son": {
+    "name": "Prodigal Son",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/prodigal-son/"
+  },
+  "prop house": {
+    "name": "Prop House",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/prop-house/"
+  },
+  "publican": {
+    "name": "PUBLICAN",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/publican/"
+  },
+  "pullman pub": {
+    "name": "Pullman Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pullman-pub/"
+  },
+  "pump room": {
+    "name": "PUMP ROOM",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pumproom/"
+  },
+  "pumping company bar grill": {
+    "name": "Pumping Company Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pumping/"
+  },
+  "pure café": {
+    "name": "PURE CAFÉ",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/pure/"
+  },
+  "purple palace": {
+    "name": "The Purple Palace",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/purple/"
+  },
+  "quenchers saloon": {
+    "name": "Quenchers Saloon",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/quenchers/"
+  },
+  "r bar": {
+    "name": "R Bar",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/r/"
+  },
+  "rail bar grill": {
+    "name": "RAIL BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rail/"
+  },
+  "rainbo club": {
+    "name": "RAINBO CLUB",
+    "neighborhood": "Ukrainian Village",
+    "chibarUrl": "https://chibarproject.com/reviews/rainboclub/"
+  },
+  "ravenswood pub": {
+    "name": "Ravenswood Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ravenswood-pub/"
+  },
+  "raven’s": {
+    "name": "RAVEN’S",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/ravens/"
+  },
+  "reagle beagle": {
+    "name": "Reagle Beagle",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/reagle-beagle/"
+  },
+  "rebel bar grill": {
+    "name": "Rebel Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rebel/"
+  },
+  "red canary": {
+    "name": "Red Canary",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/red-canary/"
+  },
+  "red ivy": {
+    "name": "Red Ivy",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/red-ivy/"
+  },
+  "red lion pub": {
+    "name": "Red Lion Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/red-lion/"
+  },
+  "red wine room": {
+    "name": "Red Wine Room",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/red/"
+  },
+  "redhead piano bar": {
+    "name": "REDHEAD PIANO BAR",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/redhead/"
+  },
+  "redmond’s": {
+    "name": "REDMOND’S",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/redmonds/"
+  },
+  "reggie’s music joint rock club": {
+    "name": "Reggie’s Music Joint & Rock Club",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/reggies/"
+  },
+  "renaldi’s pizza": {
+    "name": "RENALDI’S PIZZA",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/renaldis/"
+  },
+  "resi’s bierstube": {
+    "name": "RESI’S BIERSTUBE",
+    "neighborhood": "Lincoln Square",
+    "chibarUrl": "https://chibarproject.com/reviews/resis/"
+  },
+  "revolution brewing co": {
+    "name": "Revolution Brewing co.",
+    "neighborhood": "Logan Square",
+    "chibarUrl": "https://chibarproject.com/reviews/revolution/"
+  },
+  "riccardo’s restaurant gallery": {
+    "name": "Riccardo’s Restaurant & Gallery",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/riccardos/"
+  },
+  "richard’s bar": {
+    "name": "RICHARD’S BAR",
+    "neighborhood": "River West",
+    "chibarUrl": "https://chibarproject.com/reviews/richards/"
+  },
+  "rich’s first one today": {
+    "name": "Rich’s First One Today",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/richs/"
+  },
+  "ricky g’s": {
+    "name": "RICKY G’S",
+    "neighborhood": "West Rogers Park",
+    "chibarUrl": "https://chibarproject.com/reviews/rickygs/"
+  },
+  "river shannon": {
+    "name": "RIVER SHANNON",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/rivershannon/"
+  },
+  "riverfront saloon": {
+    "name": "Riverfront Saloon",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/riverfront-saloon/"
+  },
+  "rivers": {
+    "name": "RIVERS",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/rivers/"
+  },
+  "riverview tavern": {
+    "name": "RIVERVIEW TAVERN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/riverview/"
+  },
+  "roadhouse": {
+    "name": "Roadhouse",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/roadhouse/"
+  },
+  "rocco’s ranalli’s": {
+    "name": "ROCCO’S RANALLI’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ranallisclark/"
+  },
+  "rock bottom": {
+    "name": "ROCK BOTTOM",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/rockbottomchicago/"
+  },
+  "rockit bar grill": {
+    "name": "ROCKIT BAR & GRILL",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rockit/"
+  },
+  "rockit wrigleyville": {
+    "name": "ROCKIT WRIGLEYVILLE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rockitwrigleyville/"
+  },
+  "rocks lincoln park": {
+    "name": "Rocks Lincoln Park",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rocks/"
+  },
+  "rockwell neighborhood grill": {
+    "name": "ROCKWELL NEIGHBORHOOD GRILL",
+    "neighborhood": "Ravenswood Gardens",
+    "chibarUrl": "https://chibarproject.com/reviews/rockwell/"
+  },
+  "rodan": {
+    "name": "Rodan",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rodan/"
+  },
+  "roof on the wit rooftop in chicago": {
+    "name": "ROOF ON THE WIT: ROOFTOP IN CHICAGO",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/roof/"
+  },
+  "rootstock bar": {
+    "name": "ROOTSTOCK BAR",
+    "neighborhood": "Humboldt Park",
+    "chibarUrl": "https://chibarproject.com/reviews/rootstock/"
+  },
+  "rosa’s lounge": {
+    "name": "Rosa’s Lounge",
+    "neighborhood": "Logan Square",
+    "chibarUrl": "https://chibarproject.com/reviews/rosas/"
+  },
+  "roscoe’s tavern café": {
+    "name": "ROSCOE’S TAVERN & CAFÉ",
+    "neighborhood": "Boystown",
+    "chibarUrl": "https://chibarproject.com/reviews/roscoes/"
+  },
+  "rose crown london pub": {
+    "name": "Rose & Crown London Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rose/"
+  },
+  "rossi’s liquors": {
+    "name": "ROSSI’S LIQUORS",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/rossis/"
+  },
+  "rt o’sullivan’s ii": {
+    "name": "R.T. O’Sullivan’s II",
+    "neighborhood": "Beyond",
+    "chibarUrl": "https://chibarproject.com/reviews/rtoiis/"
+  },
+  "rudy ann’s": {
+    "name": "Rudy & Ann’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rudy-anns/"
+  },
+  "rumors bar grille": {
+    "name": "Rumors Bar & Grille",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/rumors/"
+  },
+  "sable kitchen bar": {
+    "name": "SABLE KITCHEN & BAR",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/sable/"
+  },
+  "salseria cantina grill": {
+    "name": "Salseria Cantina & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/salseria/"
+  },
+  "salud tequila lounge": {
+    "name": "Salud Tequila Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/salud/"
+  },
+  "saluki bar grill": {
+    "name": "Saluki Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/saluki/"
+  },
+  "schaller’s pump": {
+    "name": "Schaller’s Pump",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/schallers-pump/"
+  },
+  "schoolyard tavern": {
+    "name": "SCHOOLYARD TAVERN",
+    "neighborhood": "Southport Corridor",
+    "chibarUrl": "https://chibarproject.com/reviews/schoolyard/"
+  },
+  "schubas tavern": {
+    "name": "SCHUBAS TAVERN",
+    "neighborhood": "Southport Corridor",
+    "chibarUrl": "https://chibarproject.com/reviews/schubas/"
+  },
+  "schubert inn": {
+    "name": "Schubert Inn",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/schubert/"
+  },
+  "schulien’s": {
+    "name": "Schulien’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/schuliens/"
+  },
+  "schwaben stube": {
+    "name": "Schwaben Stube",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/schwaben-stube/"
+  },
+  "sedgwick stop": {
+    "name": "SEDGWICK STOP",
+    "neighborhood": "Old Town Triangle",
+    "chibarUrl": "https://chibarproject.com/reviews/sedgwick-stop/"
+  },
+  "sedgwick’s bar grill": {
+    "name": "Sedgwick’s Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/sedgwicks/"
+  },
+  "seven ten lounge": {
+    "name": "SEVEN TEN LOUNGE",
+    "neighborhood": "Wrightwood Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/seventen/"
+  },
+  "shamrock club": {
+    "name": "SHAMROCK CLUB",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/shamrockclub/"
+  },
+  "sheffield’s wine beer garden": {
+    "name": "SHEFFIELD’S WINE & BEER GARDEN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/sheffields/"
+  },
+  "shinnick’s pub": {
+    "name": "Shinnick’s Pub",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/shinnicks/"
+  },
+  "shoes pub": {
+    "name": "SHOES PUB",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/shoes/"
+  },
+  "siblings": {
+    "name": "Siblings",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/siblings/"
+  },
+  "side street saloon": {
+    "name": "SIDE STREET SALOON",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/sidestreet/"
+  },
+  "signature lounge": {
+    "name": "SIGNATURE LOUNGE",
+    "neighborhood": "Magnificent Mile",
+    "chibarUrl": "https://chibarproject.com/reviews/signature/"
+  },
+  "silver cloud bar grill": {
+    "name": "Silver Cloud Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/silvercloud/"
+  },
+  "silver palm": {
+    "name": "SILVER PALM",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/silverpalm/"
+  },
+  "simone’s": {
+    "name": "Simone’s",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/simones/"
+  },
+  "simon’s tavern": {
+    "name": "SIMON’S TAVERN",
+    "neighborhood": "Andersonville",
+    "chibarUrl": "https://chibarproject.com/reviews/simons/"
+  },
+  "sky ride tap": {
+    "name": "SKY RIDE TAP",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/skyridetap/"
+  },
+  "skylark": {
+    "name": "Skylark",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/skylark/"
+  },
+  "slow down life’s too short": {
+    "name": "Slow Down! Life’s too Short",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/slow-down/"
+  },
+  "sluggers world class sports bar and grill dueling pianos": {
+    "name": "SLUGGERS WORLD CLASS SPORTS BAR AND GRILL & DUELING PIANOS",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/sluggers/"
+  },
+  "small bar": {
+    "name": "Small Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/small-bar-division/"
+  },
+  "small bar avondale": {
+    "name": "Small Bar Avondale",
+    "neighborhood": "Avondale",
+    "chibarUrl": "https://chibarproject.com/reviews/small-bar/"
+  },
+  "small world inn": {
+    "name": "Small World Inn",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/small-world/"
+  },
+  "smoke daddy": {
+    "name": "SMOKE DADDY",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/smokedaddy/"
+  },
+  "snickers bar grill": {
+    "name": "SNICKERS BAR & GRILL",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/snickers/"
+  },
+  "sofie’s tavern": {
+    "name": "Sofie’s Tavern",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/sofies/"
+  },
+  "sofo": {
+    "name": "SOFO",
+    "neighborhood": "Andersonville",
+    "chibarUrl": "https://chibarproject.com/reviews/sofo/"
+  },
+  "sopo": {
+    "name": "Sopo",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/sopo/"
+  },
+  "soundbar": {
+    "name": "Sound-Bar",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/sound-bar/"
+  },
+  "south loop club": {
+    "name": "SOUTH LOOP CLUB",
+    "neighborhood": "South Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/slc/"
+  },
+  "south shore inn": {
+    "name": "South Shore Inn",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/south-shore/"
+  },
+  "southern": {
+    "name": "The Southern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/southern/"
+  },
+  "southport city saloon": {
+    "name": "Southport City Saloon",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/southport-city/"
+  },
+  "southport lanes": {
+    "name": "SOUTHPORT LANES",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/southportlanes/"
+  },
+  "sovereign": {
+    "name": "SOVEREIGN",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/sovereign/"
+  },
+  "spectrum bar grill": {
+    "name": "SPECTRUM BAR & GRILL",
+    "neighborhood": "Greektown & West Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/spectrum/"
+  },
+  "spin nightclub": {
+    "name": "Spin Nightclub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/spin/"
+  },
+  "spread": {
+    "name": "The Spread",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/spread/"
+  },
+  "spyners pub": {
+    "name": "SPYNERS PUB",
+    "neighborhood": "Lincoln Square",
+    "chibarUrl": "https://chibarproject.com/reviews/spyners/"
+  },
+  "st andrew’s inn": {
+    "name": "St. Andrew’s Inn",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ole-st-andrews/"
+  },
+  "stanley’s kitchen tap": {
+    "name": "Stanley’s Kitchen & Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/stanleys/"
+  },
+  "stanley’s on racine": {
+    "name": "Stanley’s on Racine",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/stanleys-racine/"
+  },
+  "star gaze": {
+    "name": "Star Gaze",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/stargaze/"
+  },
+  "sterch’s": {
+    "name": "Sterch’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/sterchs/"
+  },
+  "steve’s lounge": {
+    "name": "Steve’s Lounge",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/steves/"
+  },
+  "stocks blondes": {
+    "name": "STOCKS & BLONDES",
+    "neighborhood": "Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/stocksblondes/"
+  },
+  "store": {
+    "name": "THE STORE",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/store/"
+  },
+  "streeter’s tavern": {
+    "name": "STREETER’S TAVERN",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/streeters/"
+  },
+  "stretch bar grill": {
+    "name": "THE STRETCH BAR & GRILL",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/stretch/"
+  },
+  "stretch run": {
+    "name": "Stretch Run",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/stretch-run/"
+  },
+  "studio 31": {
+    "name": "Studio 31",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/studio-31/"
+  },
+  "subterranean": {
+    "name": "SUBTERRANEAN",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/subterranean/"
+  },
+  "sugarcane lounge": {
+    "name": "SUGARCANE LOUNGE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/sugarcanelounge/"
+  },
+  "suite lounge": {
+    "name": "SUITE LOUNGE",
+    "neighborhood": "Old Town",
+    "chibarUrl": "https://chibarproject.com/reviews/suitelounge/"
+  },
+  "sully’s public house": {
+    "name": "SULLY’S PUBLIC HOUSE",
+    "neighborhood": "SoNo",
+    "chibarUrl": "https://chibarproject.com/reviews/sullys/"
+  },
+  "swirl wine bar": {
+    "name": "SWIRL WINE BAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/swirl/"
+  },
+  "syrena baltyk lounge": {
+    "name": "Syrena Baltyk Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/syrena/"
+  },
+  "szalas restaurant": {
+    "name": "Szalas Restaurant",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/szalas/"
+  },
+  "t mellon’s hye bar": {
+    "name": "T. Mellon’s Hye Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tmellons/"
+  },
+  "tai’s til 4": {
+    "name": "TAI’S TIL 4",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/tais/"
+  },
+  "take five": {
+    "name": "Take Five",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/take-five/"
+  },
+  "tapster chicago": {
+    "name": "Tapster Chicago",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/tapster/"
+  },
+  "tasting room": {
+    "name": "Tasting Room",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tasting/"
+  },
+  "tavern 33": {
+    "name": "Tavern 33",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tavern33/"
+  },
+  "ted’s place": {
+    "name": "Ted’s Place",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/teds/"
+  },
+  "ten cat tavern": {
+    "name": "TEN CAT TAVERN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/tencat/"
+  },
+  "ten56": {
+    "name": "Ten56",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ten-56/"
+  },
+  "terrace": {
+    "name": "THE TERRACE",
+    "neighborhood": "Magnificent Mile",
+    "chibarUrl": "https://chibarproject.com/reviews/theterrace/"
+  },
+  "terrace at conrad hotel": {
+    "name": "Terrace at Conrad Hotel",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/terraceconrad/"
+  },
+  "theory": {
+    "name": "THEORY",
+    "neighborhood": "River North",
+    "chibarUrl": "https://chibarproject.com/reviews/theory/"
+  },
+  "theresa’s lounge": {
+    "name": "Theresa’s Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/theresas/"
+  },
+  "tilted kilt pub eatery": {
+    "name": "TILTED KILT PUB & EATERY",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tiltedkilt/"
+  },
+  "time out lounge": {
+    "name": "Time Out Lounge",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/timeoutlounge/"
+  },
+  "time out sports bar": {
+    "name": "TIME OUT SPORTS BAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/timeout/"
+  },
+  "timothy o’toole’s pub": {
+    "name": "TIMOTHY O’TOOLE’S PUB",
+    "neighborhood": "Streeterville",
+    "chibarUrl": "https://chibarproject.com/reviews/tot/"
+  },
+  "tin lizzie": {
+    "name": "TIN LIZZIE",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/tinlizzie/"
+  },
+  "tiny lounge": {
+    "name": "Tiny Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tiny-lounge/"
+  },
+  "tnt lounge": {
+    "name": "TNT Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tnt/"
+  },
+  "tommy nevin’s pub": {
+    "name": "Tommy Nevin’s Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/nevins/"
+  },
+  "tonic room": {
+    "name": "TONIC ROOM",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tonicroom/"
+  },
+  "toons bar grill": {
+    "name": "TOONS BAR & GRILL",
+    "neighborhood": "Southport Corridor",
+    "chibarUrl": "https://chibarproject.com/reviews/toons/"
+  },
+  "top ten lies told at wrigley field": {
+    "name": "Top Ten Lies Told at Wrigley Field",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/toptenlies/"
+  },
+  "touch of class": {
+    "name": "Touch of Class",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/toc/"
+  },
+  "touché": {
+    "name": "TOUCHÉ",
+    "neighborhood": "Edgewater",
+    "chibarUrl": "https://chibarproject.com/reviews/touche/"
+  },
+  "trader vic’s": {
+    "name": "TRADER VIC’S",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/tradervics/"
+  },
+  "trinity": {
+    "name": "Trinity",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/trinity/"
+  },
+  "tripoli tap": {
+    "name": "TRIPOLI TAP",
+    "neighborhood": "Sheffield Neighbors",
+    "chibarUrl": "https://chibarproject.com/reviews/tripolitap/"
+  },
+  "tufano’s vernon park tap": {
+    "name": "Tufano’s Vernon Park Tap",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/tufanos/"
+  },
+  "twin anchors": {
+    "name": "TWIN ANCHORS",
+    "neighborhood": "Old Town Triangle",
+    "chibarUrl": "https://chibarproject.com/reviews/twinanchors/"
+  },
+  "twisted shamrock pub": {
+    "name": "Twisted Shamrock Pub",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/twistedshamrock/"
+  },
+  "twisted spoke": {
+    "name": "TWISTED SPOKE",
+    "neighborhood": "West Town",
+    "chibarUrl": "https://chibarproject.com/reviews/twistedspoke/"
+  },
+  "t’s bar restaurant": {
+    "name": "T’s Bar & Restaurant",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ts/"
+  },
+  "ubaa old crawford inn": {
+    "name": "Ubaa & Old Crawford Inn",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ubaa/"
+  },
+  "uncommon ground": {
+    "name": "UNCOMMON GROUND",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/uncommonground/"
+  },
+  "underbar": {
+    "name": "UNDERBAR",
+    "neighborhood": "Roscoe Village",
+    "chibarUrl": "https://chibarproject.com/reviews/underbar/"
+  },
+  "underground lounge": {
+    "name": "UNDERGROUND LOUNGE",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/undergroundlounge/"
+  },
+  "underground wonder bar": {
+    "name": "UNDERGROUND WONDER BAR",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/undergroundwonder/"
+  },
+  "union": {
+    "name": "THE UNION",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/union/"
+  },
+  "union park lounge": {
+    "name": "Union Park Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/unionpark/"
+  },
+  "unofficial steve bartman page": {
+    "name": "The Unofficial Steve Bartman Page",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/bartman/"
+  },
+  "uptown lounge": {
+    "name": "UPTOWN LOUNGE",
+    "neighborhood": "Uptown",
+    "chibarUrl": "https://chibarproject.com/reviews/uptown/"
+  },
+  "us beer co": {
+    "name": "U.S. Beer Co.",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/usbeerco/"
+  },
+  "vaughan’s pub": {
+    "name": "VAUGHAN’S PUB",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/vaughans/"
+  },
+  "velvet lounge": {
+    "name": "VELVET LOUNGE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/newvelvet/"
+  },
+  "vertigo sky lounge": {
+    "name": "Vertigo Sky Lounge",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/vertigo/"
+  },
+  "vice district brewing company": {
+    "name": "Vice District Brewing Company",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/vicedistrictbrewingcompany/"
+  },
+  "village tap": {
+    "name": "VILLAGE TAP",
+    "neighborhood": "Roscoe Village",
+    "chibarUrl": "https://chibarproject.com/reviews/villagetap/"
+  },
+  "village tavern": {
+    "name": "Village Tavern",
+    "neighborhood": "Suburbs",
+    "chibarUrl": "https://chibarproject.com/reviews/villagetavern/"
+  },
+  "villains": {
+    "name": "VILLAINS",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/villains/"
+  },
+  "vines on clark": {
+    "name": "VINES ON CLARK",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/vines/"
+  },
+  "violet": {
+    "name": "Violet",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/violet/"
+  },
+  "violet hour": {
+    "name": "Violet Hour",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/violethour/"
+  },
+  "von stuke’s hofbrau": {
+    "name": "Von Stuke’s Hofbrau",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/von-stukes/"
+  },
+  "wabash tap": {
+    "name": "WABASH TAP",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wabashtap/"
+  },
+  "walter payton’s roundhouse america’s brewpub": {
+    "name": "Walter Payton’s Roundhouse & America’s Brewpub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/roundhouse/"
+  },
+  "waterhouse tavern grill": {
+    "name": "WATERHOUSE TAVERN & GRILL",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/waterhouse/"
+  },
+  "weather mark tavern": {
+    "name": "WEATHER MARK TAVERN",
+    "neighborhood": "South Loop",
+    "chibarUrl": "https://chibarproject.com/reviews/weathermark/"
+  },
+  "webster’s wine bar": {
+    "name": "Webster’s Wine Bar",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/websters/"
+  },
+  "weeds tavern": {
+    "name": "WEEDS TAVERN",
+    "neighborhood": "SoNo",
+    "chibarUrl": "https://chibarproject.com/reviews/weeds/"
+  },
+  "weegee’s lounge": {
+    "name": "Weegee’s Lounge",
+    "neighborhood": "Logan Square",
+    "chibarUrl": "https://chibarproject.com/reviews/weegees/"
+  },
+  "wellington’s tavern": {
+    "name": "WELLINGTON’S TAVERN",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wellingtons/"
+  },
+  "wells on wells": {
+    "name": "WELLS ON WELLS",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wells/"
+  },
+  "wendol’s": {
+    "name": "Wendol’s",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wendols/"
+  },
+  "wertelka’s tavern": {
+    "name": "Wertelka’s Tavern",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wertelkas/"
+  },
+  "west 55th street": {
+    "name": "West 55th Street",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/west55th/"
+  },
+  "whirlaway lounge": {
+    "name": "Whirlaway Lounge",
+    "neighborhood": "Logan Square",
+    "chibarUrl": "https://chibarproject.com/reviews/whirlaway/"
+  },
+  "whiskey bar grill": {
+    "name": "Whiskey Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/whiskey/"
+  },
+  "whiskey business": {
+    "name": "Whiskey Business",
+    "neighborhood": "Wicker Park",
+    "chibarUrl": "https://chibarproject.com/reviews/whiskey-business/"
+  },
+  "whistler": {
+    "name": "Whistler",
+    "neighborhood": "Logan Square",
+    "chibarUrl": "https://chibarproject.com/reviews/whistler/"
+  },
+  "wild goose": {
+    "name": "Wild Goose",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/wildgoose/"
+  },
+  "wild hare singing armadillo frog sanctuary": {
+    "name": "WILD HARE & SINGING ARMADILLO FROG SANCTUARY",
+    "neighborhood": "Lincoln Park & Park West",
+    "chibarUrl": "https://chibarproject.com/reviews/wildhare/"
+  },
+  "wild pug": {
+    "name": "Wild Pug",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wildpug/"
+  },
+  "wild rover": {
+    "name": "Wild Rover",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wildrover/"
+  },
+  "wilde bar restaurant": {
+    "name": "WILDE BAR & RESTAURANT",
+    "neighborhood": "East Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/wilde/"
+  },
+  "will’s northwoods inn": {
+    "name": "WILL’S NORTHWOODS INN",
+    "neighborhood": "West Lakeview",
+    "chibarUrl": "https://chibarproject.com/reviews/wills/"
+  },
+  "windy cindy’s ii": {
+    "name": "Windy Cindy’s II",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/windy-cindys/"
+  },
+  "windy city inn": {
+    "name": "Windy City Inn",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/windycity/"
+  },
+  "winner’s on lincoln sports bar grill": {
+    "name": "Winner’s on Lincoln Sports Bar & Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/winners/"
+  },
+  "wise fools pub": {
+    "name": "Wise Fools Pub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wisefools/"
+  },
+  "witt’s bar grille": {
+    "name": "WITT’S BAR & GRILLE",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/witts/"
+  },
+  "wolfgang puck airport café": {
+    "name": "WOLFGANG PUCK AIRPORT CAFÉ",
+    "neighborhood": "O'Hare Airport",
+    "chibarUrl": "https://chibarproject.com/reviews/wolfgangpuckohare/"
+  },
+  "woodlawn tap": {
+    "name": "Woodlawn Tap",
+    "neighborhood": "South Side",
+    "chibarUrl": "https://chibarproject.com/reviews/woodlawntap/"
+  },
+  "wrightwood tap": {
+    "name": "Wrightwood Tap",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/wrightwood/"
+  },
+  "wrigley field": {
+    "name": "WRIGLEY FIELD",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/wrigleyfield/"
+  },
+  "wrigleyville north": {
+    "name": "WRIGLEYVILLE NORTH",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/wrigleyvillenorth/"
+  },
+  "xippo": {
+    "name": "XIPPO",
+    "neighborhood": "North Center",
+    "chibarUrl": "https://chibarproject.com/reviews/xippo/"
+  },
+  "yakzies on clark": {
+    "name": "YAK-ZIES ON CLARK",
+    "neighborhood": "Wrigleyville",
+    "chibarUrl": "https://chibarproject.com/reviews/yak-ziesclark/"
+  },
+  "yakzies on diversey": {
+    "name": "YAK-ZIES ON DIVERSEY",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/yak-ziesdiversey/"
+  },
+  "yard": {
+    "name": "Yard",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/yard/"
+  },
+  "zebra lounge": {
+    "name": "ZEBRA LOUNGE",
+    "neighborhood": "Gold Coast",
+    "chibarUrl": "https://chibarproject.com/reviews/zebra/"
+  },
+  "zed451": {
+    "name": "ZED451",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/zed451/"
+  },
+  "zella": {
+    "name": "Zella",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/zella/"
+  },
+  "zentra nightclub": {
+    "name": "Zentra Nightclub",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/zentra/"
+  },
+  "zona": {
+    "name": "Zona",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/zona/"
+  },
+  "zoo ultra bar + grill": {
+    "name": "Zoo Ultra Bar + Grill",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/zoo/"
+  },
+  "zum deutschen eck": {
+    "name": "Zum Deutschen Eck",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/zum-deutschen-eck/"
+  },
+  "ñ": {
+    "name": "ñ",
+    "neighborhood": "Avondale",
+    "chibarUrl": "https://chibarproject.com/reviews/n/"
+  },
+  "überstein": {
+    "name": "Überstein",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/ubersteinwp/"
+  },
+  "“first bunny”": {
+    "name": "“First Bunny”",
+    "neighborhood": "Gone But Not Forgotten",
+    "chibarUrl": "https://chibarproject.com/reviews/first-bunny/"
+  }
+}

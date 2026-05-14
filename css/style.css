@@ -355,6 +355,7 @@ button {
 }
 
 /* A–Z pill bar in Venue tab */
+#venue-neighborhood-bar,
 #venue-alpha-bar {
   flex-shrink: 0;
   display: flex;
@@ -364,7 +365,17 @@ button {
   scrollbar-width: none;
   border-bottom: 1px solid var(--border);
 }
+#venue-neighborhood-bar::-webkit-scrollbar,
 #venue-alpha-bar::-webkit-scrollbar { display: none; }
+
+.venue-nbhd-badge {
+  font-size: 10px;
+  color: var(--text3);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 #view-year {
   display: flex;

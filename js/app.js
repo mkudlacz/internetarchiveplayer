@@ -10,6 +10,46 @@ fetch('./js/chicago-history.json').then(r => r.json()).then(d => { HISTORY = d; 
 let ARTIST_CONTEXT = {};
 fetch('./js/artist-context.json').then(r => r.json()).then(d => { ARTIST_CONTEXT = d; }).catch(() => {});
 
+// ── Venue neighborhood data ────────────────────────────────────────
+let CHIBAR = {};
+let CHIBAR_OVERRIDES = {};
+Promise.all([
+  fetch('./js/chibar-venues.json').then(r => r.json()).catch(() => ({})),
+  fetch('./js/venue-overrides.json').then(r => r.json()).catch(() => ({})),
+]).then(([chibar, overrides]) => {
+  // Exclude non-neighborhood buckets from scraped data
+  const SKIP = new Set(['Gone But Not Forgotten', 'South Side', 'Suburbs', 'Beyond']);
+  CHIBAR = Object.fromEntries(Object.entries(chibar).filter(([, v]) => !SKIP.has(v.neighborhood)));
+  CHIBAR_OVERRIDES = overrides;
+});
+
+function normalizeVenueName(name) {
+  return (name || '').toLowerCase()
+    .replace(/^the\s+/, '')
+    .replace(/['''".,:;!&\-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getVenueNeighborhood(venueName) {
+  const key = normalizeVenueName(venueName);
+  if (!key) return null;
+  // Hand-curated overrides take precedence
+  if (CHIBAR_OVERRIDES[key]) return CHIBAR_OVERRIDES[key].neighborhood;
+  // Exact match in scraped data
+  if (CHIBAR[key]) return CHIBAR[key].neighborhood;
+  // Starts-with fuzzy match (handles "Schubas" → "Schubas Tavern")
+  if (key.length >= 5) {
+    for (const [k, v] of Object.entries(CHIBAR_OVERRIDES)) {
+      if (k.startsWith(key) || key.startsWith(k)) return v.neighborhood;
+    }
+    for (const [k, v] of Object.entries(CHIBAR)) {
+      if (k.startsWith(key) || key.startsWith(k)) return v.neighborhood;
+    }
+  }
+  return null;
+}
+
 // ── State ──────────────────────────────────────────────────────────
 const state = {
   collectionId: localStorage.getItem('collectionId') || DEFAULT_COLLECTION,
@@ -24,7 +64,8 @@ const state = {
   searchQuery:  '',
   selectedArtist:     null,   // { name, docs[] } or null = all
   artistLetterFilter: null,   // 'A'–'Z' or null = all
-  venueLetterFilter:  null,   // 'A'–'Z' or null = all
+  venueLetterFilter:       null,   // 'A'–'Z' or null = all
+  venueNeighborhoodFilter: null,   // neighborhood string or null = all
   favLetterFilter:    null,   // 'A'–'Z' or null = all
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
@@ -59,7 +100,8 @@ const el = {
   concertList:    $('concert-list'),
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
-  venueAlphaBar:  $('venue-alpha-bar'),
+  venueNeighborhoodBar: $('venue-neighborhood-bar'),
+  venueAlphaBar:        $('venue-alpha-bar'),
   favAlphaBar:    $('fav-alpha-bar'),
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
@@ -181,7 +223,7 @@ function setMode(mode) {
   state.searchQuery = '';
   el.searchInput.value = '';
   if (mode !== 'artists') state.artistLetterFilter = null;
-  if (mode !== 'venue')      state.venueLetterFilter = null;
+  if (mode !== 'venue')      state.venueLetterFilter = state.venueNeighborhoodFilter = null;
   if (mode !== 'favorites')  state.favLetterFilter   = null;
 
   if (mode === 'library') {
@@ -1354,6 +1396,13 @@ function renderVenue() {
     }
   }
 
+  if (state.venueNeighborhoodFilter) {
+    byVenue = byVenue.filter(([v]) => getVenueNeighborhood(v) === state.venueNeighborhoodFilter);
+    if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
+      state.selectedVenue = null;
+    }
+  }
+
   if (state.venueLetterFilter) {
     const letter = state.venueLetterFilter;
     byVenue = byVenue.filter(([v]) =>
@@ -1364,6 +1413,7 @@ function renderVenue() {
     }
   }
 
+  renderVenueNeighborhoodPills(allByVenue);
   renderVenueAlphaPills(allByVenue);
 
   el.venueList.innerHTML = '';
@@ -1381,6 +1431,13 @@ function renderVenue() {
 
   byVenue.forEach(([venue, docs]) => {
     const item = makeArtistItem(venue, docs.length, state.selectedVenue === venue);
+    const nbhd = getVenueNeighborhood(venue);
+    if (nbhd) {
+      const badge = document.createElement('div');
+      badge.className = 'venue-nbhd-badge';
+      badge.textContent = nbhd;
+      item.appendChild(badge);
+    }
     item.addEventListener('click', () => selectVenue(venue, docs));
     frag.appendChild(item);
   });
@@ -1402,6 +1459,43 @@ function selectVenue(venue, docs) {
   });
   renderVenueConcerts(dateAsc(docs));
   updateStatBanner();
+}
+
+function renderVenueNeighborhoodPills(allByVenue) {
+  const neighborhoods = new Set();
+  allByVenue.forEach(([v]) => {
+    const n = getVenueNeighborhood(v);
+    if (n) neighborhoods.add(n);
+  });
+  const sorted = [...neighborhoods].sort();
+
+  if (!sorted.length) {
+    el.venueNeighborhoodBar.style.display = 'none';
+    return;
+  }
+  el.venueNeighborhoodBar.style.display = '';
+  el.venueNeighborhoodBar.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  const allPill = makeAlphaPill('All', state.venueNeighborhoodFilter === null);
+  allPill.addEventListener('click', () => {
+    state.venueNeighborhoodFilter = null;
+    state.selectedVenue = null;
+    renderVenue();
+  });
+  frag.appendChild(allPill);
+
+  sorted.forEach(nbhd => {
+    const pill = makeAlphaPill(nbhd, state.venueNeighborhoodFilter === nbhd);
+    pill.addEventListener('click', () => {
+      state.venueNeighborhoodFilter = nbhd;
+      state.selectedVenue = null;
+      renderVenue();
+    });
+    frag.appendChild(pill);
+  });
+
+  el.venueNeighborhoodBar.appendChild(frag);
 }
 
 function renderVenueAlphaPills(allByVenue) {
@@ -1504,7 +1598,7 @@ function extractVenueName(doc) {
   // Try coverage field first, then parse from title
   if (doc.coverage && doc.coverage.trim()) return doc.coverage.trim();
   const title = doc.title || '';
-  const m = title.match(/(?:live\s+)?at\s+([^,\d\(\[]+?)(?:\s+\d{4}|\s*[,\(\[\-]|$)/i);
+  const m = title.match(/(?:live\s+)?at\s+([^,\d\(\[]+?)(?:\s+on\s+|\s+\d{4}|\s*[,\(\[\-]|$)/i);
   return m ? m[1].trim() : null;
 }
 
