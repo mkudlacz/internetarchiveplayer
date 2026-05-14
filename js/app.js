@@ -1085,7 +1085,7 @@ function renderDiscover() {
   donateBar.rel = 'noopener';
   donateBar.className = 'ia-donate-bar';
   donateBar.innerHTML = `
-    <span class="ia-donate-text">All content in this app is provided by the Internet Archive. Help keep it free.</span>
+    <span class="ia-donate-text">All content provided by the <strong>Internet Archive</strong>. Help keep it free.</span>
     <span class="ia-donate-cta">Donate</span>
   `;
   el.viewDiscover.appendChild(donateBar);

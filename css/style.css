@@ -1575,7 +1575,7 @@ button {
 
 .ia-donate-icon { font-size: 18px; flex-shrink: 0; }
 
-.ia-donate-text { flex: 1; line-height: 1.3; }
+.ia-donate-text { flex: 1; line-height: 1.3; font-size: 14px; color: var(--text); }
 
 .ia-donate-cta {
   flex-shrink: 0;
