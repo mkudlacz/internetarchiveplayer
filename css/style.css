@@ -1589,19 +1589,36 @@ button {
 
 /* ── Donate bar ───────────────────────────────────────────────────── */
 .ia-donate-bar {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 12px 16px 4px;
-  padding: 12px 14px 34px;
+  padding: 9px 12px;
   border-radius: 10px;
   background: var(--bg2);
   border: 1px solid var(--border);
+  overflow: hidden;
 }
 
-.ia-donate-text {
-  display: block;
+.ia-donate-scroll-wrap {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  mask-image: linear-gradient(to right, black 80%, transparent 100%);
+}
+
+.ia-donate-ticker {
+  display: inline-block;
+  white-space: nowrap;
   font-size: 13px;
-  line-height: 1.5;
   color: var(--text2);
+  animation: donate-scroll 22s linear infinite;
+}
+
+@keyframes donate-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .ia-donate-collection {
@@ -1612,9 +1629,7 @@ button {
 .ia-donate-collection:active { opacity: 0.7; }
 
 .ia-donate-cta {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
+  flex-shrink: 0;
   font-size: 12px;
   font-weight: 600;
   color: var(--accent);
