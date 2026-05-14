@@ -1087,7 +1087,7 @@ function renderDiscover() {
   const donateBar = document.createElement('div');
   donateBar.className = 'ia-donate-bar';
   donateBar.innerHTML = `
-    <span class="ia-donate-text">All content provided by the <a class="ia-donate-collection" href="https://archive.org/details/${esc(state.collectionId)}" target="_blank" rel="noopener">${esc(state.collectionId)}</a> collection on the <strong>Internet Archive</strong>. Help keep it free.</span>
+    <span class="ia-donate-text">All content from the <a class="ia-donate-collection" href="https://archive.org/details/${esc(state.collectionId)}" target="_blank" rel="noopener">${esc(state.collectionId)}</a> collection on the <strong>Internet Archive</strong>. Help keep it free.</span>
     <a class="ia-donate-cta" href="https://archive.org/donate" target="_blank" rel="noopener">Donate</a>
   `;
   el.viewDiscover.appendChild(donateBar);
