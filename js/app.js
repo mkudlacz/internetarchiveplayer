@@ -869,7 +869,7 @@ function renderConcert(meta) {
       <div class="concert-hero-meta">
         <div class="concert-header-date">${formatDateWithDay(m.date)}</div>
         <div class="concert-header-creator${m.creator ? ' concert-artist-link' : ''}" id="concert-artist-link">${esc(m.creator || '')}</div>
-        ${venueName ? `<div class="concert-header-venue">${esc(venueName)}</div>` : ''}
+        ${venueName ? `<div class="concert-header-venue">${esc(venueName)}${(n => n ? `<span class="concert-venue-nbhd"> · ${esc(n)}</span>` : '')(getVenueNeighborhood(venueName))}</div>` : ''}
         <div class="concert-archive-mini"><a href="https://archive.org/details/${esc(m.identifier)}" target="_blank" rel="noopener">${esc(m.title || m.identifier)}</a></div>
         ${m.addeddate ? `<div class="concert-upload-date">uploaded ${formatUploadDate(m.addeddate)}</div>` : ''}
         ${(()=>{ const d = state.index?.find(x=>x.identifier===m.identifier); const n = d?.downloads || m.downloads; return n ? `<div class="concert-upload-date">${Number(n).toLocaleString()} plays</div>` : ''; })()}

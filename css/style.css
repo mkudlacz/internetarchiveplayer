@@ -543,9 +543,15 @@ button {
 .concert-archive-mini a:active { opacity: 0.5; }
 
 .concert-upload-date {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text3);
   margin-top: 2px;
+}
+
+.concert-venue-nbhd {
+  font-size: 12px;
+  color: var(--text3);
+  font-weight: 400;
 }
 
 .concert-info-block {
