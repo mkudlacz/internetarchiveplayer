@@ -1090,7 +1090,7 @@ function renderDiscover() {
   donateBar.rel = 'noopener';
   donateBar.className = 'ia-donate-bar';
   donateBar.innerHTML = `
-    <span class="ia-donate-text">All content provided by the <span class="ia-donate-collection">${esc(state.collectionId)}</span> collection on the Internet Archive. Help keep it free.</span>
+    <span class="ia-donate-text">All content provided by the <span class="ia-donate-collection">${esc(state.collectionId)}</span> collection, hosted by the Internet Archive. Help keep it free.</span>
     <span class="ia-donate-cta">Donate</span>
   `;
   el.viewDiscover.appendChild(donateBar);
