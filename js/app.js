@@ -266,6 +266,11 @@ function updateStatBanner() {
     if (selectedArtist) {
       const count = selectedArtist.docs.length;
       el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedArtist.name}`;
+    } else if (state.artistLetterFilter) {
+      const L = state.artistLetterFilter;
+      const filtered = index.filter(d => (d.creator || '').replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
+      const ua = new Set(filtered.map(d => d.creator).filter(Boolean)).size;
+      el.statBanner.textContent = `${ua} artist${ua !== 1 ? 's' : ''} · ${filtered.length} show${filtered.length !== 1 ? 's' : ''} · ${L}`;
     } else {
       const uniqueArtists = new Set(index.map(d => d.creator).filter(Boolean)).size;
       el.statBanner.textContent = `${uniqueArtists} artists · ${index.length} shows`;
@@ -276,6 +281,11 @@ function updateStatBanner() {
     if (selectedVenue) {
       const docs = index.filter(d => extractVenueName(d) === selectedVenue);
       el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedVenue}`;
+    } else if (state.venueLetterFilter) {
+      const L = state.venueLetterFilter;
+      const filtered = index.filter(d => (extractVenueName(d) || '').replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
+      const uv = new Set(filtered.map(d => extractVenueName(d)).filter(Boolean)).size;
+      el.statBanner.textContent = `${uv} venue${uv !== 1 ? 's' : ''} · ${filtered.length} show${filtered.length !== 1 ? 's' : ''} · ${L}`;
     } else {
       const uniqueVenues = new Set(index.map(d => extractVenueName(d)).filter(Boolean)).size;
       el.statBanner.textContent = `${uniqueVenues} venues · ${index.length} shows`;
@@ -637,6 +647,7 @@ function renderAlphaPills(allGroups) {
     state.artistLetterFilter = null;
     state.selectedArtist = null;
     renderArtistView();
+    updateStatBanner();
   });
   frag.appendChild(allPill);
 
@@ -646,6 +657,7 @@ function renderAlphaPills(allGroups) {
       state.artistLetterFilter = letter;
       state.selectedArtist = null;
       renderArtistView();
+      updateStatBanner();
     });
     frag.appendChild(pill);
   });
@@ -1653,6 +1665,7 @@ function renderVenueAlphaPills(allByVenue) {
     state.venueLetterFilter = null;
     state.selectedVenue = null;
     renderVenue();
+    updateStatBanner();
   });
   frag.appendChild(allPill);
 
@@ -1662,6 +1675,7 @@ function renderVenueAlphaPills(allByVenue) {
       state.venueLetterFilter = letter;
       state.selectedVenue = null;
       renderVenue();
+      updateStatBanner();
     });
     frag.appendChild(pill);
   });
