@@ -1084,14 +1084,11 @@ function renderDiscover() {
   updateStatBanner();
 
   // ── Donate bar ──
-  const donateBar = document.createElement('a');
-  donateBar.href = 'https://archive.org/donate';
-  donateBar.target = '_blank';
-  donateBar.rel = 'noopener';
+  const donateBar = document.createElement('div');
   donateBar.className = 'ia-donate-bar';
   donateBar.innerHTML = `
-    <span class="ia-donate-text">All content provided by the <span class="ia-donate-collection">${esc(state.collectionId)}</span> collection, hosted by the Internet Archive. Help keep it free.</span>
-    <span class="ia-donate-cta">Donate</span>
+    <span class="ia-donate-text">All content provided by the <a class="ia-donate-collection" href="https://archive.org/details/${esc(state.collectionId)}" target="_blank" rel="noopener">${esc(state.collectionId)}</a> collection on the <strong>Internet Archive</strong>. Help keep it free.</span>
+    <a class="ia-donate-cta" href="https://archive.org/donate" target="_blank" rel="noopener">Donate</a>
   `;
   el.viewDiscover.appendChild(donateBar);
 
