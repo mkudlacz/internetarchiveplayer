@@ -65,9 +65,10 @@ const state = {
   searchQuery:  '',
   selectedArtist:     null,   // { name, docs[] } or null = all
   artistLetterFilter: null,   // 'A'–'Z' or null = all
-  venueLetterFilter:       null,   // 'A'–'Z' or null = all
-  venueNeighborhoodFilter: null,   // neighborhood string or null = all
-  favLetterFilter:    null,   // 'A'–'Z' or null = all
+  venueLetterFilter:    null,   // 'A'–'Z' or null = all
+  favLetterFilter:      null,   // 'A'–'Z' or null = all
+  nbhdEraNeighborhood:  null,   // persisted neighborhood selection in Discover era strip
+  nbhdEraYear:          null,   // persisted year selection in Discover era strip
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
   selectedVenue:    null,   // venue string
@@ -101,7 +102,6 @@ const el = {
   concertList:    $('concert-list'),
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
-  venueNeighborhoodBar: $('venue-neighborhood-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
   favAlphaBar:    $('fav-alpha-bar'),
   artistList:     $('artist-list'),
@@ -224,7 +224,7 @@ function setMode(mode) {
   state.searchQuery = '';
   el.searchInput.value = '';
   if (mode !== 'artists') state.artistLetterFilter = null;
-  if (mode !== 'venue')      state.venueLetterFilter = state.venueNeighborhoodFilter = null;
+  if (mode !== 'venue')      state.venueLetterFilter = null;
   if (mode !== 'favorites')  state.favLetterFilter   = null;
 
   if (mode === 'library') {
@@ -599,6 +599,11 @@ function renderArtistView() {
 
   groups.forEach(([name, docs]) => {
     const item = makeArtistItem(name, docs.length, state.selectedArtist?.name === name);
+    const years = docs.map(d => (d.date || '').slice(0, 4)).filter(Boolean).sort();
+    if (years.length) {
+      item.querySelector('.artist-count').textContent =
+        `${years[0]}${years[0] !== years[years.length - 1] ? ` – ${years[years.length - 1]}` : ''} • ${docs.length} show${docs.length !== 1 ? 's' : ''}`;
+    }
     item.addEventListener('click', () => selectArtist({ name, docs }));
     frag.appendChild(item);
   });
@@ -1085,7 +1090,7 @@ function renderDiscover() {
   donateBar.rel = 'noopener';
   donateBar.className = 'ia-donate-bar';
   donateBar.innerHTML = `
-    <span class="ia-donate-text">All content provided by the <strong>Internet Archive</strong>. Help keep it free.</span>
+    <span class="ia-donate-text">All content provided by the <span class="ia-donate-collection">${esc(state.collectionId)}</span> collection on the Internet Archive. Help keep it free.</span>
     <span class="ia-donate-cta">Donate</span>
   `;
   el.viewDiscover.appendChild(donateBar);
@@ -1203,7 +1208,120 @@ function renderDiscover() {
       .catch(() => {});
   }
 
-  // ── 3. Time Travel to a Show (multi-artist bills) ──
+  // ── 3. Explore Space-Time (shelved) ──
+  if (false) // eslint-disable-line no-constant-condition
+  {
+    const nbhdMap = {};
+    index.forEach(d => {
+      const v = extractVenueName(d);
+      const n = v ? getVenueNeighborhood(v) : null;
+      if (!n) return;
+      (nbhdMap[n] = nbhdMap[n] || []).push(d);
+    });
+    const neighborhoods = Object.entries(nbhdMap)
+      .sort((a, b) => b[1].length - a[1].length)
+      .map(([n]) => n);
+
+    if (neighborhoods.length >= 2) {
+      const getYears = nbhd => [...new Set(
+        (nbhdMap[nbhd] || []).map(d => (d.date || '').slice(0, 4)).filter(Boolean)
+      )].sort().reverse();
+
+      // Random initial selection
+      if (!state.nbhdEraNeighborhood || !nbhdMap[state.nbhdEraNeighborhood]) {
+        state.nbhdEraNeighborhood = neighborhoods[Math.floor(Math.random() * neighborhoods.length)];
+        const ys = getYears(state.nbhdEraNeighborhood);
+        state.nbhdEraYear = ys[Math.floor(Math.random() * ys.length)] || null;
+      } else {
+        const ys = getYears(state.nbhdEraNeighborhood);
+        if (!state.nbhdEraYear || !ys.includes(state.nbhdEraYear))
+          state.nbhdEraYear = ys[Math.floor(Math.random() * ys.length)] || null;
+      }
+
+      const getMatching = () => (nbhdMap[state.nbhdEraNeighborhood] || [])
+        .filter(d => (d.date || '').slice(0, 4) === state.nbhdEraYear);
+
+      const sec = discoverSection('Explore Space-Time', '…', () => rebuildStrip());
+
+      const rebuildStrip = () => {
+        const matching = getMatching();
+        const picks = [...matching].sort(() => Math.random() - 0.5).slice(0, billLimit);
+
+        const countEl = sec.querySelector('.discover-section-count');
+        if (countEl) countEl.textContent = `${picks.length} of ${matching.length}`;
+
+        const strip = document.createElement('div');
+        strip.className = 'discover-h-scroll';
+
+        // Selector card — far left with native <select> dropdowns
+        const selectorCard = document.createElement('div');
+        selectorCard.className = 'nbhd-era-selector-card';
+
+        const nbhdSelect = document.createElement('select');
+        nbhdSelect.className = 'nbhd-era-selector-btn';
+        neighborhoods.forEach(n => {
+          const opt = document.createElement('option');
+          opt.value = n;
+          opt.textContent = n;
+          if (n === state.nbhdEraNeighborhood) opt.selected = true;
+          nbhdSelect.appendChild(opt);
+        });
+        nbhdSelect.addEventListener('change', () => {
+          state.nbhdEraNeighborhood = nbhdSelect.value;
+          const ys = getYears(state.nbhdEraNeighborhood);
+          state.nbhdEraYear = ys[Math.floor(Math.random() * ys.length)] || null;
+          rebuildStrip();
+        });
+
+        const yearSelect = document.createElement('select');
+        yearSelect.className = 'nbhd-era-selector-btn';
+        getYears(state.nbhdEraNeighborhood).forEach(y => {
+          const opt = document.createElement('option');
+          opt.value = y;
+          opt.textContent = y;
+          if (y === state.nbhdEraYear) opt.selected = true;
+          yearSelect.appendChild(opt);
+        });
+        yearSelect.addEventListener('change', () => {
+          state.nbhdEraYear = yearSelect.value;
+          rebuildStrip();
+        });
+
+        selectorCard.append(nbhdSelect, yearSelect);
+        strip.appendChild(selectorCard);
+
+        // Show cards — reuse bill-card style for consistent formatting
+        picks.forEach(doc => {
+          const card = document.createElement('div');
+          card.className = 'bill-card';
+          const venue = extractVenueName(doc) || '';
+          card.innerHTML = `
+            <div class="bill-date-full">${esc(formatDateBill(doc.date?.slice(0, 10) || ''))}</div>
+            <div class="bill-artists">${esc(doc.creator || doc.title || '')}</div>
+            ${venue ? `<div class="bill-venue">${esc(venue)}</div>` : ''}
+          `;
+          card.addEventListener('click', () => openConcert(doc));
+          strip.appendChild(card);
+        });
+
+        requestAnimationFrame(() => {
+          strip.querySelectorAll('.bill-artists').forEach(a => {
+            a.style.fontSize = '15px';
+            while (a.scrollHeight > a.clientHeight && parseFloat(a.style.fontSize) > 9)
+              a.style.fontSize = (parseFloat(a.style.fontSize) - 0.5) + 'px';
+          });
+        });
+
+        const old = sec.querySelector('.discover-h-scroll');
+        if (old) sec.replaceChild(strip, old); else sec.appendChild(strip);
+      };
+
+      rebuildStrip();
+      el.viewDiscover.appendChild(sec);
+    }
+  }
+
+  // ── 5. Time Travel to a Show (multi-artist bills) ──
   {
     if (allBills.length) {
       const buildBillStrip = () => {
@@ -1249,7 +1367,7 @@ function renderDiscover() {
         return strip;
       };
 
-      const sec = discoverSection('Time Travel to a Show', `${billLimit} of ${allBills.length}`, () => {
+      const sec = discoverSection('Time Travel to a Rando Show', `${billLimit} of ${allBills.length}`, () => {
         const old = sec.querySelector('.discover-h-scroll');
         const neo = buildBillStrip();
         if (old) sec.replaceChild(neo, old); else sec.appendChild(neo);
@@ -1410,13 +1528,6 @@ function renderVenue() {
     }
   }
 
-  if (state.venueNeighborhoodFilter) {
-    byVenue = byVenue.filter(([v]) => getVenueNeighborhood(v) === state.venueNeighborhoodFilter);
-    if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
-      state.selectedVenue = null;
-    }
-  }
-
   if (state.venueLetterFilter) {
     const letter = state.venueLetterFilter;
     byVenue = byVenue.filter(([v]) =>
@@ -1427,7 +1538,6 @@ function renderVenue() {
     }
   }
 
-  renderVenueNeighborhoodPills(allByVenue);
   renderVenueAlphaPills(allByVenue);
 
   el.venueList.innerHTML = '';
@@ -1445,6 +1555,11 @@ function renderVenue() {
 
   byVenue.forEach(([venue, docs]) => {
     const item = makeArtistItem(venue, docs.length, state.selectedVenue === venue);
+    const years = docs.map(d => (d.date || '').slice(0, 4)).filter(Boolean).sort();
+    if (years.length) {
+      item.querySelector('.artist-count').textContent =
+        `${years[0]}${years[0] !== years[years.length - 1] ? ` – ${years[years.length - 1]}` : ''} • ${docs.length} show${docs.length !== 1 ? 's' : ''}`;
+    }
     item.addEventListener('click', () => selectVenue(venue, docs));
     frag.appendChild(item);
   });
@@ -1466,43 +1581,6 @@ function selectVenue(venue, docs) {
   });
   renderVenueConcerts(dateAsc(docs));
   updateStatBanner();
-}
-
-function renderVenueNeighborhoodPills(allByVenue) {
-  const neighborhoods = new Set();
-  allByVenue.forEach(([v]) => {
-    const n = getVenueNeighborhood(v);
-    if (n) neighborhoods.add(n);
-  });
-  const sorted = [...neighborhoods].sort();
-
-  if (!sorted.length) {
-    el.venueNeighborhoodBar.style.display = 'none';
-    return;
-  }
-  el.venueNeighborhoodBar.style.display = '';
-  el.venueNeighborhoodBar.innerHTML = '';
-  const frag = document.createDocumentFragment();
-
-  const allPill = makeAlphaPill('All', state.venueNeighborhoodFilter === null);
-  allPill.addEventListener('click', () => {
-    state.venueNeighborhoodFilter = null;
-    state.selectedVenue = null;
-    renderVenue();
-  });
-  frag.appendChild(allPill);
-
-  sorted.forEach(nbhd => {
-    const pill = makeAlphaPill(nbhd, state.venueNeighborhoodFilter === nbhd);
-    pill.addEventListener('click', () => {
-      state.venueNeighborhoodFilter = nbhd;
-      state.selectedVenue = null;
-      renderVenue();
-    });
-    frag.appendChild(pill);
-  });
-
-  el.venueNeighborhoodBar.appendChild(frag);
 }
 
 function renderVenueAlphaPills(allByVenue) {

@@ -355,7 +355,6 @@ button {
 }
 
 /* A–Z pill bar in Venue tab */
-#venue-neighborhood-bar,
 #venue-alpha-bar {
   flex-shrink: 0;
   display: flex;
@@ -365,17 +364,7 @@ button {
   scrollbar-width: none;
   border-bottom: 1px solid var(--border);
 }
-#venue-neighborhood-bar::-webkit-scrollbar,
 #venue-alpha-bar::-webkit-scrollbar { display: none; }
-
-.venue-nbhd-badge {
-  font-size: 10px;
-  color: var(--text3);
-  margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 #view-year {
   display: flex;
@@ -1119,6 +1108,37 @@ button {
 .action-sheet-btn.cancel { color: var(--text2); margin-top: 4px; border-top: 1px solid var(--border); }
 
 /* ── Go to a Show (bill cards) ───────────────────────────────────── */
+/* ── Explore Space-Time strip ─────────────────────────────────────── */
+.nbhd-era-selector-card {
+  flex-shrink: 0;
+  width: 130px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  justify-content: center;
+  padding: 10px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.nbhd-era-selector-btn {
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--accent);
+  color: #1a1209;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .bill-card {
   flex-shrink: 0;
   width: 140px;
@@ -1575,7 +1595,12 @@ button {
 
 .ia-donate-icon { font-size: 18px; flex-shrink: 0; }
 
-.ia-donate-text { flex: 1; line-height: 1.3; font-size: 14px; color: var(--text); }
+.ia-donate-text { flex: 1; line-height: 1.3; font-size: 13px; color: var(--text2); }
+
+.ia-donate-collection {
+  font-weight: 700;
+  color: var(--accent);
+}
 
 .ia-donate-cta {
   flex-shrink: 0;
