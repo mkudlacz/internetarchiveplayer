@@ -71,6 +71,7 @@ const state = {
   nbhdEraYear:          null,   // persisted year selection in Discover era strip
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
+  yearEraFilter:    null,   // 5-yr range start e.g. 1990, or null = all
   selectedVenue:    null,   // venue string
   currentConcert:   null,
 };
@@ -108,6 +109,7 @@ const el = {
   artistConcerts: $('artist-concerts'),
   viewDiscover:       $('view-discover'),
   viewYear:           $('view-year'),
+  yearEraBar:         $('year-era-bar'),
   yearList:           $('year-list'),
   yearConcerts:       $('year-concerts'),
   viewVenue:          $('view-venue'),
@@ -225,6 +227,7 @@ function setMode(mode) {
   el.searchInput.value = '';
   if (mode !== 'artists') state.artistLetterFilter = null;
   if (mode !== 'venue')      state.venueLetterFilter = null;
+  if (mode !== 'year')       state.yearEraFilter = null;
   if (mode !== 'favorites')  state.favLetterFilter   = null;
 
   if (mode === 'library') {
@@ -283,6 +286,11 @@ function updateStatBanner() {
     if (selectedYear) {
       const docs = index.filter(d => (d.date || '').slice(0, 4) === selectedYear);
       el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedYear}`;
+    } else if (state.yearEraFilter !== null) {
+      const start = state.yearEraFilter;
+      const docs = index.filter(d => { const yr = parseInt((d.date || '').slice(0, 4)); return yr >= start && yr < start + 5; });
+      const yearsInRange = new Set(docs.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
+      el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${yearsInRange} year${yearsInRange !== 1 ? 's' : ''} · ${start}–${start + 4}`;
     } else {
       const uniqueYears = new Set(index.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
       el.statBanner.textContent = `${uniqueYears} years · ${index.length} shows`;
@@ -1452,11 +1460,49 @@ function renderDiscover() {
 }
 
 // ── Year tab ───────────────────────────────────────────────────────
+function renderYearEraPills(allByYear) {
+  const presentYears = new Set(allByYear.map(([y]) => parseInt(y)));
+  const eraStarts = new Set([...presentYears].map(y => Math.floor(y / 5) * 5));
+  const sorted = [...eraStarts].sort((a, b) => a - b);
+
+  el.yearEraBar.innerHTML = '';
+  if (sorted.length <= 1) { el.yearEraBar.style.display = 'none'; return; }
+  el.yearEraBar.style.display = '';
+
+  const frag = document.createDocumentFragment();
+
+  const allPill = makeAlphaPill('All', state.yearEraFilter === null);
+  allPill.addEventListener('click', () => {
+    state.yearEraFilter = null;
+    state.selectedYear = null;
+    renderYear();
+    updateStatBanner();
+  });
+  frag.appendChild(allPill);
+
+  sorted.forEach(start => {
+    const end = start + 4;
+    const label = `${String(start).slice(2)}-${String(end).slice(2)}`;
+    const pill = makeAlphaPill(label, state.yearEraFilter === start);
+    pill.addEventListener('click', () => {
+      state.yearEraFilter = start;
+      state.selectedYear = null;
+      renderYear();
+      updateStatBanner();
+    });
+    frag.appendChild(pill);
+  });
+
+  el.yearEraBar.appendChild(frag);
+}
+
 function renderYear() {
   const index = state.index;
-  let byYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
+  const allByYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
     .filter(([y]) => y && y.length === 4)
     .sort((a, b) => a[0] - b[0]); // ascending
+
+  let byYear = allByYear;
 
   if (state.searching && state.searchQuery) {
     const q = state.searchQuery.toLowerCase();
@@ -1465,6 +1511,16 @@ function renderYear() {
       state.selectedYear = null;
     }
   }
+
+  if (state.yearEraFilter !== null) {
+    const start = state.yearEraFilter;
+    byYear = byYear.filter(([y]) => { const yr = parseInt(y); return yr >= start && yr < start + 5; });
+    if (state.selectedYear && !byYear.find(([y]) => y === state.selectedYear)) {
+      state.selectedYear = null;
+    }
+  }
+
+  renderYearEraPills(allByYear);
 
   const allYearDocs = byYear.flatMap(([, docs]) => docs);
 

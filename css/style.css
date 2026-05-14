@@ -368,8 +368,20 @@ button {
 
 #view-year {
   display: flex;
+  flex-direction: column;
   height: 100%;
 }
+
+#year-era-bar {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+}
+#year-era-bar::-webkit-scrollbar { display: none; }
 
 /* A–Z pill bar in Artists tab */
 #artist-alpha-bar {
