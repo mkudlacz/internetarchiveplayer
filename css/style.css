@@ -354,19 +354,18 @@ button {
   height: 100%;
 }
 
-/* More to Discover tray in Venue tab */
-#venue-discover-section {
+/* Neighborhood + era pill rows in Venue tab */
+#venue-nbhd-pills, #venue-era-pills {
   flex-shrink: 0;
-}
-.venue-discover-pill-row {
   display: flex;
   gap: 6px;
-  padding: 6px 0;
+  padding: 6px 16px;
   overflow-x: auto;
   scrollbar-width: none;
-  border-top: 1px solid var(--border);
 }
-.venue-discover-pill-row::-webkit-scrollbar { display: none; }
+#venue-nbhd-pills::-webkit-scrollbar, #venue-era-pills::-webkit-scrollbar { display: none; }
+#venue-nbhd-pills { padding-top: 8px; }
+#venue-era-pills { padding-bottom: 8px; border-bottom: 1px solid var(--border); }
 
 /* A–Z pill bar in Venue tab */
 #venue-alpha-bar {

@@ -66,7 +66,6 @@ const state = {
   selectedArtist:     null,   // { name, docs[] } or null = all
   artistLetterFilter: null,   // 'A'–'Z' or null = all
   venueLetterFilter:         null,   // 'A'–'Z' or null = all
-  venueDiscoverOpen:         false,  // discover tray visible
   venueDiscoverNeighborhood: null,   // neighborhood filter in venue tab
   venueDiscoverEra:          null,   // 5-yr era start (e.g. 1990) filter in venue tab
   favLetterFilter:           null,   // 'A'–'Z' or null = all
@@ -107,9 +106,6 @@ const el = {
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
-  venueDiscoverSection: $('venue-discover-section'),
-  venueDiscoverToggle:  $('venue-discover-toggle'),
-  venueDiscoverLabel:   $('venue-discover-label'),
   venueNbhdPills:       $('venue-nbhd-pills'),
   venueEraPills:        $('venue-era-pills'),
   favAlphaBar:    $('fav-alpha-bar'),
@@ -238,7 +234,6 @@ function setMode(mode) {
     state.venueLetterFilter = null;
     state.venueDiscoverNeighborhood = null;
     state.venueDiscoverEra = null;
-    state.venueDiscoverOpen = false;
   }
   if (mode !== 'year')       state.yearEraFilter = null;
   if (mode !== 'favorites')  state.favLetterFilter   = null;
@@ -1755,17 +1750,6 @@ function renderVenueAlphaPills(allByVenue) {
 }
 
 function renderVenueDiscoverTray(neighborhoods, nbhdMap) {
-  el.venueDiscoverSection.classList.toggle('open', state.venueDiscoverOpen);
-
-  // Header label shows active filter even when collapsed
-  let labelText = '';
-  if (state.venueDiscoverNeighborhood) labelText = state.venueDiscoverNeighborhood;
-  if (state.venueDiscoverEra !== null) {
-    const s = state.venueDiscoverEra;
-    labelText += (labelText ? ' · ' : '') + `${String(s).slice(2)}-${String(s + 4).slice(2)}`;
-  }
-  el.venueDiscoverLabel.textContent = labelText;
-
   // Neighborhood pills
   el.venueNbhdPills.innerHTML = '';
   const nbhdFrag = document.createDocumentFragment();
@@ -2089,11 +2073,6 @@ function init() {
     // Scroll to where we were
   });
 
-  // Venue Discover tray
-  el.venueDiscoverToggle.addEventListener('click', () => {
-    state.venueDiscoverOpen = !state.venueDiscoverOpen;
-    if (state.index) renderVenue();
-  });
   // Search (persistent input — no toggle)
   el.searchInput.addEventListener('focus', () => {
     el.searchInput.placeholder = SEARCH_PLACEHOLDERS[state.mode] || 'Search…';
