@@ -354,19 +354,17 @@ button {
   height: 100%;
 }
 
-/* Discover tray in Venue tab */
-#venue-discover-bar {
+/* More to Discover tray in Venue tab */
+#venue-discover-section {
   flex-shrink: 0;
-  padding: 8px 16px 4px;
 }
-#venue-discover-tray {
-  flex-shrink: 0;
+.venue-discover-controls {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 16px 8px;
+  padding: 8px 0 6px;
+  border-top: 1px solid var(--border);
 }
-#venue-discover-tray.hidden { display: none; }
 .venue-discover-select {
   flex-shrink: 0;
   padding: 5px 26px 5px 11px;
@@ -391,8 +389,6 @@ button {
   color: #fff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23fff'/%3E%3C/svg%3E");
 }
-#venue-discover-toggle::after { content: ' ▾'; font-size: 10px; }
-#venue-discover-toggle.tray-open::after { content: ' ▴'; font-size: 10px; }
 
 /* A–Z pill bar in Venue tab */
 #venue-alpha-bar {

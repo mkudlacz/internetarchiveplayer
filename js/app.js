@@ -107,8 +107,9 @@ const el = {
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
+  venueDiscoverSection: $('venue-discover-section'),
   venueDiscoverToggle:  $('venue-discover-toggle'),
-  venueDiscoverTray:    $('venue-discover-tray'),
+  venueDiscoverLabel:   $('venue-discover-label'),
   venueNbhdSelect:      $('venue-nbhd-select'),
   venueYearSelect:      $('venue-year-select'),
   venueDiscoverClear:   $('venue-discover-clear'),
@@ -1751,9 +1752,13 @@ function renderVenueAlphaPills(allByVenue) {
 
 function renderVenueDiscoverTray(neighborhoods, nbhdMap) {
   const hasFilter = !!(state.venueDiscoverNeighborhood || state.venueDiscoverYear);
-  el.venueDiscoverToggle.classList.toggle('active', state.venueDiscoverOpen || hasFilter);
-  el.venueDiscoverToggle.classList.toggle('tray-open', state.venueDiscoverOpen);
-  el.venueDiscoverTray.classList.toggle('hidden', !state.venueDiscoverOpen);
+  el.venueDiscoverSection.classList.toggle('open', state.venueDiscoverOpen);
+
+  // Show active filter summary in header (visible even when collapsed)
+  let labelText = '';
+  if (state.venueDiscoverNeighborhood) labelText = state.venueDiscoverNeighborhood;
+  if (state.venueDiscoverYear) labelText += (labelText ? ' · ' : '') + state.venueDiscoverYear;
+  el.venueDiscoverLabel.textContent = labelText;
 
   // Neighborhood select
   el.venueNbhdSelect.innerHTML = '';
