@@ -1211,13 +1211,19 @@ function buildArchiveSheet(favDocs) {
     block.innerHTML = `
       <p>This page provides a summary of your favorite shows in the archive.</p>
       <p>As you explore the collection, tap ♥ to add a show to your Favs. With each new addition, you'll unlock features on this page — artist and venue word clouds, charts by era, an image gallery and more.</p>
-      <div class="archive-info-footer"><button class="archive-info-go-btn">Go to Favs →</button></div>
     `;
-    block.querySelector('.archive-info-go-btn').addEventListener('click', () => {
+    return block;
+  };
+
+  const makeGoFavsSticker = () => {
+    const btn = document.createElement('button');
+    btn.className = 'archive-info-go-btn';
+    btn.textContent = 'Go to Favs →';
+    btn.addEventListener('click', () => {
       el.archiveSheet.classList.remove('visible');
       setMode('favorites');
     });
-    return block;
+    return btn;
   };
 
   // Empty state
@@ -1230,6 +1236,7 @@ function buildArchiveSheet(favDocs) {
     `;
     body.appendChild(empty);
     body.appendChild(makeInfoBlock());
+    body.appendChild(makeGoFavsSticker());
     return;
   }
 
@@ -1258,9 +1265,10 @@ function buildArchiveSheet(favDocs) {
     statsEl.appendChild(item);
   });
 
-  // < 5: info block + stats + nudge only
+  // < 5: info block + sticker + stats + nudge only
   if (n < 5) {
     body.appendChild(makeInfoBlock());
+    body.appendChild(makeGoFavsSticker());
     body.appendChild(statsEl);
     const need = 5 - n;
     const nudge = document.createElement('p');
@@ -1270,13 +1278,13 @@ function buildArchiveSheet(favDocs) {
     return;
   }
 
-  // 5+: photo grid → stats → portrait
-  buildPhotoGrid(body, favDocs);
+  // 5+: stats → portrait → photo grid
   body.appendChild(statsEl);
   const portraitEl = document.createElement('p');
   portraitEl.className = 'archive-portrait';
   portraitEl.textContent = buildArchivePortrait(favDocs);
   body.appendChild(portraitEl);
+  buildPhotoGrid(body, favDocs);
 
   // 5–19: simple ranked lists + nudge to unlock full viz
   if (n < 20) {

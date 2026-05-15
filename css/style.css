@@ -1776,17 +1776,14 @@ button {
   border: 1px solid var(--border);
 }
 .archive-info-block p + p { margin-top: 8px; }
-.archive-info-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 12px;
-}
 .archive-info-go-btn {
-  display: inline-block;
-  padding: 5px 12px;
+  display: block;
+  width: fit-content;
+  margin: 10px auto 20px;
+  padding: 6px 16px;
   background: var(--accent);
   color: #000;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.3px;
   border-radius: 20px;
