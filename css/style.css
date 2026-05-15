@@ -354,18 +354,24 @@ button {
   height: 100%;
 }
 
-/* Neighborhood + era pill rows in Venue tab */
-#venue-nbhd-pills, #venue-era-pills {
+/* "More" tray in Venue tab */
+#venue-discover-section {
   flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+#venue-discover-toggle { padding: 10px 16px; }
+#venue-discover-tray { display: none; }
+#venue-discover-section.open #venue-discover-tray { display: block; }
+#venue-discover-section.open .concert-also-chevron-toggle { transform: rotate(180deg); }
+.venue-discover-pill-row {
   display: flex;
   gap: 6px;
-  padding: 6px 16px;
+  padding: 4px 16px;
   overflow-x: auto;
   scrollbar-width: none;
 }
-#venue-nbhd-pills::-webkit-scrollbar, #venue-era-pills::-webkit-scrollbar { display: none; }
-#venue-nbhd-pills { padding-top: 8px; }
-#venue-era-pills { padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.venue-discover-pill-row:last-child { padding-bottom: 10px; }
+.venue-discover-pill-row::-webkit-scrollbar { display: none; }
 
 /* A–Z pill bar in Venue tab */
 #venue-alpha-bar {

@@ -66,6 +66,7 @@ const state = {
   selectedArtist:     null,   // { name, docs[] } or null = all
   artistLetterFilter: null,   // 'A'–'Z' or null = all
   venueLetterFilter:         null,   // 'A'–'Z' or null = all
+  venueDiscoverOpen:         false,
   venueDiscoverNeighborhood: null,   // neighborhood filter in venue tab
   venueDiscoverEra:          null,   // 5-yr era start (e.g. 1990) filter in venue tab
   favLetterFilter:           null,   // 'A'–'Z' or null = all
@@ -106,6 +107,8 @@ const el = {
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
+  venueDiscoverSection: $('venue-discover-section'),
+  venueDiscoverToggle:  $('venue-discover-toggle'),
   venueNbhdPills:       $('venue-nbhd-pills'),
   venueEraPills:        $('venue-era-pills'),
   favAlphaBar:    $('fav-alpha-bar'),
@@ -232,6 +235,7 @@ function setMode(mode) {
   if (mode !== 'artists') state.artistLetterFilter = null;
   if (mode !== 'venue') {
     state.venueLetterFilter = null;
+    state.venueDiscoverOpen = false;
     state.venueDiscoverNeighborhood = null;
     state.venueDiscoverEra = null;
   }
@@ -1750,6 +1754,8 @@ function renderVenueAlphaPills(allByVenue) {
 }
 
 function renderVenueDiscoverTray(neighborhoods, nbhdMap) {
+  el.venueDiscoverSection.classList.toggle('open', state.venueDiscoverOpen);
+
   // Neighborhood pills
   el.venueNbhdPills.innerHTML = '';
   const nbhdFrag = document.createDocumentFragment();
@@ -2071,6 +2077,12 @@ function init() {
     state.displayPage++;
     renderLibrary();
     // Scroll to where we were
+  });
+
+  // Venue "More" tray toggle
+  el.venueDiscoverToggle.addEventListener('click', () => {
+    state.venueDiscoverOpen = !state.venueDiscoverOpen;
+    if (state.index) renderVenue();
   });
 
   // Search (persistent input — no toggle)
