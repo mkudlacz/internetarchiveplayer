@@ -82,6 +82,10 @@ const state = {
   yearMonthFilter:   null,   // 1-12 or null
   yearDayFilter:     null,   // 1-31 or null
   yearDowFilter:     null,   // 0-6 (Sun=0) or null
+  favDiscoverOpen:         false,
+  favDiscoverShowBin:      null,   // bin min (1,2,3,4,5,10) or null
+  favDiscoverEra:          null,   // 5-yr era start or null
+  favDiscoverNeighborhood: null,   // neighborhood string or null
   selectedVenue:    null,   // venue string
   currentConcert:   null,
 };
@@ -90,6 +94,7 @@ const PAGE_SIZE = 50;
 
 const MONTH_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DOW_LABELS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DOW_FULL     = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
 function dateParts(dateStr) {
   const s = (dateStr || '').slice(0, 10);
@@ -141,7 +146,16 @@ const el = {
   venueDiscoverToggle:  $('venue-discover-toggle'),
   venueNbhdPills:       $('venue-nbhd-pills'),
   venueEraPills:        $('venue-era-pills'),
-  favAlphaBar:    $('fav-alpha-bar'),
+  favAlphaBar:         $('fav-alpha-bar'),
+  favDiscoverSection:  $('fav-discover-section'),
+  favDiscoverToggle:   $('fav-discover-toggle'),
+  favShowPills:        $('fav-show-pills'),
+  favEraPills:         $('fav-era-pills'),
+  favNbhdPills:        $('fav-nbhd-pills'),
+  archiveBtn:          $('archive-btn'),
+  archiveSheet:        $('archive-sheet'),
+  archiveClose:        $('archive-close'),
+  archiveBody:         $('archive-body'),
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
   viewDiscover:       $('view-discover'),
@@ -286,7 +300,13 @@ function setMode(mode) {
     state.yearDayFilter = null;
     state.yearDowFilter = null;
   }
-  if (mode !== 'favorites')  state.favLetterFilter   = null;
+  if (mode !== 'favorites') {
+    state.favLetterFilter        = null;
+    state.favDiscoverOpen        = false;
+    state.favDiscoverShowBin     = null;
+    state.favDiscoverEra         = null;
+    state.favDiscoverNeighborhood = null;
+  }
 
   if (mode === 'library') {
     showView('library');
@@ -431,10 +451,26 @@ function updateStatBanner() {
   }
   if (mode === 'favorites') {
     const ids = new Set(getFavIds());
-    const favDocs = index.filter(d => ids.has(d.identifier));
+    let favDocs = index.filter(d => ids.has(d.identifier));
+    const hasDiscover = state.favDiscoverShowBin !== null || state.favDiscoverEra !== null || state.favDiscoverNeighborhood;
     if (selectedFavArtist) {
-      const count = favDocs.filter(d => d.creator === selectedFavArtist).length;
+      let base = favDocs;
+      if (state.favDiscoverEra !== null) { const s = state.favDiscoverEra; base = base.filter(d => { const yr = parseInt((d.date||'').slice(0,4)); return yr >= s && yr < s + 5; }); }
+      if (state.favDiscoverNeighborhood) { base = base.filter(d => { const v = extractVenueName(d); return v && getVenueNeighborhood(v) === state.favDiscoverNeighborhood; }); }
+      const count = base.filter(d => d.creator === selectedFavArtist).length;
       el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedFavArtist}`;
+    } else if (hasDiscover) {
+      if (state.favDiscoverEra !== null) { const s = state.favDiscoverEra; favDocs = favDocs.filter(d => { const yr = parseInt((d.date||'').slice(0,4)); return yr >= s && yr < s + 5; }); }
+      if (state.favDiscoverNeighborhood) { favDocs = favDocs.filter(d => { const v = extractVenueName(d); return v && getVenueNeighborhood(v) === state.favDiscoverNeighborhood; }); }
+      let groups = groupByArtist(favDocs);
+      if (state.favDiscoverShowBin !== null) { const bin = SHOW_BINS.find(b => b.min === state.favDiscoverShowBin); if (bin) groups = groups.filter(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max)); }
+      const displayDocs = groups.flatMap(([, docs]) => docs);
+      const ua = groups.length;
+      const parts = [];
+      if (state.favDiscoverEra !== null) { const s = state.favDiscoverEra; parts.push(`${s}-${String(s+4).slice(2)}`); }
+      if (state.favDiscoverNeighborhood) parts.push(state.favDiscoverNeighborhood);
+      if (state.favDiscoverShowBin !== null) { const bin = SHOW_BINS.find(b => b.min === state.favDiscoverShowBin); if (bin) parts.push(`${bin.label} shows`); }
+      el.statBanner.textContent = `${ua} artist${ua !== 1 ? 's' : ''} · ${displayDocs.length} show${displayDocs.length !== 1 ? 's' : ''}${parts.length ? ' · ' + parts.join(' · ') : ''}`;
     } else if (state.favLetterFilter) {
       const L = state.favLetterFilter;
       const filtered = favDocs.filter(d => (d.creator || '').replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
@@ -945,7 +981,26 @@ function renderFavorites() {
   const ids = new Set(getFavIds());
   const favDocs = state.index.filter(d => ids.has(d.identifier));
 
-  const allGroups = groupByArtist(favDocs).sort((a, b) => a[0].localeCompare(b[0]));
+  // Apply discover filters
+  let filteredFavDocs = favDocs;
+  if (state.favDiscoverEra !== null) {
+    const s = state.favDiscoverEra;
+    filteredFavDocs = filteredFavDocs.filter(d => { const yr = parseInt((d.date||'').slice(0,4)); return yr >= s && yr < s + 5; });
+  }
+  if (state.favDiscoverNeighborhood) {
+    filteredFavDocs = filteredFavDocs.filter(d => { const v = extractVenueName(d); return v && getVenueNeighborhood(v) === state.favDiscoverNeighborhood; });
+  }
+
+  let allGroups = groupByArtist(filteredFavDocs).sort((a, b) => a[0].localeCompare(b[0]));
+
+  if (state.favDiscoverShowBin !== null) {
+    const bin = SHOW_BINS.find(b => b.min === state.favDiscoverShowBin);
+    if (bin) {
+      allGroups = allGroups.filter(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max));
+      if (state.selectedFavArtist && !allGroups.find(([name]) => name === state.selectedFavArtist)) state.selectedFavArtist = null;
+    }
+  }
+
   let groups = allGroups;
 
   if (state.searching && state.searchQuery) {
@@ -966,6 +1021,8 @@ function renderFavorites() {
     }
   }
 
+  renderFavDiscoverTray(favDocs);
+
   // Only show pill bar when collection is large enough to warrant it
   if (allGroups.length > 40) {
     renderFavAlphaPills(allGroups);
@@ -974,6 +1031,8 @@ function renderFavorites() {
     el.favAlphaBar.style.display = 'none';
     state.favLetterFilter = null;
   }
+
+  const displayDocs = allGroups.flatMap(([, docs]) => docs);
 
   el.favArtistList.innerHTML = '';
   if (!groups.length) {
@@ -986,8 +1045,8 @@ function renderFavorites() {
 
   const frag = document.createDocumentFragment();
 
-  const allFavItem = makeArtistItem('All', favDocs.length, state.selectedFavArtist === null);
-  allFavItem.addEventListener('click', () => selectFavArtist(null, favDocs));
+  const allFavItem = makeArtistItem('All', displayDocs.length, state.selectedFavArtist === null);
+  allFavItem.addEventListener('click', () => selectFavArtist(null, displayDocs));
   frag.appendChild(allFavItem);
 
   groups.forEach(([name, docs]) => {
@@ -1001,7 +1060,7 @@ function renderFavorites() {
     const entry = groups.find(([n]) => n === state.selectedFavArtist);
     renderFavConcerts(dateAsc(entry?.[1] || []));
   } else {
-    renderFavConcerts(dateAsc(favDocs));
+    renderFavConcerts(dateAsc(displayDocs));
   }
 }
 
@@ -1056,6 +1115,364 @@ function renderFavConcerts(docs) {
     return;
   }
   appendConcertRows(el.favConcerts, docs, doc => openConcert(doc));
+}
+
+function renderFavDiscoverTray(favDocs) {
+  el.favDiscoverSection.classList.toggle('open', state.favDiscoverOpen);
+
+  const allArtistGroups = groupByArtist(favDocs);
+
+  // Row 1: Show count bins
+  el.favShowPills.innerHTML = '';
+  const showFrag = document.createDocumentFragment();
+  const allShows = makeAlphaPill('All', state.favDiscoverShowBin === null);
+  allShows.addEventListener('click', () => { state.favDiscoverShowBin = null; state.selectedFavArtist = null; renderFavorites(); updateStatBanner(); });
+  showFrag.appendChild(allShows);
+  SHOW_BINS.forEach(bin => {
+    if (!allArtistGroups.some(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max))) return;
+    const pill = makeAlphaPill(bin.label, state.favDiscoverShowBin === bin.min);
+    pill.addEventListener('click', () => { state.favDiscoverShowBin = bin.min; state.selectedFavArtist = null; renderFavorites(); updateStatBanner(); });
+    showFrag.appendChild(pill);
+  });
+  el.favShowPills.appendChild(showFrag);
+
+  // Row 2: Era pills
+  const presentYears = new Set(favDocs.map(d => parseInt((d.date||'').slice(0,4))).filter(n => !isNaN(n)));
+  const eraStarts = [...new Set([...presentYears].map(y => Math.floor(y / 5) * 5))].sort((a, b) => a - b);
+  el.favEraPills.innerHTML = '';
+  const eraFrag = document.createDocumentFragment();
+  const allEra = makeAlphaPill('All', state.favDiscoverEra === null);
+  allEra.addEventListener('click', () => { state.favDiscoverEra = null; state.selectedFavArtist = null; renderFavorites(); updateStatBanner(); });
+  eraFrag.appendChild(allEra);
+  eraStarts.forEach(start => {
+    const label = `${start}-${String(start + 4).slice(2)}`;
+    const pill = makeAlphaPill(label, state.favDiscoverEra === start);
+    pill.addEventListener('click', () => { state.favDiscoverEra = start; state.selectedFavArtist = null; renderFavorites(); updateStatBanner(); });
+    eraFrag.appendChild(pill);
+  });
+  el.favEraPills.appendChild(eraFrag);
+
+  // Row 3: Neighborhood pills
+  const nbhdCounts = {};
+  favDocs.forEach(d => { const v = extractVenueName(d); const n = v ? getVenueNeighborhood(v) : null; if (n) nbhdCounts[n] = (nbhdCounts[n]||0) + 1; });
+  const neighborhoods = Object.keys(nbhdCounts).sort();
+  el.favNbhdPills.innerHTML = '';
+  const nbhdFrag = document.createDocumentFragment();
+  const allNbhd = makeAlphaPill('All', !state.favDiscoverNeighborhood);
+  allNbhd.addEventListener('click', () => { state.favDiscoverNeighborhood = null; state.selectedFavArtist = null; renderFavorites(); updateStatBanner(); });
+  nbhdFrag.appendChild(allNbhd);
+  neighborhoods.forEach(n => {
+    const pill = makeAlphaPill(n, state.favDiscoverNeighborhood === n);
+    pill.addEventListener('click', () => { state.favDiscoverNeighborhood = n; state.selectedFavArtist = null; renderFavorites(); updateStatBanner(); });
+    nbhdFrag.appendChild(pill);
+  });
+  el.favNbhdPills.appendChild(nbhdFrag);
+}
+
+function buildArchivePortrait(favDocs) {
+  // Top decade
+  const decadeCounts = {};
+  favDocs.forEach(d => { const yr = parseInt((d.date||'').slice(0,4)); if (!isNaN(yr)) { const dec = Math.floor(yr/10)*10; decadeCounts[dec] = (decadeCounts[dec]||0)+1; } });
+  const topDecade = Object.entries(decadeCounts).sort((a,b)=>b[1]-a[1])[0];
+  const decadeLabel = topDecade ? `${topDecade[0]}s` : null;
+
+  // Top neighborhood
+  const nbhdCounts = {};
+  favDocs.forEach(d => { const v = extractVenueName(d); const n = v ? getVenueNeighborhood(v) : null; if (n) nbhdCounts[n] = (nbhdCounts[n]||0)+1; });
+  const topNbhd = Object.entries(nbhdCounts).sort((a,b)=>b[1]-a[1])[0]?.[0] || null;
+
+  // Top 2 venues
+  const venueCounts = {};
+  favDocs.forEach(d => { const v = extractVenueName(d); if (v) venueCounts[v] = (venueCounts[v]||0)+1; });
+  const topVenues = Object.entries(venueCounts).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([v])=>v);
+
+  // Most common weekday
+  const dowCounts = new Array(7).fill(0);
+  favDocs.forEach(d => { const p = dateParts(d.date); if (p) dowCounts[p.dow]++; });
+  const maxDow = Math.max(...dowCounts);
+  const topDow = maxDow > 0 ? DOW_FULL[dowCounts.indexOf(maxDow)] : null;
+
+  const locationParts = [decadeLabel, topNbhd].filter(Boolean).join(' ');
+  const prefix = locationParts ? `Mostly ${locationParts}` : null;
+  const venues = topVenues.length >= 2 ? `heavy on ${topVenues[0]} and ${topVenues[1]}`
+               : topVenues.length === 1 ? `heavy on ${topVenues[0]}` : null;
+  const day = topDow ? `${topDow} nights` : null;
+  return [prefix, venues, day].filter(Boolean).join(', ') + '.';
+}
+
+function buildArchiveSheet(favDocs) {
+  const body = el.archiveBody;
+  body.innerHTML = '';
+  const n = favDocs.length;
+
+  const makeInfoBlock = () => {
+    const block = document.createElement('div');
+    block.className = 'archive-info-block';
+    block.innerHTML = `
+      <p>This page provides a summary of your favorite shows in the archive.</p>
+      <p>As you explore the collection, tap ♥ to add a show to your Favs. With each new addition, you'll unlock features on this page — artist and venue word clouds, charts by era, an image gallery and more.</p>
+      <div class="archive-info-footer"><button class="archive-info-go-btn">Go to Favs →</button></div>
+    `;
+    block.querySelector('.archive-info-go-btn').addEventListener('click', () => {
+      el.archiveSheet.classList.remove('visible');
+      setMode('favorites');
+    });
+    return block;
+  };
+
+  // Empty state
+  if (!n) {
+    const empty = document.createElement('div');
+    empty.className = 'archive-empty';
+    empty.innerHTML = `
+      <div class="archive-empty-icon">♥</div>
+      <div class="archive-empty-title">No favorites yet</div>
+    `;
+    body.appendChild(empty);
+    body.appendChild(makeInfoBlock());
+    return;
+  }
+
+  // Precompute all counts up front (reused across thresholds)
+  const artistCounts = {};
+  favDocs.forEach(d => { if (d.creator) artistCounts[d.creator] = (artistCounts[d.creator]||0)+1; });
+  const venueCounts = {};
+  favDocs.forEach(d => { const v = extractVenueName(d); if (v) venueCounts[v] = (venueCounts[v]||0)+1; });
+  const nbhdCounts = {};
+  favDocs.forEach(d => { const v = extractVenueName(d); const nh = v ? getVenueNeighborhood(v) : null; if (nh) nbhdCounts[nh] = (nbhdCounts[nh]||0)+1; });
+  const eraCounts = {};
+  favDocs.forEach(d => { const yr = parseInt((d.date||'').slice(0,4)); if (!isNaN(yr)) { const era = Math.floor(yr/5)*5; eraCounts[era] = (eraCounts[era]||0)+1; } });
+  const dowCounts = new Array(7).fill(0);
+  favDocs.forEach(d => { const p = dateParts(d.date); if (p) dowCounts[p.dow]++; });
+
+  // Stat header
+  const ua = Object.keys(artistCounts).length;
+  const uv = Object.keys(venueCounts).length;
+  const uy = new Set(favDocs.map(d => (d.date||'').slice(0,4)).filter(Boolean)).size;
+  const statsEl = document.createElement('div');
+  statsEl.className = 'archive-stat-header';
+  [{ value: n, label: 'Shows' }, { value: ua, label: 'Artists' }, { value: uv, label: 'Venues' }, { value: uy, label: 'Years' }].forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'archive-stat-item';
+    item.innerHTML = `<div class="archive-stat-value">${s.value}</div><div class="archive-stat-label">${s.label}</div>`;
+    statsEl.appendChild(item);
+  });
+
+  // < 5: info block + stats + nudge only
+  if (n < 5) {
+    body.appendChild(makeInfoBlock());
+    body.appendChild(statsEl);
+    const need = 5 - n;
+    const nudge = document.createElement('p');
+    nudge.className = 'archive-nudge';
+    nudge.textContent = `Save ${need} more show${need !== 1 ? 's' : ''} to start unlocking your archive — portrait, photo mosaic, and top charts.`;
+    body.appendChild(nudge);
+    return;
+  }
+
+  // 5+: photo grid → stats → portrait
+  buildPhotoGrid(body, favDocs);
+  body.appendChild(statsEl);
+  const portraitEl = document.createElement('p');
+  portraitEl.className = 'archive-portrait';
+  portraitEl.textContent = buildArchivePortrait(favDocs);
+  body.appendChild(portraitEl);
+
+  // 5–19: simple ranked lists + nudge to unlock full viz
+  if (n < 20) {
+    const simpleList = (title, countObj, max = 5) => {
+      const entries = Object.entries(countObj).sort((a,b)=>b[1]-a[1]).slice(0, max);
+      if (!entries.length) return;
+      const sec = document.createElement('div');
+      sec.className = 'archive-section';
+      const t = document.createElement('div');
+      t.className = 'archive-section-title';
+      t.textContent = title;
+      sec.appendChild(t);
+      const ul = document.createElement('ul');
+      ul.className = 'archive-simple-list';
+      entries.forEach(([name, count], i) => {
+        const li = document.createElement('li');
+        li.className = 'archive-simple-item';
+        li.innerHTML = `<span class="archive-simple-rank">${i+1}</span><span class="archive-simple-name">${esc(name)}</span><span class="archive-simple-count">${count}</span>`;
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+      body.appendChild(sec);
+    };
+    simpleList('Top Artists', artistCounts);
+    simpleList('Top Venues', venueCounts);
+    if (Object.keys(nbhdCounts).length >= 2) simpleList('Neighborhoods', nbhdCounts);
+    const need = 20 - n;
+    const nudge = document.createElement('p');
+    nudge.className = 'archive-nudge';
+    nudge.textContent = `Save ${need} more show${need !== 1 ? 's' : ''} to unlock era charts, weeknight analysis, and artist clouds.`;
+    body.appendChild(nudge);
+    return;
+  }
+
+  // Full experience (20+): tag clouds + era chart + weekday chart
+  // Order: Top Artists → Eras → Top Venues → Neighborhoods → Weeknights
+  const makeTagCloud = (title, entries, maxItems = 30) => {
+    const top = entries.slice(0, maxItems);
+    if (!top.length) return;
+    const maxC = top[0][1], minC = top[top.length - 1][1], range = maxC - minC || 1;
+    const section = document.createElement('div');
+    section.className = 'archive-section';
+    const titleEl = document.createElement('div');
+    titleEl.className = 'archive-section-title';
+    titleEl.textContent = title;
+    section.appendChild(titleEl);
+    const cloud = document.createElement('div');
+    cloud.className = 'archive-tag-cloud';
+    [...top].sort(() => Math.random() - 0.5).forEach(([name, count]) => {
+      const span = document.createElement('span');
+      span.className = 'archive-cloud-tag';
+      const t = (count - minC) / range;
+      span.style.fontSize = `${Math.round(11 + t * 15)}px`;
+      span.style.opacity = (0.5 + t * 0.5).toFixed(2);
+      span.textContent = name;
+      cloud.appendChild(span);
+    });
+    section.appendChild(cloud);
+    body.appendChild(section);
+  };
+
+  makeTagCloud('Top Artists', Object.entries(artistCounts).sort((a,b)=>b[1]-a[1]));
+
+  // Era horizontal bar chart — after Top Artists
+  const eraEntries = Object.entries(eraCounts).sort((a,b)=>Number(a[0])-Number(b[0]));
+  if (eraEntries.length > 1) {
+    const maxC = Math.max(...eraEntries.map(([,c])=>c));
+    const barH = 18, gap = 4, labelW = 56, chartW = 200, totalH = eraEntries.length * (barH + gap) - gap;
+    const bars = eraEntries.map(([era, count], i) => {
+      const y = i * (barH + gap);
+      const label = `${era}-${String(Number(era)+4).slice(2)}`;
+      const bw = (count / maxC) * chartW;
+      const op = (0.35 + 0.65 * count / maxC).toFixed(2);
+      return `<text x="${labelW - 4}" y="${y + barH/2 + 3.5}" text-anchor="end" class="archive-chart-label">${label}</text><rect x="${labelW}" y="${y}" width="${bw.toFixed(1)}" height="${barH}" rx="3" class="archive-chart-bar" opacity="${op}"/><text x="${(labelW + bw + 4).toFixed(1)}" y="${y + barH/2 + 3.5}" class="archive-chart-label">${count}</text>`;
+    }).join('');
+    const section = document.createElement('div');
+    section.className = 'archive-section';
+    const t1 = document.createElement('div');
+    t1.className = 'archive-section-title';
+    t1.textContent = 'Eras';
+    section.appendChild(t1);
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', `0 0 ${labelW + chartW + 32} ${totalH}`);
+    svg.setAttribute('class', 'archive-chart-svg');
+    svg.innerHTML = bars;
+    section.appendChild(svg);
+    body.appendChild(section);
+  }
+
+  makeTagCloud('Top Venues', Object.entries(venueCounts).sort((a,b)=>b[1]-a[1]));
+  const nbhdEntries = Object.entries(nbhdCounts).sort((a,b)=>b[1]-a[1]);
+  if (nbhdEntries.length >= 3) makeTagCloud('Neighborhoods', nbhdEntries);
+
+  // Weekday vertical bar chart
+  const maxDow = Math.max(...dowCounts);
+  if (maxDow > 0) {
+    const VH = 56, barW = 32, gap = 5, totalW = 7 * (barW + gap) - gap;
+    const bars = DOW_LABELS.map((label, i) => {
+      const count = dowCounts[i];
+      const h = count > 0 ? Math.max(3, (count / maxDow) * VH) : 3;
+      const x = i * (barW + gap);
+      const op = (0.25 + 0.75 * count / maxDow).toFixed(2);
+      const cLabel = count > 0 ? `<text x="${(x + barW/2).toFixed(1)}" y="${(VH - h - 3).toFixed(1)}" text-anchor="middle" class="archive-chart-label">${count}</text>` : '';
+      return `<rect x="${x}" y="${(VH - h).toFixed(1)}" width="${barW}" height="${h.toFixed(1)}" rx="3" class="archive-chart-bar" opacity="${op}"/>${cLabel}<text x="${(x + barW/2).toFixed(1)}" y="${VH + 12}" text-anchor="middle" class="archive-chart-label">${label}</text>`;
+    }).join('');
+    const section = document.createElement('div');
+    section.className = 'archive-section';
+    const t2 = document.createElement('div');
+    t2.className = 'archive-section-title';
+    t2.textContent = 'Weeknights';
+    section.appendChild(t2);
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', `0 0 ${totalW} ${VH + 16}`);
+    svg.setAttribute('class', 'archive-chart-svg');
+    svg.innerHTML = bars;
+    section.appendChild(svg);
+    body.appendChild(section);
+  }
+}
+
+function buildPhotoGrid(body, favDocs) {
+  const sorted = [...favDocs].sort((a, b) => (Number(b.downloads)||0) - (Number(a.downloads)||0));
+  const candidates = sorted.slice(0, 20);
+  if (!candidates.length) return;
+  const COLS = 3;
+
+  const section = document.createElement('div');
+  section.className = 'archive-section';
+
+  const hdr = document.createElement('div');
+  hdr.className = 'archive-section-hdr';
+  const titleEl = document.createElement('div');
+  titleEl.className = 'archive-section-title';
+  titleEl.textContent = 'From Your Shows';
+  const refreshBtn = document.createElement('button');
+  refreshBtn.className = 'discover-refresh-btn';
+  refreshBtn.setAttribute('aria-label', 'Shuffle photos');
+  refreshBtn.textContent = '↺';
+  hdr.appendChild(titleEl);
+  hdr.appendChild(refreshBtn);
+  section.appendChild(hdr);
+
+  const grid = document.createElement('div');
+  grid.className = 'archive-photo-grid';
+  section.appendChild(grid);
+  body.appendChild(section);
+
+  const loadGrid = (pool) => {
+    grid.innerHTML = '';
+    // Track naturalWidth×naturalHeight to detect default collection thumbnails.
+    // Keep at most 2 images of any given pixel size.
+    const sizeCounts = {};
+    const entries = [];
+    let settledCount = 0;
+
+    const onSettle = () => {
+      settledCount++;
+      if (settledCount < pool.length) return;
+      const good = entries.filter(e => e.ok);
+      const keep = Math.floor(good.length / COLS) * COLS;
+      if (keep === 0) { section.remove(); return; }
+      good.slice(0, keep).forEach(e => { e.item.style.display = ''; });
+      good.slice(keep).forEach(e => e.item.remove());
+      entries.filter(e => !e.ok).forEach(e => e.item.remove());
+    };
+
+    pool.forEach(doc => {
+      const e = { item: null, ok: false };
+      entries.push(e);
+      const item = document.createElement('div');
+      item.className = 'archive-photo-item';
+      item.style.display = 'none';
+      e.item = item;
+      const img = document.createElement('img');
+      img.src = `https://archive.org/services/img/${esc(doc.identifier)}`;
+      img.alt = esc(doc.creator || '');
+      img.onload = function() {
+        const key = `${this.naturalWidth}x${this.naturalHeight}`;
+        sizeCounts[key] = (sizeCounts[key] || 0) + 1;
+        e.ok = sizeCounts[key] <= 2;
+        onSettle();
+      };
+      img.onerror = () => onSettle();
+      img.addEventListener('click', () => {
+        el.archiveSheet.classList.remove('visible');
+        openConcert(doc);
+      });
+      item.appendChild(img);
+      grid.appendChild(item);
+    });
+  };
+
+  loadGrid(candidates);
+  refreshBtn.addEventListener('click', () => {
+    loadGrid([...candidates].sort(() => Math.random() - 0.5));
+  });
 }
 
 // ── Concert detail view ────────────────────────────────────────────
@@ -2347,6 +2764,21 @@ function init() {
     state.venueDiscoverOpen = !state.venueDiscoverOpen;
     if (state.index) renderVenue();
   });
+
+  // Favs "Shows, Eras and Neighborhoods" tray toggle
+  el.favDiscoverToggle.addEventListener('click', () => {
+    state.favDiscoverOpen = !state.favDiscoverOpen;
+    if (state.index) renderFavorites();
+  });
+
+  // Your Archive sheet (header heart button)
+  el.archiveBtn.addEventListener('click', () => {
+    const ids = new Set(getFavIds());
+    const favDocs = state.index ? state.index.filter(d => ids.has(d.identifier)) : [];
+    buildArchiveSheet(favDocs);
+    el.archiveSheet.classList.add('visible');
+  });
+  el.archiveClose.addEventListener('click', () => el.archiveSheet.classList.remove('visible'));
 
   // Search (persistent input — no toggle)
   el.searchInput.addEventListener('focus', () => {

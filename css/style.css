@@ -354,21 +354,25 @@ button {
   height: 100%;
 }
 
-/* Collapsible discover trays (Artists, Venues, Years tabs) */
+/* Collapsible discover trays (Artists, Venues, Years, Favs tabs) */
 #venue-discover-section,
 #artist-discover-section,
-#year-discover-section {
+#year-discover-section,
+#fav-discover-section {
   flex-shrink: 0;
   border-bottom: 1px solid var(--border);
 }
-#venue-discover-toggle, #artist-discover-toggle, #year-discover-toggle { padding: 10px 16px; }
-#venue-discover-tray, #artist-discover-tray, #year-discover-tray { display: none; }
+#venue-discover-toggle, #artist-discover-toggle, #year-discover-toggle, #fav-discover-toggle { padding: 10px 16px; }
+#venue-discover-tray, #artist-discover-tray, #year-discover-tray, #fav-discover-tray { display: none; }
 #venue-discover-section.open #venue-discover-tray,
 #artist-discover-section.open #artist-discover-tray,
-#year-discover-section.open #year-discover-tray { display: block; }
+#year-discover-section.open #year-discover-tray,
+#fav-discover-section.open #fav-discover-tray { display: block; }
 #venue-discover-section.open .concert-also-chevron-toggle,
 #artist-discover-section.open .concert-also-chevron-toggle,
-#year-discover-section.open .concert-also-chevron-toggle { transform: rotate(180deg); }
+#year-discover-section.open .concert-also-chevron-toggle,
+#fav-discover-section.open .concert-also-chevron-toggle { transform: rotate(180deg); }
+
 .venue-discover-pill-row {
   display: flex;
   gap: 6px;
@@ -1224,10 +1228,12 @@ button {
 /* ── Persistent stat banner ──────────────────────────────────────── */
 #stat-banner {
   padding: 6px 16px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text3);
   border-bottom: 1px solid var(--border);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   flex-shrink: 0;
 }
 
@@ -1667,6 +1673,224 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 .ia-donate-cta:active { opacity: 0.7; }
+
+/* ── Your Archive Sheet ────────────────────────────────────────────── */
+#archive-sheet {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; flex-direction: column;
+  background: var(--bg);
+}
+#archive-sheet.visible { display: flex; }
+
+.archive-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+.archive-portrait {
+  font-size: 16px;
+  color: var(--text2);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  background: var(--bg2);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.archive-stat-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.archive-stat-item {
+  text-align: center;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 6px;
+}
+
+.archive-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.archive-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text3);
+  margin-top: 4px;
+}
+
+.archive-section { margin-bottom: 24px; }
+
+.archive-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+
+.archive-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  line-height: 1.7;
+}
+
+.archive-cloud-tag {
+  color: var(--text);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.archive-chart-svg { width: 100%; display: block; }
+
+.archive-chart-label {
+  font-size: 9px;
+  fill: var(--text3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.archive-chart-bar { fill: var(--accent); }
+
+.archive-info-block {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  background: var(--bg2);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.archive-info-block p + p { margin-top: 8px; }
+.archive-info-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.archive-info-go-btn {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--accent);
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.archive-info-go-btn:active { opacity: 0.75; }
+
+.archive-section-hdr {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.archive-section-hdr .archive-section-title { margin-bottom: 0; }
+
+.archive-empty {
+  text-align: center;
+  padding: 56px 24px 32px;
+}
+.archive-empty-icon {
+  font-size: 52px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.archive-empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.archive-empty-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+.archive-nudge {
+  font-size: 12px;
+  color: var(--text3);
+  text-align: center;
+  padding: 12px 16px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.archive-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.archive-photo-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--bg2);
+  cursor: pointer;
+}
+.archive-photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.archive-photo-item:active { opacity: 0.7; }
+
+.archive-simple-list {
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.archive-simple-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+.archive-simple-item:last-child { border-bottom: none; }
+.archive-simple-rank {
+  font-size: 11px;
+  color: var(--text3);
+  width: 18px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.archive-simple-name {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.archive-simple-count {
+  font-size: 12px;
+  color: var(--accent);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
 
 /* ── Utility ──────────────────────────────────────────────────────── */
 .loading-msg, .error-msg, .empty-msg {

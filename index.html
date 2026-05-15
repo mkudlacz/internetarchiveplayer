@@ -28,6 +28,11 @@
            autocapitalize="none" autocorrect="off" spellcheck="false">
     <button id="search-clear" class="search-clear-btn" aria-label="Clear search" style="display:none">✕</button>
     <div class="header-actions">
+      <button id="archive-btn" aria-label="Your Archive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
       <button id="help-btn" aria-label="Getting Started">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="10"/>
@@ -157,6 +162,19 @@
 
     <!-- Favorites -->
     <div id="view-favorites" style="display:none">
+      <div id="fav-discover-section">
+        <div id="fav-discover-toggle" class="concert-section-header concert-also-toggle">
+          <span>Shows, Eras and Neighborhoods</span>
+          <svg class="concert-also-chevron-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6,9 12,15 18,9"/>
+          </svg>
+        </div>
+        <div id="fav-discover-tray">
+          <div id="fav-show-pills" class="venue-discover-pill-row"></div>
+          <div id="fav-era-pills" class="venue-discover-pill-row"></div>
+          <div id="fav-nbhd-pills" class="venue-discover-pill-row"></div>
+        </div>
+      </div>
       <div id="fav-alpha-bar"></div>
       <div class="artist-two-col">
         <div class="artist-col">
@@ -293,6 +311,15 @@
       <p class="settings-hint">Paste your exported link above and tap Restore.</p>
     </div>
   </div>
+</div>
+
+<!-- ── Your Archive Sheet ── -->
+<div id="archive-sheet" role="dialog" aria-label="Your Archive" aria-modal="true">
+  <div class="sheet-header">
+    <h2>About Your Favs</h2>
+    <button class="sheet-close" id="archive-close">Done</button>
+  </div>
+  <div id="archive-body" class="archive-body"></div>
 </div>
 
 <!-- ── Help Sheet ── -->
