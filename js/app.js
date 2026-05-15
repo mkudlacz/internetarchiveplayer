@@ -308,7 +308,7 @@ function updateStatBanner() {
       let label = state.venueDiscoverNeighborhood || '';
       if (state.venueDiscoverEra !== null) {
         const s = state.venueDiscoverEra;
-        label += (label ? ' · ' : '') + `${String(s).slice(2)}-${String(s + 4).slice(2)}`;
+        label += (label ? ' · ' : '') + `${s}-${String(s + 4).slice(2)}`;
       }
       el.statBanner.textContent = `${uv} venue${uv !== 1 ? 's' : ''} · ${shows} show${shows !== 1 ? 's' : ''} · ${label}`;
     } else if (state.venueLetterFilter) {
@@ -1535,7 +1535,7 @@ function renderYearEraPills(allByYear) {
 
   sorted.forEach(start => {
     const end = start + 4;
-    const label = `${String(start).slice(2)}-${String(end).slice(2)}`;
+    const label = `${start}-${String(end).slice(2)}`;
     const pill = makeAlphaPill(label, state.yearEraFilter === start);
     pill.addEventListener('click', () => {
       state.yearEraFilter = start;
@@ -1790,7 +1790,7 @@ function renderVenueDiscoverTray(neighborhoods, nbhdMap) {
   });
   eraFrag.appendChild(allEra);
   eraStarts.forEach(start => {
-    const label = `${String(start).slice(2)}-${String(start + 4).slice(2)}`;
+    const label = `${start}-${String(start + 4).slice(2)}`;
     const pill = makeAlphaPill(label, state.venueDiscoverEra === start);
     pill.addEventListener('click', () => {
       state.venueDiscoverEra = start;
