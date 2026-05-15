@@ -85,11 +85,12 @@ const state = {
 const PAGE_SIZE = 50;
 
 const SHOW_BINS = [
-  { min: 1,  max: 1,    label: '1' },
-  { min: 2,  max: 4,    label: '2–4' },
-  { min: 5,  max: 9,    label: '5–9' },
-  { min: 10, max: 19,   label: '10–19' },
-  { min: 20, max: null, label: '20+' },
+  { min: 1,  max: 1,  label: '1' },
+  { min: 2,  max: 2,  label: '2' },
+  { min: 3,  max: 3,  label: '3' },
+  { min: 4,  max: 4,  label: '4' },
+  { min: 5,  max: 9,  label: '5–9' },
+  { min: 10, max: 19, label: '10–19' },
 ];
 
 // ── DOM refs ───────────────────────────────────────────────────────
@@ -769,7 +770,29 @@ function renderAlphaPills(allGroups) {
 function renderArtistDiscoverTray(allGroups) {
   el.artistDiscoverSection.classList.toggle('open', state.artistDiscoverOpen);
 
-  // Era pills
+  // Show count bin pills (row 1) — only bins with at least one artist
+  el.artistShowPills.innerHTML = '';
+  const showFrag = document.createDocumentFragment();
+  const allShows = makeAlphaPill('All', state.artistDiscoverShowBin === null);
+  allShows.addEventListener('click', () => {
+    state.artistDiscoverShowBin = null;
+    state.selectedArtist = null;
+    renderArtistView(); updateStatBanner();
+  });
+  showFrag.appendChild(allShows);
+  SHOW_BINS.forEach(bin => {
+    if (!allGroups.some(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max))) return;
+    const pill = makeAlphaPill(bin.label, state.artistDiscoverShowBin === bin.min);
+    pill.addEventListener('click', () => {
+      state.artistDiscoverShowBin = bin.min;
+      state.selectedArtist = null;
+      renderArtistView(); updateStatBanner();
+    });
+    showFrag.appendChild(pill);
+  });
+  el.artistShowPills.appendChild(showFrag);
+
+  // Era pills (row 2)
   const presentYears = new Set(
     allGroups.flatMap(([, docs]) => docs.map(d => parseInt((d.date||'').slice(0,4)))).filter(n => !isNaN(n))
   );
@@ -795,28 +818,6 @@ function renderArtistDiscoverTray(allGroups) {
     eraFrag.appendChild(pill);
   });
   el.artistEraPills.appendChild(eraFrag);
-
-  // Show count bin pills — only show bins that have at least one artist
-  el.artistShowPills.innerHTML = '';
-  const showFrag = document.createDocumentFragment();
-  const allShows = makeAlphaPill('All', state.artistDiscoverShowBin === null);
-  allShows.addEventListener('click', () => {
-    state.artistDiscoverShowBin = null;
-    state.selectedArtist = null;
-    renderArtistView(); updateStatBanner();
-  });
-  showFrag.appendChild(allShows);
-  SHOW_BINS.forEach(bin => {
-    if (!allGroups.some(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max))) return;
-    const pill = makeAlphaPill(bin.label, state.artistDiscoverShowBin === bin.min);
-    pill.addEventListener('click', () => {
-      state.artistDiscoverShowBin = bin.min;
-      state.selectedArtist = null;
-      renderArtistView(); updateStatBanner();
-    });
-    showFrag.appendChild(pill);
-  });
-  el.artistShowPills.appendChild(showFrag);
 }
 
 function makeAlphaPill(label, active) {
