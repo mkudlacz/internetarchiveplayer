@@ -354,18 +354,21 @@ button {
   height: 100%;
 }
 
-/* Collapsible discover trays (Venues + Artists tabs) */
+/* Collapsible discover trays (Artists, Venues, Years tabs) */
 #venue-discover-section,
-#artist-discover-section {
+#artist-discover-section,
+#year-discover-section {
   flex-shrink: 0;
   border-bottom: 1px solid var(--border);
 }
-#venue-discover-toggle, #artist-discover-toggle { padding: 10px 16px; }
-#venue-discover-tray, #artist-discover-tray { display: none; }
+#venue-discover-toggle, #artist-discover-toggle, #year-discover-toggle { padding: 10px 16px; }
+#venue-discover-tray, #artist-discover-tray, #year-discover-tray { display: none; }
 #venue-discover-section.open #venue-discover-tray,
-#artist-discover-section.open #artist-discover-tray { display: block; }
+#artist-discover-section.open #artist-discover-tray,
+#year-discover-section.open #year-discover-tray { display: block; }
 #venue-discover-section.open .concert-also-chevron-toggle,
-#artist-discover-section.open .concert-also-chevron-toggle { transform: rotate(180deg); }
+#artist-discover-section.open .concert-also-chevron-toggle,
+#year-discover-section.open .concert-also-chevron-toggle { transform: rotate(180deg); }
 .venue-discover-pill-row {
   display: flex;
   gap: 6px;

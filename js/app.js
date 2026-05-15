@@ -76,13 +76,27 @@ const state = {
   nbhdEraNeighborhood:       null,   // persisted neighborhood selection in Discover era strip
   nbhdEraYear:               null,   // persisted year selection in Discover era strip
   selectedFavArtist: null,  // artist name string
-  selectedYear:     null,   // year string e.g. "1995"
-  yearEraFilter:    null,   // 5-yr range start e.g. 1990, or null = all
+  selectedYear:      null,   // year string e.g. "1995"
+  yearEraFilter:     null,   // 5-yr range start e.g. 1990, or null = all
+  yearDiscoverOpen:  false,
+  yearMonthFilter:   null,   // 1-12 or null
+  yearDayFilter:     null,   // 1-31 or null
+  yearDowFilter:     null,   // 0-6 (Sun=0) or null
   selectedVenue:    null,   // venue string
   currentConcert:   null,
 };
 
 const PAGE_SIZE = 50;
+
+const MONTH_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DOW_LABELS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function dateParts(dateStr) {
+  const s = (dateStr || '').slice(0, 10);
+  const [y, m, d] = s.split('-').map(Number);
+  if (!y || !m || !d) return null;
+  return { y, m, d, dow: new Date(y, m - 1, d).getDay() };
+}
 
 const SHOW_BINS = [
   { min: 1,  max: 1,  label: '1' },
@@ -133,6 +147,11 @@ const el = {
   viewDiscover:       $('view-discover'),
   viewYear:           $('view-year'),
   yearEraBar:         $('year-era-bar'),
+  yearDiscoverSection: $('year-discover-section'),
+  yearDiscoverToggle:  $('year-discover-toggle'),
+  yearMonthPills:      $('year-month-pills'),
+  yearDayPills:        $('year-day-pills'),
+  yearDowPills:        $('year-dow-pills'),
   yearList:           $('year-list'),
   yearConcerts:       $('year-concerts'),
   viewVenue:          $('view-venue'),
@@ -260,7 +279,13 @@ function setMode(mode) {
     state.venueDiscoverNeighborhood = null;
     state.venueDiscoverEra = null;
   }
-  if (mode !== 'year')       state.yearEraFilter = null;
+  if (mode !== 'year') {
+    state.yearEraFilter = null;
+    state.yearDiscoverOpen = false;
+    state.yearMonthFilter = null;
+    state.yearDayFilter = null;
+    state.yearDowFilter = null;
+  }
   if (mode !== 'favorites')  state.favLetterFilter   = null;
 
   if (mode === 'library') {
@@ -368,14 +393,36 @@ function updateStatBanner() {
     return;
   }
   if (mode === 'year') {
+    const hasDiscover = state.yearMonthFilter !== null || state.yearDayFilter !== null || state.yearDowFilter !== null;
+    // Build base docs applying era filter first
+    let yearBase = index;
+    if (state.yearEraFilter !== null) {
+      const s = state.yearEraFilter;
+      yearBase = yearBase.filter(d => { const yr = parseInt((d.date||'').slice(0,4)); return yr >= s && yr < s + 5; });
+    }
+    // Apply discover filters
+    const yearFiltered = hasDiscover ? yearBase.filter(d => {
+      const p = dateParts(d.date);
+      if (!p) return false;
+      if (state.yearMonthFilter !== null && p.m !== state.yearMonthFilter) return false;
+      if (state.yearDayFilter   !== null && p.d !== state.yearDayFilter)   return false;
+      if (state.yearDowFilter   !== null && p.dow !== state.yearDowFilter) return false;
+      return true;
+    }) : yearBase;
+    // Label parts for discover filters
+    const dParts = [];
+    if (state.yearMonthFilter !== null) dParts.push(MONTH_LABELS[state.yearMonthFilter - 1]);
+    if (state.yearDayFilter   !== null) dParts.push(String(state.yearDayFilter));
+    if (state.yearDowFilter   !== null) dParts.push(DOW_LABELS[state.yearDowFilter]);
     if (selectedYear) {
-      const docs = index.filter(d => (d.date || '').slice(0, 4) === selectedYear);
-      el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedYear}`;
-    } else if (state.yearEraFilter !== null) {
-      const start = state.yearEraFilter;
-      const docs = index.filter(d => { const yr = parseInt((d.date || '').slice(0, 4)); return yr >= start && yr < start + 5; });
-      const yearsInRange = new Set(docs.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
-      el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${yearsInRange} year${yearsInRange !== 1 ? 's' : ''} · ${start}–${start + 4}`;
+      const docs = yearFiltered.filter(d => (d.date||'').slice(0,4) === selectedYear);
+      const parts = [selectedYear, ...dParts];
+      el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${parts.join(' · ')}`;
+    } else if (state.yearEraFilter !== null || hasDiscover) {
+      const uniqueYears = new Set(yearFiltered.map(d => (d.date||'').slice(0,4)).filter(Boolean)).size;
+      const eraPart = state.yearEraFilter !== null ? `${state.yearEraFilter}–${state.yearEraFilter + 4}` : null;
+      const parts = [eraPart, ...dParts].filter(Boolean);
+      el.statBanner.textContent = `${yearFiltered.length} show${yearFiltered.length !== 1 ? 's' : ''} · ${uniqueYears} year${uniqueYears !== 1 ? 's' : ''}${parts.length ? ' · ' + parts.join(' · ') : ''}`;
     } else {
       const uniqueYears = new Set(index.map(d => (d.date || '').slice(0, 4)).filter(Boolean)).size;
       el.statBanner.textContent = `${uniqueYears} years · ${index.length} shows`;
@@ -1666,6 +1713,77 @@ function renderYearEraPills(allByYear) {
   el.yearEraBar.appendChild(frag);
 }
 
+function renderYearDiscoverTray(eraFilteredDocs) {
+  el.yearDiscoverSection.classList.toggle('open', state.yearDiscoverOpen);
+
+  // Month pills (row 1) — calendar order, only months with shows
+  const presentMonths = new Set(eraFilteredDocs.map(d => dateParts(d.date)?.m).filter(Boolean));
+  el.yearMonthPills.innerHTML = '';
+  const mFrag = document.createDocumentFragment();
+  const allMonth = makeAlphaPill('All', state.yearMonthFilter === null);
+  allMonth.addEventListener('click', () => {
+    state.yearMonthFilter = null; state.yearDayFilter = null; state.selectedYear = null;
+    renderYear(); updateStatBanner();
+  });
+  mFrag.appendChild(allMonth);
+  for (let m = 1; m <= 12; m++) {
+    if (!presentMonths.has(m)) continue;
+    const pill = makeAlphaPill(MONTH_LABELS[m - 1], state.yearMonthFilter === m);
+    pill.addEventListener('click', () => {
+      state.yearMonthFilter = m; state.yearDayFilter = null; state.selectedYear = null;
+      renderYear(); updateStatBanner();
+    });
+    mFrag.appendChild(pill);
+  }
+  el.yearMonthPills.appendChild(mFrag);
+
+  // Day-of-month pills (row 2) — rescoped by selected month
+  const daySource = state.yearMonthFilter !== null
+    ? eraFilteredDocs.filter(d => dateParts(d.date)?.m === state.yearMonthFilter)
+    : eraFilteredDocs;
+  const presentDays = new Set(daySource.map(d => dateParts(d.date)?.d).filter(Boolean));
+  el.yearDayPills.innerHTML = '';
+  const dFrag = document.createDocumentFragment();
+  const allDay = makeAlphaPill('All', state.yearDayFilter === null);
+  allDay.addEventListener('click', () => {
+    state.yearDayFilter = null; state.selectedYear = null;
+    renderYear(); updateStatBanner();
+  });
+  dFrag.appendChild(allDay);
+  for (let d = 1; d <= 31; d++) {
+    if (!presentDays.has(d)) continue;
+    const pill = makeAlphaPill(String(d), state.yearDayFilter === d);
+    pill.addEventListener('click', () => {
+      state.yearDayFilter = d; state.selectedYear = null;
+      renderYear(); updateStatBanner();
+    });
+    dFrag.appendChild(pill);
+  }
+  el.yearDayPills.appendChild(dFrag);
+
+  // Day-of-week pills (row 3) — Sun→Sat, rescoped by month+day selection
+  const dowSource = daySource.filter(d => state.yearDayFilter === null || dateParts(d.date)?.d === state.yearDayFilter);
+  const presentDows = new Set(dowSource.map(d => dateParts(d.date)?.dow).filter(n => n !== null && n !== undefined));
+  el.yearDowPills.innerHTML = '';
+  const wFrag = document.createDocumentFragment();
+  const allDow = makeAlphaPill('All', state.yearDowFilter === null);
+  allDow.addEventListener('click', () => {
+    state.yearDowFilter = null; state.selectedYear = null;
+    renderYear(); updateStatBanner();
+  });
+  wFrag.appendChild(allDow);
+  for (let w = 0; w <= 6; w++) {
+    if (!presentDows.has(w)) continue;
+    const pill = makeAlphaPill(DOW_LABELS[w], state.yearDowFilter === w);
+    pill.addEventListener('click', () => {
+      state.yearDowFilter = w; state.selectedYear = null;
+      renderYear(); updateStatBanner();
+    });
+    wFrag.appendChild(pill);
+  }
+  el.yearDowPills.appendChild(wFrag);
+}
+
 function renderYear() {
   const index = state.index;
   const allByYear = groupBy(index, d => (d.date || d.year || '').toString().slice(0, 4))
@@ -1690,7 +1808,27 @@ function renderYear() {
     }
   }
 
+  // Snapshot era-filtered docs for the discover tray (before month/day/dow)
+  const eraFilteredDocs = byYear.flatMap(([, docs]) => docs);
+
+  // Month / day-of-month / day-of-week filters
+  if (state.yearMonthFilter !== null || state.yearDayFilter !== null || state.yearDowFilter !== null) {
+    byYear = byYear.map(([y, docs]) => [
+      y,
+      docs.filter(d => {
+        const p = dateParts(d.date);
+        if (!p) return false;
+        if (state.yearMonthFilter !== null && p.m !== state.yearMonthFilter) return false;
+        if (state.yearDayFilter   !== null && p.d !== state.yearDayFilter)   return false;
+        if (state.yearDowFilter   !== null && p.dow !== state.yearDowFilter) return false;
+        return true;
+      })
+    ]).filter(([, docs]) => docs.length > 0);
+    if (state.selectedYear && !byYear.find(([y]) => y === state.selectedYear)) state.selectedYear = null;
+  }
+
   renderYearEraPills(allByYear);
+  renderYearDiscoverTray(eraFilteredDocs);
 
   const allYearDocs = byYear.flatMap(([, docs]) => docs);
 
@@ -2190,6 +2328,12 @@ function init() {
     state.displayPage++;
     renderLibrary();
     // Scroll to where we were
+  });
+
+  // Year "Months and Days" tray toggle
+  el.yearDiscoverToggle.addEventListener('click', () => {
+    state.yearDiscoverOpen = !state.yearDiscoverOpen;
+    if (state.index) renderYear();
   });
 
   // Artist "Shows and Eras" tray toggle
