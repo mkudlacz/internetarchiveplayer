@@ -354,6 +354,46 @@ button {
   height: 100%;
 }
 
+/* Discover tray in Venue tab */
+#venue-discover-bar {
+  flex-shrink: 0;
+  padding: 8px 16px 4px;
+}
+#venue-discover-tray {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px 8px;
+}
+#venue-discover-tray.hidden { display: none; }
+.venue-discover-select {
+  flex-shrink: 0;
+  padding: 5px 26px 5px 11px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: var(--bg2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23777'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  background-size: 9px 5px;
+  color: var(--text2);
+  border: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.venue-discover-select.active {
+  background-color: var(--accent);
+  color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23fff'/%3E%3C/svg%3E");
+}
+#venue-discover-toggle::after { content: ' ▾'; font-size: 10px; }
+#venue-discover-toggle.tray-open::after { content: ' ▴'; font-size: 10px; }
+
 /* A–Z pill bar in Venue tab */
 #venue-alpha-bar {
   flex-shrink: 0;

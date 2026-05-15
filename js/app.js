@@ -65,10 +65,13 @@ const state = {
   searchQuery:  '',
   selectedArtist:     null,   // { name, docs[] } or null = all
   artistLetterFilter: null,   // 'A'–'Z' or null = all
-  venueLetterFilter:    null,   // 'A'–'Z' or null = all
-  favLetterFilter:      null,   // 'A'–'Z' or null = all
-  nbhdEraNeighborhood:  null,   // persisted neighborhood selection in Discover era strip
-  nbhdEraYear:          null,   // persisted year selection in Discover era strip
+  venueLetterFilter:         null,   // 'A'–'Z' or null = all
+  venueDiscoverOpen:         false,  // discover tray visible
+  venueDiscoverNeighborhood: null,   // neighborhood filter in venue tab
+  venueDiscoverYear:         null,   // year filter in venue tab
+  favLetterFilter:           null,   // 'A'–'Z' or null = all
+  nbhdEraNeighborhood:       null,   // persisted neighborhood selection in Discover era strip
+  nbhdEraYear:               null,   // persisted year selection in Discover era strip
   selectedFavArtist: null,  // artist name string
   selectedYear:     null,   // year string e.g. "1995"
   yearEraFilter:    null,   // 5-yr range start e.g. 1990, or null = all
@@ -104,6 +107,11 @@ const el = {
   loadMore:       $('load-more'),
   artistAlphaBar: $('artist-alpha-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
+  venueDiscoverToggle:  $('venue-discover-toggle'),
+  venueDiscoverTray:    $('venue-discover-tray'),
+  venueNbhdSelect:      $('venue-nbhd-select'),
+  venueYearSelect:      $('venue-year-select'),
+  venueDiscoverClear:   $('venue-discover-clear'),
   favAlphaBar:    $('fav-alpha-bar'),
   artistList:     $('artist-list'),
   artistConcerts: $('artist-concerts'),
@@ -226,7 +234,12 @@ function setMode(mode) {
   state.searchQuery = '';
   el.searchInput.value = '';
   if (mode !== 'artists') state.artistLetterFilter = null;
-  if (mode !== 'venue')      state.venueLetterFilter = null;
+  if (mode !== 'venue') {
+    state.venueLetterFilter = null;
+    state.venueDiscoverNeighborhood = null;
+    state.venueDiscoverYear = null;
+    state.venueDiscoverOpen = false;
+  }
   if (mode !== 'year')       state.yearEraFilter = null;
   if (mode !== 'favorites')  state.favLetterFilter   = null;
 
@@ -281,6 +294,24 @@ function updateStatBanner() {
     if (selectedVenue) {
       const docs = index.filter(d => extractVenueName(d) === selectedVenue);
       el.statBanner.textContent = `${docs.length} show${docs.length !== 1 ? 's' : ''} · ${selectedVenue}`;
+    } else if (state.venueDiscoverNeighborhood || state.venueDiscoverYear) {
+      let fv = groupBy(index, d => extractVenueName(d) || '__none__').filter(([v]) => v !== '__none__');
+      if (state.venueDiscoverNeighborhood) {
+        fv = fv.filter(([v]) => getVenueNeighborhood(v) === state.venueDiscoverNeighborhood);
+      }
+      if (state.venueDiscoverYear) {
+        fv = fv.map(([v, docs]) => [v, docs.filter(d => (d.date || '').slice(0, 4) === state.venueDiscoverYear)])
+               .filter(([, docs]) => docs.length > 0);
+      }
+      if (state.venueLetterFilter) {
+        const L = state.venueLetterFilter;
+        fv = fv.filter(([v]) => v.replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
+      }
+      const uv = fv.length;
+      const shows = fv.reduce((sum, [, docs]) => sum + docs.length, 0);
+      let label = state.venueDiscoverNeighborhood || '';
+      if (state.venueDiscoverYear) label += (label ? ' · ' : '') + state.venueDiscoverYear;
+      el.statBanner.textContent = `${uv} venue${uv !== 1 ? 's' : ''} · ${shows} show${shows !== 1 ? 's' : ''} · ${label}`;
     } else if (state.venueLetterFilter) {
       const L = state.venueLetterFilter;
       const filtered = index.filter(d => (extractVenueName(d) || '').replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
@@ -1594,6 +1625,16 @@ function renderVenue() {
   const allByVenue = groupBy(index, d => extractVenueName(d) || '__none__')
     .filter(([v]) => v !== '__none__')
     .sort((a, b) => a[0].localeCompare(b[0]));
+
+  // Build neighborhood map from unique venues (for discover tray)
+  const nbhdMap = {};
+  allByVenue.forEach(([venueName, docs]) => {
+    const n = getVenueNeighborhood(venueName);
+    if (!n) return;
+    (nbhdMap[n] = nbhdMap[n] || []).push(...docs);
+  });
+  const neighborhoods = Object.keys(nbhdMap).sort();
+
   let byVenue = allByVenue;
 
   if (state.searching && state.searchQuery) {
@@ -1602,6 +1643,20 @@ function renderVenue() {
     if (state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
       state.selectedVenue = null;
     }
+  }
+
+  // Discover neighborhood + year filters
+  if (state.venueDiscoverNeighborhood) {
+    byVenue = byVenue.filter(([v]) => getVenueNeighborhood(v) === state.venueDiscoverNeighborhood);
+  }
+  if (state.venueDiscoverYear) {
+    byVenue = byVenue
+      .map(([v, docs]) => [v, docs.filter(d => (d.date || '').slice(0, 4) === state.venueDiscoverYear)])
+      .filter(([, docs]) => docs.length > 0);
+  }
+  if ((state.venueDiscoverNeighborhood || state.venueDiscoverYear) &&
+      state.selectedVenue && !byVenue.find(([v]) => v === state.selectedVenue)) {
+    state.selectedVenue = null;
   }
 
   if (state.venueLetterFilter) {
@@ -1615,6 +1670,7 @@ function renderVenue() {
   }
 
   renderVenueAlphaPills(allByVenue);
+  renderVenueDiscoverTray(neighborhoods, nbhdMap);
 
   el.venueList.innerHTML = '';
   if (!byVenue.length) {
@@ -1691,6 +1747,49 @@ function renderVenueAlphaPills(allByVenue) {
   });
 
   el.venueAlphaBar.appendChild(frag);
+}
+
+function renderVenueDiscoverTray(neighborhoods, nbhdMap) {
+  const hasFilter = !!(state.venueDiscoverNeighborhood || state.venueDiscoverYear);
+  el.venueDiscoverToggle.classList.toggle('active', state.venueDiscoverOpen || hasFilter);
+  el.venueDiscoverToggle.classList.toggle('tray-open', state.venueDiscoverOpen);
+  el.venueDiscoverTray.classList.toggle('hidden', !state.venueDiscoverOpen);
+
+  // Neighborhood select
+  el.venueNbhdSelect.innerHTML = '';
+  const nbhdPlaceholder = document.createElement('option');
+  nbhdPlaceholder.value = '';
+  nbhdPlaceholder.textContent = 'Neighborhood';
+  el.venueNbhdSelect.appendChild(nbhdPlaceholder);
+  neighborhoods.forEach(n => {
+    const opt = document.createElement('option');
+    opt.value = n;
+    opt.textContent = n;
+    if (n === state.venueDiscoverNeighborhood) opt.selected = true;
+    el.venueNbhdSelect.appendChild(opt);
+  });
+  el.venueNbhdSelect.classList.toggle('active', !!state.venueDiscoverNeighborhood);
+
+  // Year select — years present in selected neighborhood (or all years in collection)
+  const yearsSource = state.venueDiscoverNeighborhood
+    ? nbhdMap[state.venueDiscoverNeighborhood] || []
+    : Object.values(nbhdMap).flat();
+  const years = [...new Set(yearsSource.map(d => (d.date || '').slice(0, 4)).filter(Boolean))].sort();
+  el.venueYearSelect.innerHTML = '';
+  const yearPlaceholder = document.createElement('option');
+  yearPlaceholder.value = '';
+  yearPlaceholder.textContent = 'Year';
+  el.venueYearSelect.appendChild(yearPlaceholder);
+  years.forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y;
+    if (y === state.venueDiscoverYear) opt.selected = true;
+    el.venueYearSelect.appendChild(opt);
+  });
+  el.venueYearSelect.classList.toggle('active', !!state.venueDiscoverYear);
+
+  el.venueDiscoverClear.style.display = hasFilter ? '' : 'none';
 }
 
 function renderVenueConcerts(docs) {
@@ -1962,6 +2061,32 @@ function init() {
     state.displayPage++;
     renderLibrary();
     // Scroll to where we were
+  });
+
+  // Venue Discover tray
+  el.venueDiscoverToggle.addEventListener('click', () => {
+    state.venueDiscoverOpen = !state.venueDiscoverOpen;
+    if (state.index) renderVenue();
+  });
+  el.venueNbhdSelect.addEventListener('change', () => {
+    state.venueDiscoverNeighborhood = el.venueNbhdSelect.value || null;
+    state.venueDiscoverYear = null;
+    state.selectedVenue = null;
+    if (state.index) renderVenue();
+    updateStatBanner();
+  });
+  el.venueYearSelect.addEventListener('change', () => {
+    state.venueDiscoverYear = el.venueYearSelect.value || null;
+    state.selectedVenue = null;
+    if (state.index) renderVenue();
+    updateStatBanner();
+  });
+  el.venueDiscoverClear.addEventListener('click', () => {
+    state.venueDiscoverNeighborhood = null;
+    state.venueDiscoverYear = null;
+    state.selectedVenue = null;
+    if (state.index) renderVenue();
+    updateStatBanner();
   });
 
   // Search (persistent input — no toggle)
