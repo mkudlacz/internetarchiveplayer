@@ -64,7 +64,10 @@ const state = {
   searching:    false,
   searchQuery:  '',
   selectedArtist:     null,   // { name, docs[] } or null = all
-  artistLetterFilter: null,   // 'A'–'Z' or null = all
+  artistLetterFilter:     null,   // 'A'–'Z' or null = all
+  artistDiscoverOpen:     false,
+  artistDiscoverEra:      null,   // 5-yr start or null
+  artistDiscoverShowBin:  null,   // bin min (1,2,5,10,20) or null
   venueLetterFilter:         null,   // 'A'–'Z' or null = all
   venueDiscoverOpen:         false,
   venueDiscoverNeighborhood: null,   // neighborhood filter in venue tab
@@ -80,6 +83,14 @@ const state = {
 };
 
 const PAGE_SIZE = 50;
+
+const SHOW_BINS = [
+  { min: 1,  max: 1,    label: '1' },
+  { min: 2,  max: 4,    label: '2–4' },
+  { min: 5,  max: 9,    label: '5–9' },
+  { min: 10, max: 19,   label: '10–19' },
+  { min: 20, max: null, label: '20+' },
+];
 
 // ── DOM refs ───────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
@@ -105,6 +116,10 @@ const el = {
   viewConcert:    $('view-concert'),
   concertList:    $('concert-list'),
   loadMore:       $('load-more'),
+  artistDiscoverSection: $('artist-discover-section'),
+  artistDiscoverToggle:  $('artist-discover-toggle'),
+  artistEraPills:        $('artist-era-pills'),
+  artistShowPills:       $('artist-show-pills'),
   artistAlphaBar: $('artist-alpha-bar'),
   venueAlphaBar:        $('venue-alpha-bar'),
   venueDiscoverSection: $('venue-discover-section'),
@@ -232,7 +247,12 @@ function setMode(mode) {
   state.searching = false;
   state.searchQuery = '';
   el.searchInput.value = '';
-  if (mode !== 'artists') state.artistLetterFilter = null;
+  if (mode !== 'artists') {
+    state.artistLetterFilter = null;
+    state.artistDiscoverOpen = false;
+    state.artistDiscoverEra = null;
+    state.artistDiscoverShowBin = null;
+  }
   if (mode !== 'venue') {
     state.venueLetterFilter = null;
     state.venueDiscoverOpen = false;
@@ -278,6 +298,26 @@ function updateStatBanner() {
     if (selectedArtist) {
       const count = selectedArtist.docs.length;
       el.statBanner.textContent = `${count} show${count !== 1 ? 's' : ''} · ${selectedArtist.name}`;
+    } else if (state.artistDiscoverEra !== null || state.artistDiscoverShowBin !== null) {
+      let fg = groupByArtist(index);
+      if (state.artistDiscoverEra !== null) {
+        const s = state.artistDiscoverEra;
+        fg = fg.filter(([, docs]) => docs.some(d => { const yr = parseInt((d.date||'').slice(0,4)); return yr >= s && yr < s + 5; }));
+      }
+      if (state.artistDiscoverShowBin !== null) {
+        const bin = SHOW_BINS.find(b => b.min === state.artistDiscoverShowBin);
+        if (bin) fg = fg.filter(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max));
+      }
+      if (state.artistLetterFilter) {
+        const L = state.artistLetterFilter;
+        fg = fg.filter(([name]) => name.replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
+      }
+      const ua = fg.length;
+      const shows = fg.reduce((sum, [, docs]) => sum + docs.length, 0);
+      const parts = [];
+      if (state.artistDiscoverEra !== null) { const s = state.artistDiscoverEra; parts.push(`${s}-${String(s+4).slice(2)}`); }
+      if (state.artistDiscoverShowBin !== null) { const bin = SHOW_BINS.find(b => b.min === state.artistDiscoverShowBin); if (bin) parts.push(`${bin.label} shows`); }
+      el.statBanner.textContent = `${ua} artist${ua !== 1 ? 's' : ''} · ${shows} show${shows !== 1 ? 's' : ''} · ${parts.join(' · ')}`;
     } else if (state.artistLetterFilter) {
       const L = state.artistLetterFilter;
       const filtered = index.filter(d => (d.creator || '').replace(/^the\s+/i, '').charAt(0).toUpperCase() === L);
@@ -635,6 +675,24 @@ function renderArtistView() {
     }
   }
 
+  // Discover era filter
+  if (state.artistDiscoverEra !== null) {
+    const s = state.artistDiscoverEra;
+    groups = groups.filter(([, docs]) =>
+      docs.some(d => { const yr = parseInt((d.date||'').slice(0,4)); return yr >= s && yr < s + 5; })
+    );
+    if (state.selectedArtist && !groups.find(([name]) => name === state.selectedArtist.name)) state.selectedArtist = null;
+  }
+
+  // Discover show count filter
+  if (state.artistDiscoverShowBin !== null) {
+    const bin = SHOW_BINS.find(b => b.min === state.artistDiscoverShowBin);
+    if (bin) {
+      groups = groups.filter(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max));
+      if (state.selectedArtist && !groups.find(([name]) => name === state.selectedArtist.name)) state.selectedArtist = null;
+    }
+  }
+
   if (state.artistLetterFilter) {
     const letter = state.artistLetterFilter;
     groups = groups.filter(([name]) =>
@@ -646,6 +704,7 @@ function renderArtistView() {
   }
 
   renderAlphaPills(allGroups);
+  renderArtistDiscoverTray(allGroups);
 
   const totalVisible = groups.reduce((sum, [, docs]) => sum + docs.length, 0);
 
@@ -705,6 +764,59 @@ function renderAlphaPills(allGroups) {
   });
 
   el.artistAlphaBar.appendChild(frag);
+}
+
+function renderArtistDiscoverTray(allGroups) {
+  el.artistDiscoverSection.classList.toggle('open', state.artistDiscoverOpen);
+
+  // Era pills
+  const presentYears = new Set(
+    allGroups.flatMap(([, docs]) => docs.map(d => parseInt((d.date||'').slice(0,4)))).filter(n => !isNaN(n))
+  );
+  const eraStarts = [...new Set([...presentYears].map(y => Math.floor(y / 5) * 5))].sort((a, b) => a - b);
+
+  el.artistEraPills.innerHTML = '';
+  const eraFrag = document.createDocumentFragment();
+  const allEra = makeAlphaPill('All', state.artistDiscoverEra === null);
+  allEra.addEventListener('click', () => {
+    state.artistDiscoverEra = null;
+    state.selectedArtist = null;
+    renderArtistView(); updateStatBanner();
+  });
+  eraFrag.appendChild(allEra);
+  eraStarts.forEach(start => {
+    const label = `${start}-${String(start + 4).slice(2)}`;
+    const pill = makeAlphaPill(label, state.artistDiscoverEra === start);
+    pill.addEventListener('click', () => {
+      state.artistDiscoverEra = start;
+      state.selectedArtist = null;
+      renderArtistView(); updateStatBanner();
+    });
+    eraFrag.appendChild(pill);
+  });
+  el.artistEraPills.appendChild(eraFrag);
+
+  // Show count bin pills — only show bins that have at least one artist
+  el.artistShowPills.innerHTML = '';
+  const showFrag = document.createDocumentFragment();
+  const allShows = makeAlphaPill('All', state.artistDiscoverShowBin === null);
+  allShows.addEventListener('click', () => {
+    state.artistDiscoverShowBin = null;
+    state.selectedArtist = null;
+    renderArtistView(); updateStatBanner();
+  });
+  showFrag.appendChild(allShows);
+  SHOW_BINS.forEach(bin => {
+    if (!allGroups.some(([, docs]) => docs.length >= bin.min && (bin.max === null || docs.length <= bin.max))) return;
+    const pill = makeAlphaPill(bin.label, state.artistDiscoverShowBin === bin.min);
+    pill.addEventListener('click', () => {
+      state.artistDiscoverShowBin = bin.min;
+      state.selectedArtist = null;
+      renderArtistView(); updateStatBanner();
+    });
+    showFrag.appendChild(pill);
+  });
+  el.artistShowPills.appendChild(showFrag);
 }
 
 function makeAlphaPill(label, active) {
@@ -2079,7 +2191,13 @@ function init() {
     // Scroll to where we were
   });
 
-  // Venue "More" tray toggle
+  // Artist "Shows and Eras" tray toggle
+  el.artistDiscoverToggle.addEventListener('click', () => {
+    state.artistDiscoverOpen = !state.artistDiscoverOpen;
+    if (state.index) renderArtistView();
+  });
+
+  // Venue "Neighborhoods and Eras" tray toggle
   el.venueDiscoverToggle.addEventListener('click', () => {
     state.venueDiscoverOpen = !state.venueDiscoverOpen;
     if (state.index) renderVenue();
