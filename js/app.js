@@ -1,7 +1,9 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
-import { RCD_FAVS } from './rcd-favs.js';
+// ── Redcontroldeck curated favs ────────────────────────────────────
+let RCD_FAVS = [];
+fetch('./js/rcd-favs.json').then(r => r.json()).then(d => { RCD_FAVS = Array.isArray(d) ? d : []; }).catch(() => {});
 
 // ── Chicago history ────────────────────────────────────────────────
 let HISTORY = {};
@@ -203,6 +205,7 @@ const el = {
   collectionInput: $('collection-input'),
   settingsSave:   $('settings-save'),
   favsExport:     $('favs-export'),
+  favsExportJson: $('favs-export-json'),
   favsImportInput: $('favs-import-input'),
   favsImport:     $('favs-import'),
   queueItemSheet:  $('queue-item-sheet'),
@@ -2914,6 +2917,19 @@ function init() {
     navigator.clipboard?.writeText(url).then(() => {
       flashConfirm(`Copied! (${ids.length} favorites)`);
     }).catch(() => flashConfirm('Could not copy — try again'));
+  });
+
+  el.favsExportJson.addEventListener('click', () => {
+    const ids = getFavIds();
+    if (!ids.length) { flashConfirm('No favorites yet.'); return; }
+    const json = JSON.stringify(ids, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'rcd-favs.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    flashConfirm(`Downloaded ${ids.length} favorites`);
   });
 
   // Queue item action sheet
