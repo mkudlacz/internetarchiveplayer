@@ -1,6 +1,7 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
 import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
+import { RCD_FAVS } from './rcd-favs.js';
 
 // ── Chicago history ────────────────────────────────────────────────
 let HISTORY = {};
@@ -1798,61 +1799,52 @@ function renderDiscover() {
     .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2);
   const billLimit = Math.min(Math.max(todayShows.length, 5), 8);
 
-  // ── 2. Popular in the Archive ──
+  // ── 2. Redcontroldeck Favs ──
   {
-    let popularDocs = [];
-    const buildPopularStrip = () => {
-      const strip = document.createElement('div');
-      strip.className = 'discover-h-scroll';
-      const picks = [...popularDocs].sort(() => Math.random() - 0.5).slice(0, billLimit);
-      picks.forEach(doc => {
-        const card = document.createElement('div');
-        card.className = 'popular-card';
-        const artUrl = `https://archive.org/services/img/${doc.identifier}`;
-        const city   = doc.coverage || '';
-        const plays  = doc.downloads ? `${Number(doc.downloads).toLocaleString()} plays` : '';
-        card.innerHTML = `
-          <img class="popular-card-img" src="${esc(artUrl)}" alt="" loading="lazy">
-          <div class="popular-card-info">
-            <div class="popular-card-artist">${esc(doc.creator || doc.title || '')}</div>
-            ${city ? `<div class="popular-card-city">${esc(city)}</div>` : ''}
-            <div class="popular-card-date">${formatDate(doc.date)}</div>
-            ${plays ? `<div class="popular-card-plays">${esc(plays)}</div>` : ''}
-          </div>
-        `;
-        const popFav = document.createElement('button');
-        popFav.className = `card-fav${isFav(doc.identifier) ? ' active' : ''}`;
-        popFav.title = 'Favorite';
-        popFav.textContent = '♥';
-        popFav.addEventListener('click', e => {
-          e.stopPropagation();
-          const active = toggleFav(doc.identifier);
-          popFav.classList.toggle('active', active);
-          updateStatBanner();
+    const indexById = new Map(index.map(d => [d.identifier, d]));
+    const rcdPool = RCD_FAVS.map(id => indexById.get(id)).filter(Boolean);
+    if (rcdPool.length) {
+      const buildRcdStrip = () => {
+        const strip = document.createElement('div');
+        strip.className = 'discover-h-scroll';
+        const picks = [...rcdPool].sort(() => Math.random() - 0.5).slice(0, billLimit);
+        picks.forEach(doc => {
+          const card = document.createElement('div');
+          card.className = 'popular-card';
+          const artUrl = `https://archive.org/services/img/${doc.identifier}`;
+          const city   = doc.coverage || '';
+          card.innerHTML = `
+            <img class="popular-card-img" src="${esc(artUrl)}" alt="" loading="lazy">
+            <div class="popular-card-info">
+              <div class="popular-card-artist">${esc(doc.creator || doc.title || '')}</div>
+              ${city ? `<div class="popular-card-city">${esc(city)}</div>` : ''}
+              <div class="popular-card-date">${formatDate(doc.date)}</div>
+            </div>
+          `;
+          const rcdFav = document.createElement('button');
+          rcdFav.className = `card-fav${isFav(doc.identifier) ? ' active' : ''}`;
+          rcdFav.title = 'Favorite';
+          rcdFav.textContent = '♥';
+          rcdFav.addEventListener('click', e => {
+            e.stopPropagation();
+            const active = toggleFav(doc.identifier);
+            rcdFav.classList.toggle('active', active);
+            updateStatBanner();
+          });
+          card.appendChild(rcdFav);
+          card.addEventListener('click', () => openConcert(doc));
+          strip.appendChild(card);
         });
-        card.appendChild(popFav);
-        card.addEventListener('click', () => openConcert(doc));
-        strip.appendChild(card);
+        return strip;
+      };
+      const rcdSec = discoverSection('Redcontroldeck Favs', `${Math.min(billLimit, rcdPool.length)} of ${rcdPool.length}`, () => {
+        const old = rcdSec.querySelector('.discover-h-scroll');
+        const neo = buildRcdStrip();
+        if (old) rcdSec.replaceChild(neo, old); else rcdSec.appendChild(neo);
       });
-      return strip;
-    };
-
-    const popularSec = discoverSection('Popular in the Archive', '…', () => {
-      const old = popularSec.querySelector('.discover-h-scroll');
-      const neo = buildPopularStrip();
-      if (old) popularSec.replaceChild(neo, old); else popularSec.appendChild(neo);
-    });
-    el.viewDiscover.appendChild(popularSec);
-
-    fetch(`https://archive.org/advancedsearch.php?q=collection%3A${encodeURIComponent(state.collectionId)}+AND+mediatype%3Aaudio&fl[]=identifier&fl[]=creator&fl[]=date&fl[]=title&fl[]=coverage&fl[]=downloads&sort[]=downloads+desc&rows=50&output=json`)
-      .then(r => r.json())
-      .then(data => {
-        popularDocs = (data.response?.docs ?? []).filter(d => (d.downloads || 0) >= 400);
-        const countEl = popularSec.querySelector('.discover-section-count');
-        if (countEl) countEl.textContent = `${Math.min(billLimit, popularDocs.length)} of ${popularDocs.length}`;
-        if (popularDocs.length) popularSec.appendChild(buildPopularStrip());
-      })
-      .catch(() => {});
+      rcdSec.appendChild(buildRcdStrip());
+      el.viewDiscover.appendChild(rcdSec);
+    }
   }
 
   // ── 3. Explore Space-Time (shelved) ──
@@ -2024,7 +2016,64 @@ function renderDiscover() {
     }
   }
 
-  // ── 4. Uploads by Year chart ──
+  // ── 4. Popular in the Archive ──
+  {
+    let popularDocs = [];
+    const buildPopularStrip = () => {
+      const strip = document.createElement('div');
+      strip.className = 'discover-h-scroll';
+      const picks = [...popularDocs].sort(() => Math.random() - 0.5).slice(0, billLimit);
+      picks.forEach(doc => {
+        const card = document.createElement('div');
+        card.className = 'popular-card';
+        const artUrl = `https://archive.org/services/img/${doc.identifier}`;
+        const city   = doc.coverage || '';
+        const plays  = doc.downloads ? `${Number(doc.downloads).toLocaleString()} plays` : '';
+        card.innerHTML = `
+          <img class="popular-card-img" src="${esc(artUrl)}" alt="" loading="lazy">
+          <div class="popular-card-info">
+            <div class="popular-card-artist">${esc(doc.creator || doc.title || '')}</div>
+            ${city ? `<div class="popular-card-city">${esc(city)}</div>` : ''}
+            <div class="popular-card-date">${formatDate(doc.date)}</div>
+            ${plays ? `<div class="popular-card-plays">${esc(plays)}</div>` : ''}
+          </div>
+        `;
+        const popFav = document.createElement('button');
+        popFav.className = `card-fav${isFav(doc.identifier) ? ' active' : ''}`;
+        popFav.title = 'Favorite';
+        popFav.textContent = '♥';
+        popFav.addEventListener('click', e => {
+          e.stopPropagation();
+          const active = toggleFav(doc.identifier);
+          popFav.classList.toggle('active', active);
+          updateStatBanner();
+        });
+        card.appendChild(popFav);
+        card.addEventListener('click', () => openConcert(doc));
+        strip.appendChild(card);
+      });
+      return strip;
+    };
+
+    const popularSec = discoverSection('Popular in the Archive', '…', () => {
+      const old = popularSec.querySelector('.discover-h-scroll');
+      const neo = buildPopularStrip();
+      if (old) popularSec.replaceChild(neo, old); else popularSec.appendChild(neo);
+    });
+    el.viewDiscover.appendChild(popularSec);
+
+    fetch(`https://archive.org/advancedsearch.php?q=collection%3A${encodeURIComponent(state.collectionId)}+AND+mediatype%3Aaudio&fl[]=identifier&fl[]=creator&fl[]=date&fl[]=title&fl[]=coverage&fl[]=downloads&sort[]=downloads+desc&rows=50&output=json`)
+      .then(r => r.json())
+      .then(data => {
+        popularDocs = (data.response?.docs ?? []).filter(d => (d.downloads || 0) >= 400);
+        const countEl = popularSec.querySelector('.discover-section-count');
+        if (countEl) countEl.textContent = `${Math.min(billLimit, popularDocs.length)} of ${popularDocs.length}`;
+        if (popularDocs.length) popularSec.appendChild(buildPopularStrip());
+      })
+      .catch(() => {});
+  }
+
+  // ── 5. Uploads by Year chart ──
   {
     const monthCounts = {};
     index.forEach(d => {
