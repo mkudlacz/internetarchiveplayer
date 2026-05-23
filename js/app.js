@@ -2923,13 +2923,9 @@ function init() {
     const ids = getFavIds();
     if (!ids.length) { flashConfirm('No favorites yet.'); return; }
     const json = JSON.stringify(ids, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'rcd-favs.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-    flashConfirm(`Downloaded ${ids.length} favorites`);
+    navigator.clipboard?.writeText(json).then(() => {
+      flashConfirm(`Copied! (${ids.length} favorites)`);
+    }).catch(() => flashConfirm('Could not copy — try again'));
   });
 
   // Queue item action sheet
