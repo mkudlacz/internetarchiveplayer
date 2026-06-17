@@ -3058,3 +3058,18 @@ function svgPause()   { return `<svg viewBox="0 0 24 24" fill="currentColor"><re
 function svgChevron() { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>`; }
 
 init();
+
+// ── Add to Home Screen prompt ──────────────────────────────────────
+if (/iPhone|iPad|iPod/.test(navigator.userAgent) &&
+    !window.navigator.standalone &&
+    !localStorage.getItem('ntlb-a2hs')) {
+  setTimeout(() => {
+    const overlay = document.getElementById('a2hs-overlay');
+    if (!overlay) return;
+    overlay.classList.add('visible');
+    document.getElementById('a2hs-dismiss').addEventListener('click', () => {
+      localStorage.setItem('ntlb-a2hs', '1');
+      overlay.classList.remove('visible');
+    });
+  }, 2000);
+}

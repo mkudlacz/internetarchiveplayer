@@ -1907,3 +1907,56 @@ button {
   margin: 48px auto;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Add to Home Screen prompt ───────────────────────────────────── */
+#a2hs-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+#a2hs-overlay.visible { display: flex; }
+#a2hs-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 20px 20px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+#a2hs-text {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+#a2hs-share-icon,
+#a2hs-add-icon {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  color: var(--accent);
+  margin: 0 1px;
+}
+#a2hs-dismiss {
+  display: block;
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 11px 0;
+}
+#a2hs-dismiss:active { background: var(--accent2); }

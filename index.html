@@ -401,6 +401,20 @@
   </div>
 </div>
 
+<!-- ── Add to Home Screen prompt ── -->
+<div id="a2hs-overlay">
+  <div id="a2hs-card">
+    <p id="a2hs-text">
+      On iOS, tap
+      <svg id="a2hs-share-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      <strong>Share</strong> and
+      <svg id="a2hs-add-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Add to Home Screen"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <strong>Add to Home Screen</strong> to turn this page into a dedicated app.
+    </p>
+    <button id="a2hs-dismiss">Got it</button>
+  </div>
+</div>
+
 <script type="module" src="js/app.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
