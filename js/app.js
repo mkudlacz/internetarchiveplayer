@@ -1600,29 +1600,46 @@ function renderConcert(meta) {
     if (sec) {
       sec.className = 'concert-also open';
 
+      // Header
+      const header = document.createElement('div');
+      header.className = 'concert-section-header concert-also-toggle';
+      const lbl = document.createElement('span');
+      lbl.textContent = 'From the Artist';
+      header.appendChild(lbl);
+      const ns = 'http://www.w3.org/2000/svg';
+      const chevSvg = document.createElementNS(ns, 'svg');
+      chevSvg.setAttribute('viewBox', '0 0 24 24');
+      chevSvg.setAttribute('fill', 'none');
+      chevSvg.setAttribute('stroke', 'currentColor');
+      chevSvg.setAttribute('stroke-width', '2');
+      chevSvg.setAttribute('width', '16');
+      chevSvg.setAttribute('height', '16');
+      chevSvg.classList.add('concert-also-chevron-toggle');
+      const poly = document.createElementNS(ns, 'polyline');
+      poly.setAttribute('points', '6,9 12,15 18,9');
+      chevSvg.appendChild(poly);
+      header.appendChild(chevSvg);
+
+      // Body — inline display:block so CSS cache state can't hide it
+      const bodyEl = document.createElement('div');
+      bodyEl.className = 'concert-artist-body';
+      bodyEl.style.display = 'block';
       let bodyHtml = '';
       if (artistData.blurb) {
         bodyHtml += `<p class=”concert-artist-blurb”>${renderMd(artistData.blurb)}</p>`;
       }
       (artistData.quotes || []).forEach(q => {
-        bodyHtml += `<div class=”concert-snippet”><div class=”concert-snippet-quote”>“${esc(q.text)}”</div>${q.attr ? `<div class=”concert-snippet-attr”>— ${renderMd(q.attr)}</div>` : ''}</div>`;
+        bodyHtml += `<div class=”concert-snippet”><div class=”concert-snippet-quote”>”${esc(q.text)}”</div>${q.attr ? `<div class=”concert-snippet-attr”>— ${renderMd(q.attr)}</div>` : ''}</div>`;
+      });
+      bodyEl.innerHTML = bodyHtml;
+
+      header.addEventListener('click', () => {
+        const open = sec.classList.toggle('open');
+        bodyEl.style.display = open ? 'block' : 'none';
       });
 
-      sec.innerHTML = `
-        <div class=”concert-section-header concert-also-toggle”>
-          <span>From the Artist</span>
-          <svg class=”concert-also-chevron-toggle” viewBox=”0 0 24 24” fill=”none” stroke=”currentColor” stroke-width=”2” width=”16” height=”16”><polyline points=”6,9 12,15 18,9”/></svg>
-        </div>
-        <div class=”concert-artist-body” style=”display:block”>${bodyHtml}</div>`;
-
-      const artistBodyEl = sec.querySelector('.concert-artist-body');
-      const toggleEl = sec.querySelector('.concert-also-toggle');
-      if (toggleEl && artistBodyEl) {
-        toggleEl.addEventListener('click', () => {
-          const open = sec.classList.toggle('open');
-          artistBodyEl.style.display = open ? 'block' : 'none';
-        });
-      }
+      sec.appendChild(header);
+      sec.appendChild(bodyEl);
     }
   }
 
