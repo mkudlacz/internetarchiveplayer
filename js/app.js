@@ -1601,7 +1601,7 @@ function renderConcert(meta) {
       sec.className = 'concert-also';
       let html = `<div class="concert-section-header">From the Artist</div>`;
       if (artistData.blurb) {
-        html += `<p class="concert-artist-blurb">${esc(artistData.blurb)}</p>`;
+        html += `<p class="concert-artist-blurb">${renderMd(artistData.blurb)}</p>`;
       }
       (artistData.quotes || []).forEach(q => {
         html += `
@@ -3072,6 +3072,13 @@ function stripExt(name) { return name.replace(/\.[^.]+$/, ''); }
 
 function esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Minimal markdown → HTML: **bold**, *italic*, no other transformations.
+function renderMd(s) {
+  return esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
 }
 
 function flashBtn(btn) {
