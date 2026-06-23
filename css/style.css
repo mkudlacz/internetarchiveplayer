@@ -646,6 +646,14 @@ button {
   display: block;
 }
 
+.concert-artist-body {
+  display: none;
+}
+
+.concert-also.open .concert-artist-body {
+  display: block;
+}
+
 .concert-also-item {
   display: flex;
   align-items: center;

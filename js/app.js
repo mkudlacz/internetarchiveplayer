@@ -1598,19 +1598,27 @@ function renderConcert(meta) {
   if (artistData) {
     const sec = $('concert-snippets-section');
     if (sec) {
-      sec.className = 'concert-also';
-      let html = `<div class="concert-section-header">From the Artist</div>`;
+      sec.className = 'concert-also open';
+      let bodyHtml = '';
       if (artistData.blurb) {
-        html += `<p class="concert-artist-blurb">${renderMd(artistData.blurb)}</p>`;
+        bodyHtml += `<p class=”concert-artist-blurb”>${renderMd(artistData.blurb)}</p>`;
       }
       (artistData.quotes || []).forEach(q => {
-        html += `
-          <div class="concert-snippet">
-            <div class="concert-snippet-quote">“${esc(q.text)}”</div>
-            ${q.attr ? `<div class="concert-snippet-attr">— ${esc(q.attr)}</div>` : ''}
+        bodyHtml += `
+          <div class=”concert-snippet”>
+            <div class=”concert-snippet-quote”>”${esc(q.text)}”</div>
+            ${q.attr ? `<div class=”concert-snippet-attr”>— ${esc(q.attr)}</div>` : ''}
           </div>`;
       });
-      sec.innerHTML = html;
+      sec.innerHTML = `
+        <div class=”concert-section-header concert-also-toggle”>
+          <span>From the Artist</span>
+          <svg class=”concert-also-chevron-toggle” viewBox=”0 0 24 24” fill=”none” stroke=”currentColor” stroke-width=”2”>
+            <polyline points=”6,9 12,15 18,9”/>
+          </svg>
+        </div>
+        <div class=”concert-artist-body”>${bodyHtml}</div>`;
+      sec.querySelector('.concert-also-toggle').addEventListener('click', () => sec.classList.toggle('open'));
     }
   }
 
