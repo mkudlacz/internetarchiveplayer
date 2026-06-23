@@ -206,6 +206,7 @@ const el = {
   settingsSave:   $('settings-save'),
   favsExport:     $('favs-export'),
   favsExportJson: $('favs-export-json'),
+  favsExportCsv:  $('favs-export-csv'),
   favsImportInput: $('favs-import-input'),
   favsImport:     $('favs-import'),
   queueItemSheet:  $('queue-item-sheet'),
@@ -2926,6 +2927,33 @@ function init() {
     navigator.clipboard?.writeText(json).then(() => {
       flashConfirm(`Copied! (${ids.length} favorites)`);
     }).catch(() => flashConfirm('Could not copy — try again'));
+  });
+
+  el.favsExportCsv.addEventListener('click', () => {
+    const ids = new Set(getFavIds());
+    if (!ids.size) { flashConfirm('No favorites yet.'); return; }
+    const favDocs = (state.index || []).filter(d => ids.has(d.identifier));
+    const seen = new Set();
+    const rows = [['Artist Name', 'Year']];
+    for (const d of favDocs) {
+      const artist = (d.creator || '').trim();
+      const year = (d.date || '').slice(0, 4);
+      if (!artist || !year) continue;
+      const key = `${artist}|${year}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      rows.push([`"${artist.replace(/"/g, '""')}"`, year]);
+    }
+    if (rows.length <= 1) { flashConfirm('No artist/year data found.'); return; }
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'favorites-artist-year.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    flashConfirm(`Downloaded ${rows.length - 1} artist/year pairs`);
   });
 
   // Queue item action sheet
