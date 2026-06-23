@@ -690,7 +690,7 @@ button {
 
 .concert-snippet {
   padding: 14px 0 10px;
-  border-top: 1px solid #444;
+  border-top: 1px solid rgba(255,255,255,0.18);
 }
 
 .concert-snippet-quote {
