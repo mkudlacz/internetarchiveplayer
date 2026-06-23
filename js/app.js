@@ -2934,13 +2934,16 @@ function init() {
     if (!ids.size) { flashConfirm('No favorites yet.'); return; }
     const favDocs = (state.index || []).filter(d => ids.has(d.identifier));
     const csvCell = s => `"${(s || '').replace(/"/g, '""')}"`;
-    const rows = [['Artist Name', 'Year', 'Venue']];
+    const rows = [['Title', 'Artist', 'Date', 'Year', 'Venue', 'Archive Link']];
     for (const d of favDocs) {
-      const artist = (d.creator || '').trim();
-      const year = (d.date || '').slice(0, 4);
-      const venue = extractVenueName(d) || '';
-      if (!artist || !year) continue;
-      rows.push([csvCell(artist), year, csvCell(venue)]);
+      rows.push([
+        csvCell(d.title),
+        csvCell(d.creator),
+        d.date || '',
+        (d.date || '').slice(0, 4),
+        csvCell(extractVenueName(d)),
+        `https://archive.org/details/${d.identifier}`,
+      ]);
     }
     if (rows.length <= 1) { flashConfirm('No data found.'); return; }
     const csv = rows.map(r => r.join(',')).join('\n');
@@ -2951,7 +2954,7 @@ function init() {
     a.download = 'favorites.csv';
     a.click();
     URL.revokeObjectURL(url);
-    flashConfirm(`Downloaded ${rows.length - 1} rows`);
+    flashConfirm(`Downloaded ${rows.length - 1} shows`);
   });
 
   // Queue item action sheet
