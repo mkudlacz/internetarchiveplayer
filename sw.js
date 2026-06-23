@@ -1,4 +1,4 @@
-const CACHE = 'ntlb-v1';
+const CACHE = 'ntlb-v2';
 const SHELL = [
   './',
   './index.html',

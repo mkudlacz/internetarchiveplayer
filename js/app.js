@@ -1599,6 +1599,25 @@ function renderConcert(meta) {
     const sec = $('concert-snippets-section');
     if (sec) {
       sec.className = 'concert-also open';
+
+      const header = document.createElement('div');
+      header.className = 'concert-section-header concert-also-toggle';
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', 'currentColor');
+      svg.setAttribute('stroke-width', '2');
+      svg.classList.add('concert-also-chevron-toggle');
+      const poly = document.createElementNS(svgNS, 'polyline');
+      poly.setAttribute('points', '6,9 12,15 18,9');
+      svg.appendChild(poly);
+      header.innerHTML = '<span>From the Artist</span>';
+      header.appendChild(svg);
+      header.addEventListener('click', () => sec.classList.toggle('open'));
+
+      const body = document.createElement('div');
+      body.className = 'concert-artist-body';
       let bodyHtml = '';
       if (artistData.blurb) {
         bodyHtml += `<p class=”concert-artist-blurb”>${renderMd(artistData.blurb)}</p>`;
@@ -1610,15 +1629,10 @@ function renderConcert(meta) {
             ${q.attr ? `<div class=”concert-snippet-attr”>— ${esc(q.attr)}</div>` : ''}
           </div>`;
       });
-      sec.innerHTML = `
-        <div class=”concert-section-header concert-also-toggle”>
-          <span>From the Artist</span>
-          <svg class=”concert-also-chevron-toggle” viewBox=”0 0 24 24” fill=”none” stroke=”currentColor” stroke-width=”2”>
-            <polyline points=”6,9 12,15 18,9”/>
-          </svg>
-        </div>
-        <div class=”concert-artist-body”>${bodyHtml}</div>`;
-      sec.querySelector('.concert-also-toggle').addEventListener('click', () => sec.classList.toggle('open'));
+      body.innerHTML = bodyHtml;
+
+      sec.appendChild(header);
+      sec.appendChild(body);
     }
   }
 
