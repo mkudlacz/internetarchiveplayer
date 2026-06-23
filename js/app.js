@@ -2933,27 +2933,25 @@ function init() {
     const ids = new Set(getFavIds());
     if (!ids.size) { flashConfirm('No favorites yet.'); return; }
     const favDocs = (state.index || []).filter(d => ids.has(d.identifier));
-    const seen = new Set();
-    const rows = [['Artist Name', 'Year']];
+    const csvCell = s => `"${(s || '').replace(/"/g, '""')}"`;
+    const rows = [['Artist Name', 'Year', 'Venue']];
     for (const d of favDocs) {
       const artist = (d.creator || '').trim();
       const year = (d.date || '').slice(0, 4);
+      const venue = extractVenueName(d) || '';
       if (!artist || !year) continue;
-      const key = `${artist}|${year}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      rows.push([`"${artist.replace(/"/g, '""')}"`, year]);
+      rows.push([csvCell(artist), year, csvCell(venue)]);
     }
-    if (rows.length <= 1) { flashConfirm('No artist/year data found.'); return; }
+    if (rows.length <= 1) { flashConfirm('No data found.'); return; }
     const csv = rows.map(r => r.join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'favorites-artist-year.csv';
+    a.download = 'favorites.csv';
     a.click();
     URL.revokeObjectURL(url);
-    flashConfirm(`Downloaded ${rows.length - 1} artist/year pairs`);
+    flashConfirm(`Downloaded ${rows.length - 1} rows`);
   });
 
   // Queue item action sheet
