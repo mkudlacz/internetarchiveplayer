@@ -1600,39 +1600,29 @@ function renderConcert(meta) {
     if (sec) {
       sec.className = 'concert-also open';
 
-      const header = document.createElement('div');
-      header.className = 'concert-section-header concert-also-toggle';
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(svgNS, 'svg');
-      svg.setAttribute('viewBox', '0 0 24 24');
-      svg.setAttribute('fill', 'none');
-      svg.setAttribute('stroke', 'currentColor');
-      svg.setAttribute('stroke-width', '2');
-      svg.classList.add('concert-also-chevron-toggle');
-      const poly = document.createElementNS(svgNS, 'polyline');
-      poly.setAttribute('points', '6,9 12,15 18,9');
-      svg.appendChild(poly);
-      header.innerHTML = '<span>From the Artist</span>';
-      header.appendChild(svg);
-      header.addEventListener('click', () => sec.classList.toggle('open'));
-
-      const body = document.createElement('div');
-      body.className = 'concert-artist-body';
       let bodyHtml = '';
       if (artistData.blurb) {
         bodyHtml += `<p class=”concert-artist-blurb”>${renderMd(artistData.blurb)}</p>`;
       }
       (artistData.quotes || []).forEach(q => {
-        bodyHtml += `
-          <div class=”concert-snippet”>
-            <div class=”concert-snippet-quote”>”${esc(q.text)}”</div>
-            ${q.attr ? `<div class=”concert-snippet-attr”>— ${renderMd(q.attr)}</div>` : ''}
-          </div>`;
+        bodyHtml += `<div class=”concert-snippet”><div class=”concert-snippet-quote”>“${esc(q.text)}”</div>${q.attr ? `<div class=”concert-snippet-attr”>— ${renderMd(q.attr)}</div>` : ''}</div>`;
       });
-      body.innerHTML = bodyHtml;
 
-      sec.appendChild(header);
-      sec.appendChild(body);
+      sec.innerHTML = `
+        <div class=”concert-section-header concert-also-toggle”>
+          <span>From the Artist</span>
+          <svg class=”concert-also-chevron-toggle” viewBox=”0 0 24 24” fill=”none” stroke=”currentColor” stroke-width=”2” width=”16” height=”16”><polyline points=”6,9 12,15 18,9”/></svg>
+        </div>
+        <div class=”concert-artist-body” style=”display:block”>${bodyHtml}</div>`;
+
+      const artistBodyEl = sec.querySelector('.concert-artist-body');
+      const toggleEl = sec.querySelector('.concert-also-toggle');
+      if (toggleEl && artistBodyEl) {
+        toggleEl.addEventListener('click', () => {
+          const open = sec.classList.toggle('open');
+          artistBodyEl.style.display = open ? 'block' : 'none';
+        });
+      }
     }
   }
 
