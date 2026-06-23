@@ -1626,7 +1626,7 @@ function renderConcert(meta) {
         bodyHtml += `
           <div class=”concert-snippet”>
             <div class=”concert-snippet-quote”>”${esc(q.text)}”</div>
-            ${q.attr ? `<div class=”concert-snippet-attr”>— ${esc(q.attr)}</div>` : ''}
+            ${q.attr ? `<div class=”concert-snippet-attr”>— ${renderMd(q.attr)}</div>` : ''}
           </div>`;
       });
       body.innerHTML = bodyHtml;
