@@ -696,8 +696,8 @@ button {
 }
 
 .concert-snippet {
-  padding: 12px 0;
-  border-top: 1px solid var(--border);
+  padding: 14px 0 10px;
+  border-top: 1px solid #444;
 }
 
 .concert-snippet-quote {
@@ -718,7 +718,7 @@ button {
   color: var(--text);
   line-height: 1.6;
   margin-top: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 #concert-lightbox {
