@@ -1032,8 +1032,11 @@ button {
 #help-sheet.visible { display: flex; }
 
 .help-body {
-  padding: 16px 16px 12px;
+  padding: 16px 16px calc(12px + env(safe-area-inset-bottom, 0px));
   gap: 4px;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .help-feature {
   display: flex;
@@ -1076,8 +1079,11 @@ button {
 }
 
 .settings-body {
-  padding: 24px 16px;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
   display: flex; flex-direction: column; gap: 20px;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .settings-label {
   font-size: 12px; color: var(--text2);
