@@ -1592,7 +1592,7 @@ function renderConcert(meta) {
     });
   }
 
-  // From the Artist section
+  // Tour-Spiel section
   const concertYear = dateKey ? dateKey.slice(0, 4) : null;
   const artistData = m.creator && concertYear && ARTIST_CONTEXT[m.creator]?.[concertYear];
   if (artistData) {
@@ -1604,7 +1604,7 @@ function renderConcert(meta) {
       const header = document.createElement('div');
       header.className = 'concert-section-header concert-also-toggle';
       const lbl = document.createElement('span');
-      lbl.textContent = 'From the Artist';
+      lbl.textContent = 'Tour-Spiel';
       header.appendChild(lbl);
       const ns = 'http://www.w3.org/2000/svg';
       const chevSvg = document.createElementNS(ns, 'svg');
@@ -1626,10 +1626,10 @@ function renderConcert(meta) {
       bodyEl.style.display = 'block';
       let bodyHtml = '';
       if (artistData.blurb) {
-        bodyHtml += `<p class=”concert-artist-blurb”>${renderMd(artistData.blurb)}</p>`;
+        bodyHtml += `<p class="concert-artist-blurb">${renderMd(artistData.blurb)}</p>`;
       }
       (artistData.quotes || []).forEach(q => {
-        bodyHtml += `<div class=”concert-snippet”><div class=”concert-snippet-quote”>”${esc(q.text)}”</div>${q.attr ? `<div class=”concert-snippet-attr”>— ${renderMd(q.attr)}</div>` : ''}</div>`;
+        bodyHtml += `<div class="concert-snippet"><div class="concert-snippet-quote">"${esc(q.text)}"</div>${q.attr ? `<div class="concert-snippet-attr">— ${renderMd(q.attr)}</div>` : ''}</div>`;
       });
       bodyEl.innerHTML = bodyHtml;
 

@@ -10,7 +10,7 @@ Usage:
 
 The script:
   - Reads all .md files under Artists/ in the Tour Wiki vault
-  - Parses frontmatter (band, era), the "From the Artist" blurb, and quotes
+  - Parses frontmatter (band, era), the "Tour-Spiel" blurb, and quotes
   - Expands year ranges ("1993-1994" → entries for 1993 and 1994)
   - Merges into js/artist-context.json (preserving any existing entries
     not present in the vault)
@@ -90,15 +90,15 @@ def expand_years(era_str):
 
 def extract_blurb_and_quotes(body):
     """
-    Extract the From the Artist blurb (plain text paragraph) and quotes
+    Extract the Tour-Spiel blurb (plain text paragraph) and quotes
     (blockquotes) from the markdown body.
 
     Returns (blurb_str, quotes_list) where quotes_list is a list of
     {"text": str, "attr": str} dicts.
     """
-    # Find the "From the Artist" section
+    # Find the "Tour-Spiel" section
     section_match = re.search(
-        r"^##\s+From the Artist\s*\n(.*?)(?=^##\s|\Z)",
+        r"^##\s+Tour-Spiel\s*\n(.*?)(?=^##\s|\Z)",
         body,
         re.MULTILINE | re.DOTALL,
     )
