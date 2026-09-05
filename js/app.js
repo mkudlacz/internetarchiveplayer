@@ -1832,6 +1832,70 @@ function renderDiscover() {
     .filter(([, docs]) => new Set(docs.map(d => d.creator)).size >= 2);
   const billLimit = Math.min(Math.max(todayShows.length, 5), 8);
 
+  // ── Based on Your Favs ──
+  {
+    const favIds = new Set(getFavIds());
+    if (favIds.size > 10) {
+      const favDocs = index.filter(d => favIds.has(d.identifier));
+      const favArtists    = new Set(favDocs.map(d => (d.creator || '').trim().toLowerCase()).filter(Boolean));
+      const favDateVenues = new Set(favDocs.map(d => {
+        const date  = (d.date || '').slice(0, 10);
+        const venue = extractVenueName(d);
+        return date && venue ? `${date}|${venue.toLowerCase()}` : null;
+      }).filter(Boolean));
+
+      const favMatches = index.filter(d => {
+        if (favIds.has(d.identifier)) return false;
+        const artist = (d.creator || '').trim().toLowerCase();
+        if (artist && favArtists.has(artist)) return true;
+        const date  = (d.date || '').slice(0, 10);
+        const venue = extractVenueName(d);
+        return !!(date && venue && favDateVenues.has(`${date}|${venue.toLowerCase()}`));
+      });
+
+      if (favMatches.length >= 5) {
+        const byArtist = new Map();
+        favMatches.forEach(doc => {
+          const name = (doc.creator || doc.title || '').trim();
+          if (!name) return;
+          if (!byArtist.has(name)) byArtist.set(name, []);
+          byArtist.get(name).push(doc);
+        });
+        const artistGroups = [...byArtist.entries()].map(([name, docs]) => ({ name, count: docs.length }));
+
+        const buildFavBandStrip = () => {
+          const strip = document.createElement('div');
+          strip.className = 'discover-h-scroll';
+          const picks = [...artistGroups].sort(() => Math.random() - 0.5).slice(0, billLimit);
+          picks.forEach(({ name, count }) => {
+            const card = document.createElement('div');
+            card.className = 'favband-card';
+            card.innerHTML = `
+              <div class="favband-card-name">${esc(name)}</div>
+              <div class="favband-card-count">${count} Show${count !== 1 ? 's' : ''}</div>
+            `;
+            card.addEventListener('click', () => {
+              const groups = groupByArtist(state.index);
+              const entry = groups.find(([n]) => n === name);
+              state.selectedArtist = { name, docs: entry ? entry[1] : [] };
+              setMode('artists');
+            });
+            strip.appendChild(card);
+          });
+          return strip;
+        };
+
+        const favSec = discoverSection('Based on Your Favs', `${Math.min(billLimit, artistGroups.length)} of ${artistGroups.length}`, () => {
+          const old = favSec.querySelector('.discover-h-scroll');
+          const neo = buildFavBandStrip();
+          if (old) favSec.replaceChild(neo, old); else favSec.appendChild(neo);
+        });
+        favSec.appendChild(buildFavBandStrip());
+        el.viewDiscover.appendChild(favSec);
+      }
+    }
+  }
+
   // ── 2. Redcontroldeck Favs ──
   {
     const indexById = new Map(index.map(d => [d.identifier, d]));
