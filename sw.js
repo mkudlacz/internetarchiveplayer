@@ -1,4 +1,4 @@
-const CACHE = 'ntlb-v3';
+const CACHE = 'ntlb-v4';
 const SHELL = [
   './',
   './index.html',
@@ -8,7 +8,6 @@ const SHELL = [
   './js/api.js',
   './js/player.js',
   './js/favorites.js',
-  './js/flickr.js',
   './js/chicago-history.json',
   './icon.jpg',
   './favicon.jpg',
