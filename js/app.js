@@ -1,6 +1,6 @@
 import { DEFAULT_COLLECTION, loadFullIndex, getItemMetadata, getStreamUrl, getAudioFiles, formatDuration } from './api.js';
 import player from './player.js';
-import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash } from './favorites.js';
+import { isFav, toggleFav, getFavIds, importFavIds, encodeFavsHash, decodeFavsHash, isDismissed, toggleDismiss } from './favorites.js';
 // ── Redcontroldeck curated favs ────────────────────────────────────
 let RCD_FAVS = [];
 fetch('./js/rcd-favs.json').then(r => r.json()).then(d => { RCD_FAVS = Array.isArray(d) ? d : []; }).catch(() => {});
@@ -581,11 +581,12 @@ function appendConcertRows(listEl, docs, onTap) {
   docs.forEach(doc => {
     const li = document.createElement('li');
     li.className = 'concert-item';
+    const venueStr = extractVenueName(doc) || '';
     li.innerHTML = `
       <div class="concert-info">
         <div class="concert-date">${formatDate(doc.date)}</div>
-        <div class="concert-title">${esc(doc.title || doc.identifier)}</div>
-        <div class="concert-creator">${esc(doc.creator || '')}</div>
+        <div class="concert-title">${esc(doc.creator || doc.title || '')}</div>
+        <div class="concert-creator">${esc(venueStr)}</div>
       </div>
       <button class="concert-fav${isFav(doc.identifier) ? ' active' : ''}"
               data-id="${esc(doc.identifier)}" title="Favorite">♥</button>
@@ -947,28 +948,7 @@ function renderArtistConcerts(fallbackDocs) {
     return;
   }
 
-  const frag = document.createDocumentFragment();
-  docs.forEach(doc => {
-    const li = document.createElement('li');
-    li.className = 'artist-concert-item';
-    li.innerHTML = `
-      <div class="artist-concert-info">
-        <div class="artist-concert-date">${formatDate(doc.date)}</div>
-        <div class="artist-concert-title">${esc(doc.title || doc.identifier)}</div>
-      </div>
-      <button class="concert-fav${isFav(doc.identifier) ? ' active' : ''}"
-              data-id="${esc(doc.identifier)}" title="Favorite">♥</button>
-      <span class="concert-chevron">${svgChevron()}</span>
-    `;
-    li.querySelector('.concert-fav').addEventListener('click', e => {
-      e.stopPropagation();
-      const active = toggleFav(doc.identifier);
-      e.currentTarget.classList.toggle('active', active);
-    });
-    li.addEventListener('click', () => openConcert(doc));
-    frag.appendChild(li);
-  });
-  el.artistConcerts.appendChild(frag);
+  appendConcertRows(el.artistConcerts, docs, doc => openConcert(doc));
 }
 
 function groupByArtist(docs) {
@@ -1517,6 +1497,7 @@ function renderConcert(meta) {
   const m = meta.metadata;
   const tracks = buildTracks(meta);
   const faved = isFav(m.identifier);
+  const dismissed = isDismissed(m.creator);
   const venueName = extractVenueName({ title: m.title, coverage: m.coverage });
   const artUrl = `https://archive.org/services/img/${esc(m.identifier)}`;
   const dateKey = m.date ? m.date.slice(0, 10) : null;
@@ -1533,6 +1514,12 @@ function renderConcert(meta) {
         ${m.addeddate ? `<div class="concert-upload-date">uploaded ${formatUploadDate(m.addeddate)}</div>` : ''}
         ${(()=>{ const d = state.index?.find(x=>x.identifier===m.identifier); const n = d?.downloads || m.downloads; return n ? `<div class="concert-upload-date">${Number(n).toLocaleString()} plays</div>` : ''; })()}
       </div>
+      <div class="concert-hero-actions">
+        <button class="btn-dismiss${dismissed ? ' active' : ''}" id="concert-dismiss" title="Don't Recommend This Artist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="5.5" y1="18.5" x2="18.5" y2="5.5"/></svg>
+        </button>
+        <button class="btn-fav${faved ? ' active' : ''}" id="concert-fav" title="Favorite">♥</button>
+      </div>
     </div>
     <div id="concert-context-section"></div>
     <div id="concert-snippets-section"></div>
@@ -1541,7 +1528,6 @@ function renderConcert(meta) {
       <div class="concert-actions">
         <button class="btn-primary" id="play-all">Play All</button>
         <button class="btn-secondary" id="queue-all">Add to Queue</button>
-        <button class="btn-fav${faved ? ' active' : ''}" id="concert-fav" title="Favorite">♥</button>
       </div>
     </div>
     <ul class="track-list" id="track-list"></ul>
@@ -1692,6 +1678,14 @@ function renderConcert(meta) {
     const active = toggleFav(m.identifier);
     e.currentTarget.classList.toggle('active', active);
   });
+
+  if (m.creator) {
+    $('concert-dismiss').addEventListener('click', e => {
+      const active = toggleDismiss(m.creator);
+      e.currentTarget.classList.toggle('active', active);
+      flashConfirm(active ? `Won't recommend ${m.creator} anymore` : `${m.creator} recommendations restored`);
+    });
+  }
 
   $('play-all').addEventListener('click', () => { player.replaceQueue(tracks, 0); openQueue(); });
   $('queue-all').addEventListener('click', () => tracks.forEach(t => player.addToEnd(t)));
@@ -1847,6 +1841,7 @@ function renderDiscover() {
       const favMatches = index.filter(d => {
         if (favIds.has(d.identifier)) return false;
         const artist = (d.creator || '').trim().toLowerCase();
+        if (artist && isDismissed(artist)) return false;
         if (artist && favArtists.has(artist)) return true;
         const date  = (d.date || '').slice(0, 10);
         const venue = extractVenueName(d);

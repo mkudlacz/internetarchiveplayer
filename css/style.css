@@ -499,34 +499,6 @@ button {
 }
 
 /* Compact concert rows in the right column */
-.artist-concert-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 16px 10px 14px;
-  border-bottom: 1px solid var(--border);
-  gap: 8px;
-  cursor: pointer;
-  transition: background 0.1s;
-}
-.artist-concert-item:active { background: var(--bg2); }
-
-.artist-concert-info { flex: 1; min-width: 0; }
-
-.artist-concert-date {
-  font-size: 11px;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-  margin-bottom: 2px;
-}
-
-.artist-concert-title {
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 /* ── Concert Detail View ──────────────────────────────────────────── */
 .concert-hero {
   display: flex;
@@ -550,6 +522,14 @@ button {
   flex: 1;
   min-width: 0;
   padding-top: 2px;
+}
+
+.concert-hero-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-shrink: 0;
+  align-self: flex-end;
 }
 
 .concert-artist-link {
@@ -808,6 +788,19 @@ button {
   transition: color 0.15s;
 }
 .btn-fav.active { color: var(--accent); border-color: var(--accent2); }
+
+.btn-dismiss {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text3);
+  transition: color 0.15s;
+}
+.btn-dismiss svg { width: 20px; height: 20px; }
+.btn-dismiss.active { color: var(--accent); border-color: var(--accent2); }
 
 .track-list { list-style: none; }
 
