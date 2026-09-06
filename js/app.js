@@ -1856,18 +1856,33 @@ function renderDiscover() {
           if (!byArtist.has(name)) byArtist.set(name, []);
           byArtist.get(name).push(doc);
         });
-        const artistGroups = [...byArtist.entries()].map(([name, docs]) => ({ name, count: docs.length }));
+        const artistGroups = [...byArtist.entries()].map(([name, docs]) => {
+          const count = docs.length;
+          const seen = new Set();
+          const entries = [];
+          dateAsc(docs).forEach(doc => {
+            const venue = extractVenueName(doc);
+            const yr2 = (doc.date || '').slice(2, 4);
+            if (!venue || !yr2) return;
+            const key = `${venue.toLowerCase()}|${yr2}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+            entries.push(`${venue} '${yr2}`);
+          });
+          const label = entries.length ? entries.join(' · ') : `${count} Show${count !== 1 ? 's' : ''}`;
+          return { name, count, label };
+        });
 
         const buildFavBandStrip = () => {
           const strip = document.createElement('div');
           strip.className = 'discover-h-scroll';
           const picks = [...artistGroups].sort(() => Math.random() - 0.5).slice(0, billLimit);
-          picks.forEach(({ name, count }) => {
+          picks.forEach(({ name, label }) => {
             const card = document.createElement('div');
             card.className = 'favband-card';
             card.innerHTML = `
               <div class="favband-card-name">${esc(name)}</div>
-              <div class="favband-card-count">${count} Show${count !== 1 ? 's' : ''}</div>
+              <div class="favband-card-count"><span class="favband-card-count-inner">${esc(label)}</span></div>
             `;
             card.addEventListener('click', () => {
               const groups = groupByArtist(state.index);
@@ -1876,6 +1891,16 @@ function renderDiscover() {
               setMode('artists');
             });
             strip.appendChild(card);
+          });
+          requestAnimationFrame(() => {
+            strip.querySelectorAll('.favband-card-count').forEach(wrap => {
+              const inner = wrap.querySelector('.favband-card-count-inner');
+              const text = inner.textContent;
+              if (inner.offsetWidth > wrap.clientWidth) {
+                inner.textContent = text + '      ' + text;
+                inner.classList.add('scrolling');
+              }
+            });
           });
           return strip;
         };
