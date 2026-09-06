@@ -1867,9 +1867,9 @@ function renderDiscover() {
             const key = `${venue.toLowerCase()}|${yr2}`;
             if (seen.has(key)) return;
             seen.add(key);
-            entries.push(`${venue} · '${yr2}`);
+            entries.push(`${venue} '${yr2}`);
           });
-          const label = entries.length ? entries.join(' · ') : `${count} Show${count !== 1 ? 's' : ''}`;
+          const label = entries.length ? entries.map(e => `${e} ·`).join(' ') : `${count} Show${count !== 1 ? 's' : ''}`;
           return { name, count, label };
         });
 
